@@ -546,11 +546,7 @@
     <Content Include="Resources\Delete.bmp" />
     <None Include="Resources\Up.bmp" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GAcl\" />
-    <Folder Include="GData\GPhoto\" />
-    <Folder Include="GDrive\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
