@@ -68,7 +68,7 @@
                                                   {
                                                       Docs = GE.EndInvoke(ar).Entries.ToList();
                                                       foreach (var item in Docs)
-                                                          lvCloud.cbAdd( item.Title, 0, item.AtomEntry.AlternateUri.Content);
+                                                          lvCloud.cbAdd(item.Title, item.Type == Document.DocumentType.Folder ? 0 : 2, item.AtomEntry.AlternateUri.Content);
                                                       if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                                                       btnSign.cbEnable(true);
                                                       txtFolderName.cbEnable(true);
@@ -153,7 +153,7 @@
                                 {
                                     Docs = DFC.EndInvoke(ar).Entries.ToList();
                                     foreach (var item in Docs)
-                                        lvCloud.cbAdd(item.Title, item.Type == Document.DocumentType.Folder ? 0 : 1, item.AtomEntry.AlternateUri.Content);
+                                        lvCloud.cbAdd(item.Title, item.Type == Document.DocumentType.Folder ? 0 : 2, item.AtomEntry.AlternateUri.Content);
                                     if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                                     btnUp.cbEnable(true);
                                     btnCreateFolder.cbEnable(true);
@@ -223,7 +223,7 @@
                             Docs = GE.EndInvoke(ar).Entries.ToList();
                             foreach (var item in Docs)
                             {
-                                lvCloud.cbAdd(item.Title, item.Type == Document.DocumentType.Folder ? 0 : 1, item.AtomEntry.AlternateUri.Content);
+                                lvCloud.cbAdd(item.Title, item.Type == Document.DocumentType.Folder ? 0 : 2, item.AtomEntry.AlternateUri.Content);
                             }
                             if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                             txtFolderName.cbEnable(true);
@@ -242,7 +242,7 @@
                             {
                                 Docs = DFC.EndInvoke(ar).Entries.ToList();
                                 foreach (var item in Docs)
-                                    lvCloud.cbAdd(item.Title, item.Type == Document.DocumentType.Folder ? 0 : 1, item.AtomEntry.AlternateUri.Content);
+                                    lvCloud.cbAdd(item.Title, item.Type == Document.DocumentType.Folder ? 0 : 2, item.AtomEntry.AlternateUri.Content);
                                 if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                                 btnUp.cbEnable(true);
                                 btnAddFiles.cbEnable(true);
@@ -513,8 +513,8 @@
                                 @new = DR.MoveDocumentTo(@base, @new);
                             }
                             string ttt = @new.AtomEntry.AlternateUri.Content;
-                            lvCloud.cbAdd(de.Title.Text, 1, ttt);
-                            if (cldItems != null) cldItems.Add(new ListViewItem(de.Title.Text, 1) { ToolTipText = ttt });
+                            lvCloud.cbAdd(de.Title.Text, 2, ttt);
+                            if (cldItems != null) cldItems.Add(new ListViewItem(de.Title.Text, 2) { ToolTipText = ttt });
                             Docs.Add(@new);
                         }
                         catch (Exception exp)
@@ -790,9 +790,69 @@
         private void lvCloud_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (lvCloud.SelectedItems.Count > 0)
+            {
                 btnDelete.Enabled = true;
+                ListViewItem lvi = lvCloud.SelectedItems[0];
+                switch (Service)
+                {
+                    #region GDrive
+                    case CloudType.GDrive:
+                        Document doc= Docs.FirstOrDefault(_ => _.Title == lvi.Text);
+                        Prompt = "Type: " + Enum.GetName(typeof(Document.DocumentType), doc.Type);
+                        break;
+                    #endregion
+
+                    #region Flickr
+                    case CloudType.Flickr:
+                        break;
+                    #endregion
+
+                    #region Facebook
+                    case CloudType.Facebook:
+                        break;
+                    #endregion
+
+                    #region Picasa
+                    case CloudType.Picasa:
+                        if (AlbumID == null)
+                        {
+                            Album a = Albums.FirstOrDefault(_ => _.Title == lvi.Text);
+                            Prompt = a.NumPhotos + " photos";
+                        }
+                        else
+                            Prompt = lvi.Text;
+                        break;
+                    #endregion
+                }
+            }
             else
+            {
                 btnDelete.Enabled = false;
+                switch (Service)
+                {
+                    #region GDrive
+                    case CloudType.GDrive:
+                        Prompt = Docs.Count + " item(s)";
+                        break;
+                    #endregion
+
+                    #region Flickr
+                    case CloudType.Flickr:
+                        break;
+                    #endregion
+
+                    #region Facebook
+                    case CloudType.Facebook:
+                        break;
+                    #endregion
+
+                    #region Picasa
+                    case CloudType.Picasa:
+                        Prompt = (AlbumID == null ? Albums.Count : Photos.Count) + " item(s)";
+                        break;
+                    #endregion
+                }
+            }
         }
 
         private void lvCloud_MouseClick(object sender, MouseEventArgs e)

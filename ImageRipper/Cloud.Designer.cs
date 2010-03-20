@@ -81,7 +81,8 @@
             this.lvImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("lvImageList.ImageStream")));
             this.lvImageList.TransparentColor = System.Drawing.Color.Transparent;
             this.lvImageList.Images.SetKeyName(0, "Folder");
-            this.lvImageList.Images.SetKeyName(1, "File");
+            this.lvImageList.Images.SetKeyName(1, "Image");
+            this.lvImageList.Images.SetKeyName(2, "Document");
             // 
             // lblCloudID
             // 
