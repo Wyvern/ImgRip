@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ImgRipper.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="txtParse" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="txtDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F:\Multimedia\Image</Value>
+    </Setting>
+    <Setting Name="CookieContent" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CloudID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">beautyleg@live.com</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9SmUu2Cr</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

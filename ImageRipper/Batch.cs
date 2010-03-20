@@ -1,0 +1,37 @@
+﻿namespace ImgRipper
+{
+    using System;
+    using System.Windows.Forms;
+
+    partial class BatchAction : Form
+    {
+        public BatchAction(int from, int to)
+        {
+            InitializeComponent();
+            udFrom.Value = from;
+            udTo.Value = to;
+        }
+
+        private void btnSet_Click(object sender, EventArgs e)
+        {
+            //Do batch download actions.
+            Ripper ripper = this.Owner as Ripper;
+            if (udFrom.Value > 0 && udFrom.Value < udTo.Value)
+            {
+                ripper.From = Convert.ToInt32(udFrom.Value); ripper.To = Convert.ToInt32(udTo.Value);
+                ripper.Range = ripper.To - ripper.From + 1;
+                ripper.Url = new Uri(ripper.Url.AbsoluteUri.Replace(ripper.Url.Query, "?thread=" + ripper.From.ToString()));
+                ripper.BatchDownload = true;
+                Close();
+            }
+            else
+            {
+                ToolTip tt = new ToolTip();
+                tt.IsBalloon = true;
+                tt.ToolTipIcon = ToolTipIcon.Warning;
+                tt.ToolTipTitle = "Invalid Range";
+                tt.Show("Out of range values", lblCaption, 2000);
+            }
+        }
+    }
+}
