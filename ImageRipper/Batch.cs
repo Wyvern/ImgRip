@@ -5,11 +5,10 @@
 
     partial class BatchAction : Form
     {
-        public BatchAction(int from, int to)
+        public BatchAction(int seed)
         {
             InitializeComponent();
-            udFrom.Value = from;
-            udTo.Value = to;
+            udFrom.Value = udTo.Value = seed;
         }
 
         private void btnSet_Click(object sender, EventArgs e)
@@ -20,7 +19,7 @@
             {
                 ripper.From = Convert.ToInt32(udFrom.Value); ripper.To = Convert.ToInt32(udTo.Value);
                 ripper.Range = ripper.To - ripper.From + 1;
-                ripper.Url = new Uri(ripper.Url.AbsoluteUri.Replace(ripper.Url.Query, "?thread=" + ripper.From.ToString()));
+                ripper.Url = new Uri(ripper.Url.AbsoluteUri.Replace(ripper.Url.Query, "?thread=" + ripper.From));
                 ripper.BatchDownload = true;
                 Close();
             }

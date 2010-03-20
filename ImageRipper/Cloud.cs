@@ -773,16 +773,16 @@
             switch (Service)
             {
                 case CloudType.GDrive:
-                    lblCloudID.Text = Text = "GDrive";
+                    gpLogin.Text = "GDrive";
                     break;
                 case CloudType.Flickr:
-                    lblCloudID.Text = Text = "Flickr";
+                    gpLogin.Text = "Flickr";
                     break;
                 case CloudType.Facebook:
-                    lblCloudID.Text = Text = "Facebook";
+                    gpLogin.Text = "Facebook";
                     break;
                 case CloudType.Picasa:
-                    lblCloudID.Text = Text = "Picasa";
+                    gpLogin.Text = "Picasa";
                     break;
             }
         }
@@ -821,7 +821,7 @@
                             {
                                 total+=Albums.FirstOrDefault(_ => _.Title == item.Text).NumPhotos;
                             }
-                            Prompt = "Total: " + total + " Photos";
+                            Prompt = string.Format("Total: {0} Photos", total);
                         }
                         else
                             Prompt = lvi.Text;

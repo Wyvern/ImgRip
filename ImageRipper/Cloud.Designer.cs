@@ -91,9 +91,9 @@
             this.lblCloudID.ForeColor = System.Drawing.Color.DodgerBlue;
             this.lblCloudID.Location = new System.Drawing.Point(4, 26);
             this.lblCloudID.Name = "lblCloudID";
-            this.lblCloudID.Size = new System.Drawing.Size(25, 19);
+            this.lblCloudID.Size = new System.Drawing.Size(51, 19);
             this.lblCloudID.TabIndex = 3;
-            this.lblCloudID.Text = "ID";
+            this.lblCloudID.Text = "Name";
             // 
             // lblLivePass
             // 

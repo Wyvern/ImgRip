@@ -614,12 +614,11 @@
             if (((rip = rip ?? new Fetcher()).Style = Check()) == ParseStyle.NotSupport) return;
             if (rip.Style == ParseStyle.Heels)
             {
-                string text = Url.Query.Substring(Url.Query.LastIndexOf('=') + 1);
-                int fromto = 0;
-                if (!string.IsNullOrEmpty(text))
-                    fromto= Convert.ToInt32(text);
-                BatchAction ba = new BatchAction(fromto, fromto);
-                ba.ShowDialog(this);
+                if (!Url.AbsoluteUri.StartsWith("http://www.heels.cn/web/viewthread?thread=")) return;
+                string text = Url.Query.Split('=')[1];
+                int pageid;
+                if (int.TryParse(text, out pageid))
+                    new BatchAction(pageid).ShowDialog(this);
             }
             else
                 MessageBox.Show("Please imput URL address which support batch operation.", "Can not take batch operation on this site!",MessageBoxButtons.OK,MessageBoxIcon.Information);
