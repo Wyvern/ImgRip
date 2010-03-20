@@ -17,7 +17,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>Icons\icon.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -281,67 +281,67 @@
       <Link>GData\Extensions\misc.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\gacl\aclentry.cs">
-      <Link>GAcl\aclentry.cs</Link>
+      <Link>GData\Acl\aclentry.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\gacl\aclfeed.cs">
-      <Link>GAcl\aclfeed.cs</Link>
+      <Link>GData\Acl\aclfeed.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\gacl\aclnamespace.cs">
-      <Link>GAcl\aclnamespace.cs</Link>
+      <Link>GData\Acl\aclnamespace.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\gacl\aclrole.cs">
-      <Link>GAcl\aclrole.cs</Link>
+      <Link>GData\Acl\aclrole.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\gacl\aclscope.cs">
-      <Link>GAcl\aclscope.cs</Link>
+      <Link>GData\Acl\aclscope.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\GDoc\docrequest.cs">
-      <Link>GDrive\docrequest.cs</Link>
+      <Link>GData\Docs\docrequest.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\GDoc\documententry.cs">
-      <Link>GDrive\documententry.cs</Link>
+      <Link>GData\Docs\documententry.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\GDoc\documentfeed.cs">
-      <Link>GDrive\documentfeed.cs</Link>
+      <Link>GData\Docs\documentfeed.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\GDoc\documentquery.cs">
-      <Link>GDrive\documentquery.cs</Link>
+      <Link>GData\Docs\documentquery.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\GDoc\documentservice.cs">
-      <Link>GDrive\documentservice.cs</Link>
+      <Link>GData\Docs\documentservice.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\albumentry.cs">
-      <Link>GData\GPhoto\albumentry.cs</Link>
+      <Link>GData\Photo\albumentry.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\gphotos\commententry.cs">
-      <Link>GData\GPhoto\commententry.cs</Link>
+      <Link>GData\Photo\commententry.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\gextphotos.cs">
-      <Link>GData\GPhoto\gextphotos.cs</Link>
+      <Link>GData\Photo\gextphotos.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\kindsquery.cs">
-      <Link>GData\GPhoto\kindsquery.cs</Link>
+      <Link>GData\Photo\kindsquery.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\photoentry.cs">
-      <Link>GData\GPhoto\photoentry.cs</Link>
+      <Link>GData\Photo\photoentry.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\photosrequest.cs">
-      <Link>GData\GPhoto\photosrequest.cs</Link>
+      <Link>GData\Photo\photosrequest.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\picasaentry.cs">
-      <Link>GData\GPhoto\picasaentry.cs</Link>
+      <Link>GData\Photo\picasaentry.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\picasafeed.cs">
-      <Link>GData\GPhoto\picasafeed.cs</Link>
+      <Link>GData\Photo\picasafeed.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\picasaquery.cs">
-      <Link>GData\GPhoto\picasaquery.cs</Link>
+      <Link>GData\Photo\picasaquery.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\picasaservice.cs">
-      <Link>GData\GPhoto\picasaservice.cs</Link>
+      <Link>GData\Photo\picasaservice.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\tagentry.cs">
-      <Link>GData\GPhoto\tagentry.cs</Link>
+      <Link>GData\Photo\tagentry.cs</Link>
     </Compile>
     <Compile Include="Helper.cs" />
     <Compile Include="SetCookie.cs">
@@ -538,13 +538,18 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="icon.ico" />
+    <EmbeddedResource Include="Icons\icon.ico" />
     <Content Include="setup.ico" />
     <None Include="Resources\files.bmp" />
     <None Include="Resources\Login.bmp" />
     <Content Include="Resources\New.bmp" />
     <Content Include="Resources\Delete.bmp" />
     <None Include="Resources\Up.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="GAcl\" />
+    <Folder Include="GData\GPhoto\" />
+    <Folder Include="GDrive\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
