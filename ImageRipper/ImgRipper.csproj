@@ -17,7 +17,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ApplicationIcon>iphoto1-64x64.ico</ApplicationIcon>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -488,10 +488,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\accepted_48.png" />
+    <EmbeddedResource Include="Resources\download.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\cancel_48.png" />
+    <EmbeddedResource Include="Resources\cancel.png" />
     <EmbeddedResource Include="Cloud.resx">
       <DependentUpon>Cloud.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -538,7 +538,7 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="iphoto1-64x64.ico" />
+    <EmbeddedResource Include="icon.ico" />
     <Content Include="setup.ico" />
     <None Include="Resources\files.bmp" />
     <None Include="Resources\Login.bmp" />
