@@ -816,8 +816,12 @@
                     case CloudType.Picasa:
                         if (AlbumID == null)
                         {
-                            Album a = Albums.FirstOrDefault(_ => _.Title == lvi.Text);
-                            Prompt = a.NumPhotos + " photos";
+                            uint total = 0;
+                            foreach (ListViewItem item in lvCloud.SelectedItems)
+                            {
+                                total+=Albums.FirstOrDefault(_ => _.Title == item.Text).NumPhotos;
+                            }
+                            Prompt = "Total: " + total + " Photos";
                         }
                         else
                             Prompt = lvi.Text;
