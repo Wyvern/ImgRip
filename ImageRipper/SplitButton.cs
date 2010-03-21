@@ -103,7 +103,6 @@ namespace Wyvern
                     State = PushButtonState.Pressed;
                 }
             }
-
             base.OnKeyDown(kevent);
         }
 
@@ -148,13 +147,13 @@ namespace Wyvern
             {
                 if (UpClickMouseDown != null)
                     UpClickMouseDown(this, e);
-                State = PushButtonState.Pressed;
+                State = PushButtonState.Normal;
             }
             else if (DownRectangle.Contains(e.Location))
             {
                 if (DownClickMouseDown != null)
                     DownClickMouseDown(this, e);
-                State = PushButtonState.Pressed;
+                State = PushButtonState.Normal;
             }
             else
             {
@@ -277,9 +276,7 @@ namespace Wyvern
                     // draw two lines at the bottom edge of the dropdown button
                     g.DrawLine(SystemPens.ButtonShadow, BorderSize - 1, bounds.Bottom - PushButtonWidth, bounds.Right - PushButtonWidth, bounds.Bottom - PushButtonWidth);
                     g.DrawLine(SystemPens.ButtonFace, BorderSize - 1, bounds.Bottom - PushButtonWidth - 1, bounds.Right - PushButtonWidth, bounds.Bottom - PushButtonWidth - 1);
-
                 }
-
             }
 
             // Draw an arrow in the correct location
@@ -373,7 +370,7 @@ namespace Wyvern
             if (Up)//Up Arrow
                 arrow = new Point[] { new Point(middle.X - 3, middle.Y + 1), new Point(middle.X + 3, middle.Y + 1), new Point(middle.X, middle.Y - 4) };
             else//Down Arrow
-                arrow = new Point[] { new Point(middle.X - 3, middle.Y - 1), new Point(middle.X + 3, middle.Y - 1), new Point(middle.X, middle.Y + 4) };
+                arrow = new Point[] { new Point(middle.X - 2, middle.Y - 1), new Point(middle.X + 3, middle.Y - 1), new Point(middle.X, middle.Y + 4) };
             
             g.FillPolygon(Brushes.Green, arrow);
         }

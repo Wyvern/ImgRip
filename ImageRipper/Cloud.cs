@@ -55,7 +55,7 @@
                 case CloudType.GDrive:
                     if (!Regex.IsMatch(LoginName, @"^[\w\.-]+@(google|gmail|googlemail).com$", RegexOptions.IgnoreCase))
                     {
-                        MessageBox.Show("Please check your Google account", "Invalidate login");
+                        MessageBox.Show("Please check your Google account", "Invalid login");
                         return;
                     }
                     
@@ -100,7 +100,7 @@
                 case CloudType.Picasa:
                     if (!Regex.IsMatch(LoginName, @"^[\w\.-]+@(google|gmail|googlemail).com$", RegexOptions.IgnoreCase))
                     {
-                        MessageBox.Show("Please check your Google account", "Invalidate login");
+                        MessageBox.Show("Please check your Google account", "Invalid login");
                         return;
                     }
 

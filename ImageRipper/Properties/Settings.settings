@@ -6,16 +6,16 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="txtDir" Type="System.String" Scope="User">
-      <Value Profile="(Default)">F:\Multimedia\Image</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="CookieContent" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="CloudID" Type="System.String" Scope="User">
-      <Value Profile="(Default)">beautyleg@live.com</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Password" Type="System.String" Scope="User">
-      <Value Profile="(Default)">9SmUu2Cr</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

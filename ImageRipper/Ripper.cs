@@ -112,7 +112,6 @@
             rip = rip ?? new Fetcher();
             switch (rip.PushState)
             {
-                default:
                 case RipperAction.Download:
                     if (!CanDownload) return;
                     //Save application settings
@@ -124,7 +123,6 @@
                     tbDir.ReadOnly = true;
                     //Begin download action
                     DownloadFiles.RunWorkerAsync();
-
                     ((Button) sender).Image = Resources.Cancel;
                     rip.PushState = RipperAction.Cancel;
                     break;
@@ -769,6 +767,7 @@
             switch (e.KeyCode)
             {
                 case Keys.Space:
+                    if (e.Shift) { mainSplit.Panel2Collapsed = true; break; }
                     if (tbParse.Focused || tbDir.Focused) break;
                     mainSplit.Panel1Collapsed = !mainSplit.Panel1Collapsed;
                     break;
@@ -811,7 +810,7 @@
         {
             get
             {
-                if (((rip = rip ?? new Fetcher()).Style = Check()) == ParseStyle.NotSupport) return false;
+                if ((rip.Style = Check()) == ParseStyle.NotSupport) return false;
                 if (!Directory.Exists(Dir))
                 {
                     if (DialogResult.Yes == MessageBox.Show("Do you want to create new folder to store files?", "Invalid Directory!", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
