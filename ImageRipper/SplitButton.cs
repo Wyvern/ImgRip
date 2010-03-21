@@ -147,13 +147,11 @@ namespace Wyvern
             {
                 if (UpClickMouseDown != null)
                     UpClickMouseDown(this, e);
-                State = PushButtonState.Normal;
             }
             else if (DownRectangle.Contains(e.Location))
             {
                 if (DownClickMouseDown != null)
                     DownClickMouseDown(this, e);
-                State = PushButtonState.Normal;
             }
             else
             {

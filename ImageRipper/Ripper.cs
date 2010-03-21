@@ -301,7 +301,7 @@
                         {
                             rip.Title = rip.Title.Substring(rip.Title.LastIndexOf('-') + 1);
                             HAP.HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//div/a/img[@src]");
-                            if (links == null || links.Count == 0) throw new Exception("Not find pictures in this page");
+                            if (links == null || links.Count == 0) return "No picture found in this page";
                             foreach (HAP.HtmlNode lnk in links)
                             {
                                 string href = lnk.Attributes["src"].Value;
@@ -318,11 +318,11 @@
                     case ParseStyle.Duide:
                         {
                             HAP.HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//a/img[@border=1]");
-                            if (links == null || links.Count == 0) throw new Exception("Not find pictures in this page");
+                            if (links == null || links.Count == 0) return "No picture found in this page";
                             foreach (HAP.HtmlNode lnk in links)
                             {
                                 string href = lnk.Attributes["src"].Value.Replace("thumbnails", "images");
-                                string[] name = href.Split("/_".ToCharArray());
+                                string[] name = href.Split('/','_');
                                 string key = name[1].ToUpper() + '-' + name[3] + ".jpg";
                                 rip.Imgs[key] = url.AbsoluteUri.Replace(url.LocalPath.Split('/')[2], href);
                             }
@@ -336,7 +336,7 @@
                         {
                             int countofpage = doc.DocumentNode.SelectNodes("//option").Count;
                             HAP.HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//td/a/img[@src]");
-                            if (links == null || links.Count == 0) throw new Exception("Not find pictures in this page");
+                            if (links == null || links.Count == 0) return "No picture found in this page";
                             string path = "http://tuku.keaibbs.com" + url.AbsolutePath.Replace("/index.html", "");
                             foreach (HAP.HtmlNode lnk in links)
                             {
@@ -369,7 +369,7 @@
                             rip.NextPage = nextpageNode.Attributes["href"].Value;
                             rip.NextPage = rip.NextPage.StartsWith("/new/") ? "http://www.tu11.cc" + rip.NextPage : null;
                             HAP.HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//div[@id='content']/img[@src]");
-                            if (links == null || links.Count == 0) throw new Exception("Not find pictures in this page");
+                            if (links == null || links.Count == 0) return "No picture found in this page";
                             foreach (HAP.HtmlNode lnk in links)
                             {
                                 string address = lnk.Attributes["src"].Value;
@@ -389,7 +389,7 @@
                             rip.NextPage = nextpageNode.Attributes["href"].Value;
                             rip.NextPage = rip.NextPage != "#" ? url.AbsoluteUri.Replace(pageName, rip.NextPage) : null;
                             HAP.HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//div[@id='newsContent']/a[@href]");
-                            if (links == null || links.Count == 0) throw new Exception("Not find pictures in this page");
+                            if (links == null || links.Count == 0) return "No picture found in this page";
                             foreach (HAP.HtmlNode lnk in links)
                             {
                                 string address = "http://www.meituiji.com" + lnk.Attributes["href"].Value;
@@ -407,7 +407,7 @@
                             rip.NextPage = nextpageNode != null ? nextpageNode.Attributes["href"].Value : null;
                             rip.NextPage = rip.NextPage != null ? "http://pal.ath.cx" + rip.NextPage : null;
                             HAP.HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
-                            if (links == null || links.Count == 0) throw new Exception("Not find pictures in this page");
+                            if (links == null || links.Count == 0) return "No picture found in this page";
                             foreach (HAP.HtmlNode lnk in links)
                             {
                                 string imgsrc = lnk.Attributes["src"].Value;
@@ -442,9 +442,9 @@
                         return "Invalid Site Url!";
                 }
             }
-            catch (Exception we)
+            catch (Exception)
             {
-                return we.Message;
+                return "Parse ERROR!";
             }
             return null;
         }
