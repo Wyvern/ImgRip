@@ -774,6 +774,9 @@
             {
                 case CloudType.GDrive:
                     gpLogin.Text = "GDrive";
+                    cbPublic.Visible = false;
+                    txtFolderName.Location = new System.Drawing.Point(txtFolderName.Location.X - 60, txtFolderName.Location.Y);
+                    txtFolderName.Width = 230;
                     break;
                 case CloudType.Flickr:
                     gpLogin.Text = "Flickr";

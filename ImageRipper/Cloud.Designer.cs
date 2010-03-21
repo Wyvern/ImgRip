@@ -131,9 +131,9 @@
             this.txtFolderName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFolderName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFolderName.Enabled = false;
-            this.txtFolderName.Location = new System.Drawing.Point(399, 76);
+            this.txtFolderName.Location = new System.Drawing.Point(394, 80);
             this.txtFolderName.Name = "txtFolderName";
-            this.txtFolderName.Size = new System.Drawing.Size(166, 25);
+            this.txtFolderName.Size = new System.Drawing.Size(171, 25);
             this.txtFolderName.TabIndex = 12;
             this.txtFolderName.TextChanged += new System.EventHandler(this.txtFolderName_TextChanged);
             this.txtFolderName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFolderName_KeyPress);
@@ -189,7 +189,7 @@
             // 
             this.btnAddFiles.Enabled = false;
             this.btnAddFiles.Image = global::ImgRipper.Properties.Resources.Files;
-            this.btnAddFiles.Location = new System.Drawing.Point(121, 11);
+            this.btnAddFiles.Location = new System.Drawing.Point(121, 9);
             this.btnAddFiles.Name = "btnAddFiles";
             this.btnAddFiles.Size = new System.Drawing.Size(50, 50);
             this.btnAddFiles.TabIndex = 11;
@@ -232,16 +232,15 @@
             // 
             // CommandPanel
             // 
-            this.CommandPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CommandPanel.AutoSize = true;
             this.CommandPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CommandPanel.Controls.Add(this.btnUp);
             this.CommandPanel.Controls.Add(this.btnDelete);
             this.CommandPanel.Controls.Add(this.btnCreateFolder);
             this.CommandPanel.Controls.Add(this.btnAddFiles);
-            this.CommandPanel.Location = new System.Drawing.Point(332, 4);
+            this.CommandPanel.Location = new System.Drawing.Point(332, 5);
             this.CommandPanel.Name = "CommandPanel";
-            this.CommandPanel.Size = new System.Drawing.Size(233, 64);
+            this.CommandPanel.Size = new System.Drawing.Size(233, 62);
             this.CommandPanel.TabIndex = 14;
             // 
             // cbPublic
@@ -250,9 +249,9 @@
             this.cbPublic.Enabled = false;
             this.cbPublic.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.cbPublic.Image = ((System.Drawing.Image)(resources.GetObject("cbPublic.Image")));
-            this.cbPublic.Location = new System.Drawing.Point(332, 62);
+            this.cbPublic.Location = new System.Drawing.Point(340, 71);
             this.cbPublic.Name = "cbPublic";
-            this.cbPublic.Size = new System.Drawing.Size(58, 55);
+            this.cbPublic.Size = new System.Drawing.Size(48, 42);
             this.cbPublic.TabIndex = 13;
             this.cbPublic.UseVisualStyleBackColor = true;
             // 
