@@ -64,7 +64,7 @@
             this.pbPreview = new System.Windows.Forms.PictureBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.DownloadFiles = new System.ComponentModel.BackgroundWorker();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.ttRipper = new System.Windows.Forms.ToolTip(this.components);
             this.tmMinus = new System.Windows.Forms.Timer(this.components);
             this.tmPlus = new System.Windows.Forms.Timer(this.components);
             this.mainSplit.Panel1.SuspendLayout();
@@ -121,6 +121,7 @@
             this.btnDownloadCancel.Size = new System.Drawing.Size(64, 66);
             this.btnDownloadCancel.TabIndex = 3;
             this.btnDownloadCancel.TabStop = false;
+            this.ttRipper.SetToolTip(this.btnDownloadCancel, "Begin/Stop, Set page Id Up or Down");
             this.btnDownloadCancel.UseVisualStyleBackColor = true;
             this.btnDownloadCancel.Click += new System.EventHandler(this.DownloadCancel_Click);
             // 
@@ -180,6 +181,7 @@
             this.llCookie.TabIndex = 32;
             this.llCookie.TabStop = true;
             this.llCookie.Text = "Cookie";
+            this.ttRipper.SetToolTip(this.llCookie, "Click to add Cookie");
             this.llCookie.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llCookie_LinkClicked);
             // 
             // llFolder
@@ -454,11 +456,9 @@
             this.DownloadFiles.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.DownloadFiles_ProgressChanged);
             this.DownloadFiles.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DownloadFiles_RunWorkerCompleted);
             // 
-            // toolTip1
+            // ttRipper
             // 
-            this.toolTip1.AutoPopDelay = 5000;
-            this.toolTip1.InitialDelay = 300;
-            this.toolTip1.ReshowDelay = 100;
+            this.ttRipper.AutomaticDelay = 300;
             // 
             // tmMinus
             // 
@@ -510,7 +510,7 @@
         private System.Windows.Forms.SplitContainer mainSplit;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip ttRipper;
         private System.Windows.Forms.Timer tmMinus;
         private System.Windows.Forms.Timer tmPlus;
         private System.Windows.Forms.ContextMenuStrip cmsLV;

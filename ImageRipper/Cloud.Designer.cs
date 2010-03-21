@@ -47,6 +47,7 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.CommandPanel = new System.Windows.Forms.Panel();
             this.cbPublic = new System.Windows.Forms.CheckBox();
+            this.ttCloud = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip1.SuspendLayout();
             this.gpLogin.SuspendLayout();
             this.CommandPanel.SuspendLayout();
@@ -135,6 +136,7 @@
             this.txtFolderName.Name = "txtFolderName";
             this.txtFolderName.Size = new System.Drawing.Size(171, 25);
             this.txtFolderName.TabIndex = 12;
+            this.ttCloud.SetToolTip(this.txtFolderName, "Type to search or add new album");
             this.txtFolderName.TextChanged += new System.EventHandler(this.txtFolderName_TextChanged);
             this.txtFolderName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFolderName_KeyPress);
             // 
@@ -149,7 +151,7 @@
             this.gpLogin.ForeColor = System.Drawing.Color.BlueViolet;
             this.gpLogin.Location = new System.Drawing.Point(12, 5);
             this.gpLogin.Name = "gpLogin";
-            this.gpLogin.Size = new System.Drawing.Size(319, 107);
+            this.gpLogin.Size = new System.Drawing.Size(319, 100);
             this.gpLogin.TabIndex = 13;
             this.gpLogin.TabStop = false;
             this.gpLogin.Text = "Login";
@@ -193,6 +195,7 @@
             this.btnAddFiles.Name = "btnAddFiles";
             this.btnAddFiles.Size = new System.Drawing.Size(50, 50);
             this.btnAddFiles.TabIndex = 11;
+            this.ttCloud.SetToolTip(this.btnAddFiles, "Add Photos");
             this.btnAddFiles.UseVisualStyleBackColor = true;
             this.btnAddFiles.Click += new System.EventHandler(this.btnAddFiles_Click);
             // 
@@ -204,6 +207,7 @@
             this.btnCreateFolder.Name = "btnCreateFolder";
             this.btnCreateFolder.Size = new System.Drawing.Size(50, 50);
             this.btnCreateFolder.TabIndex = 10;
+            this.ttCloud.SetToolTip(this.btnCreateFolder, "Create Album");
             this.btnCreateFolder.UseVisualStyleBackColor = true;
             this.btnCreateFolder.Click += new System.EventHandler(this.btnCreateFolder_Click);
             // 
@@ -215,6 +219,7 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(50, 50);
             this.btnDelete.TabIndex = 9;
+            this.ttCloud.SetToolTip(this.btnDelete, "Delete Items");
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -227,6 +232,7 @@
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(50, 50);
             this.btnUp.TabIndex = 7;
+            this.ttCloud.SetToolTip(this.btnUp, "Up to folder");
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
@@ -253,7 +259,12 @@
             this.cbPublic.Name = "cbPublic";
             this.cbPublic.Size = new System.Drawing.Size(48, 42);
             this.cbPublic.TabIndex = 13;
+            this.ttCloud.SetToolTip(this.cbPublic, "Check to create shared new Album");
             this.cbPublic.UseVisualStyleBackColor = true;
+            // 
+            // ttCloud
+            // 
+            this.ttCloud.AutomaticDelay = 300;
             // 
             // WebCloud
             // 
@@ -309,5 +320,6 @@
         private System.Windows.Forms.ImageList lvImageList;
         private System.Windows.Forms.Panel CommandPanel;
         private System.Windows.Forms.CheckBox cbPublic;
+        private System.Windows.Forms.ToolTip ttCloud;
     }
 }
