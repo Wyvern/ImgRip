@@ -11,9 +11,9 @@
         {
             ctl.Invoke(new Action(() => ctl.Enabled = enable));
         }
-        public static void cbAdd(this ListView lv, string text, int imgindex, string tip)
+        public static void cbAdd(this ListView lv, string name, string text, int imgindex, string tip)
         {
-            lv.Invoke(new Action(()=>lv.Items.Add(new ListViewItem(text, imgindex) { ToolTipText = tip })));
+            lv.Invoke(new Action(()=>lv.Items.Add(new ListViewItem(text, imgindex) { Name=name, ToolTipText = tip })));
         }
     }
 }

@@ -226,25 +226,25 @@
             // 
             this.chName.DisplayIndex = 1;
             this.chName.Text = "Name";
-            this.chName.Width = 77;
+            this.chName.Width = 100;
             // 
             // chNumber
             // 
             this.chNumber.DisplayIndex = 0;
             this.chNumber.Text = "#";
-            this.chNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.chNumber.Width = 30;
+            this.chNumber.Width = 40;
             // 
             // chSize
             // 
-            this.chSize.Text = "Size";
+            this.chSize.Text = "Size in KB";
             this.chSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.chSize.Width = 70;
             // 
             // chState
             // 
             this.chState.Text = "State";
             this.chState.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.chState.Width = 200;
+            this.chState.Width = 140;
             // 
             // cmsLV
             // 

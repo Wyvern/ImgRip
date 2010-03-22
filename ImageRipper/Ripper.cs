@@ -84,7 +84,7 @@
             set { tbDir.Text = value; }
         }
 
-        internal Uri Url
+        internal Uri Address
         {
             get
             {
@@ -148,7 +148,7 @@
 
         private void DownloadFiles_DoWork(object sender, DoWorkEventArgs e)
         {
-            if ((e.Result = Parse(Url)) != null) return;
+            if ((e.Result = Parse(Address)) != null) return;
             if (rip.Canceled) { e.Result = "User Cancelled!"; rip.NextPage = null; return; }
             Fetch(e);
         }
@@ -266,18 +266,18 @@
 
         private ParseStyle Check()
         {
-            if (Url == null) return ParseStyle.NotSupport;
-            if (Url.Host.Contains("heels"))
+            if (Address == null) return ParseStyle.NotSupport;
+            if (Address.Host.Contains("heels"))
                 return ParseStyle.Heels;
-            else if (Url.Host.Contains("duide"))
+            else if (Address.Host.Contains("duide"))
                 return ParseStyle.Duide;
-            else if (Url.Host.Contains("keaibbs"))
+            else if (Address.Host.Contains("keaibbs"))
                 return ParseStyle.KeAiBbs;
-            else if (Url.Host.Contains("tu11"))
+            else if (Address.Host.Contains("tu11"))
                 return ParseStyle.Tu11;
-            else if (Url.Host.Contains("meituiji"))
+            else if (Address.Host.Contains("meituiji"))
                 return ParseStyle.MeiTuiJi;
-            else if (Url.Host.Contains("pal.ath.cx"))
+            else if (Address.Host.Contains("pal.ath.cx"))
                 return ParseStyle.PalAthCx;
             else return ParseStyle.NotSupport;
         }
@@ -479,7 +479,7 @@
                         default://Action.Download
                             btnDownloadCancel.Image = Resources.Cancel;
                             rip.PushState = RipperAction.Cancel;
-                            Url = new Uri(rip.NextPage);
+                            Address = new Uri(rip.NextPage);
                             DownloadFiles.RunWorkerAsync();
                             break;
                         case RipperAction.Cancel:
@@ -563,21 +563,22 @@
             switch (rip.Style)
             {
                 case ParseStyle.Heels:
-                    number = Url.Query.Substring(Url.Query.LastIndexOf('=') + 1);
+                    if (!Address.AbsoluteUri.StartsWith("http://www.heels.cn/web/viewthread?thread=")) return;
+                    number = Address.Query.Split('=')[1];
                     if (int.TryParse(number, out value))
                     {
                         value += step;
-                        Url = new Uri(Url.AbsoluteUri.Replace(number, value.ToString()));
+                        Address = new Uri(Address.AbsoluteUri.Replace(number, value.ToString()));
                     }
                     break;
 
                 case ParseStyle.Duide:
-                    number = Url.LocalPath.Substring(Url.LocalPath.LastIndexOf("/") + 2);
-                    number = number.Remove(number.LastIndexOf('.'));
+                    if (!Address.AbsoluteUri.StartsWith("http://www.duide.com/ggfdrdsuy")) return;
+                    number = Address.LocalPath.Split("/.abc".ToCharArray())[3];
                     if (int.TryParse(number, out value))
                     {
                         value += step;
-                        Url = new Uri(Url.AbsoluteUri.Replace(number, value.ToString()));
+                        Address = new Uri(Address.AbsoluteUri.Replace(number, value.ToString()));
                     }
                     break;
 
@@ -612,8 +613,8 @@
             if (((rip = rip ?? new Fetcher()).Style = Check()) == ParseStyle.NotSupport) return;
             if (rip.Style == ParseStyle.Heels)
             {
-                if (!Url.AbsoluteUri.StartsWith("http://www.heels.cn/web/viewthread?thread=")) return;
-                string text = Url.Query.Split('=')[1];
+                if (!Address.AbsoluteUri.StartsWith("http://www.heels.cn/web/viewthread?thread=")) return;
+                string text = Address.Query.Split('=')[1];
                 int pageid;
                 if (int.TryParse(text, out pageid))
                     new BatchAction(pageid).ShowDialog(this);
