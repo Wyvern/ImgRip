@@ -55,8 +55,7 @@
                 case CloudType.GDrive:
                     if (!Regex.IsMatch(LoginName, @"^[\w\.-]+@(google|gmail|googlemail).com$", RegexOptions.IgnoreCase))
                     {
-                        MessageBox.Show("Please check your Google account", "Invalid login");
-                        return;
+                        MessageBox.Show("Please check your Google account", "Invalid login"); return;
                     }
                     
                     DR = new DocumentsRequest(new RequestSettings("Ripper", LoginName, loginPass.Text));
@@ -100,8 +99,7 @@
                 case CloudType.Picasa:
                     if (!Regex.IsMatch(LoginName, @"^[\w\.-]+@(google|gmail|googlemail).com$", RegexOptions.IgnoreCase))
                     {
-                        MessageBox.Show("Please check your Google account", "Invalid login");
-                        return;
+                        MessageBox.Show("Please check your Google account", "Invalid login"); return;
                     }
 
                     CloudStatus.Text = "Waiting..."; lvCloud.Items.Clear();
