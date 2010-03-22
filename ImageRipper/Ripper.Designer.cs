@@ -149,10 +149,12 @@
             this.tbParse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tbParse.AutoCompleteCustomSource.AddRange(new string[] {
-            "http://www.heels.cn/web/viewthread?thread=",
-            "http://www.duide.com/",
-            "http://meituiji.com/",
-            "http://tu11.cc/"});
+            "http://www.deskcity.com/details/picture/<id>.html",
+            "http://wallcoo.com/<Category>/<album>/index.html",
+            "http://www.heels.cn/web/viewthread?thread=<id>",
+            "http://www.duide.com/ggfdrdsuy/[a|b|c]<id>.htm",
+            "http://meituiji.com/<Category>/<Year>/<Month><Date>/<Id>.html",
+            "http://tu11.cc/new/<Category>/<DateTime>.htm"});
             this.tbParse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tbParse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.tbParse.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "txtParse", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -236,7 +238,7 @@
             // 
             // chSize
             // 
-            this.chSize.Text = "Size in KB";
+            this.chSize.Text = "Size";
             this.chSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.chSize.Width = 70;
             // 

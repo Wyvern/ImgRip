@@ -60,7 +60,7 @@
     /// <summary>
     /// Supported parseable web site Enumeration.
     /// </summary>
-    enum ParseStyle {NotSupport, Heels, Duide, KeAiBbs, Tu11, MeiTuiJi, PalAthCx};
+    enum ParseStyle {NotSupport, Heels, Duide, KeAiBbs, Tu11, MeiTuiJi, PalAthCx, DeskCity};
     /// <summary>
     /// Represent the download button action type.
     /// </summary>

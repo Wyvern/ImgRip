@@ -279,6 +279,8 @@
                 return ParseStyle.MeiTuiJi;
             else if (Address.Host.Contains("pal.ath.cx"))
                 return ParseStyle.PalAthCx;
+            else if (Address.Host.Contains("deskcity"))
+                return ParseStyle.DeskCity;
             else return ParseStyle.NotSupport;
         }
 
@@ -436,6 +438,46 @@
                             }
                         }
                         break;
+                    #endregion
+
+                    #region Parse DeskCity.com site
+
+                    case ParseStyle.DeskCity:
+                        {
+                            rip.Title = rip.Title.Split('|')[0];
+                            HAP.HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
+                            if (links == null || links.Count == 0) return "No picture found in this page";
+                            foreach (HAP.HtmlNode lnk in links)
+                            {
+                                string img = lnk.Attributes["src"].Value;
+                                string key = img.Split("/-".ToCharArray())[4];
+                                rip.Imgs[key + ".jpg"] = "http://" + url.Host + img.Replace(img.Substring(img.LastIndexOf(key)), key + ".jpg");
+                            }
+                            string nextpage = null;
+                            HAP.HtmlNode next = doc.DocumentNode.SelectSingleNode("//div[@class='pagination']");
+                            if (next != null && next.HasChildNodes) next = next.LastChild; else return null;
+                            if (next.Attributes["href"] != null)
+                                nextpage = next.Attributes["href"].Value;
+                            while (nextpage != null)
+                            {
+                                doc = new HAP.HtmlWeb().Load("http://www.deskcity.com" + nextpage);
+                                links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
+                                if (links == null || links.Count == 0) return "No picture found in this page";
+                                foreach (HAP.HtmlNode lnk in links)
+                                {
+                                    string img = lnk.Attributes["src"].Value;
+                                    string key = img.Split("/-".ToCharArray())[4];
+                                    rip.Imgs[key + ".jpg"] = "http://" + url.Host + img.Replace(img.Substring(img.LastIndexOf(key)), key + ".jpg");
+                                }
+                                next = doc.DocumentNode.SelectSingleNode("//div[@class='pagination']").LastChild;
+                                if (next.Attributes["href"] != null)
+                                    nextpage = next.Attributes["href"].Value;
+                                else
+                                    nextpage = null;
+                            }
+                        }
+                        break;
+
                     #endregion
 
                     case ParseStyle.NotSupport:
