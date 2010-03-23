@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebCloud));
             this.lvCloud = new System.Windows.Forms.ListView();
-            this.lvImageList = new System.Windows.Forms.ImageList(this.components);
+            this.lvImageList = new System.Windows.Forms.ImageList();
             this.lblCloudID = new System.Windows.Forms.Label();
             this.lblLivePass = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -47,7 +46,7 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.CommandPanel = new System.Windows.Forms.Panel();
             this.cbPublic = new System.Windows.Forms.CheckBox();
-            this.ttCloud = new System.Windows.Forms.ToolTip(this.components);
+            this.ttCloud = new System.Windows.Forms.ToolTip();
             this.statusStrip1.SuspendLayout();
             this.gpLogin.SuspendLayout();
             this.CommandPanel.SuspendLayout();
@@ -73,6 +72,7 @@
             this.lvCloud.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvCloud_ItemSelectionChanged);
             this.lvCloud.DragDrop += new System.Windows.Forms.DragEventHandler(this.lvCloud_DragDrop);
             this.lvCloud.DragEnter += new System.Windows.Forms.DragEventHandler(this.lvCloud_DragEnter);
+            this.lvCloud.Enter += new System.EventHandler(this.lvCloud_Enter);
             this.lvCloud.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvCloud_KeyDown);
             this.lvCloud.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvCloud_MouseClick);
             this.lvCloud.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvCloud_MouseDoubleClick);
@@ -140,7 +140,6 @@
             this.txtFolderName.TextChanged += new System.EventHandler(this.txtFolderName_TextChanged);
             this.txtFolderName.Enter += new System.EventHandler(this.txtFolderName_Enter);
             this.txtFolderName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFolderName_KeyPress);
-            this.txtFolderName.Leave += new System.EventHandler(this.txtFolderName_Leave);
             // 
             // gpLogin
             // 
@@ -264,7 +263,6 @@
             this.cbPublic.ThreeState = true;
             this.ttCloud.SetToolTip(this.cbPublic, "Shared");
             this.cbPublic.UseVisualStyleBackColor = true;
-            this.cbPublic.EnabledChanged += new System.EventHandler(this.cbPublic_EnabledChanged);
             // 
             // ttCloud
             // 

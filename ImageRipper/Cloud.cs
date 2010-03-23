@@ -791,7 +791,6 @@
             {
                 btnDelete.Enabled = true;
                 ListViewItem lvi = lvCloud.SelectedItems[0];
-                cbPublic.Enabled = false;
                 switch (Service)
                 {
                     #region GDrive
@@ -815,8 +814,9 @@
                     case CloudType.Picasa:
                         if (AlbumID == null)
                         {
-                            uint total =0, check = 0;
-                            cbPublic.ThreeState = true;
+                            cbPublic.Enabled = true;
+                            cbPublic.AutoCheck = false;
+                            uint total = 0, check = 0;
                             foreach (ListViewItem item in lvCloud.SelectedItems)
                             {
                                 total += Albums.Single(_ => _.Id == item.Name).NumPhotos;
@@ -899,17 +899,19 @@
 
         private void txtFolderName_Enter(object sender, EventArgs e)
         {
-            cbPublic.Enabled = true;
+            cbPublic.Enabled = AlbumID == null;
+            cbPublic.ThreeState = false;
+            cbPublic.AutoCheck = true;
+            cbPublic.Checked = false;
         }
 
-        private void txtFolderName_Leave(object sender, EventArgs e)
+        private void lvCloud_Enter(object sender, EventArgs e)
         {
-            cbPublic.Enabled = cbPublic.Focused;
-        }
-
-        private void cbPublic_EnabledChanged(object sender, EventArgs e)
-        {
-            cbPublic.ThreeState = cbPublic.Enabled ? false : true;
+            if (lvCloud.Items.Count > 0 && AlbumID == null)
+            {
+                cbPublic.AutoCheck = false;
+                cbPublic.ThreeState = true;
+            }
         }
     }
 }
