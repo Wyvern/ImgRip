@@ -114,6 +114,7 @@
                         if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                         txtFolderName.cbEnable(true);
                         btnCreateFolder.cbEnable(true);
+                        cbPublic.cbEnable(false);
                         btnUp.cbEnable(false);
                         btnAddFiles.cbEnable(false);
                         btnDelete.cbEnable(false);
