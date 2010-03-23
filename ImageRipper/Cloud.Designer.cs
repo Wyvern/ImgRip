@@ -138,7 +138,9 @@
             this.txtFolderName.TabIndex = 12;
             this.ttCloud.SetToolTip(this.txtFolderName, "Type to search or add new album");
             this.txtFolderName.TextChanged += new System.EventHandler(this.txtFolderName_TextChanged);
+            this.txtFolderName.Enter += new System.EventHandler(this.txtFolderName_Enter);
             this.txtFolderName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFolderName_KeyPress);
+            this.txtFolderName.Leave += new System.EventHandler(this.txtFolderName_Leave);
             // 
             // gpLogin
             // 
@@ -259,8 +261,10 @@
             this.cbPublic.Name = "cbPublic";
             this.cbPublic.Size = new System.Drawing.Size(48, 42);
             this.cbPublic.TabIndex = 13;
-            this.ttCloud.SetToolTip(this.cbPublic, "Check to create shared new Album");
+            this.cbPublic.ThreeState = true;
+            this.ttCloud.SetToolTip(this.cbPublic, "Shared");
             this.cbPublic.UseVisualStyleBackColor = true;
+            this.cbPublic.EnabledChanged += new System.EventHandler(this.cbPublic_EnabledChanged);
             // 
             // ttCloud
             // 

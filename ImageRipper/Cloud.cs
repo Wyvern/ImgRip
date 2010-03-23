@@ -114,7 +114,6 @@
                         if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                         txtFolderName.cbEnable(true);
                         btnCreateFolder.cbEnable(true);
-                        cbPublic.cbEnable(true);
                         btnUp.cbEnable(false);
                         btnAddFiles.cbEnable(false);
                         btnDelete.cbEnable(false);
@@ -275,7 +274,6 @@
                             lvCloud.cbAdd(item.Id, item.Title, 0, item.AtomEntry.AlternateUri.Content);
                         if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                         Photos.Clear(); AlbumID = null;
-                        cbPublic.cbEnable(true);
                         txtFolderName.cbEnable(true);
                         btnCreateFolder.cbEnable(true);
                         Prompt = "Picasa: " + Albums.Count + " item(s)";
@@ -303,29 +301,27 @@
                 case CloudType.GDrive:
                     Func<Document> CD = () => DR.CreateDocument(new Document() { Title = foldername, Type = Document.DocumentType.Folder });
                     Document @base = null;
-                    string title, ttt;
+                    string title, tip;
                     if (Folder != null && Folder.Count > 0) @base = Folder.Peek();
-                    CD.BeginInvoke(_ =>
+                    CD.BeginInvoke(c =>
                         {
-                            var @old = CD.EndInvoke(_);
-                            title = @old.Title; ttt = @old.AtomEntry.AlternateUri.Content;
-                            var @new = @old;
+                            var @new = CD.EndInvoke(c);
                             if (@base != null)
                             {
-                                Func<Document> MD = () => DR.MoveDocumentTo(@base, @old);
-                                MD.BeginInvoke(__ =>
+                                Func<Document> MD = () => DR.MoveDocumentTo(@base, @new);
+                                MD.BeginInvoke(m =>
                                     {
-                                        @new = MD.EndInvoke(__);
-                                        title = @new.Title; ttt = @new.AtomEntry.AlternateUri.Content;
+                                        @new = MD.EndInvoke(m);
                                     }, null);
                             }
-                            lvCloud.cbAdd(@new.Id, title, 0, ttt);
-                            if (cldItems != null) cldItems.Add(new ListViewItem(title, 0) { ToolTipText = ttt });
+                            title = @new.Title; tip = @new.AtomEntry.AlternateUri.Content;
+                            lvCloud.cbAdd(@new.Id, title, 0, tip);
+                            if (cldItems != null) cldItems.Add(new ListViewItem(title, 0) { Name = @new.Id, ToolTipText = tip });
                             Docs.Add(@new);
                             txtFolderName.cbEnable(true);
                             btnCreateFolder.cbEnable(true);
                             btnUp.cbEnable(@base != null);
-                            Prompt = (@base == null ? "GDrive" : @base.Title) + ": " + Docs.Count + " item(s)";
+                            Prompt = (@base == null ? "GDrive" : string.Join(" > ", Folder.Select(f =>f.Title).Reverse().ToArray())) + ": " + Docs.Count + " item(s)";
                         }, null);
                     break;
                 #endregion
@@ -344,14 +340,14 @@
                 case CloudType.Picasa:
                     var a = new Album();
                     a.Title = foldername;
+                    cbPublic.ThreeState = false;
                     a.Access = cbPublic.Checked ? "public" : "private";
-                    btnCreateFolder.Enabled = false;
                     Func<Album> CA = () => PR.Insert<Album>(new Uri(PicasaQuery.CreatePicasaUri(LoginName)), a);
                     CA.BeginInvoke(_ =>
                         {
                             var @new = CA.EndInvoke(_);
                             lvCloud.cbAdd(@new.Id, foldername, 0, @new.AtomEntry.AlternateUri.Content);
-                            if (cldItems != null) cldItems.Add(new ListViewItem(foldername, 0) { ToolTipText = @new.AtomEntry.AlternateUri.Content });
+                            if (cldItems != null) cldItems.Add(new ListViewItem(foldername, 0) {Name=@new.Id, ToolTipText = @new.AtomEntry.AlternateUri.Content });
                             Albums.Add(@new);
                             btnCreateFolder.cbEnable(true);
                             txtFolderName.cbEnable(true);
@@ -375,7 +371,8 @@
                     List<ListViewItem> items = new List<ListViewItem>();
                     foreach (ListViewItem item in lvCloud.SelectedItems)
                         items.Add(item);
-                    ThreadPool.QueueUserWorkItem(DeleteCloudItem, items);
+                    if (MessageBox.Show("Are you sure to delete items below\n" + string.Join(", ", items.Select(i => i.Text).ToArray()), "Delete Cloud Items", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                        ThreadPool.QueueUserWorkItem(DeleteCloudItem, items);
                     break;
                 #endregion
 
@@ -412,7 +409,7 @@
                         try
                         {
                             var doc = Docs.Single(_ => _.Id == lvi.Name);
-                            DR.Delete(doc);
+                            doc.DocumentEntry.Delete();
                             Docs.Remove(doc);
                         }
                         catch (Exception exp)
@@ -476,7 +473,6 @@
                     break;
                 #endregion
             }
-            System.Media.SystemSounds.Exclamation.Play();
         }
 
         void AddCloudFile(object arg)
@@ -512,7 +508,7 @@
                             }
                             string ttt = @new.AtomEntry.AlternateUri.Content;
                             lvCloud.cbAdd(@new.Id, de.Title.Text, 2, ttt);
-                            if (cldItems != null) cldItems.Add(new ListViewItem(de.Title.Text, 2) { ToolTipText = ttt });
+                            if (cldItems != null) cldItems.Add(new ListViewItem(de.Title.Text, 2) {Name=@new.Id, ToolTipText = ttt });
                             Docs.Add(@new);
                         }
                         catch (Exception exp)
@@ -551,7 +547,7 @@
                                 Photos.Add(p);
                                 fs.Close();
                                 lvCloud.cbAdd(p.Id, filename, 1, ae.AlternateUri.Content);
-                                if (cldItems != null) cldItems.Add(new ListViewItem(filename, 1) { ToolTipText=ae.AlternateUri.Content});
+                                if (cldItems != null) cldItems.Add(new ListViewItem(filename, 1) { Name = p.Id, ToolTipText = ae.AlternateUri.Content });
                             }
                         }
                         catch (Exception exp)
@@ -612,7 +608,7 @@
                         Document @new = DU.EndInvoke(_); Docs.Remove(doc); Docs.Add(@new); lvi.ToolTipText = @new.AtomEntry.AlternateUri.Content; 
                         if (cldItems != null)
                         {
-                            ListViewItem item = cldItems.Single(__ => __.Name == lvi.Name);
+                            ListViewItem item = cldItems.Single(i => i.Name == lvi.Name);
                             item.Text = e.Label; item.ToolTipText = lvi.ToolTipText;
                         }
                         Prompt = "Done";
@@ -642,7 +638,7 @@
                             Album @new = PU.EndInvoke(_); Albums.Remove(a); Albums.Add(@new); lvi.ToolTipText = @new.AtomEntry.AlternateUri.Content;
                             if (cldItems != null)
                             {
-                                ListViewItem item = cldItems.Single(__ => __.Name == lvi.Name);
+                                ListViewItem item = cldItems.Single(i => i.Name == lvi.Name);
                                 item.Text = e.Label; item.ToolTipText = lvi.ToolTipText;
                             }
                             Prompt = "Done";
@@ -658,7 +654,7 @@
                             Photo @new = PU.EndInvoke(_); Photos.Remove(p); Photos.Add(@new); lvi.ToolTipText = @new.AtomEntry.AlternateUri.Content;
                             if (cldItems != null)
                             {
-                                ListViewItem item = cldItems.Single(__ => __.Name == lvi.Name);
+                                ListViewItem item = cldItems.Single(i => i.Name == lvi.Name);
                                 item.Text = e.Label; item.ToolTipText = lvi.ToolTipText;
                             }
                             Prompt = "Done";
@@ -795,6 +791,7 @@
             {
                 btnDelete.Enabled = true;
                 ListViewItem lvi = lvCloud.SelectedItems[0];
+                cbPublic.Enabled = false;
                 switch (Service)
                 {
                     #region GDrive
@@ -818,11 +815,14 @@
                     case CloudType.Picasa:
                         if (AlbumID == null)
                         {
-                            uint total = 0;
+                            uint total =0, check = 0;
+                            cbPublic.ThreeState = true;
                             foreach (ListViewItem item in lvCloud.SelectedItems)
                             {
                                 total += Albums.Single(_ => _.Id == item.Name).NumPhotos;
+                                if (Albums.Single(_ => _.Id == item.Name).Access == "public") check++;
                             }
+                            cbPublic.CheckState = check == 0 ? CheckState.Unchecked : check == lvCloud.SelectedItems.Count ? CheckState.Checked : CheckState.Indeterminate;
                             Prompt = string.Format("Total: {0} Photos", total);
                         }
                         else
@@ -854,6 +854,7 @@
 
                     #region Picasa
                     case CloudType.Picasa:
+                        cbPublic.CheckState = CheckState.Unchecked;
                         Prompt = (AlbumID == null ? Albums.Count : Photos.Count) + " item(s)";
                         break;
                     #endregion
@@ -894,6 +895,21 @@
         private void WebCloud_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (cldItems != null) { cldItems.Clear(); cldItems = null; }
+        }
+
+        private void txtFolderName_Enter(object sender, EventArgs e)
+        {
+            cbPublic.Enabled = true;
+        }
+
+        private void txtFolderName_Leave(object sender, EventArgs e)
+        {
+            cbPublic.Enabled = cbPublic.Focused;
+        }
+
+        private void cbPublic_EnabledChanged(object sender, EventArgs e)
+        {
+            cbPublic.ThreeState = cbPublic.Enabled ? false : true;
         }
     }
 }
