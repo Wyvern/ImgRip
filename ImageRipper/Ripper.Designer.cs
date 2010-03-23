@@ -50,20 +50,20 @@
             this.cmmiSave = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiClear = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.RipStatus = new System.Windows.Forms.StatusStrip();
+            this.tsLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblBatch = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.CloudToolStrip = new System.Windows.Forms.ToolStripSplitButton();
-            this.SkyDriveItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.FlickrItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.FacebookItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.PicasaItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsPB = new System.Windows.Forms.ToolStripProgressBar();
+            this.tsCloud = new System.Windows.Forms.ToolStripSplitButton();
+            this.tsiGData = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsiFlickr = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsiFacebook = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsiPicasa = new System.Windows.Forms.ToolStripMenuItem();
             this.lblUrl = new System.Windows.Forms.Label();
             this.tbDir = new System.Windows.Forms.TextBox();
             this.pbPreview = new System.Windows.Forms.PictureBox();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.DownloadFiles = new System.ComponentModel.BackgroundWorker();
+            this.fbDir = new System.Windows.Forms.FolderBrowserDialog();
+            this.bwDownload = new System.ComponentModel.BackgroundWorker();
             this.ttRipper = new System.Windows.Forms.ToolTip(this.components);
             this.tmMinus = new System.Windows.Forms.Timer(this.components);
             this.tmPlus = new System.Windows.Forms.Timer(this.components);
@@ -72,7 +72,7 @@
             this.mainSplit.SuspendLayout();
             this.cmsBatch.SuspendLayout();
             this.cmsLV.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
+            this.RipStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,7 +91,7 @@
             this.mainSplit.Panel1.Controls.Add(this.llCookie);
             this.mainSplit.Panel1.Controls.Add(this.llFolder);
             this.mainSplit.Panel1.Controls.Add(this.lvRip);
-            this.mainSplit.Panel1.Controls.Add(this.statusStrip1);
+            this.mainSplit.Panel1.Controls.Add(this.RipStatus);
             this.mainSplit.Panel1.Controls.Add(this.lblUrl);
             this.mainSplit.Panel1.Controls.Add(this.tbDir);
             this.mainSplit.Panel1.Padding = new System.Windows.Forms.Padding(1);
@@ -321,29 +321,29 @@
             this.cmmiClear.Visible = false;
             this.cmmiClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // statusStrip1
+            // RipStatus
             // 
-            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
+            this.RipStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.RipStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsLabel,
             this.lblBatch,
-            this.toolStripProgressBar1,
-            this.CloudToolStrip});
-            this.statusStrip1.Location = new System.Drawing.Point(1, 465);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(785, 22);
-            this.statusStrip1.TabIndex = 22;
-            this.statusStrip1.Text = "statusStrip1";
+            this.tsPB,
+            this.tsCloud});
+            this.RipStatus.Location = new System.Drawing.Point(1, 465);
+            this.RipStatus.Name = "RipStatus";
+            this.RipStatus.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.RipStatus.Size = new System.Drawing.Size(785, 22);
+            this.RipStatus.TabIndex = 22;
+            this.RipStatus.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // tsLabel
             // 
-            this.toolStripStatusLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(41, 17);
-            this.toolStripStatusLabel1.Text = "Done";
+            this.tsLabel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsLabel.Font = new System.Drawing.Font("Microsoft YaHei", 9F, System.Drawing.FontStyle.Bold);
+            this.tsLabel.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.tsLabel.Name = "tsLabel";
+            this.tsLabel.Size = new System.Drawing.Size(41, 17);
+            this.tsLabel.Text = "Done";
             // 
             // lblBatch
             // 
@@ -352,63 +352,63 @@
             this.lblBatch.Name = "lblBatch";
             this.lblBatch.Size = new System.Drawing.Size(0, 17);
             // 
-            // toolStripProgressBar1
+            // tsPB
             // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
-            this.toolStripProgressBar1.Visible = false;
+            this.tsPB.Name = "tsPB";
+            this.tsPB.Size = new System.Drawing.Size(100, 16);
+            this.tsPB.Visible = false;
             // 
-            // CloudToolStrip
+            // tsCloud
             // 
-            this.CloudToolStrip.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.CloudToolStrip.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.CloudToolStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.SkyDriveItem,
-            this.FlickrItem,
-            this.FacebookItem,
-            this.PicasaItem});
-            this.CloudToolStrip.Image = ((System.Drawing.Image)(resources.GetObject("CloudToolStrip.Image")));
-            this.CloudToolStrip.Name = "CloudToolStrip";
-            this.CloudToolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.CloudToolStrip.Size = new System.Drawing.Size(32, 20);
-            this.CloudToolStrip.Text = "SkyDrive";
-            this.CloudToolStrip.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.CloudToolStrip.ToolTipText = "Cloud web storage service.";
-            this.CloudToolStrip.Click += new System.EventHandler(this.CloudToolStrip_Click);
+            this.tsCloud.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tsCloud.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsCloud.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsiGData,
+            this.tsiFlickr,
+            this.tsiFacebook,
+            this.tsiPicasa});
+            this.tsCloud.Image = ((System.Drawing.Image)(resources.GetObject("tsCloud.Image")));
+            this.tsCloud.Name = "tsCloud";
+            this.tsCloud.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.tsCloud.Size = new System.Drawing.Size(32, 20);
+            this.tsCloud.Text = "SkyDrive";
+            this.tsCloud.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsCloud.ToolTipText = "Cloud web storage service.";
+            this.tsCloud.Click += new System.EventHandler(this.CloudToolStrip_Click);
             // 
-            // SkyDriveItem
+            // tsiGData
             // 
-            this.SkyDriveItem.Image = ((System.Drawing.Image)(resources.GetObject("SkyDriveItem.Image")));
-            this.SkyDriveItem.Name = "SkyDriveItem";
-            this.SkyDriveItem.Size = new System.Drawing.Size(127, 22);
-            this.SkyDriveItem.Text = "GDrive";
-            this.SkyDriveItem.Click += new System.EventHandler(this.CloudItem_Click);
+            this.tsiGData.Image = ((System.Drawing.Image)(resources.GetObject("tsiGData.Image")));
+            this.tsiGData.Name = "tsiGData";
+            this.tsiGData.Size = new System.Drawing.Size(152, 22);
+            this.tsiGData.Text = "GDrive";
+            this.tsiGData.Click += new System.EventHandler(this.CloudItem_Click);
             // 
-            // FlickrItem
+            // tsiFlickr
             // 
-            this.FlickrItem.Image = ((System.Drawing.Image)(resources.GetObject("FlickrItem.Image")));
-            this.FlickrItem.Name = "FlickrItem";
-            this.FlickrItem.Size = new System.Drawing.Size(127, 22);
-            this.FlickrItem.Text = "Flickr";
-            this.FlickrItem.Visible = false;
-            this.FlickrItem.Click += new System.EventHandler(this.CloudItem_Click);
+            this.tsiFlickr.Image = ((System.Drawing.Image)(resources.GetObject("tsiFlickr.Image")));
+            this.tsiFlickr.Name = "tsiFlickr";
+            this.tsiFlickr.Size = new System.Drawing.Size(152, 22);
+            this.tsiFlickr.Text = "Flickr";
+            this.tsiFlickr.Visible = false;
+            this.tsiFlickr.Click += new System.EventHandler(this.CloudItem_Click);
             // 
-            // FacebookItem
+            // tsiFacebook
             // 
-            this.FacebookItem.Image = ((System.Drawing.Image)(resources.GetObject("FacebookItem.Image")));
-            this.FacebookItem.Name = "FacebookItem";
-            this.FacebookItem.Size = new System.Drawing.Size(127, 22);
-            this.FacebookItem.Text = "Facebook";
-            this.FacebookItem.Visible = false;
-            this.FacebookItem.Click += new System.EventHandler(this.CloudItem_Click);
+            this.tsiFacebook.Image = ((System.Drawing.Image)(resources.GetObject("tsiFacebook.Image")));
+            this.tsiFacebook.Name = "tsiFacebook";
+            this.tsiFacebook.Size = new System.Drawing.Size(152, 22);
+            this.tsiFacebook.Text = "Facebook";
+            this.tsiFacebook.Visible = false;
+            this.tsiFacebook.Click += new System.EventHandler(this.CloudItem_Click);
             // 
-            // PicasaItem
+            // tsiPicasa
             // 
-            this.PicasaItem.Image = ((System.Drawing.Image)(resources.GetObject("PicasaItem.Image")));
-            this.PicasaItem.Name = "PicasaItem";
-            this.PicasaItem.Size = new System.Drawing.Size(127, 22);
-            this.PicasaItem.Text = "Picasa";
-            this.PicasaItem.Click += new System.EventHandler(this.CloudItem_Click);
+            this.tsiPicasa.Image = ((System.Drawing.Image)(resources.GetObject("tsiPicasa.Image")));
+            this.tsiPicasa.Name = "tsiPicasa";
+            this.tsiPicasa.Size = new System.Drawing.Size(152, 22);
+            this.tsiPicasa.Text = "Picasa";
+            this.tsiPicasa.Click += new System.EventHandler(this.CloudItem_Click);
             // 
             // lblUrl
             // 
@@ -450,13 +450,13 @@
             this.pbPreview.TabStop = false;
             this.pbPreview.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
-            // DownloadFiles
+            // bwDownload
             // 
-            this.DownloadFiles.WorkerReportsProgress = true;
-            this.DownloadFiles.WorkerSupportsCancellation = true;
-            this.DownloadFiles.DoWork += new System.ComponentModel.DoWorkEventHandler(this.DownloadFiles_DoWork);
-            this.DownloadFiles.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.DownloadFiles_ProgressChanged);
-            this.DownloadFiles.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DownloadFiles_RunWorkerCompleted);
+            this.bwDownload.WorkerReportsProgress = true;
+            this.bwDownload.WorkerSupportsCancellation = true;
+            this.bwDownload.DoWork += new System.ComponentModel.DoWorkEventHandler(this.DownloadFiles_DoWork);
+            this.bwDownload.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.DownloadFiles_ProgressChanged);
+            this.bwDownload.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DownloadFiles_RunWorkerCompleted);
             // 
             // ttRipper
             // 
@@ -485,7 +485,7 @@
             this.MinimumSize = new System.Drawing.Size(450, 300);
             this.Name = "Ripper";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Image Ripper - Designed by Wyvern";
+            this.Text = "Image Ripper - F11: Fullscreen, Spacebar: Switch preview panel";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Ripper_KeyDown);
             this.mainSplit.Panel1.ResumeLayout(false);
             this.mainSplit.Panel1.PerformLayout();
@@ -493,8 +493,8 @@
             this.mainSplit.ResumeLayout(false);
             this.cmsBatch.ResumeLayout(false);
             this.cmsLV.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.RipStatus.ResumeLayout(false);
+            this.RipStatus.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
             this.ResumeLayout(false);
 
@@ -504,14 +504,14 @@
 
         private Wyvern.SplitButton btnDownloadCancel;
         private System.Windows.Forms.TextBox tbDir;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        internal System.ComponentModel.BackgroundWorker DownloadFiles;
+        private System.Windows.Forms.FolderBrowserDialog fbDir;
+        internal System.ComponentModel.BackgroundWorker bwDownload;
         private System.Windows.Forms.Label lblUrl;
         private System.Windows.Forms.TextBox tbParse;
         private System.Windows.Forms.PictureBox pbPreview;
         private System.Windows.Forms.SplitContainer mainSplit;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.StatusStrip RipStatus;
+        private System.Windows.Forms.ToolStripStatusLabel tsLabel;
         private System.Windows.Forms.ToolTip ttRipper;
         private System.Windows.Forms.Timer tmMinus;
         private System.Windows.Forms.Timer tmPlus;
@@ -532,12 +532,12 @@
         private System.Windows.Forms.LinkLabel llCookie;
         private System.Windows.Forms.ToolStripMenuItem cmmiSave;
         private System.Windows.Forms.ToolStripMenuItem cmmiRemove;
-        private System.Windows.Forms.ToolStripSplitButton CloudToolStrip;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
-        private System.Windows.Forms.ToolStripMenuItem SkyDriveItem;
-        private System.Windows.Forms.ToolStripMenuItem FlickrItem;
-        private System.Windows.Forms.ToolStripMenuItem FacebookItem;
-        private System.Windows.Forms.ToolStripMenuItem PicasaItem;
+        private System.Windows.Forms.ToolStripSplitButton tsCloud;
+        private System.Windows.Forms.ToolStripProgressBar tsPB;
+        private System.Windows.Forms.ToolStripMenuItem tsiGData;
+        private System.Windows.Forms.ToolStripMenuItem tsiFlickr;
+        private System.Windows.Forms.ToolStripMenuItem tsiFacebook;
+        private System.Windows.Forms.ToolStripMenuItem tsiPicasa;
         private System.Windows.Forms.ColumnHeader chNumber;
     }
 }

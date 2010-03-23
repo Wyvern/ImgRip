@@ -22,7 +22,7 @@
             InitializeComponent();
         }
 
-        string LoginName { get { return loginName.Text.Trim(); } }
+        string LoginName { get { return tbName.Text.Trim(); } }
         bool Aborted = false;
         string Prompt { set { statusStrip1.Invoke(new Action(() => CloudStatus.Text = value)); } }
         
@@ -58,7 +58,7 @@
                         MessageBox.Show("Please check your Google account", "Invalid login"); return;
                     }
                     
-                    DR = new DocumentsRequest(new RequestSettings("Ripper", LoginName, loginPass.Text) {AutoPaging=true});
+                    DR = new DocumentsRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) {AutoPaging=true});
                     CloudStatus.Text = "Waiting..."; lvCloud.Items.Clear();
                     Func<Feed<Document>> GE = () => DR.GetFolders();
                     try
@@ -72,10 +72,10 @@
                                                       if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                                                       btnSign.cbEnable(true);
                                                       txtFolderName.cbEnable(true);
-                                                      btnCreateFolder.cbEnable(true);
+                                                      btnCreate.cbEnable(true);
                                                       btnDelete.cbEnable(false);
                                                       btnUp.cbEnable(false);
-                                                      btnAddFiles.cbEnable(false);
+                                                      btnAdd.cbEnable(false);
                                                       Prompt = "GDrive: " + Docs.Count + " item(s)";
                                                   }, null);
                     }
@@ -104,7 +104,7 @@
                     }
 
                     CloudStatus.Text = "Waiting..."; lvCloud.Items.Clear();
-                    PR = new PicasaRequest(new RequestSettings("Ripper", LoginName, loginPass.Text) { AutoPaging=true});
+                    PR = new PicasaRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) { AutoPaging=true});
                     Func<Feed<Album>> GA = () => PR.GetAlbums();
                     GA.BeginInvoke(_ =>
                     {
@@ -113,10 +113,10 @@
                             lvCloud.cbAdd(item.Id, item.Title, 0, item.AtomEntry.AlternateUri.Content);
                         if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                         txtFolderName.cbEnable(true);
-                        btnCreateFolder.cbEnable(true);
+                        btnCreate.cbEnable(true);
                         cbPublic.cbEnable(false);
                         btnUp.cbEnable(false);
-                        btnAddFiles.cbEnable(false);
+                        btnAdd.cbEnable(false);
                         btnDelete.cbEnable(false);
                         btnSign.cbEnable(true);
                         Prompt = "Picasa: " + Albums.Count + " Album(s)";
@@ -126,7 +126,7 @@
             }
             btnSign.Enabled = false;
             Properties.Settings.Default.CloudID = LoginName;
-            Properties.Settings.Default.Password = loginPass.Text;
+            Properties.Settings.Default.Password = tbPass.Text;
             Properties.Settings.Default.Save();
         }
 
@@ -145,7 +145,7 @@
                             Folder = Folder ?? new Stack<Document>();
                             CloudStatus.Text = "Listing \"" + doc.Title + "\"";
                             Folder.Push(doc);
-                            btnDelete.Enabled = btnAddFiles.Enabled = btnCreateFolder.Enabled = false;
+                            btnDelete.Enabled = btnAdd.Enabled = btnCreate.Enabled = false;
                             lvCloud.Items.Clear();
                             Func<Feed<Document>> DFC = () => DR.GetFolderContent(doc);
                             DFC.BeginInvoke(ar =>
@@ -155,8 +155,8 @@
                                         lvCloud.cbAdd(item.Id, item.Title, item.Type == Document.DocumentType.Folder ? 0 : 2, item.AtomEntry.AlternateUri.Content);
                                     if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                                     btnUp.cbEnable(true);
-                                    btnCreateFolder.cbEnable(true);
-                                    btnAddFiles.cbEnable(true);
+                                    btnCreate.cbEnable(true);
+                                    btnAdd.cbEnable(true);
                                     txtFolderName.cbEnable(true);
                                     Prompt = string.Join(" > ", Folder.Select(_ => _.Title).Reverse().ToArray()) + ": " + Docs.Count + " item(s)";
                                 }, null);
@@ -191,9 +191,9 @@
                                         lvCloud.cbAdd(item.Id, item.Title, 1, item.AtomEntry.AlternateUri.Content);
                                     if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                                     btnUp.cbEnable(true);
-                                    btnCreateFolder.cbEnable(false);
+                                    btnCreate.cbEnable(false);
                                     txtFolderName.cbEnable(true);
-                                    btnAddFiles.cbEnable(true);
+                                    btnAdd.cbEnable(true);
                                     Prompt = a.Title + ": " + Photos.Count + " Photo(s)";
                                 }, null);
                         }
@@ -212,7 +212,7 @@
                     if (Folder == null || Folder.Count == 0) return;
                     Document doc = Folder.Pop();
                     lvCloud.Items.Clear();
-                    btnUp.Enabled = btnDelete.Enabled = btnCreateFolder.Enabled = txtFolderName.Enabled = btnAddFiles.Enabled = false;
+                    btnUp.Enabled = btnDelete.Enabled = btnCreate.Enabled = txtFolderName.Enabled = btnAdd.Enabled = false;
                     if (Folder.Count == 0)
                     {
                         CloudStatus.Text = "Waiting...";
@@ -226,7 +226,7 @@
                             if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                             txtFolderName.cbEnable(true);
                             //btnAddFiles.cbEnable(true);
-                            btnCreateFolder.cbEnable(true);
+                            btnCreate.cbEnable(true);
                             btnUp.cbEnable(false);
                             Prompt = "GDrive: " + Docs.Count + " item(s)";
                         }, null);
@@ -243,8 +243,8 @@
                                     lvCloud.cbAdd(item.Id, item.Title, item.Type == Document.DocumentType.Folder ? 0 : 2, item.AtomEntry.AlternateUri.Content);
                                 if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                                 btnUp.cbEnable(true);
-                                btnAddFiles.cbEnable(true);
-                                btnCreateFolder.cbEnable(true);
+                                btnAdd.cbEnable(true);
+                                btnCreate.cbEnable(true);
                                 txtFolderName.cbEnable(true);
                                 Prompt = string.Join(" > ", Folder.Select(_ => _.Title).Reverse().ToArray()) + ": " + Docs.Count + " item(s)";
                             }, null);
@@ -266,7 +266,7 @@
                 case CloudType.Picasa:
                     lvCloud.Items.Clear();
                     CloudStatus.Text = "Waiting...";
-                    btnUp.Enabled = btnDelete.Enabled = btnCreateFolder.Enabled = txtFolderName.Enabled = btnAddFiles.Enabled = false;
+                    btnUp.Enabled = btnDelete.Enabled = btnCreate.Enabled = txtFolderName.Enabled = btnAdd.Enabled = false;
                     Func<Feed<Album>> GA = () => PR.GetAlbums();
                     GA.BeginInvoke(_ =>
                     {
@@ -276,7 +276,7 @@
                         if (cldItems != null) { cldItems.Clear(); cldItems = null; }
                         Photos.Clear(); AlbumID = null;
                         txtFolderName.cbEnable(true);
-                        btnCreateFolder.cbEnable(true);
+                        btnCreate.cbEnable(true);
                         Prompt = "Picasa: " + Albums.Count + " Albums(s)";
                     }, null);
                     break;
@@ -294,7 +294,7 @@
             if (lvCloud.FindItemWithText(foldername) != null) { CloudStatus.Text = "\"" + foldername + "\" already existed."; return; }
             CloudStatus.Text = "Creating \"" + foldername + "\"";
             txtFolderName.Enabled = false;
-            btnCreateFolder.Enabled = false;
+            btnCreate.Enabled = false;
             btnUp.Enabled = false;
             switch (Service)
             {
@@ -320,7 +320,7 @@
                             if (cldItems != null) cldItems.Add(new ListViewItem(title, 0) { Name = @new.Id, ToolTipText = tip });
                             Docs.Add(@new);
                             txtFolderName.cbEnable(true);
-                            btnCreateFolder.cbEnable(true);
+                            btnCreate.cbEnable(true);
                             btnUp.cbEnable(@base != null);
                             Prompt = (@base == null ? "GDrive" : string.Join(" > ", Folder.Select(f =>f.Title).Reverse().ToArray())) + ": " + Docs.Count + " item(s)";
                         }, null);
@@ -350,7 +350,7 @@
                             lvCloud.cbAdd(@new.Id, foldername, 0, @new.AtomEntry.AlternateUri.Content);
                             if (cldItems != null) cldItems.Add(new ListViewItem(foldername, 0) {Name=@new.Id, ToolTipText = @new.AtomEntry.AlternateUri.Content });
                             Albums.Add(@new);
-                            btnCreateFolder.cbEnable(true);
+                            btnCreate.cbEnable(true);
                             txtFolderName.cbEnable(true);
                             Prompt = "Picasa " + Albums.Count + " item(s)";
                         }, null);
@@ -737,7 +737,7 @@
             {
                 #region GDrive
                 case CloudType.GDrive:
-                    if (DR == null||!btnAddFiles.Enabled)
+                    if (DR == null||!btnAdd.Enabled)
                     { e.Effect = DragDropEffects.None; return; }
                     break;
                 #endregion

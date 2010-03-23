@@ -28,25 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebCloud));
             this.lvCloud = new System.Windows.Forms.ListView();
-            this.lvImageList = new System.Windows.Forms.ImageList();
+            this.lvImageList = new System.Windows.Forms.ImageList(this.components);
             this.lblCloudID = new System.Windows.Forms.Label();
-            this.lblLivePass = new System.Windows.Forms.Label();
+            this.lblPass = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.CloudStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtFolderName = new System.Windows.Forms.TextBox();
             this.gpLogin = new System.Windows.Forms.GroupBox();
-            this.loginName = new System.Windows.Forms.TextBox();
+            this.tbName = new System.Windows.Forms.TextBox();
             this.btnSign = new System.Windows.Forms.Button();
-            this.loginPass = new System.Windows.Forms.TextBox();
-            this.btnAddFiles = new System.Windows.Forms.Button();
-            this.btnCreateFolder = new System.Windows.Forms.Button();
+            this.tbPass = new System.Windows.Forms.TextBox();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
             this.CommandPanel = new System.Windows.Forms.Panel();
             this.cbPublic = new System.Windows.Forms.CheckBox();
-            this.ttCloud = new System.Windows.Forms.ToolTip();
+            this.ttCloud = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip1.SuspendLayout();
             this.gpLogin.SuspendLayout();
             this.CommandPanel.SuspendLayout();
@@ -96,16 +97,16 @@
             this.lblCloudID.TabIndex = 3;
             this.lblCloudID.Text = "Name";
             // 
-            // lblLivePass
+            // lblPass
             // 
-            this.lblLivePass.AutoSize = true;
-            this.lblLivePass.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
-            this.lblLivePass.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblLivePass.Location = new System.Drawing.Point(4, 63);
-            this.lblLivePass.Name = "lblLivePass";
-            this.lblLivePass.Size = new System.Drawing.Size(76, 19);
-            this.lblLivePass.TabIndex = 4;
-            this.lblLivePass.Text = "Password";
+            this.lblPass.AutoSize = true;
+            this.lblPass.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
+            this.lblPass.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblPass.Location = new System.Drawing.Point(4, 63);
+            this.lblPass.Name = "lblPass";
+            this.lblPass.Size = new System.Drawing.Size(76, 19);
+            this.lblPass.TabIndex = 4;
+            this.lblPass.Text = "Password";
             // 
             // statusStrip1
             // 
@@ -143,11 +144,11 @@
             // 
             // gpLogin
             // 
-            this.gpLogin.Controls.Add(this.loginName);
+            this.gpLogin.Controls.Add(this.tbName);
             this.gpLogin.Controls.Add(this.btnSign);
             this.gpLogin.Controls.Add(this.lblCloudID);
-            this.gpLogin.Controls.Add(this.lblLivePass);
-            this.gpLogin.Controls.Add(this.loginPass);
+            this.gpLogin.Controls.Add(this.lblPass);
+            this.gpLogin.Controls.Add(this.tbPass);
             this.gpLogin.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.gpLogin.ForeColor = System.Drawing.Color.BlueViolet;
             this.gpLogin.Location = new System.Drawing.Point(12, 5);
@@ -157,14 +158,14 @@
             this.gpLogin.TabStop = false;
             this.gpLogin.Text = "Login";
             // 
-            // loginName
+            // tbName
             // 
-            this.loginName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "CloudID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.loginName.Location = new System.Drawing.Point(78, 21);
-            this.loginName.Name = "loginName";
-            this.loginName.Size = new System.Drawing.Size(174, 25);
-            this.loginName.TabIndex = 0;
-            this.loginName.Text = global::ImgRipper.Properties.Settings.Default.CloudID;
+            this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "CloudID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbName.Location = new System.Drawing.Point(78, 21);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(174, 25);
+            this.tbName.TabIndex = 0;
+            this.tbName.Text = global::ImgRipper.Properties.Settings.Default.CloudID;
             // 
             // btnSign
             // 
@@ -178,39 +179,39 @@
             this.btnSign.UseVisualStyleBackColor = true;
             this.btnSign.Click += new System.EventHandler(this.ConnectCloud_Click);
             // 
-            // loginPass
+            // tbPass
             // 
-            this.loginPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "Password", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.loginPass.Location = new System.Drawing.Point(78, 60);
-            this.loginPass.Name = "loginPass";
-            this.loginPass.Size = new System.Drawing.Size(174, 25);
-            this.loginPass.TabIndex = 1;
-            this.loginPass.Text = global::ImgRipper.Properties.Settings.Default.Password;
-            this.loginPass.UseSystemPasswordChar = true;
+            this.tbPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "Password", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbPass.Location = new System.Drawing.Point(78, 60);
+            this.tbPass.Name = "tbPass";
+            this.tbPass.Size = new System.Drawing.Size(174, 25);
+            this.tbPass.TabIndex = 1;
+            this.tbPass.Text = global::ImgRipper.Properties.Settings.Default.Password;
+            this.tbPass.UseSystemPasswordChar = true;
             // 
-            // btnAddFiles
+            // btnAdd
             // 
-            this.btnAddFiles.Enabled = false;
-            this.btnAddFiles.Image = global::ImgRipper.Properties.Resources.Files;
-            this.btnAddFiles.Location = new System.Drawing.Point(121, 9);
-            this.btnAddFiles.Name = "btnAddFiles";
-            this.btnAddFiles.Size = new System.Drawing.Size(50, 50);
-            this.btnAddFiles.TabIndex = 11;
-            this.ttCloud.SetToolTip(this.btnAddFiles, "Add Photos");
-            this.btnAddFiles.UseVisualStyleBackColor = true;
-            this.btnAddFiles.Click += new System.EventHandler(this.btnAddFiles_Click);
+            this.btnAdd.Enabled = false;
+            this.btnAdd.Image = global::ImgRipper.Properties.Resources.Files;
+            this.btnAdd.Location = new System.Drawing.Point(121, 9);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(50, 50);
+            this.btnAdd.TabIndex = 11;
+            this.ttCloud.SetToolTip(this.btnAdd, "Add Photos");
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAddFiles_Click);
             // 
-            // btnCreateFolder
+            // btnCreate
             // 
-            this.btnCreateFolder.Enabled = false;
-            this.btnCreateFolder.Image = global::ImgRipper.Properties.Resources.New;
-            this.btnCreateFolder.Location = new System.Drawing.Point(180, 9);
-            this.btnCreateFolder.Name = "btnCreateFolder";
-            this.btnCreateFolder.Size = new System.Drawing.Size(50, 50);
-            this.btnCreateFolder.TabIndex = 10;
-            this.ttCloud.SetToolTip(this.btnCreateFolder, "Create Album");
-            this.btnCreateFolder.UseVisualStyleBackColor = true;
-            this.btnCreateFolder.Click += new System.EventHandler(this.btnCreateFolder_Click);
+            this.btnCreate.Enabled = false;
+            this.btnCreate.Image = global::ImgRipper.Properties.Resources.New;
+            this.btnCreate.Location = new System.Drawing.Point(180, 9);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(50, 50);
+            this.btnCreate.TabIndex = 10;
+            this.ttCloud.SetToolTip(this.btnCreate, "Create Album");
+            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreateFolder_Click);
             // 
             // btnDelete
             // 
@@ -243,8 +244,8 @@
             this.CommandPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CommandPanel.Controls.Add(this.btnUp);
             this.CommandPanel.Controls.Add(this.btnDelete);
-            this.CommandPanel.Controls.Add(this.btnCreateFolder);
-            this.CommandPanel.Controls.Add(this.btnAddFiles);
+            this.CommandPanel.Controls.Add(this.btnCreate);
+            this.CommandPanel.Controls.Add(this.btnAdd);
             this.CommandPanel.Location = new System.Drawing.Point(332, 5);
             this.CommandPanel.Name = "CommandPanel";
             this.CommandPanel.Size = new System.Drawing.Size(233, 62);
@@ -308,15 +309,15 @@
         private System.Windows.Forms.ListView lvCloud;
         private System.Windows.Forms.Button btnSign;
         private System.Windows.Forms.Label lblCloudID;
-        private System.Windows.Forms.Label lblLivePass;
-        private System.Windows.Forms.TextBox loginName;
-        private System.Windows.Forms.TextBox loginPass;
+        private System.Windows.Forms.Label lblPass;
+        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.TextBox tbPass;
         private System.Windows.Forms.Button btnUp;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel CloudStatus;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnCreateFolder;
-        private System.Windows.Forms.Button btnAddFiles;
+        private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtFolderName;
         private System.Windows.Forms.GroupBox gpLogin;
         private System.Windows.Forms.ImageList lvImageList;

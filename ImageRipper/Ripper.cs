@@ -38,9 +38,9 @@
         /// <summary>
         /// UI Callback properties
         /// </summary>
-        bool ToggleProgressBar { set { statusStrip1.Invoke(new Action(() => toolStripProgressBar1.Visible = value)); } }
-        string Prompt { set { statusStrip1.Invoke(new Action(() => toolStripStatusLabel1.Text = value)); } }
-        int SetProgressBar { set {  statusStrip1.Invoke(new Action(() => toolStripProgressBar1.Value = value)); } }
+        bool ToggleProgressBar { set { RipStatus.Invoke(new Action(() => tsPB.Visible = value)); } }
+        string Prompt { set { RipStatus.Invoke(new Action(() => tsLabel.Text = value)); } }
+        int SetProgressBar { set {  RipStatus.Invoke(new Action(() => tsPB.Value = value)); } }
         string[] SetListViewItem
         {
             set
@@ -122,7 +122,7 @@
                     tbParse.ReadOnly = true;
                     tbDir.ReadOnly = true;
                     //Begin download action
-                    DownloadFiles.RunWorkerAsync();
+                    bwDownload.RunWorkerAsync();
                     ((Button) sender).Image = Resources.Cancel;
                     rip.PushState = RipperAction.Cancel;
                     break;
@@ -132,8 +132,8 @@
                     rip.NextPage = null;
                     tbParse.ReadOnly = false;
                     tbDir.ReadOnly = false;
-                    if (DownloadFiles.IsBusy)
-                        DownloadFiles.CancelAsync();
+                    if (bwDownload.IsBusy)
+                        bwDownload.CancelAsync();
                     ((Button) sender).Enabled = false;
                     break;
             }
@@ -255,7 +255,7 @@
                         pbPreview.ImageLocation = rip.ImageLocation = fi.ToString();
                     }
                     #endregion
-                    DownloadFiles.ReportProgress((idx + 1) * 100 / rip.Imgs.Count);
+                    bwDownload.ReportProgress((idx + 1) * 100 / rip.Imgs.Count);
                 }
                 catch (WebException exp)
                 {
@@ -494,12 +494,12 @@
         private void DownloadFiles_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             rip.Reset();
-            toolStripProgressBar1.Visible = false;
+            tsPB.Visible = false;
             lblBatch.Text = default(string);
             System.Media.SystemSounds.Exclamation.Play();
             if (e.Cancelled)
             {
-                toolStripStatusLabel1.Text = "Task terminated.";
+                tsLabel.Text = "Task terminated.";
                 btnDownloadCancel.Image = Resources.Download;
                 btnDownloadCancel.Enabled = true;
                 btnBatch.Enabled = true;
@@ -513,7 +513,7 @@
             }
             else
             {
-                toolStripStatusLabel1.Text = e.Result != null ? e.Result as string : "Task finished.";
+                tsLabel.Text = e.Result != null ? e.Result as string : "Task finished.";
                 if (rip.NextPage != null)
                 {
                     switch (rip.PushState)
@@ -522,14 +522,14 @@
                             btnDownloadCancel.Image = Resources.Cancel;
                             rip.PushState = RipperAction.Cancel;
                             Address = new Uri(rip.NextPage);
-                            DownloadFiles.RunWorkerAsync();
+                            bwDownload.RunWorkerAsync();
                             break;
                         case RipperAction.Cancel:
                             rip.NextPage = null;
-                            if (DownloadFiles.CancellationPending) return;
+                            if (bwDownload.CancellationPending) return;
                             rip.Canceled = true;
-                            if (DownloadFiles.IsBusy)
-                                DownloadFiles.CancelAsync();
+                            if (bwDownload.IsBusy)
+                                bwDownload.CancelAsync();
                             btnDownloadCancel.Enabled = false;
                             break;
                     }
@@ -541,7 +541,7 @@
                         default://Action.Download
                             From++;
                             AdjustURL(1);
-                            DownloadFiles.RunWorkerAsync();
+                            bwDownload.RunWorkerAsync();
                             btnDownloadCancel.Image = Resources.Cancel;
                             rip.PushState = RipperAction.Cancel;
                             lblBatch.Text = " #" + (Range - (To - From) - 1) + "/" + Range;
@@ -549,10 +549,10 @@
                             break;
                         case RipperAction.Cancel:
                             BatchDownload = false;
-                            if (DownloadFiles.CancellationPending) return;
+                            if (bwDownload.CancellationPending) return;
                             rip.Canceled = true;
-                            if (DownloadFiles.IsBusy)
-                                DownloadFiles.CancelAsync();
+                            if (bwDownload.IsBusy)
+                                bwDownload.CancelAsync();
                             btnDownloadCancel.Enabled = false;
                             break;
                     }
@@ -575,7 +575,7 @@
 
         private void DownloadFiles_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            toolStripProgressBar1.Value = e.ProgressPercentage;
+            tsPB.Value = e.ProgressPercentage;
         }
 
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
@@ -861,7 +861,7 @@
                         try { Directory.CreateDirectory(Dir); }
                         catch (Exception exp)
                         {
-                            toolStripStatusLabel1.Text = exp.Message;
+                            tsLabel.Text = exp.Message;
                             return false;
                         }
                     }
@@ -881,11 +881,11 @@
         private void llFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (Directory.Exists(Dir))
-                folderBrowserDialog1.SelectedPath = Dir;
+                fbDir.SelectedPath = Dir;
             else
-                folderBrowserDialog1.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            if ((folderBrowserDialog1.ShowDialog()) == DialogResult.OK)
-                Dir = folderBrowserDialog1.SelectedPath;
+                fbDir.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            if ((fbDir.ShowDialog()) == DialogResult.OK)
+                Dir = fbDir.SelectedPath;
         }
         
         private void llCookie_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -918,7 +918,7 @@
 
         private void CloudToolStrip_Click(object sender, EventArgs e)
         {
-            CloudToolStrip.ShowDropDown();
+            tsCloud.ShowDropDown();
         }
 
         private void CloudItem_Click(object sender, EventArgs e)
