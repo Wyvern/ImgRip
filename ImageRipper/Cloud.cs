@@ -368,12 +368,14 @@
                 #region GDrive & Picasa
                 case CloudType.GDrive:
                 case CloudType.Picasa:
-                    btnDelete.Enabled =btnUp.Enabled = false;
                     List<ListViewItem> items = new List<ListViewItem>();
                     foreach (ListViewItem item in lvCloud.SelectedItems)
                         items.Add(item);
                     if (MessageBox.Show("Are you sure to delete items below\n" + string.Join(", ", items.Select(i => i.Text).ToArray()), "Delete Cloud Items", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        btnDelete.Enabled = btnUp.Enabled = false;
                         ThreadPool.QueueUserWorkItem(DeleteCloudItem, items);
+                    }
                     break;
                 #endregion
 
