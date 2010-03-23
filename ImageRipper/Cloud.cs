@@ -119,7 +119,7 @@
                         btnAddFiles.cbEnable(false);
                         btnDelete.cbEnable(false);
                         btnSign.cbEnable(true);
-                        Prompt = "Picasa: " + Albums.Count + " item(s)";
+                        Prompt = "Picasa: " + Albums.Count + " Album(s)";
                     }, null);
                     break;
                 #endregion
@@ -194,7 +194,7 @@
                                     btnCreateFolder.cbEnable(false);
                                     txtFolderName.cbEnable(true);
                                     btnAddFiles.cbEnable(true);
-                                    Prompt = a.Title + " " + Photos.Count + " item(s)";
+                                    Prompt = a.Title + ": " + Photos.Count + " Photo(s)";
                                 }, null);
                         }
                         break;
@@ -277,7 +277,7 @@
                         Photos.Clear(); AlbumID = null;
                         txtFolderName.cbEnable(true);
                         btnCreateFolder.cbEnable(true);
-                        Prompt = "Picasa: " + Albums.Count + " item(s)";
+                        Prompt = "Picasa: " + Albums.Count + " Albums(s)";
                     }, null);
                     break;
                 #endregion
