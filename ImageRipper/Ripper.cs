@@ -103,8 +103,8 @@
 
         internal string Cookie
         {
-            get { return Settings.Default.CookieContent; }
-            set { Settings.Default.CookieContent = value; Settings.Default.Save(); }
+            get { return Settings.Default.Cookie; }
+            set { Settings.Default.Cookie = value; Settings.Default.Save(); }
         }
 
         private void DownloadCancel_Click(object sender, EventArgs e)
@@ -508,7 +508,7 @@
                 ///Save application settings
                 Settings.Default.txtParse = tbParse.Text;
                 Settings.Default.txtDir = Dir;
-                Settings.Default.CookieContent = Cookie;
+                Settings.Default.Cookie = Cookie;
                 Settings.Default.Save();
             }
             else
@@ -567,7 +567,7 @@
                     ///Save application settings
                     Settings.Default.txtParse = tbParse.Text;
                     Settings.Default.txtDir = Dir;
-                    Settings.Default.CookieContent = Cookie;
+                    Settings.Default.Cookie = Cookie;
                     Settings.Default.Save();
                 }
             }

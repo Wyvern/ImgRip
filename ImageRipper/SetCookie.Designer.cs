@@ -45,13 +45,13 @@
             // 
             // tbCookie
             // 
-            this.tbCookie.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "CookieContent", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbCookie.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "Cookie", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbCookie.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbCookie.Location = new System.Drawing.Point(12, 65);
             this.tbCookie.Name = "tbCookie";
             this.tbCookie.Size = new System.Drawing.Size(360, 29);
             this.tbCookie.TabIndex = 1;
-            this.tbCookie.Text = global::ImgRipper.Properties.Settings.Default.CookieContent;
+            this.tbCookie.Text = global::ImgRipper.Properties.Settings.Default.Cookie;
             // 
             // btnSummit
             // 

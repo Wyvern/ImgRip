@@ -40,6 +40,8 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -539,7 +541,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icons\icon.ico" />
-    <Content Include="setup.ico" />
     <None Include="Resources\files.bmp" />
     <None Include="Resources\Login.bmp" />
     <Content Include="Resources\New.bmp" />

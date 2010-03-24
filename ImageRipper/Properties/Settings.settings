@@ -8,7 +8,7 @@
     <Setting Name="txtDir" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="CookieContent" Type="System.String" Scope="User">
+    <Setting Name="Cookie" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="CloudID" Type="System.String" Scope="User">

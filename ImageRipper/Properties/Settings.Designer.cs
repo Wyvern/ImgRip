@@ -50,12 +50,12 @@ namespace ImgRipper.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CookieContent {
+        public string Cookie {
             get {
-                return ((string)(this["CookieContent"]));
+                return ((string)(this["Cookie"]));
             }
             set {
-                this["CookieContent"] = value;
+                this["Cookie"] = value;
             }
         }
         

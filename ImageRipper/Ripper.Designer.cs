@@ -380,7 +380,7 @@
             // 
             this.tsiGData.Image = ((System.Drawing.Image)(resources.GetObject("tsiGData.Image")));
             this.tsiGData.Name = "tsiGData";
-            this.tsiGData.Size = new System.Drawing.Size(152, 22);
+            this.tsiGData.Size = new System.Drawing.Size(127, 22);
             this.tsiGData.Text = "GDrive";
             this.tsiGData.Click += new System.EventHandler(this.CloudItem_Click);
             // 
@@ -388,7 +388,7 @@
             // 
             this.tsiFlickr.Image = ((System.Drawing.Image)(resources.GetObject("tsiFlickr.Image")));
             this.tsiFlickr.Name = "tsiFlickr";
-            this.tsiFlickr.Size = new System.Drawing.Size(152, 22);
+            this.tsiFlickr.Size = new System.Drawing.Size(127, 22);
             this.tsiFlickr.Text = "Flickr";
             this.tsiFlickr.Visible = false;
             this.tsiFlickr.Click += new System.EventHandler(this.CloudItem_Click);
@@ -397,7 +397,7 @@
             // 
             this.tsiFacebook.Image = ((System.Drawing.Image)(resources.GetObject("tsiFacebook.Image")));
             this.tsiFacebook.Name = "tsiFacebook";
-            this.tsiFacebook.Size = new System.Drawing.Size(152, 22);
+            this.tsiFacebook.Size = new System.Drawing.Size(127, 22);
             this.tsiFacebook.Text = "Facebook";
             this.tsiFacebook.Visible = false;
             this.tsiFacebook.Click += new System.EventHandler(this.CloudItem_Click);
@@ -406,7 +406,7 @@
             // 
             this.tsiPicasa.Image = ((System.Drawing.Image)(resources.GetObject("tsiPicasa.Image")));
             this.tsiPicasa.Name = "tsiPicasa";
-            this.tsiPicasa.Size = new System.Drawing.Size(152, 22);
+            this.tsiPicasa.Size = new System.Drawing.Size(127, 22);
             this.tsiPicasa.Text = "Picasa";
             this.tsiPicasa.Click += new System.EventHandler(this.CloudItem_Click);
             // 
@@ -485,7 +485,7 @@
             this.MinimumSize = new System.Drawing.Size(450, 300);
             this.Name = "Ripper";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Image Ripper - F11: Fullscreen, Spacebar: Switch preview panel";
+            this.Text = "Image Ripper - F11: Fullscreen, (Shift) Spacebar: Switch preview panel";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Ripper_KeyDown);
             this.mainSplit.Panel1.ResumeLayout(false);
             this.mainSplit.Panel1.PerformLayout();
