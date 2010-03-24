@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImgRipper", "ImgRipper.csproj", "{2172F5C5-FAE4-47E4-8662-D3F6443DE0F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImgRip", "ImgRip.csproj", "{2172F5C5-FAE4-47E4-8662-D3F6443DE0F5}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 2
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs02.codeplex.com/
+		SccProjectUniqueName0 = ImgRip.csproj
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ImgRipper.csproj
 		SccLocalPath1 = .
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
