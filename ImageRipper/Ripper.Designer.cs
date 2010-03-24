@@ -233,7 +233,8 @@
             // chNumber
             // 
             this.chNumber.DisplayIndex = 0;
-            this.chNumber.Text = "#";
+            this.chNumber.Text = "No.";
+            this.chNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.chNumber.Width = 40;
             // 
             // chSize
