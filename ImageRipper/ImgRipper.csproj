@@ -255,12 +255,6 @@
     <Compile Include="f:\code\gdata\core\xmlextension.cs">
       <Link>GData\Core\xmlextension.cs</Link>
     </Compile>
-    <Compile Include="F:\Code\GData\extensions\comments.cs">
-      <Link>GData\Extensions\comments.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\GData\extensions\entrylink.cs">
-      <Link>GData\Extensions\entrylink.cs</Link>
-    </Compile>
     <Compile Include="F:\Code\GData\extensions\enumconstruct.cs">
       <Link>GData\Extensions\enumconstruct.cs</Link>
     </Compile>
@@ -318,7 +312,7 @@
     <Compile Include="F:\Code\GData\gphotos\commententry.cs">
       <Link>GData\Photo\commententry.cs</Link>
     </Compile>
-    <Compile Include="f:\code\gdata\gphotos\gextphotos.cs">
+    <Compile Include="F:\Code\GData\gphotos\gextphotos.cs">
       <Link>GData\Photo\gextphotos.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\kindsquery.cs">
