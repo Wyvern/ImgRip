@@ -76,7 +76,7 @@
                                                       btnDelete.cbEnable(false);
                                                       btnUp.cbEnable(false);
                                                       btnAdd.cbEnable(false);
-                                                      Prompt = "GDrive: " + Docs.Count + " item(s)";
+                                                      Prompt = Docs.Count + " item(s)";
                                                   }, null);
                     }
                     catch (Exception exp)
@@ -228,7 +228,7 @@
                             //btnAddFiles.cbEnable(true);
                             btnCreate.cbEnable(true);
                             btnUp.cbEnable(false);
-                            Prompt = "GDrive: " + Docs.Count + " item(s)";
+                            Prompt = Docs.Count + " item(s)";
                         }, null);
                     }
                     else
@@ -424,7 +424,7 @@
                         if (cldCache != null) cldCache.Remove(lvi);
                     }
                     btnUp.cbEnable((Folder != null && Folder.Count > 0));
-                    Prompt = "Done";
+                    Prompt = Docs.Count + " items";
                     break;
                 #endregion
 
@@ -472,7 +472,7 @@
                         if (cldCache != null) cldCache.Remove(lvi);
                     }
                     btnUp.cbEnable(AlbumID != null);
-                    Prompt = "Done";
+                    Prompt = AlbumID == null ? Albums.Count + " Albums(s)" : Photos.Count + " Photos(s)";
                     break;
                 #endregion
             }
@@ -520,7 +520,7 @@
                             break;
                         }
                     }
-                    Prompt = "Done";
+                    Prompt = Docs.Count + " items";
                     break;
                 #endregion
 
@@ -559,7 +559,7 @@
                             break;
                         }
                     }
-                    Prompt = "Done";
+                    Prompt = Photos.Count + " Photos(s)";
                     break;
                 #endregion
             }
@@ -822,8 +822,9 @@
                             uint total = 0, check = 0;
                             foreach (ListViewItem item in lvCloud.SelectedItems)
                             {
-                                total += Albums.Single(_ => _.Id == item.Name).NumPhotos;
-                                if (Albums.Single(_ => _.Id == item.Name).Access == "public") check++;
+                                Album a=Albums.Single(_ => _.Id == item.Name);
+                                total += a.NumPhotos;
+                                if (a.Access == "public") check++;
                             }
                             cbPublic.CheckState = check == 0 ? CheckState.Unchecked : check == lvCloud.SelectedItems.Count ? CheckState.Checked : CheckState.Indeterminate;
                             Prompt = string.Format("Total: {0} Photos", total);
