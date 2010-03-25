@@ -154,7 +154,8 @@
             "http://www.heels.cn/web/viewthread?thread=<id>",
             "http://www.duide.com/ggfdrdsuy/[a|b|c]<id>.htm",
             "http://meituiji.com/<Category>/<Year>/<Month><Date>/<Id>.html",
-            "http://tu11.cc/new/<Category>/<DateTime>.htm"});
+            "http://tu11.cc/new/<Category>/<DateTime>.htm",
+            "http://pal.ath.cx/<id>/<category>/<start-end>/<albumid>/"});
             this.tbParse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tbParse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.tbParse.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "txtParse", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -228,26 +229,25 @@
             // 
             this.chName.DisplayIndex = 1;
             this.chName.Text = "Name";
-            this.chName.Width = 100;
+            this.chName.Width = 150;
             // 
             // chNumber
             // 
             this.chNumber.DisplayIndex = 0;
             this.chNumber.Text = "No.";
-            this.chNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.chNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.chNumber.Width = 40;
             // 
             // chSize
             // 
             this.chSize.Text = "Size";
             this.chSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.chSize.Width = 70;
             // 
             // chState
             // 
             this.chState.Text = "State";
             this.chState.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.chState.Width = 140;
+            this.chState.Width = 100;
             // 
             // cmsLV
             // 

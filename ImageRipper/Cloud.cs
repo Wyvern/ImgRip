@@ -60,12 +60,12 @@
                     
                     DR = new DocumentsRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) {AutoPaging=true});
                     CloudStatus.Text = "Waiting..."; lvCloud.Items.Clear();
-                    Func<Feed<Document>> GE = () => DR.GetFolders();
+                    Func<Feed<Document>> GF = () => DR.GetFolders();
                     try
                     {
-                        GE.BeginInvoke(ar =>
+                        GF.BeginInvoke(ar =>
                                                   {
-                                                      Docs = GE.EndInvoke(ar).Entries.ToList();
+                                                      Docs = GF.EndInvoke(ar).Entries.ToList();
                                                       foreach (var item in Docs)
                                                           if (item.ParentFolders.Count == 0)
                                                               lvCloud.cbAdd(item.Id, item.Title, 0, item.AtomEntry.AlternateUri.Content);
@@ -139,8 +139,8 @@
                 {
                     #region GDrive
                     case CloudType.GDrive:
-                        Document doc = Docs.Where(_ => _.Type == Document.DocumentType.Folder).Single(_ => _.Id == lvi.Name);
-                        if (doc != null)
+                        Document doc = Docs.Single(_ => _.Id == lvi.Name);
+                        if (doc.Type==Document.DocumentType.Folder)
                         {
                             Folder = Folder ?? new Stack<Document>();
                             CloudStatus.Text = "Listing \"" + doc.Title + "\"";
@@ -216,10 +216,10 @@
                     if (Folder.Count == 0)
                     {
                         CloudStatus.Text = "Waiting...";
-                        Func<Feed<Document>> GE = () => DR.GetFolders();
-                        GE.BeginInvoke(ar =>
+                        Func<Feed<Document>> GF = () => DR.GetFolders();
+                        GF.BeginInvoke(ar =>
                         {
-                            Docs = GE.EndInvoke(ar).Entries.ToList();
+                            Docs = GF.EndInvoke(ar).Entries.ToList();
                             foreach (var item in Docs)
                                 if (item.ParentFolders.Count == 0)
                                     lvCloud.cbAdd(item.Id, item.Title, 0, item.AtomEntry.AlternateUri.Content);
@@ -235,10 +235,10 @@
                     {
                         doc = Folder.Peek();
                         CloudStatus.Text = "Listing \"" + doc.Title + "\"";
-                        Func<Feed<Document>> DFC = () => DR.GetFolderContent(doc);
-                        DFC.BeginInvoke(ar =>
+                        Func<Feed<Document>> GFC = () => DR.GetFolderContent(doc);
+                        GFC.BeginInvoke(ar =>
                             {
-                                Docs = DFC.EndInvoke(ar).Entries.ToList();
+                                Docs = GFC.EndInvoke(ar).Entries.ToList();
                                 foreach (var item in Docs)
                                     lvCloud.cbAdd(item.Id, item.Title, item.Type == Document.DocumentType.Folder ? 0 : 2, item.AtomEntry.AlternateUri.Content);
                                 if (cldCache != null) { cldCache.Clear(); cldCache = null; }

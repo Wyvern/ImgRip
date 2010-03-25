@@ -68,7 +68,6 @@
                             if (lvRip.Groups[rip.Title] == null) lvRip.Groups.Add(rip.Title, rip.Title + string.Format(" [{0}]", rip.Imgs.Count));
                             lvi.Group = lvRip.Groups[rip.Title];
                             lvRip.Items.Add(lvi).EnsureVisible();
-                            chName.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
                         }
                         #endregion
                     }));
@@ -293,7 +292,7 @@
             Prompt="Parsing " + Enum.GetName(typeof(ParseStyle), rip.Style);
             try
             {
-                var doc = new HAP.HtmlWeb().Load(url.AbsoluteUri);
+                var doc = new HAP.HtmlWeb() { AutoDetectEncoding=true}.Load(url.AbsoluteUri);
                 rip.Title = doc.DocumentNode.SelectSingleNode("//title").InnerText;
                 switch (rip.Style)
                 {
