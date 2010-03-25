@@ -119,7 +119,7 @@
                         btnAdd.cbEnable(false);
                         btnDelete.cbEnable(false);
                         btnSign.cbEnable(true);
-                        Prompt = "Picasa: " + Albums.Count + " Album(s)";
+                        Prompt = Albums.Count + " Album(s)";
                     }, null);
                     break;
                 #endregion
@@ -277,7 +277,7 @@
                         Photos.Clear(); AlbumID = null;
                         txtFolderName.cbEnable(true);
                         btnCreate.cbEnable(true);
-                        Prompt = "Picasa: " + Albums.Count + " Albums(s)";
+                        Prompt = Albums.Count + " Albums(s)";
                     }, null);
                     break;
                 #endregion
@@ -352,7 +352,7 @@
                             Albums.Add(@new);
                             btnCreate.cbEnable(true);
                             txtFolderName.cbEnable(true);
-                            Prompt = "Picasa " + Albums.Count + " item(s)";
+                            Prompt = Albums.Count + " item(s)";
                         }, null);
                     break;
                 #endregion
@@ -829,7 +829,12 @@
                             Prompt = string.Format("Total: {0} Photos", total);
                         }
                         else
-                            Prompt = "Updated: " + Photos.Single(_ => _.Id == lvi.Name).Updated.ToShortDateString();
+                        {
+                            long total = 0;
+                            foreach (ListViewItem item in lvCloud.SelectedItems)
+                                total += Photos.Single(_ => _.Id == item.Name).Size;
+                            Prompt = string.Format("Total: {0} KB", total/1024);
+                        }
                         break;
                     #endregion
                 }
@@ -858,7 +863,7 @@
                     #region Picasa
                     case CloudType.Picasa:
                         cbPublic.CheckState = CheckState.Unchecked;
-                        Prompt = (AlbumID == null ? Albums.Count : Photos.Count) + " item(s)";
+                        Prompt = AlbumID == null ? Albums.Count+" Albums(s)" : Photos.Count+" Photos(s)";
                         break;
                     #endregion
                 }

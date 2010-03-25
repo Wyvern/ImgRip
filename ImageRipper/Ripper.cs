@@ -402,7 +402,7 @@
                         break;
                     #endregion
 
-                    #region Parse pal.ath.cx site
+                    #region Parse Pal.Ath.Cx site
                     case ParseStyle.PalAthCx:
                         {
                             HAP.HtmlNode nextpageNode = doc.DocumentNode.SelectSingleNode("//div/a[@class='next']");
@@ -416,7 +416,9 @@
                                 string id = imgsrc.Split("/-".ToCharArray())[1];
                                 imgsrc = imgsrc.Replace(id, (uint.Parse(id) - 1).ToString());
                                 string address = "http://pal.ath.cx" + imgsrc;
-                                string name = rip.Title + "-" + string.Format("{0:000}", rip.Imgs.Count) + ".jpg";
+                                int mark = rip.Title.IndexOf('[');
+                                if (mark > 0) rip.Title = rip.Title.Substring(0, mark);
+                                string name = rip.Title + string.Format("{0:000}", rip.Imgs.Count) + ".jpg";
                                 rip.Imgs[name] = address;
                             }
                             while (rip.NextPage != null)
@@ -432,7 +434,9 @@
                                     string id = imgsrc.Split("/-".ToCharArray())[1];
                                     imgsrc = imgsrc.Replace(id, (uint.Parse(id) - 1).ToString());
                                     string address = "http://pal.ath.cx" + imgsrc;
-                                    string name = rip.Title + "-" + string.Format("{0:000}", rip.Imgs.Count) + ".jpg";
+                                    int mark = rip.Title.IndexOf('[');
+                                    if (mark > 0) rip.Title = rip.Title.Substring(0, mark);
+                                    string name = rip.Title + string.Format("{0:000}", rip.Imgs.Count) + ".jpg";
                                     rip.Imgs[name] = address;
                                 }
                             }
