@@ -488,21 +488,24 @@
                     Document @base = null, @new;
                     if (Folder != null && Folder.Count > 0)
                         @base = Folder.Peek();
-                    Dictionary<string, string> MIME = new Dictionary<string, string>
+                    Dictionary<string, string> GDrive = new Dictionary<string, string>
                     { 
-                    { ".txt", "text/plain" }, { ".htm", "text/html" }, { ".html", "text/html" }, 
-                    { ".jpg", "image/jpeg" }, { ".jpeg", "image/jpeg" }, { ".png", "image/png" }, 
-                    { ".gif", "image/gif" }, { ".tif", "image/tiff" },{"","text/plain" }
+                    { ".jpg", "image/jpeg" },{".rtf",""},{".ppt",""},{".pps",""},{ ".htm", "" }, { ".html", "" },{".xls",""},{".xlsx",""},{".ods",""},
+                    { ".png", "image/png" }, { ".gif", "image/gif" }, { ".tiff", "image/tiff" },{ ".bmp", "image/bmp" }, { ".mov", "video/quicktime" },
+                     { ".psd", "application/photoshop" },{ ".avi", "video/x-msvideo"}, { ".mpg", "video/mpeg"}, { ".wmv", "video/x-ms-wmv" },
+                     {".asf","video/x-ms-asf"},{".tif","video/x-ms-asf"},{".csv",""},{".tsb",""},{".doc",""},{".docx",""},
                     };
                     foreach (var file in files)
                     {
                         string filename = Path.GetFileName(file), ext = Path.GetExtension(file);
                         if (Aborted) { Prompt = "Operation Cancelled!"; Aborted = false; return; }
-                        if (!MIME.ContainsKey(ext)) continue;
+                        if (!GDrive.ContainsKey(ext)) continue;
                         Prompt = "Adding \"" + filename + "\"";
                         try
                         {
-                            var de = DR.Service.UploadFile(file, filename, MIME[ext], true);
+                            var de = string.IsNullOrEmpty(GDrive[ext]) ? 
+                                DR.Service.UploadDocument(file, filename) : 
+                                DR.Service.UploadFile(file, filename, GDrive[ext], true);
                             @new = new Document() { AtomEntry = de };
                             if (@base != null)
                             {
@@ -536,16 +539,24 @@
 
                 #region Picasa
                 case CloudType.Picasa:
+                    //raw formats (.cr2, .nef, .orf, etc.) - "image/x-image-raw"
+                    Dictionary<string, string> Picasa = new Dictionary<string, string>
+                    { 
+                    { ".jpg", "image/jpeg"}, { ".gif", "image/gif" }, { ".bmp", "image/bmp" }, { ".mov", "video/quicktime" }, { ".psd", "application/photoshop" },
+                     { ".avi", "video/x-msvideo"}, { ".mpg", "video/mpeg"}, { ".wmv", "video/x-ms-wmv" },{".asf","video/x-ms-asf"},
+                     {".tif","video/x-ms-asf"},{".png","image/png"},{"","image/x-image-raw"}
+                    };
                     foreach (var file in files)
-                    {  
-                        string filename = Path.GetFileName(file);
+                    {
+                        string filename = Path.GetFileName(file), ext = Path.GetExtension(file);
                         if (Aborted) { Prompt = "Operation Cancelled!"; Aborted = false; return; }
+                        if (!Picasa.ContainsKey(ext)) continue;
                         Prompt = "Adding \"" + filename + "\"";
                         try
                         {
                             using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
                             {
-                                var ae = PR.Service.Insert(new Uri(PicasaQuery.CreatePicasaUri(LoginName, AlbumID)), fs, "image/jpeg", filename);
+                                var ae = PR.Service.Insert(new Uri(PicasaQuery.CreatePicasaUri(LoginName, AlbumID)), fs, Picasa[ext], filename);
                                 Photo p=new Photo() { AtomEntry = ae };
                                 Photos.Add(p);
                                 fs.Close();
@@ -574,18 +585,10 @@
             {
                 OpenFileDialog ofd = new OpenFileDialog();
                 ofd.Multiselect = true;
-                ofd.Filter = "JPG files (*.jpg)|*.jpg|PNG files (*.png)|*.png|All files (*.*)|*.*";
+                ofd.Filter = "JPG files|*.jpg|PNG files|*.png|BMP files|*.bmp|All files|*.*";
                 ofd.InitialDirectory = ((Ripper)this.Owner).Dir ?? System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
                 if (DialogResult.OK == ofd.ShowDialog(this))
                 {
-                    foreach (string file in ofd.SafeFileNames)
-                    {
-                        if (lvCloud.FindItemWithText(file) != null)
-                        {
-                            CloudStatus.Text = "\"" + file + "\" already existed in this folder.";
-                            return;
-                        }
-                    }
                     Aborted = false;
                     btnUp.Enabled = false;
                     btnSign.Enabled = false;
@@ -716,15 +719,6 @@
             }
             files = e.Data.GetData(DataFormats.FileDrop) as string[];
             if (files.Length == 0) return;
-            foreach (string file in files)
-            {
-                string filename = Path.GetFileName(file);
-                if (lv.FindItemWithText(filename) != null)
-                {
-                    CloudStatus.Text = "\"" + filename + "\" already existed in this folder.";
-                    return;
-                }
-            }
             Aborted = false;
             btnUp.Enabled = false;
             btnSign.Enabled = false;

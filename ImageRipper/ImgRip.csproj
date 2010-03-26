@@ -96,7 +96,7 @@
     <Compile Include="f:\code\gdata\core\asyncDataHandler.cs">
       <Link>GData\Core\asyncDataHandler.cs</Link>
     </Compile>
-    <Compile Include="f:\code\gdata\core\asyncservice.cs">
+    <Compile Include="F:\Code\GData\core\asyncservice.cs">
       <Link>GData\Core\asyncservice.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\core\atombase.cs">
@@ -207,10 +207,10 @@
     <Compile Include="f:\code\gdata\core\logrequest.cs">
       <Link>GData\Core\logrequest.cs</Link>
     </Compile>
-    <Compile Include="f:\code\gdata\core\mediaservice.cs">
+    <Compile Include="F:\Code\GData\core\mediaservice.cs">
       <Link>GData\Core\mediaservice.cs</Link>
     </Compile>
-    <Compile Include="f:\code\gdata\core\mediasource.cs">
+    <Compile Include="F:\Code\GData\core\mediasource.cs">
       <Link>GData\Core\mediasource.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\core\oauthbase.cs">
