@@ -52,7 +52,7 @@
             this.cmmiClear = new System.Windows.Forms.ToolStripMenuItem();
             this.RipStatus = new System.Windows.Forms.StatusStrip();
             this.tsLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblBatch = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lbBatch = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsPB = new System.Windows.Forms.ToolStripProgressBar();
             this.tsCloud = new System.Windows.Forms.ToolStripSplitButton();
             this.tsiGData = new System.Windows.Forms.ToolStripMenuItem();
@@ -327,7 +327,7 @@
             this.RipStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.RipStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsLabel,
-            this.lblBatch,
+            this.lbBatch,
             this.tsPB,
             this.tsCloud});
             this.RipStatus.Location = new System.Drawing.Point(1, 465);
@@ -346,12 +346,12 @@
             this.tsLabel.Size = new System.Drawing.Size(41, 17);
             this.tsLabel.Text = "Done";
             // 
-            // lblBatch
+            // lbBatch
             // 
-            this.lblBatch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
-            this.lblBatch.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lblBatch.Name = "lblBatch";
-            this.lblBatch.Size = new System.Drawing.Size(0, 17);
+            this.lbBatch.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold);
+            this.lbBatch.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.lbBatch.Name = "lbBatch";
+            this.lbBatch.Size = new System.Drawing.Size(0, 17);
             // 
             // tsPB
             // 
@@ -520,7 +520,7 @@
         private System.Windows.Forms.ToolStripMenuItem cmmiNextPage;
         private System.Windows.Forms.ToolStripMenuItem cmmiSaveAll;
         private System.Windows.Forms.ToolStripMenuItem cmmiDropGroup;
-        private System.Windows.Forms.ToolStripStatusLabel lblBatch;
+        private System.Windows.Forms.ToolStripStatusLabel lbBatch;
         private System.Windows.Forms.ContextMenuStrip cmsBatch;
         private System.Windows.Forms.ToolStripMenuItem btnBatch;
         private System.Windows.Forms.ToolStripMenuItem cmmiClear;
