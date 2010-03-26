@@ -34,6 +34,8 @@
             this.btnSet = new System.Windows.Forms.Button();
             this.udFrom = new System.Windows.Forms.NumericUpDown();
             this.udTo = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.udFrom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTo)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFrom
@@ -78,13 +80,13 @@
             // 
             this.btnSet.AutoSize = true;
             this.btnSet.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btnSet.ForeColor = System.Drawing.Color.Teal;
             this.btnSet.Location = new System.Drawing.Point(113, 94);
             this.btnSet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnSet.Name = "btnSet";
             this.btnSet.Size = new System.Drawing.Size(100, 36);
             this.btnSet.TabIndex = 5;
-            this.btnSet.Text = "Set";
+            this.btnSet.Text = "Submit";
             this.btnSet.UseVisualStyleBackColor = true;
             this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
             // 
@@ -154,6 +156,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Batch Download";
             this.TopMost = true;
+            ((System.ComponentModel.ISupportInitialize)(this.udFrom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

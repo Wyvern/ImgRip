@@ -497,8 +497,8 @@
                     };
                     foreach (var file in files)
                     {
-                        string filename = Path.GetFileName(file), ext = Path.GetExtension(file);
                         if (Aborted) { Prompt = "Operation Cancelled!"; Aborted = false; return; }
+                        string filename = Path.GetFileName(file), ext = Path.GetExtension(file);
                         if (!GDrive.ContainsKey(ext)) continue;
                         Prompt = "Adding \"" + filename + "\"";
                         try
@@ -548,8 +548,8 @@
                     };
                     foreach (var file in files)
                     {
-                        string filename = Path.GetFileName(file), ext = Path.GetExtension(file);
                         if (Aborted) { Prompt = "Operation Cancelled!"; Aborted = false; return; }
+                        string filename = Path.GetFileName(file), ext = Path.GetExtension(file);
                         if (!Picasa.ContainsKey(ext)) continue;
                         Prompt = "Adding \"" + filename + "\"";
                         try
@@ -557,7 +557,7 @@
                             using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
                             {
                                 var ae = PR.Service.Insert(new Uri(PicasaQuery.CreatePicasaUri(LoginName, AlbumID)), fs, Picasa[ext], filename);
-                                Photo p=new Photo() { AtomEntry = ae };
+                                Photo p = new Photo() { AtomEntry = ae };
                                 Photos.Add(p);
                                 fs.Close();
                                 lvCloud.cbAdd(p.Id, filename, 1, ae.AlternateUri.Content);

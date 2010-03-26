@@ -20,7 +20,7 @@
                 ripper.From = Convert.ToInt32(udFrom.Value); ripper.To = Convert.ToInt32(udTo.Value);
                 ripper.Range = ripper.To - ripper.From + 1;
                 ripper.Address = new Uri(ripper.Address.AbsoluteUri.Replace(ripper.Address.Query, "?thread=" + ripper.From));
-                ripper.BatchDownload = true;
+                ripper.Batch = true;
                 Close();
             }
             else

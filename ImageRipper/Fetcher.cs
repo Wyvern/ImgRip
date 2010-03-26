@@ -24,18 +24,20 @@
         public string Address { get; set; }
         public string NextPage { get; set; }
         #endregion
-        
-        public void GetFile(string url, string cookie, out Bitmap bmp)
+
+        public Bitmap GetBitmap(string url, string cookie)
         {
+            Bitmap result;
             using (var wc = new WebClient())
             {
                 wc.Headers["Cookie"] = "JSESSIONID=" + cookie;
                 using (Stream s = wc.OpenRead(url))
                 {
-                    bmp = new Bitmap(s);
+                    result = new Bitmap(s);
                     s.Close();
                 }
             }
+            return result;
         }
         
         public void GetFile(string url, string file)

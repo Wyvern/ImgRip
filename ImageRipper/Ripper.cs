@@ -13,7 +13,7 @@
     using HAP = HtmlAgilityPack;
     partial class Ripper : Form
     {
-        internal bool BatchDownload;
+        internal bool Batch;
         Fetcher rip;
         bool FullScreen { get; set; }
         internal int Range;
@@ -126,7 +126,7 @@
                     rip.PushState = RipperAction.Cancel;
                     break;
                 case RipperAction.Cancel:
-                    BatchDownload = false;
+                    Batch = false;
                     rip.Canceled = true;
                     rip.NextPage = null;
                     tbParse.ReadOnly = false;
@@ -200,14 +200,14 @@
                             }
                             try
                             {
-                                rip.GetFile(rip.Address, Cookie, out bmp);
+                                bmp = rip.GetBitmap(rip.Address, Cookie);
                                 succeed = true;
                             }
                             catch (Exception)
                             {
                                 if (idx == 0)
                                 {
-                                    if (BatchDownload)
+                                    if (Batch)
                                         rip.SkipPage = true;
                                     SetListViewItem = new string[] {  fi.Name,number, null, "Not enough points!" };
                                     return;
@@ -537,7 +537,7 @@
                             break;
                     }
                 }
-                else if (BatchDownload)
+                else if (Batch)
                 {
                     switch (rip.PushState)
                     {
@@ -548,10 +548,10 @@
                             btnDownloadCancel.Image = Resources.Cancel;
                             rip.PushState = RipperAction.Cancel;
                             lblBatch.Text = " #" + (Range - (To - From) - 1) + "/" + Range;
-                            BatchDownload = From != To;
+                            Batch = From != To;
                             break;
                         case RipperAction.Cancel:
-                            BatchDownload = false;
+                            Batch = false;
                             if (bwDownload.CancellationPending) return;
                             rip.Canceled = true;
                             if (bwDownload.IsBusy)
@@ -670,7 +670,7 @@
 
         private void cmmiNextPage_Click(object sender, EventArgs e)
         {
-            if (BatchDownload)
+            if (Batch)
                 rip.SkipPage = true;
         }
 
@@ -769,8 +769,7 @@
                 {
                     if (rip.Style == ParseStyle.Heels)
                     {
-                        Bitmap bmp;
-                        rip.GetFile(item.Url, Cookie, out bmp);
+                        Bitmap bmp = rip.GetBitmap(item.Url, Cookie);
                         bmp.Save(Path.Combine(Dir, item.Name));
                         bmp.Dispose();
                     }
@@ -913,7 +912,7 @@
 
         private void cmsLV_Opening(object sender, CancelEventArgs e)
         {
-            cmmiNextPage.Visible = BatchDownload;
+            cmmiNextPage.Visible = Batch;
             cmmiDropGroup.Visible = cmmiSaveAll.Visible = (rip != null && rip.Style == ParseStyle.Heels) ? true : false;
             cmmiSave.Visible = cmmiRemove.Visible = cmmiCopyName.Visible = lvRip.SelectedItems.Count > 0 ? true : false;
             cmmiClear.Visible = lvRip.Items.Count == 0 ? false : true;
