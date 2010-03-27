@@ -58,7 +58,7 @@
                     {
                         var items = GF.EndInvoke(_).Entries;
                         foreach (var item in items)
-                           // if (item.ParentFolders.Count == 0)
+                            if (item.ParentFolders.Count == 0)
                                 lvCloud.cbAdd(item.AtomEntry, 0);
                         if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                         btnSign.cbEnable(true);
@@ -206,7 +206,7 @@
                         {
                             var items=GF.EndInvoke(ar).Entries;
                             foreach (var item in items)
-                                //if (item.ParentFolders.Count == 0)
+                                if (item.ParentFolders.Count == 0)
                                     lvCloud.cbAdd(item.AtomEntry, 0);
                             if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                             txtFolderName.cbEnable(true);
