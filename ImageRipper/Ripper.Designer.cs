@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ripper));
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.btnDownloadCancel = new Wyvern.SplitButton();
-            this.cmsBatch = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsBatch = new System.Windows.Forms.ContextMenuStrip();
             this.btnBatch = new System.Windows.Forms.ToolStripMenuItem();
             this.tbParse = new System.Windows.Forms.TextBox();
             this.llCookie = new System.Windows.Forms.LinkLabel();
@@ -42,7 +41,7 @@
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cmsLV = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsLV = new System.Windows.Forms.ContextMenuStrip();
             this.cmmiNextPage = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiDropGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiCopyName = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,14 +58,15 @@
             this.tsiFlickr = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiFacebook = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiPicasa = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsHome = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUrl = new System.Windows.Forms.Label();
             this.tbDir = new System.Windows.Forms.TextBox();
             this.pbPreview = new System.Windows.Forms.PictureBox();
             this.fbDir = new System.Windows.Forms.FolderBrowserDialog();
             this.bwDownload = new System.ComponentModel.BackgroundWorker();
-            this.ttRipper = new System.Windows.Forms.ToolTip(this.components);
-            this.tmMinus = new System.Windows.Forms.Timer(this.components);
-            this.tmPlus = new System.Windows.Forms.Timer(this.components);
+            this.ttRipper = new System.Windows.Forms.ToolTip();
+            this.tmMinus = new System.Windows.Forms.Timer();
+            this.tmPlus = new System.Windows.Forms.Timer();
             this.mainSplit.Panel1.SuspendLayout();
             this.mainSplit.Panel2.SuspendLayout();
             this.mainSplit.SuspendLayout();
@@ -85,7 +85,6 @@
             // 
             // mainSplit.Panel1
             // 
-            this.mainSplit.Panel1.AutoScroll = true;
             this.mainSplit.Panel1.Controls.Add(this.btnDownloadCancel);
             this.mainSplit.Panel1.Controls.Add(this.tbParse);
             this.mainSplit.Panel1.Controls.Add(this.llCookie);
@@ -324,15 +323,22 @@
             // 
             // RipStatus
             // 
+            this.RipStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.RipStatus.AutoSize = false;
+            this.RipStatus.Dock = System.Windows.Forms.DockStyle.None;
             this.RipStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.RipStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsLabel,
             this.lbBatch,
             this.tsPB,
-            this.tsCloud});
+            this.tsCloud,
+            this.tsHome});
+            this.RipStatus.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.RipStatus.Location = new System.Drawing.Point(1, 465);
             this.RipStatus.Name = "RipStatus";
             this.RipStatus.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.RipStatus.ShowItemToolTips = true;
             this.RipStatus.Size = new System.Drawing.Size(785, 22);
             this.RipStatus.TabIndex = 22;
             this.RipStatus.Text = "statusStrip1";
@@ -372,7 +378,6 @@
             this.tsCloud.Name = "tsCloud";
             this.tsCloud.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tsCloud.Size = new System.Drawing.Size(32, 20);
-            this.tsCloud.Text = "SkyDrive";
             this.tsCloud.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsCloud.ToolTipText = "Cloud web storage service.";
             this.tsCloud.Click += new System.EventHandler(this.CloudToolStrip_Click);
@@ -410,6 +415,21 @@
             this.tsiPicasa.Size = new System.Drawing.Size(127, 22);
             this.tsiPicasa.Text = "Picasa";
             this.tsiPicasa.Click += new System.EventHandler(this.CloudItem_Click);
+            // 
+            // tsHome
+            // 
+            this.tsHome.AutoToolTip = true;
+            this.tsHome.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.tsHome.Image = ((System.Drawing.Image)(resources.GetObject("tsHome.Image")));
+            this.tsHome.IsLink = true;
+            this.tsHome.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.tsHome.Margin = new System.Windows.Forms.Padding(0, 3, 5, 2);
+            this.tsHome.Name = "tsHome";
+            this.tsHome.Size = new System.Drawing.Size(57, 17);
+            this.tsHome.Text = "Home";
+            this.tsHome.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.tsHome.ToolTipText = "Home at CodePlex";
+            this.tsHome.Click += new System.EventHandler(this.tsHome_Click);
             // 
             // lblUrl
             // 
@@ -486,7 +506,7 @@
             this.MinimumSize = new System.Drawing.Size(450, 300);
             this.Name = "Ripper";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Image Ripper - F11: Fullscreen, (Shift) Spacebar: Switch preview panel";
+            this.Text = "Image Ripper - F11: FullScreen, (Shift+) Space: Switch Preview Panel";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Ripper_KeyDown);
             this.mainSplit.Panel1.ResumeLayout(false);
             this.mainSplit.Panel1.PerformLayout();
@@ -540,6 +560,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsiFacebook;
         private System.Windows.Forms.ToolStripMenuItem tsiPicasa;
         private System.Windows.Forms.ColumnHeader chNumber;
+        private System.Windows.Forms.ToolStripStatusLabel tsHome;
     }
 }
 

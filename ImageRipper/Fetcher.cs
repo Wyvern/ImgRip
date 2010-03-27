@@ -20,7 +20,7 @@
         public string ImageLocation { get; set; }
         public bool SkipPage { get; set; }
         public string Title { get; set; }
-        public bool TooSmall { get; set; }
+        public bool Tiny { get; set; }
         public string Address { get; set; }
         public string NextPage { get; set; }
         #endregion

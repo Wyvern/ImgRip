@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebCloud));
             this.lvCloud = new System.Windows.Forms.ListView();
-            this.lvImageList = new System.Windows.Forms.ImageList(this.components);
+            this.lvImageList = new System.Windows.Forms.ImageList();
             this.lblCloudID = new System.Windows.Forms.Label();
             this.lblPass = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -47,7 +46,7 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.CommandPanel = new System.Windows.Forms.Panel();
             this.cbPublic = new System.Windows.Forms.CheckBox();
-            this.ttCloud = new System.Windows.Forms.ToolTip(this.components);
+            this.ttCloud = new System.Windows.Forms.ToolTip();
             this.statusStrip1.SuspendLayout();
             this.gpLogin.SuspendLayout();
             this.CommandPanel.SuspendLayout();
@@ -61,10 +60,10 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.lvCloud.ForeColor = System.Drawing.Color.Blue;
             this.lvCloud.LabelEdit = true;
-            this.lvCloud.Location = new System.Drawing.Point(12, 118);
+            this.lvCloud.Location = new System.Drawing.Point(0, 118);
             this.lvCloud.Name = "lvCloud";
             this.lvCloud.ShowItemToolTips = true;
-            this.lvCloud.Size = new System.Drawing.Size(553, 290);
+            this.lvCloud.Size = new System.Drawing.Size(577, 290);
             this.lvCloud.SmallImageList = this.lvImageList;
             this.lvCloud.TabIndex = 1;
             this.lvCloud.UseCompatibleStateImageBehavior = false;

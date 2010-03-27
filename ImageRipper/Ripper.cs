@@ -21,6 +21,7 @@
         public Ripper()
         {
             InitializeComponent();
+            tsHome.Alignment = ToolStripItemAlignment.Right;
             btnDownloadCancel.UpClickMouseUp += (s, e) => tmPlus.Enabled = false;
             btnDownloadCancel.DownClickMouseUp += (s, e) => tmMinus.Enabled = false;
             btnDownloadCancel.UpClickMouseDown += (s, e) =>
@@ -65,7 +66,7 @@
                         {
                             lvi = new ListViewItem(value);
                             lvi.ToolTipText = rip.Address;
-                            if (lvRip.Groups[rip.Title] == null) lvRip.Groups.Add(rip.Title, rip.Title + string.Format(" [{0}p]", rip.Imgs.Count));
+                            if (lvRip.Groups[rip.Title] == null) lvRip.Groups.Add(rip.Title, rip.Title + string.Format(" [{0}P]", rip.Imgs.Count));
                             lvi.Group = lvRip.Groups[rip.Title];
                             lvRip.Items.Add(lvi).EnsureVisible();
                         }
@@ -222,7 +223,7 @@
                             }
                         }
                         #region Check whether the file is too small, dimension less than 768x768 pixels
-                        rip.TooSmall = false;
+                        rip.Tiny = false;
                         if (bmp.Width >= 768 && bmp.Height >= 768 || cmmiSaveAll.Checked)
                         {
                             bmp.Save(rip.ImageLocation = fi.ToString());
@@ -230,13 +231,13 @@
                         }
                         else
                         {
-                            rip.TooSmall = true;
+                            rip.Tiny = true;
                             rip.ImageLocation = null;
                         }
                         #endregion
                         pbPreview.Image = bmp.Clone() as Image;
                         filesize = fi.Exists ? fi.Length / 1024 + " KB" : "";
-                        SetListViewItem = new string[] { fi.Name, No, filesize, rip.TooSmall ? "Dropped" : "Finished" };
+                        SetListViewItem = new string[] { fi.Name, No, filesize, rip.Tiny ? "Dropped" : "Finished" };
                         bmp.Dispose();
                     }
                     #endregion
@@ -834,8 +835,6 @@
                     }
                     else
                     {
-                        if (WindowState == FormWindowState.Maximized)
-                            WindowState = FormWindowState.Normal;
                         this.Tag = Bounds;
                         mainSplit.Panel1Collapsed = true;
                         mainSplit.Panel2Collapsed = false;
@@ -931,6 +930,11 @@
                 case "Picasa": sd.Service = WebCloud.CloudType.Picasa; break;
             }
             sd.Show(this);
+        }
+
+        private void tsHome_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://imgrip.codeplex.com");
         }
     }
 }
