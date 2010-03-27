@@ -58,7 +58,7 @@
                     {
                         var items = GF.EndInvoke(_).Entries;
                         foreach (var item in items)
-                            if (item.ParentFolders.Count == 0)
+                           // if (item.ParentFolders.Count == 0)
                                 lvCloud.cbAdd(item.AtomEntry, 0);
                         if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                         btnSign.cbEnable(true);
@@ -206,7 +206,7 @@
                         {
                             var items=GF.EndInvoke(ar).Entries;
                             foreach (var item in items)
-                                if (item.ParentFolders.Count == 0)
+                                //if (item.ParentFolders.Count == 0)
                                     lvCloud.cbAdd(item.AtomEntry, 0);
                             if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                             txtFolderName.cbEnable(true);
@@ -293,20 +293,14 @@
                         {
                             var @new = CD.EndInvoke(c);
                             if (@base != null)
-                            {
-                                Func<Document> MD = () => DR.MoveDocumentTo(@base, @new);
-                                MD.BeginInvoke(m =>
-                                    {
-                                        @new = MD.EndInvoke(m);
-                                    }, null);
-                            }
+                                @new = DR.MoveDocumentTo(@base, @new);
                             title = @new.Title; tip = @new.AtomEntry.AlternateUri.Content;
                             lvCloud.cbAdd(@new.AtomEntry, 0);
                             if (cldCache != null) cldCache.Add(new ListViewItem(title, 0) { Tag = @new.AtomEntry, ToolTipText = tip });
                             txtFolderName.cbEnable(true);
                             btnCreate.cbEnable(true);
                             btnUp.cbEnable(@base != null);
-                            Prompt = (@base == null ? "GDrive" : string.Join(" > ", Folder.Select(f =>f.Title).Reverse().ToArray())) + ": " + lvCloud.Items.Count + " item(s)";
+                            Prompt = (@base == null ? "GDrive" : string.Join(" > ", Folder.Select(f =>f.Title).Reverse().ToArray())) + ": " + cldCache.Count + " item(s)";
                         }, null);
                     break;
                 #endregion
@@ -335,7 +329,7 @@
                             if (cldCache != null) cldCache.Add(new ListViewItem(foldername, 0) { Tag = @new.AtomEntry, ToolTipText = @new.AtomEntry.AlternateUri.Content });
                             btnCreate.cbEnable(true);
                             txtFolderName.cbEnable(true);
-                            Prompt = lvCloud.Items.Count + " item(s)";
+                            Prompt = cldCache.Count + " item(s)";
                         }, null);
                     break;
                 #endregion
