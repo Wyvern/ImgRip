@@ -921,15 +921,14 @@
         private void CloudItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            WebCloud sd = new WebCloud();
             switch (tsmi.Text)
             {
-                case "GDrive": sd.Service = WebCloud.CloudType.GDrive; break;
-                case "Flickr": sd.Service = WebCloud.CloudType.Flickr; break;
-                case "Facebook": sd.Service = WebCloud.CloudType.Facebook; break;
-                case "Picasa": sd.Service = WebCloud.CloudType.Picasa; break;
+                case "GDrive": WebCloud.Service = WebCloud.CloudType.GDrive; break;
+                case "Flickr": WebCloud.Service = WebCloud.CloudType.Flickr; break;
+                case "Facebook": WebCloud.Service = WebCloud.CloudType.Facebook; break;
+                case "Picasa": WebCloud.Service = WebCloud.CloudType.Picasa; break;
             }
-            sd.Show(this);
+            new WebCloud().Show(this);
         }
 
         private void tsHome_Click(object sender, EventArgs e)

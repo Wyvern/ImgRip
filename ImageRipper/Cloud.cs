@@ -28,18 +28,12 @@
         
         //Local ListViewItems memory cache
         Collection<ListViewItem> cldCache;
-        
-        //Google Docs client objects
-        DocumentsRequest DR;
-        List<Document> Docs;
         Stack<Document> Folder;
-        //Picasa Web Albums client objects
+        DocumentsRequest DR;
         PicasaRequest PR;
-        List<Photo> Photos;
-        List<Album> Albums;
         public string AlbumID { get; set; }
 
-        internal CloudType Service { get; set; }
+        internal static CloudType Service { get; set; }
 
         // Supported Cloud storage service
         internal enum CloudType
@@ -57,32 +51,24 @@
                     {
                         MessageBox.Show("Please check your Google account", "Invalid login"); return;
                     }
-                    
-                    DR = new DocumentsRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) {AutoPaging=true});
                     CloudStatus.Text = "Waiting..."; lvCloud.Items.Clear();
+                    DR = new DocumentsRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) {AutoPaging=true});
                     Func<Feed<Document>> GF = () => DR.GetFolders();
-                    try
+                    GF.BeginInvoke(_ =>
                     {
-                        GF.BeginInvoke(ar =>
-                                                  {
-                                                      Docs = GF.EndInvoke(ar).Entries.ToList();
-                                                      foreach (var item in Docs)
-                                                          if (item.ParentFolders.Count == 0)
-                                                              lvCloud.cbAdd(item.Id, item.Title, 0, item.AtomEntry.AlternateUri.Content);
-                                                      if (cldCache != null) { cldCache.Clear(); cldCache = null; }
-                                                      btnSign.cbEnable(true);
-                                                      txtFolderName.cbEnable(true);
-                                                      btnCreate.cbEnable(true);
-                                                      btnDelete.cbEnable(false);
-                                                      btnUp.cbEnable(false);
-                                                      btnAdd.cbEnable(false);
-                                                      Prompt = Docs.Count + " item(s)";
-                                                  }, null);
-                    }
-                    catch (Exception exp)
-                    {
-                        Prompt = exp.InnerException.Message;
-                    }
+                        var items = GF.EndInvoke(_).Entries;
+                        foreach (var item in items)
+                            if (item.ParentFolders.Count == 0)
+                                lvCloud.cbAdd(item.AtomEntry, 0);
+                        if (cldCache != null) { cldCache.Clear(); cldCache = null; }
+                        btnSign.cbEnable(true);
+                        txtFolderName.cbEnable(true);
+                        btnCreate.cbEnable(true);
+                        btnDelete.cbEnable(false);
+                        btnUp.cbEnable(false);
+                        btnAdd.cbEnable(false);
+                        Prompt = items.Count() + " item(s)";
+                    },null);
                     break;
                 #endregion
 
@@ -108,9 +94,9 @@
                     Func<Feed<Album>> GA = () => PR.GetAlbums();
                     GA.BeginInvoke(_ =>
                     {
-                        Albums = GA.EndInvoke(_).Entries.ToList();
-                        foreach (var item in Albums)
-                            lvCloud.cbAdd(item.Id, item.Title, 0, item.AtomEntry.AlternateUri.Content);
+                        var items=GA.EndInvoke(_).Entries;
+                        foreach (var item in items)
+                            lvCloud.cbAdd(item.AtomEntry, 0);
                         if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                         txtFolderName.cbEnable(true);
                         btnCreate.cbEnable(true);
@@ -119,8 +105,7 @@
                         btnAdd.cbEnable(false);
                         btnDelete.cbEnable(false);
                         btnSign.cbEnable(true);
-                        Prompt = Albums.Count + " Album(s)";
-                    }, null);
+                        Prompt = items.Count() + " Album(s)";}, null);
                     break;
                 #endregion
             }
@@ -139,7 +124,7 @@
                 {
                     #region GDrive
                     case CloudType.GDrive:
-                        Document doc = Docs.Single(_ => _.Id == lvi.Name);
+                        Document doc = new Document() { AtomEntry = lvi.Tag as AtomEntry };
                         if (doc.Type==Document.DocumentType.Folder)
                         {
                             Folder = Folder ?? new Stack<Document>();
@@ -150,15 +135,15 @@
                             Func<Feed<Document>> DFC = () => DR.GetFolderContent(doc);
                             DFC.BeginInvoke(ar =>
                                 {
-                                    Docs = DFC.EndInvoke(ar).Entries.ToList();
-                                    foreach (var item in Docs)
-                                        lvCloud.cbAdd(item.Id, item.Title, item.Type == Document.DocumentType.Folder ? 0 : 2, item.AtomEntry.AlternateUri.Content);
+                                    var items=DFC.EndInvoke(ar).Entries;
+                                    foreach (var item in items)
+                                        lvCloud.cbAdd(item.AtomEntry, item.Type == Document.DocumentType.Folder ? 0 : 2);
                                     if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                                     btnUp.cbEnable(true);
                                     btnCreate.cbEnable(true);
                                     btnAdd.cbEnable(true);
                                     txtFolderName.cbEnable(true);
-                                    Prompt = string.Join(" > ", Folder.Select(_ => _.Title).Reverse().ToArray()) + ": " + Docs.Count + " item(s)";
+                                    Prompt = string.Join(" > ", Folder.Select(_ => _.Title).Reverse().ToArray()) + ": " + items.Count() + " item(s)";
                                 }, null);
                         }
                         break;
@@ -176,7 +161,7 @@
 
                     #region Picasa
                     case CloudType.Picasa:
-                        Album a = Albums.Single(_ => _.Id == lvi.Name);
+                        Album a = new Album() { AtomEntry = lvi.Tag as AtomEntry };
                         if (a != null)
                         {
                             CloudStatus.Text = "Listing \"" + a.Title + "\"";
@@ -186,15 +171,15 @@
                             Func<Feed<Photo>> GPA = () => PR.GetPhotosInAlbum(AlbumID);
                             GPA.BeginInvoke(_ =>
                                 {
-                                    Photos = GPA.EndInvoke(_).Entries.ToList();
-                                    foreach (var item in Photos)
-                                        lvCloud.cbAdd(item.Id, item.Title, 1, item.AtomEntry.AlternateUri.Content);
+                                    var items = GPA.EndInvoke(_).Entries;
+                                    foreach (var item in items)
+                                        lvCloud.cbAdd(item.AtomEntry, 1);
                                     if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                                     btnUp.cbEnable(true);
                                     btnCreate.cbEnable(false);
                                     txtFolderName.cbEnable(true);
                                     btnAdd.cbEnable(true);
-                                    Prompt = a.Title + ": " + Photos.Count + " Photo(s)";
+                                    Prompt = a.Title + ": " + items.Count() + " Photo(s)";
                                 }, null);
                         }
                         break;
@@ -219,16 +204,16 @@
                         Func<Feed<Document>> GF = () => DR.GetFolders();
                         GF.BeginInvoke(ar =>
                         {
-                            Docs = GF.EndInvoke(ar).Entries.ToList();
-                            foreach (var item in Docs)
+                            var items=GF.EndInvoke(ar).Entries;
+                            foreach (var item in items)
                                 if (item.ParentFolders.Count == 0)
-                                    lvCloud.cbAdd(item.Id, item.Title, 0, item.AtomEntry.AlternateUri.Content);
+                                    lvCloud.cbAdd(item.AtomEntry, 0);
                             if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                             txtFolderName.cbEnable(true);
                             //btnAddFiles.cbEnable(true);
                             btnCreate.cbEnable(true);
                             btnUp.cbEnable(false);
-                            Prompt = Docs.Count + " item(s)";
+                            Prompt = items.Count() + " item(s)";
                         }, null);
                     }
                     else
@@ -238,15 +223,15 @@
                         Func<Feed<Document>> GFC = () => DR.GetFolderContent(doc);
                         GFC.BeginInvoke(ar =>
                             {
-                                Docs = GFC.EndInvoke(ar).Entries.ToList();
-                                foreach (var item in Docs)
-                                    lvCloud.cbAdd(item.Id, item.Title, item.Type == Document.DocumentType.Folder ? 0 : 2, item.AtomEntry.AlternateUri.Content);
+                                var items=GFC.EndInvoke(ar).Entries;
+                                foreach (var item in items)
+                                    lvCloud.cbAdd(item.AtomEntry, item.Type == Document.DocumentType.Folder ? 0 : 2);
                                 if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                                 btnUp.cbEnable(true);
                                 btnAdd.cbEnable(true);
                                 btnCreate.cbEnable(true);
                                 txtFolderName.cbEnable(true);
-                                Prompt = string.Join(" > ", Folder.Select(_ => _.Title).Reverse().ToArray()) + ": " + Docs.Count + " item(s)";
+                                Prompt = string.Join(" > ", Folder.Select(_ => _.Title).Reverse().ToArray()) + ": " + items.Count() + " item(s)";
                             }, null);
                     }
                     break;
@@ -270,14 +255,14 @@
                     Func<Feed<Album>> GA = () => PR.GetAlbums();
                     GA.BeginInvoke(_ =>
                     {
-                        Albums = GA.EndInvoke(_).Entries.ToList();
-                        foreach (var item in Albums)
-                            lvCloud.cbAdd(item.Id, item.Title, 0, item.AtomEntry.AlternateUri.Content);
+                        var items=GA.EndInvoke(_).Entries;
+                        foreach (var item in items)
+                            lvCloud.cbAdd(item.AtomEntry, 0);
                         if (cldCache != null) { cldCache.Clear(); cldCache = null; }
-                        Photos.Clear(); AlbumID = null;
+                        AlbumID = null;
                         txtFolderName.cbEnable(true);
                         btnCreate.cbEnable(true);
-                        Prompt = Albums.Count + " Albums(s)";
+                        Prompt = items.Count() + " Albums(s)";
                     }, null);
                     break;
                 #endregion
@@ -316,13 +301,12 @@
                                     }, null);
                             }
                             title = @new.Title; tip = @new.AtomEntry.AlternateUri.Content;
-                            lvCloud.cbAdd(@new.Id, title, 0, tip);
-                            if (cldCache != null) cldCache.Add(new ListViewItem(title, 0) { Name = @new.Id, ToolTipText = tip });
-                            Docs.Add(@new);
+                            lvCloud.cbAdd(@new.AtomEntry, 0);
+                            if (cldCache != null) cldCache.Add(new ListViewItem(title, 0) { Tag = @new.AtomEntry, ToolTipText = tip });
                             txtFolderName.cbEnable(true);
                             btnCreate.cbEnable(true);
                             btnUp.cbEnable(@base != null);
-                            Prompt = (@base == null ? "GDrive" : string.Join(" > ", Folder.Select(f =>f.Title).Reverse().ToArray())) + ": " + Docs.Count + " item(s)";
+                            Prompt = (@base == null ? "GDrive" : string.Join(" > ", Folder.Select(f =>f.Title).Reverse().ToArray())) + ": " + lvCloud.Items.Count + " item(s)";
                         }, null);
                     break;
                 #endregion
@@ -347,12 +331,11 @@
                     CA.BeginInvoke(_ =>
                         {
                             var @new = CA.EndInvoke(_);
-                            lvCloud.cbAdd(@new.Id, foldername, 0, @new.AtomEntry.AlternateUri.Content);
-                            if (cldCache != null) cldCache.Add(new ListViewItem(foldername, 0) {Name=@new.Id, ToolTipText = @new.AtomEntry.AlternateUri.Content });
-                            Albums.Add(@new);
+                            lvCloud.cbAdd(@new.AtomEntry, 0);
+                            if (cldCache != null) cldCache.Add(new ListViewItem(foldername, 0) { Tag = @new.AtomEntry, ToolTipText = @new.AtomEntry.AlternateUri.Content });
                             btnCreate.cbEnable(true);
                             txtFolderName.cbEnable(true);
-                            Prompt = Albums.Count + " item(s)";
+                            Prompt = lvCloud.Items.Count + " item(s)";
                         }, null);
                     break;
                 #endregion
@@ -411,9 +394,7 @@
                         Prompt = "Deleting \"" + lvi.Text + "\"";
                         try
                         {
-                            var doc = Docs.Single(_ => _.Id == lvi.Name);
-                            doc.DocumentEntry.Delete();
-                            Docs.Remove(doc);
+                            (lvi.Tag as AtomEntry).Delete();
                         }
                         catch (Exception exp)
                         {
@@ -424,7 +405,7 @@
                         if (cldCache != null) cldCache.Remove(lvi);
                     }
                     btnUp.cbEnable((Folder != null && Folder.Count > 0));
-                    Prompt = Docs.Count + " items";
+                    Prompt = lvCloud.Items.Count + " items";
                     break;
                 #endregion
 
@@ -452,16 +433,7 @@
                         Prompt = "Deleting \"" + lvi.Text + "\"";
                         try
                         {
-                            if (AlbumID != null)
-                            {
-                                var p = Photos.Single(_ => _.Id == lvi.Name);
-                                PR.Delete(p); Photos.Remove(p);
-                            }
-                            else
-                            {
-                                var a = Albums.Single(_ => _.Id == lvi.Name);
-                                PR.Delete(a); ; Albums.Remove(a);
-                            }
+                            (lvi.Tag as AtomEntry).Delete();
                         }
                         catch (Exception exp)
                         {
@@ -472,7 +444,7 @@
                         if (cldCache != null) cldCache.Remove(lvi);
                     }
                     btnUp.cbEnable(AlbumID != null);
-                    Prompt = AlbumID == null ? Albums.Count + " Albums(s)" : Photos.Count + " Photos(s)";
+                    Prompt = lvCloud.Items.Count + (AlbumID == null ? " Albums(s)" : " Photos(s)");
                     break;
                 #endregion
             }
@@ -493,7 +465,7 @@
                     { ".jpg", "image/jpeg" },{".rtf",""},{".ppt",""},{".pps",""},{ ".htm", "" }, { ".html", "" },{".xls",""},{".xlsx",""},{".ods",""},
                     { ".png", "image/png" }, { ".gif", "image/gif" }, { ".tiff", "image/tiff" },{ ".bmp", "image/bmp" }, { ".mov", "video/quicktime" },
                      { ".psd", "application/photoshop" },{ ".avi", "video/x-msvideo"}, { ".mpg", "video/mpeg"}, { ".wmv", "video/x-ms-wmv" },
-                     {".asf","video/x-ms-asf"},{".tif","video/x-ms-asf"},{".csv",""},{".tsb",""},{".doc",""},{".docx",""},
+                     {".asf","video/x-ms-asf"},{".tif","video/x-ms-asf"},{".csv",""},{".tsb",""},{".doc",""},{".docx",""},{".txt",""},
                     };
                     foreach (var file in files)
                     {
@@ -513,9 +485,8 @@
                                 @new = DR.MoveDocumentTo(@base, @new);
                             }
                             string ttt = @new.AtomEntry.AlternateUri.Content;
-                            lvCloud.cbAdd(@new.Id, de.Title.Text, 2, ttt);
-                            if (cldCache != null) cldCache.Add(new ListViewItem(de.Title.Text, 2) {Name=@new.Id, ToolTipText = ttt });
-                            Docs.Add(@new);
+                            lvCloud.cbAdd(de, 2);
+                            if (cldCache != null) cldCache.Add(new ListViewItem(de.Title.Text, 2) { Tag = de, ToolTipText = ttt });
                         }
                         catch (Exception exp)
                         {
@@ -523,7 +494,7 @@
                             break;
                         }
                     }
-                    Prompt = Docs.Count + " items";
+                    Prompt = lvCloud.Items.Count + " items";
                     break;
                 #endregion
 
@@ -557,11 +528,9 @@
                             using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
                             {
                                 var ae = PR.Service.Insert(new Uri(PicasaQuery.CreatePicasaUri(LoginName, AlbumID)), fs, Picasa[ext], filename);
-                                Photo p = new Photo() { AtomEntry = ae };
-                                Photos.Add(p);
                                 fs.Close();
-                                lvCloud.cbAdd(p.Id, filename, 1, ae.AlternateUri.Content);
-                                if (cldCache != null) cldCache.Add(new ListViewItem(filename, 1) { Name = p.Id, ToolTipText = ae.AlternateUri.Content });
+                                lvCloud.cbAdd(ae, 1);
+                                if (cldCache != null) cldCache.Add(new ListViewItem(filename, 1) { Tag = ae, ToolTipText = ae.AlternateUri.Content });
                             }
                         }
                         catch (Exception exp)
@@ -570,7 +539,7 @@
                             break;
                         }
                     }
-                    Prompt = Photos.Count + " Photos(s)";
+                    Prompt = lvCloud.Items.Count + " Photos(s)";
                     break;
                 #endregion
             }
@@ -581,19 +550,16 @@
 
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
-            if (Docs != null ||AlbumID!=null)
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Multiselect = true;
+            ofd.Filter = "JPG files|*.jpg|PNG files|*.png|BMP files|*.bmp|All files|*.*";
+            ofd.InitialDirectory = ((Ripper)this.Owner).Dir ?? System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            if (DialogResult.OK == ofd.ShowDialog(this))
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Multiselect = true;
-                ofd.Filter = "JPG files|*.jpg|PNG files|*.png|BMP files|*.bmp|All files|*.*";
-                ofd.InitialDirectory = ((Ripper)this.Owner).Dir ?? System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-                if (DialogResult.OK == ofd.ShowDialog(this))
-                {
-                    Aborted = false;
-                    btnUp.Enabled = false;
-                    btnSign.Enabled = false;
-                    ThreadPool.QueueUserWorkItem(AddCloudFile, ofd.FileNames);
-                }
+                Aborted = false;
+                btnUp.Enabled = false;
+                btnSign.Enabled = false;
+                ThreadPool.QueueUserWorkItem(AddCloudFile, ofd.FileNames);
             }
         }
 
@@ -604,24 +570,6 @@
             CloudStatus.Text = "Syncing...";
             switch (Service)
             {
-                #region GDrive
-                case CloudType.GDrive:
-                    Document doc = Docs.Single(_ => _.Id == lvi.Name);
-                    doc.Title = e.Label;
-                    Func<Document> DU = () => DR.Update<Document>(doc);
-                    DU.BeginInvoke(_ =>
-                    {
-                        Document @new = DU.EndInvoke(_); Docs.Remove(doc); Docs.Add(@new); lvi.ToolTipText = @new.AtomEntry.AlternateUri.Content; 
-                        if (cldCache != null)
-                        {
-                            ListViewItem item = cldCache.Single(i => i.Name == lvi.Name);
-                            item.Text = e.Label; item.ToolTipText = lvi.ToolTipText;
-                        }
-                        Prompt = "Done";
-                    }, null);
-                    break;
-                #endregion
-
                 #region Flickr
                 case CloudType.Flickr:
                     break;
@@ -632,40 +580,22 @@
                     break;
                 #endregion
 
-                #region Picasa
+                #region Picasa & GDrive
+                case CloudType.GDrive:
                 case CloudType.Picasa:
-                    if (AlbumID == null)
+                    var ae = (lvi.Tag as AtomEntry);
+                    ae.Title.Text = e.Label;
+                    Func<AtomEntry> AU = () => ae.Update();
+                    AU.BeginInvoke(_ =>
                     {
-                        Album a = Albums.Single(_ => _.Id == lvi.Name);
-                        a.Title = e.Label;
-                        Func<Album> PU = () => PR.Update<Album>(a);
-                        PU.BeginInvoke(_ =>
+                        var @new = AU.EndInvoke(_); lvi.ToolTipText = @new.AlternateUri.Content;
+                        if (cldCache != null)
                         {
-                            Album @new = PU.EndInvoke(_); Albums.Remove(a); Albums.Add(@new); lvi.ToolTipText = @new.AtomEntry.AlternateUri.Content;
-                            if (cldCache != null)
-                            {
-                                ListViewItem item = cldCache.Single(i => i.Name == lvi.Name);
-                                item.Text = e.Label; item.ToolTipText = lvi.ToolTipText;
-                            }
-                            Prompt = "Done";
-                        }, null);
-                    }
-                    else
-                    {
-                        Photo p = Photos.Single(_ => _.Id == lvi.Name);
-                        p.Title = e.Label;
-                        Func<Photo> PU = () => PR.Update<Photo>(p);
-                        PU.BeginInvoke(_ =>
-                        {
-                            Photo @new = PU.EndInvoke(_); Photos.Remove(p); Photos.Add(@new); lvi.ToolTipText = @new.AtomEntry.AlternateUri.Content;
-                            if (cldCache != null)
-                            {
-                                ListViewItem item = cldCache.Single(i => i.Name == lvi.Name);
-                                item.Text = e.Label; item.ToolTipText = lvi.ToolTipText;
-                            }
-                            Prompt = "Done";
-                        }, null);
-                    }
+                            ListViewItem item = cldCache.Single(i => ((AtomEntry)i.Tag).Id == ae.Id);
+                            item.Text = ae.Title.Text; item.ToolTipText = lvi.ToolTipText;
+                        }
+                        Prompt = "Done";
+                    }, null);
                     break;
                 #endregion
             }
@@ -727,33 +657,8 @@
 
         private void lvCloud_DragEnter(object sender, DragEventArgs e)
         {
-            switch (Service)
-            {
-                #region GDrive
-                case CloudType.GDrive:
-                    if (DR == null||!btnAdd.Enabled)
-                    { e.Effect = DragDropEffects.None; return; }
-                    break;
-                #endregion
-
-                #region Flickr
-                case CloudType.Flickr:
-                    break;
-                #endregion
-
-                #region Facebook
-                case CloudType.Facebook:
-                    break;
-                #endregion
-
-                #region Picasa
-                case CloudType.Picasa:
-                    if (AlbumID == null)
-                    { e.Effect = DragDropEffects.None; return; }
-                    break;
-                #endregion
-            }
-
+            if (!btnAdd.Enabled)
+            { e.Effect = DragDropEffects.None; return; }
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 e.Effect = DragDropEffects.Copy;
@@ -792,7 +697,7 @@
                 {
                     #region GDrive
                     case CloudType.GDrive:
-                        Document doc= Docs.Single(_ => _.Id == lvi.Name);
+                        var doc = (lvi.Tag as AtomEntry);
                         Prompt = "Updated: " + doc.Updated.ToShortDateString();
                         break;
                     #endregion
@@ -816,7 +721,7 @@
                             uint total = 0, check = 0;
                             foreach (ListViewItem item in lvCloud.SelectedItems)
                             {
-                                Album a=Albums.Single(_ => _.Id == item.Name);
+                                var a = new Album() { AtomEntry = item.Tag as AtomEntry };
                                 total += a.NumPhotos;
                                 if (a.Access == "public") check++;
                             }
@@ -827,7 +732,7 @@
                         {
                             long total = 0;
                             foreach (ListViewItem item in lvCloud.SelectedItems)
-                                total += Photos.Single(_ => _.Id == item.Name).Size;
+                                total += new Photo() { AtomEntry = item.Tag as AtomEntry }.Size;
                             Prompt = string.Format("Total: {0} KB", total/1024);
                         }
                         break;
@@ -841,7 +746,7 @@
                 {
                     #region GDrive
                     case CloudType.GDrive:
-                        Prompt = Docs.Count + " item(s)";
+                        Prompt = (cldCache != null ? cldCache.Count : lvCloud.Items.Count) + " item(s)";
                         break;
                     #endregion
 
@@ -858,7 +763,7 @@
                     #region Picasa
                     case CloudType.Picasa:
                         cbPublic.CheckState = CheckState.Unchecked;
-                        Prompt = AlbumID == null ? Albums.Count+" Albums(s)" : Photos.Count+" Photos(s)";
+                        Prompt = (cldCache != null ? cldCache.Count : lvCloud.Items.Count) + (AlbumID == null ? " Albums(s)" : " Photos(s)");
                         break;
                     #endregion
                 }
