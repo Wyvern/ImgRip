@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ripper));
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.btnDownloadCancel = new Wyvern.SplitButton();
-            this.cmsBatch = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsBatch = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnBatch = new System.Windows.Forms.ToolStripMenuItem();
             this.tbParse = new System.Windows.Forms.TextBox();
             this.llCookie = new System.Windows.Forms.LinkLabel();
@@ -41,7 +42,7 @@
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cmsLV = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsLV = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmmiNextPage = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiDropGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiCopyName = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,9 +65,9 @@
             this.pbPreview = new System.Windows.Forms.PictureBox();
             this.fbDir = new System.Windows.Forms.FolderBrowserDialog();
             this.bwDownload = new System.ComponentModel.BackgroundWorker();
-            this.ttRipper = new System.Windows.Forms.ToolTip();
-            this.tmMinus = new System.Windows.Forms.Timer();
-            this.tmPlus = new System.Windows.Forms.Timer();
+            this.ttRipper = new System.Windows.Forms.ToolTip(this.components);
+            this.tmMinus = new System.Windows.Forms.Timer(this.components);
+            this.tmPlus = new System.Windows.Forms.Timer(this.components);
             this.mainSplit.Panel1.SuspendLayout();
             this.mainSplit.Panel2.SuspendLayout();
             this.mainSplit.SuspendLayout();
@@ -114,10 +115,10 @@
             this.btnDownloadCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnDownloadCancel.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold);
             this.btnDownloadCancel.Image = global::ImgRipper.Properties.Resources.Download;
-            this.btnDownloadCancel.Location = new System.Drawing.Point(715, 12);
+            this.btnDownloadCancel.Location = new System.Drawing.Point(708, 5);
             this.btnDownloadCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDownloadCancel.Name = "btnDownloadCancel";
-            this.btnDownloadCancel.Size = new System.Drawing.Size(64, 66);
+            this.btnDownloadCancel.Size = new System.Drawing.Size(71, 73);
             this.btnDownloadCancel.TabIndex = 3;
             this.btnDownloadCancel.TabStop = false;
             this.ttRipper.SetToolTip(this.btnDownloadCancel, "Begin/Stop, Set page Id Up or Down");
@@ -163,7 +164,7 @@
             this.tbParse.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbParse.Name = "tbParse";
             this.tbParse.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.tbParse.Size = new System.Drawing.Size(666, 23);
+            this.tbParse.Size = new System.Drawing.Size(659, 23);
             this.tbParse.TabIndex = 20;
             this.tbParse.TabStop = false;
             this.tbParse.Text = global::ImgRipper.Properties.Settings.Default.txtParse;
@@ -177,7 +178,7 @@
             this.llCookie.AutoSize = true;
             this.llCookie.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.llCookie.LinkColor = System.Drawing.SystemColors.Highlight;
-            this.llCookie.Location = new System.Drawing.Point(653, 55);
+            this.llCookie.Location = new System.Drawing.Point(646, 56);
             this.llCookie.Name = "llCookie";
             this.llCookie.Size = new System.Drawing.Size(56, 19);
             this.llCookie.TabIndex = 32;
@@ -452,7 +453,7 @@
             this.tbDir.Location = new System.Drawing.Point(43, 55);
             this.tbDir.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbDir.Name = "tbDir";
-            this.tbDir.Size = new System.Drawing.Size(608, 23);
+            this.tbDir.Size = new System.Drawing.Size(594, 23);
             this.tbDir.TabIndex = 4;
             this.tbDir.TabStop = false;
             this.tbDir.Text = global::ImgRipper.Properties.Settings.Default.txtDir;
