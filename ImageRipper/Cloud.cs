@@ -53,10 +53,17 @@
                     }
                     CloudStatus.Text = "Waiting..."; lvCloud.Items.Clear();
                     DR = new DocumentsRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) {AutoPaging=true});
-                    Func<Feed<Document>> GF = () => DR.GetFolders();
+                    Func<Feed<Document>> GF = () =>
+                    {
+                        try { DR.Service.QueryClientLoginToken(); }
+                        catch (Exception exp) { Prompt = exp.Message; btnSign.cbEnable(true); return null; }
+                        return DR.GetFolders();
+                    };
                     GF.BeginInvoke(_ =>
                     {
-                        var items = GF.EndInvoke(_).Entries;
+                        var result = GF.EndInvoke(_);
+                        if (result == null) return;
+                        var items = result.Entries;
                         foreach (var item in items)
                             if (item.ParentFolders.Count == 0)
                                 lvCloud.cbAdd(item.AtomEntry, 0);
@@ -68,7 +75,7 @@
                         btnUp.cbEnable(false);
                         btnAdd.cbEnable(false);
                         Prompt = items.Count() + " item(s)";
-                    },null);
+                    }, null);
                     break;
                 #endregion
 
@@ -91,10 +98,17 @@
 
                     CloudStatus.Text = "Waiting..."; lvCloud.Items.Clear();
                     PR = new PicasaRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) { AutoPaging=true});
-                    Func<Feed<Album>> GA = () => PR.GetAlbums();
+                    Func<Feed<Album>> GA = () =>
+                    {
+                        try { PR.Service.QueryClientLoginToken(); }
+                        catch (Exception exp) { Prompt = exp.Message; btnSign.cbEnable(true); return null; }
+                        return PR.GetAlbums();
+                    };
                     GA.BeginInvoke(_ =>
                     {
-                        var items=GA.EndInvoke(_).Entries;
+                        var result = GA.EndInvoke(_);
+                        if (result == null) return;
+                        var items = result.Entries;
                         foreach (var item in items)
                             lvCloud.cbAdd(item.AtomEntry, 0);
                         if (cldCache != null) { cldCache.Clear(); cldCache = null; }
@@ -395,8 +409,8 @@
                             MessageBox.Show(exp.Message, "Delete " + lvi.Text + " ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
+                        if (cldCache != null) cldCache.Remove(cldCache.Single(_ => _.ToolTipText == lvi.ToolTipText));
                         lvCloud.Invoke(RemoveItem, lvi);
-                        if (cldCache != null) cldCache.Remove(lvi);
                     }
                     btnUp.cbEnable((Folder != null && Folder.Count > 0));
                     Prompt = lvCloud.Items.Count + " items";
@@ -434,8 +448,8 @@
                             MessageBox.Show(exp.InnerException.Message, "Delete " + lvi.Text + " ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
+                        if (cldCache != null) cldCache.Remove(cldCache.Single(_ => _.ToolTipText == lvi.ToolTipText));
                         lvCloud.Invoke(RemoveItem, lvi);
-                        if (cldCache != null) cldCache.Remove(lvi);
                     }
                     btnUp.cbEnable(AlbumID != null);
                     Prompt = lvCloud.Items.Count + (AlbumID == null ? " Albums(s)" : " Photos(s)");
@@ -559,7 +573,7 @@
 
         private void lvCloud_AfterLabelEdit(object sender, LabelEditEventArgs e)
         {
-            ListViewItem lvi = lvCloud.FocusedItem;
+            ListViewItem lvi = lvCloud.Items[e.Item];
             if (string.IsNullOrEmpty(e.Label) || e.Label == lvi.Text) { e.CancelEdit = true; return; }
             CloudStatus.Text = "Syncing...";
             switch (Service)
@@ -582,12 +596,14 @@
                     Func<AtomEntry> AU = () => ae.Update();
                     AU.BeginInvoke(_ =>
                     {
-                        var @new = AU.EndInvoke(_); lvi.ToolTipText = @new.AlternateUri.Content;
+                        var @new = AU.EndInvoke(_); 
                         if (cldCache != null)
                         {
-                            ListViewItem item = cldCache.Single(i => ((AtomEntry)i.Tag).Id == ae.Id);
-                            item.Text = ae.Title.Text; item.ToolTipText = lvi.ToolTipText;
+                            ListViewItem item = cldCache.Single(i => i.ToolTipText == lvi.ToolTipText);
+                            item.Text = e.Label; item.ToolTipText = @new.AlternateUri.Content; item.Tag = @new;
                         }
+                        lvi.ToolTipText = @new.AlternateUri.Content;
+                        lvi.Tag = @new;
                         Prompt = "Done";
                     }, null);
                     break;
@@ -779,6 +795,7 @@
             if (string.IsNullOrEmpty(text))
             {
                 lvCloud.Items.AddRange(cldCache.ToArray());
+                CloudStatus.Text = lvCloud.Items.Count + " items";
                 return;
             }
             lvCloud.Items.AddRange(cldCache.Where(_ => _.Text.ToLower().Contains(text)).ToArray());
