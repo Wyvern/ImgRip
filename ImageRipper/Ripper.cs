@@ -65,10 +65,11 @@
                         else
                         {
                             lvi = new ListViewItem(value);
-                            lvi.ToolTipText = rip.Address;
+                            lvi.ToolTipText = rip.Address; 
                             if (lvRip.Groups[rip.Title] == null) lvRip.Groups.Add(rip.Title, rip.Title + string.Format(" [{0}P]", rip.Imgs.Count));
                             lvi.Group = lvRip.Groups[rip.Title];
                             lvRip.Items.Add(lvi).EnsureVisible();
+                            lvi.ForeColor = lvi.Index % 2 == 0 ? Color.DarkGreen : Color.DarkBlue;
                         }
                         #endregion
                     }));
