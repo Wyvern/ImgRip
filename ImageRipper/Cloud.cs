@@ -47,10 +47,6 @@
             {
                 #region GDrive
                 case CloudType.GDrive:
-                    if (!Regex.IsMatch(LoginName, @"^[\w\.-]+@(google|gmail|googlemail).com$", RegexOptions.IgnoreCase))
-                    {
-                        MessageBox.Show("Please check your Google account", "Invalid login"); return;
-                    }
                     CloudStatus.Text = "Waiting..."; lvCloud.Items.Clear();
                     DR = new DocumentsRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) {AutoPaging=true});
                     Func<Feed<Document>> GF = () =>
@@ -91,11 +87,6 @@
 
                 #region Picasa
                 case CloudType.Picasa:
-                    if (!Regex.IsMatch(LoginName, @"^[\w\.-]+@(google|gmail|googlemail).com$", RegexOptions.IgnoreCase))
-                    {
-                        MessageBox.Show("Please check your Google account", "Invalid login"); return;
-                    }
-
                     CloudStatus.Text = "Waiting..."; lvCloud.Items.Clear();
                     PR = new PicasaRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) { AutoPaging=true});
                     Func<Feed<Album>> GA = () =>

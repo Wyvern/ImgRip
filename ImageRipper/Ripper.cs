@@ -911,7 +911,7 @@
             cmmiNextPage.Visible = Batch;
             cmmiDropGroup.Visible = cmmiSaveAll.Visible = (rip != null && rip.Style == ParseStyle.Heels) ? true : false;
             cmmiSave.Visible = cmmiRemove.Visible = cmmiCopyName.Visible = lvRip.SelectedItems.Count > 0 ? true : false;
-            cmmiClear.Visible = lvRip.Items.Count == 0 ? false : true;
+            cmmiClear.Enabled = lvRip.Items.Count == 0 ? false : true;
         }
 
         private void CloudToolStrip_Click(object sender, EventArgs e)

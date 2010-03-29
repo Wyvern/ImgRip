@@ -263,13 +263,13 @@
             this.cmsLV.ShowCheckMargin = true;
             this.cmsLV.ShowImageMargin = false;
             this.cmsLV.ShowItemToolTips = false;
-            this.cmsLV.Size = new System.Drawing.Size(118, 158);
+            this.cmsLV.Size = new System.Drawing.Size(153, 180);
             this.cmsLV.Opening += new System.ComponentModel.CancelEventHandler(this.cmsLV_Opening);
             // 
             // cmmiNextPage
             // 
             this.cmmiNextPage.Name = "cmmiNextPage";
-            this.cmmiNextPage.Size = new System.Drawing.Size(117, 22);
+            this.cmmiNextPage.Size = new System.Drawing.Size(152, 22);
             this.cmmiNextPage.Text = "Next";
             this.cmmiNextPage.Visible = false;
             this.cmmiNextPage.Click += new System.EventHandler(this.cmmiNextPage_Click);
@@ -277,7 +277,7 @@
             // cmmiDropGroup
             // 
             this.cmmiDropGroup.Name = "cmmiDropGroup";
-            this.cmmiDropGroup.Size = new System.Drawing.Size(117, 22);
+            this.cmmiDropGroup.Size = new System.Drawing.Size(152, 22);
             this.cmmiDropGroup.Text = "Drop";
             this.cmmiDropGroup.Visible = false;
             this.cmmiDropGroup.Click += new System.EventHandler(this.cmmiDeleteAll_Click);
@@ -285,7 +285,7 @@
             // cmmiCopyName
             // 
             this.cmmiCopyName.Name = "cmmiCopyName";
-            this.cmmiCopyName.Size = new System.Drawing.Size(117, 22);
+            this.cmmiCopyName.Size = new System.Drawing.Size(152, 22);
             this.cmmiCopyName.Text = "Copy";
             this.cmmiCopyName.Visible = false;
             this.cmmiCopyName.Click += new System.EventHandler(this.cmmiCopyName_Click);
@@ -294,14 +294,14 @@
             // 
             this.cmmiSaveAll.CheckOnClick = true;
             this.cmmiSaveAll.Name = "cmmiSaveAll";
-            this.cmmiSaveAll.Size = new System.Drawing.Size(117, 22);
+            this.cmmiSaveAll.Size = new System.Drawing.Size(152, 22);
             this.cmmiSaveAll.Text = "Small";
             this.cmmiSaveAll.Visible = false;
             // 
             // cmmiSave
             // 
             this.cmmiSave.Name = "cmmiSave";
-            this.cmmiSave.Size = new System.Drawing.Size(117, 22);
+            this.cmmiSave.Size = new System.Drawing.Size(152, 22);
             this.cmmiSave.Text = "Save";
             this.cmmiSave.Visible = false;
             this.cmmiSave.Click += new System.EventHandler(this.cmmiDownloadFile);
@@ -309,7 +309,7 @@
             // cmmiRemove
             // 
             this.cmmiRemove.Name = "cmmiRemove";
-            this.cmmiRemove.Size = new System.Drawing.Size(117, 22);
+            this.cmmiRemove.Size = new System.Drawing.Size(152, 22);
             this.cmmiRemove.Text = "Remove";
             this.cmmiRemove.Visible = false;
             this.cmmiRemove.Click += new System.EventHandler(this.cmmiDeleteFile);
@@ -317,9 +317,8 @@
             // cmmiClear
             // 
             this.cmmiClear.Name = "cmmiClear";
-            this.cmmiClear.Size = new System.Drawing.Size(117, 22);
+            this.cmmiClear.Size = new System.Drawing.Size(152, 22);
             this.cmmiClear.Text = "Clear";
-            this.cmmiClear.Visible = false;
             this.cmmiClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // RipStatus
