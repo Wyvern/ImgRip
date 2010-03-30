@@ -22,15 +22,17 @@
         {
             InitializeComponent();
             tsHome.Alignment = ToolStripItemAlignment.Right;
-            btnDownloadCancel.UpClickMouseUp += (s, e) => tmPlus.Enabled = false;
-            btnDownloadCancel.DownClickMouseUp += (s, e) => tmMinus.Enabled = false;
-            btnDownloadCancel.UpClickMouseDown += (s, e) =>
+            btnDownloadCancel.UpArrowMouseUp += (s, e) => tmPlus.Enabled = false;
+            btnDownloadCancel.DownArrowMouseUp += (s, e) => tmMinus.Enabled = false;
+            btnDownloadCancel.UpArrowMouseDown += (s, e) =>
             {
+                if (((rip = rip ?? new Fetcher()).Style = Check()) == ParseStyle.NotSupport) return;
                 if (tmMinus.Enabled) tmMinus.Enabled = false;
                 tmPlus.Enabled = true;
             };
-            btnDownloadCancel.DownClickMouseDown += (s, e) =>
+            btnDownloadCancel.DownArrowMouseDown += (s, e) =>
             {
+                if (((rip = rip ?? new Fetcher()).Style = Check()) == ParseStyle.NotSupport) return;
                 if (tmPlus.Enabled) tmPlus.Enabled = false;
                 tmMinus.Enabled = true;
             };
@@ -95,7 +97,7 @@
                 }
                 catch (System.UriFormatException format)
                 {
-                    MessageBox.Show(format.Message, "Url validation Error!");
+                    Prompt = format.Message;
                     return null;
                 }
             }
@@ -585,7 +587,6 @@
         /// <param name="pm">The PlusMinus enum value indicate the action type.</param>
         private void AdjustURL(int step)
         {
-            if (((rip = rip ?? new Fetcher()).Style = Check()) == ParseStyle.NotSupport) return;
             string number; int value;
             switch (rip.Style)
             {

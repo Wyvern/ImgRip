@@ -17,7 +17,8 @@ namespace Wyvern
         private Rectangle dropDownRectangle;
         private Rectangle UpRectangle, DownRectangle;
         private bool showSplit = true;
-        public event EventHandler UpClickMouseDown, UpClickMouseUp, DownClickMouseDown, DownClickMouseUp;
+        [Category("Mouse")]
+        public event EventHandler UpArrowMouseDown, UpArrowMouseUp, DownArrowMouseDown, DownArrowMouseUp;
 
         [DefaultValue(true)]
         [Category("Appearance")]
@@ -145,13 +146,15 @@ namespace Wyvern
             }
             else if (UpRectangle.Contains(e.Location))
             {
-                if (UpClickMouseDown != null)
-                    UpClickMouseDown(this, e);
+                if (UpArrowMouseDown != null)
+                    UpArrowMouseDown(this, e);
+                State = PushButtonState.Pressed;
             }
             else if (DownRectangle.Contains(e.Location))
             {
-                if (DownClickMouseDown != null)
-                    DownClickMouseDown(this, e);
+                if (DownArrowMouseDown != null)
+                    DownArrowMouseDown(this, e);
+                State = PushButtonState.Pressed;
             }
             else
             {
@@ -187,8 +190,8 @@ namespace Wyvern
                     State = PushButtonState.Normal;
                 }
             }
-            if (UpClickMouseUp != null) UpClickMouseUp(this, e);
-            if (DownClickMouseUp != null) DownClickMouseUp(this, e);
+            if (UpArrowMouseUp != null) UpArrowMouseUp(this, e);
+            if (DownArrowMouseUp != null) DownArrowMouseUp(this, e);
         }
 
         protected override void OnMouseUp(MouseEventArgs mevent)
@@ -206,8 +209,8 @@ namespace Wyvern
                 {
                     OnClick(new EventArgs());
                 }
-                if (UpRectangle.Contains(mevent.Location) && UpClickMouseUp != null) UpClickMouseUp(this, mevent);
-                if (DownRectangle.Contains(mevent.Location) && DownClickMouseUp != null) DownClickMouseUp(this, mevent);
+                if (UpRectangle.Contains(mevent.Location) && UpArrowMouseUp != null) UpArrowMouseUp(this, mevent);
+                if (DownRectangle.Contains(mevent.Location) && DownArrowMouseUp != null) DownArrowMouseUp(this, mevent);
             }
         }
 
@@ -386,7 +389,7 @@ namespace Wyvern
 
             if (ContextMenuStrip != null)
             {
-                ContextMenuStrip.Closing += new ToolStripDropDownClosingEventHandler(ContextMenuStrip_Closing);
+                ContextMenuStrip.Closing += ContextMenuStrip_Closing;
                 ContextMenuStrip.Show(this, new Point(0, Height), ToolStripDropDownDirection.Default);
             }
         }
@@ -396,7 +399,7 @@ namespace Wyvern
             ContextMenuStrip cms = sender as ContextMenuStrip;
             if (cms != null)
             {
-                cms.Closing -= new ToolStripDropDownClosingEventHandler(ContextMenuStrip_Closing);
+                cms.Closing -= ContextMenuStrip_Closing;
             }
 
             SetButtonDrawState();
