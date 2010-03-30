@@ -232,6 +232,13 @@
                     else
                     #region For Others
                     {
+                        if (rip.SkipPage)
+                        {
+                            rip.SkipPage = false;
+                            SetListViewItem = new string[] { fi.Name, No, null, "Skipped" };
+                            return;
+                        }
+                        if (Batch) RipStatus.Invoke(new Action(()=>lbBatch.Text=" #" + (Range - (To - From)) + "/" + Range));
                         SetListViewItem = new string[] { fi.Name,No,  null, "Downloading" };
                         rip.GetFile(rip.Address, fi.ToString());
                         fi.Refresh();
@@ -309,7 +316,7 @@
 
                     #endregion
 
-                    #region Parse duide.com site
+                    #region Parse Duide.com site
 
                     case ParseStyle.Duide:
                         {
@@ -493,7 +500,7 @@
         {
             rip.Reset();
             tsPB.Visible = false;
-            lbBatch.Text = default(string);
+            lbBatch.Text = null;
             System.Media.SystemSounds.Exclamation.Play();
             if (e.Cancelled)
             {
@@ -537,7 +544,6 @@
                             bwDownload.RunWorkerAsync();
                             btnDownloadCancel.Image = Resources.Cancel;
                             rip.PushState = RipperAction.Cancel;
-                            lbBatch.Text = " #" + (Range - (To - From) - 1) + "/" + Range;
                             Batch = From != To;
                             break;
                         case RipperAction.Cancel:
@@ -601,7 +607,7 @@
                     }
                     break;
 
-                case ParseStyle.Duide://http://www.duide.com/ggfdrdsuy/a103.htm
+                case ParseStyle.Duide:
                     if (!Address.StartsWith("http://www.duide.com/ggfdrdsuy")) return;
                     number = Address.Substring(Address.LastIndexOfAny("abc".ToCharArray())+1).Split('.')[0];
                     if (int.TryParse(number, out value))
@@ -620,7 +626,6 @@
                 //    }
                 //    break;
             }
-
         }
 
         /// <summary>
@@ -647,9 +652,17 @@
                 int pageid;
                 if (int.TryParse(text, out pageid))
                     new Batch(pageid).ShowDialog(this);
+            }//http://www.duide.com/ggfdrdsuy/a103.htm
+            else if (rip.Style == ParseStyle.Duide)
+            {
+                if (!Address.StartsWith("http://www.duide.com/ggfdrdsuy/")) return;
+                string text = Address.Substring(Address.LastIndexOfAny("abc".ToCharArray()) + 1).Split('.')[0];
+                int pageid;
+                if (int.TryParse(text, out pageid))
+                    new Batch(pageid).ShowDialog(this);
             }
             else
-                MessageBox.Show("Please imput URL address which support batch operation.", "Can not take batch operation on this site!",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                MessageBox.Show("Please imput URL address which support batch operation.", "Can not take batch operation on this site!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void cmmiNextPage_Click(object sender, EventArgs e)
