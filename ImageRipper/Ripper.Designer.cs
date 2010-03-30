@@ -158,7 +158,7 @@
             "http://pal.ath.cx/<id>/<category>/<start-end>/<albumid>/"});
             this.tbParse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tbParse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.tbParse.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "txtParse", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbParse.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "txtUrl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbParse.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
             this.tbParse.Location = new System.Drawing.Point(43, 13);
             this.tbParse.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -167,7 +167,7 @@
             this.tbParse.Size = new System.Drawing.Size(659, 23);
             this.tbParse.TabIndex = 20;
             this.tbParse.TabStop = false;
-            this.tbParse.Text = global::ImgRipper.Properties.Settings.Default.txtParse;
+            this.tbParse.Text = global::ImgRipper.Properties.Settings.Default.txtUrl;
             this.tbParse.WordWrap = false;
             this.tbParse.DragDrop += new System.Windows.Forms.DragEventHandler(this.tbParse_DragDrop);
             this.tbParse.DragEnter += new System.Windows.Forms.DragEventHandler(this.tbParse_DragEnter);
@@ -184,7 +184,6 @@
             this.llCookie.TabIndex = 32;
             this.llCookie.TabStop = true;
             this.llCookie.Text = "Cookie";
-            this.ttRipper.SetToolTip(this.llCookie, "Click to add Cookie");
             this.llCookie.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llCookie_LinkClicked);
             // 
             // llFolder
@@ -470,6 +469,11 @@
             this.pbPreview.TabIndex = 22;
             this.pbPreview.TabStop = false;
             this.pbPreview.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
+            // 
+            // fbDir
+            // 
+            this.fbDir.Description = "Select folder to store files";
+            this.fbDir.SelectedPath = global::ImgRipper.Properties.Settings.Default.txtDir;
             // 
             // bwDownload
             // 

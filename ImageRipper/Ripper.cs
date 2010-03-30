@@ -13,10 +13,10 @@
     using HAP = HtmlAgilityPack;
     partial class Ripper : Form
     {
-        internal bool Batch;
+        public bool Batch { get; set; }
         Fetcher rip;
         bool FullScreen { get; set; }
-        internal int Range;
+        public int Range { get; set; }
 
         public Ripper()
         {
@@ -76,8 +76,8 @@
             }
         }
 
-        internal int From { get; set; }
-        internal int To { get; set; }
+        public int From { get; set; }
+        public int To { get; set; }
 
         internal string Dir
         {
@@ -85,7 +85,7 @@
             set { tbDir.Text = value; }
         }
 
-        internal Uri Address
+       public Uri Address
         {
             get
             {
@@ -102,12 +102,6 @@
             set { tbParse.Text = value.ToString(); }
         }
 
-        internal string Cookie
-        {
-            get { return Settings.Default.Cookie; }
-            set { Settings.Default.Cookie = value; Settings.Default.Save(); }
-        }
-
         private void DownloadCancel_Click(object sender, EventArgs e)
         {
             rip = rip ?? new Fetcher();
@@ -115,9 +109,9 @@
             {
                 case RipperAction.Download:
                     if (!CanDownload) return;
-                    SaveAppSettings();
                     tbParse.ReadOnly = true;
                     tbDir.ReadOnly = true;
+                    Settings.Default.Save();
                     //Begin download action
                     bwDownload.RunWorkerAsync();
                     ((Button) sender).Image = Resources.Cancel;
@@ -175,14 +169,14 @@
                         Bitmap bmp = null;
                         string filesize;
                         bool succeed = false;
-                        if (string.IsNullOrEmpty(Cookie))
+                        if (string.IsNullOrEmpty(Settings.Default.Cookie))
                         {
                             this.Invoke(new Action(() =>
                             {
-                                new SetCookie(Cookie).ShowDialog(this);
+                                new SetCookie().ShowDialog(this);
                             }));
                         }
-                        if (string.IsNullOrEmpty(Cookie))
+                        if (string.IsNullOrEmpty(Settings.Default.Cookie))
                         {
                             e.Result = "NULL Cookie!";
                             SetListViewItem = new string[] { fi.Name,No,  null, "Cancelled" };
@@ -198,7 +192,7 @@
                             }
                             try
                             {
-                                bmp = rip.GetBitmap(rip.Address, Cookie);
+                                bmp = rip.GetBitmap(rip.Address, Settings.Default.Cookie);
                                 succeed = true;
                             }
                             catch (Exception)
@@ -506,7 +500,6 @@
                 btnBatch.Enabled = true;
                 tbParse.ReadOnly = false;
                 tbDir.ReadOnly = false;
-                SaveAppSettings();
             }
             else
             {
@@ -561,17 +554,8 @@
                     btnBatch.Enabled = true;
                     tbParse.ReadOnly = false;
                     tbDir.ReadOnly = false;
-                    SaveAppSettings();
                 }
             }
-        }
-
-        void SaveAppSettings()
-        {
-            Settings.Default.txtParse = tbParse.Text;
-            Settings.Default.txtDir = Dir;
-            Settings.Default.Cookie = Cookie;
-            Settings.Default.Save();
         }
 
         private void DownloadFiles_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -660,7 +644,7 @@
                 string text = Address.Query.Split('=')[1];
                 int pageid;
                 if (int.TryParse(text, out pageid))
-                    new BatchAction(pageid).ShowDialog(this);
+                    new Batch(pageid) .ShowDialog(this);
             }
             else
                 MessageBox.Show("Please imput URL address which support batch operation.", "Can not take batch operation on this site!",MessageBoxButtons.OK,MessageBoxIcon.Information);
@@ -714,7 +698,7 @@
         {
             if (lvRip.FocusedItem!=null)
             {
-                string file = (Dir.EndsWith("\\")?Dir:Dir + "\\") + lvRip.FocusedItem.Text;
+                string file = Path.Combine(Dir, lvRip.FocusedItem.Text);
                 if (File.Exists(file))
                 {
                     if (mainSplit.Panel2Collapsed) mainSplit.Panel2Collapsed = false;
@@ -731,10 +715,10 @@
             {
                 foreach (ListViewItem lvi in lvRip.SelectedItems)
                 {
-                    FileInfo fi = new FileInfo(Dir + "\\" + lvi.Text);
-                    if (fi.Exists)
+                    string path = Path.Combine(Dir, lvi.Text);
+                    if (File.Exists(path))
                     {
-                        fi.Delete();
+                        File.Delete(path);
                         lvi.SubItems[3].Text = "Deleted";
                         lvi.Font = new Font(lvi.Font, FontStyle.Strikeout);
                     }
@@ -767,7 +751,7 @@
                 {
                     if (rip.Style == ParseStyle.Heels)
                     {
-                        Bitmap bmp = rip.GetBitmap(item.Url, Cookie);
+                        Bitmap bmp = rip.GetBitmap(item.Url, Settings.Default.Cookie);
                         bmp.Save(Path.Combine(Dir, item.Name));
                         bmp.Dispose();
                     }
@@ -878,18 +862,13 @@
 
         private void llFolder_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (Directory.Exists(Dir))
-                fbDir.SelectedPath = Dir;
-            else
-                fbDir.SelectedPath = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             if ((fbDir.ShowDialog()) == DialogResult.OK)
                 Dir = fbDir.SelectedPath;
         }
         
         private void llCookie_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            SetCookie sc = new SetCookie(Cookie);
-            sc.ShowDialog(this);
+            new SetCookie().ShowDialog(this);
         }
 
         private void tbParse_DragEnter(object sender, DragEventArgs e)

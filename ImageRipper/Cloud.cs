@@ -549,10 +549,6 @@
 
         private void btnAddFiles_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Multiselect = true;
-            ofd.Filter = "JPG files|*.jpg|PNG files|*.png|BMP files|*.bmp|All files|*.*";
-            ofd.InitialDirectory = ((Ripper)this.Owner).Dir ?? System.Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             if (DialogResult.OK == ofd.ShowDialog(this))
             {
                 Aborted = false;

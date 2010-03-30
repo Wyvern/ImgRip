@@ -1,6 +1,6 @@
 ﻿namespace ImgRipper
 {
-    partial class BatchAction
+    partial class Batch
     {
         /// <summary>
         /// Required designer variable.
@@ -32,10 +32,10 @@
             this.lblCaption = new System.Windows.Forms.Label();
             this.lblTo = new System.Windows.Forms.Label();
             this.btnSet = new System.Windows.Forms.Button();
-            this.udFrom = new System.Windows.Forms.NumericUpDown();
             this.udTo = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.udFrom)).BeginInit();
+            this.udFrom = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.udTo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udFrom)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFrom
@@ -90,25 +90,6 @@
             this.btnSet.UseVisualStyleBackColor = true;
             this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
             // 
-            // udFrom
-            // 
-            this.udFrom.AutoSize = true;
-            this.udFrom.Location = new System.Drawing.Point(72, 52);
-            this.udFrom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.udFrom.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.udFrom.Name = "udFrom";
-            this.udFrom.Size = new System.Drawing.Size(100, 29);
-            this.udFrom.TabIndex = 7;
-            this.udFrom.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
             // udTo
             // 
             this.udTo.AutoSize = true;
@@ -133,7 +114,26 @@
             0,
             0});
             // 
-            // BatchAction
+            // udFrom
+            // 
+            this.udFrom.AutoSize = true;
+            this.udFrom.Location = new System.Drawing.Point(72, 52);
+            this.udFrom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.udFrom.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.udFrom.Name = "udFrom";
+            this.udFrom.Size = new System.Drawing.Size(100, 29);
+            this.udFrom.TabIndex = 7;
+            this.udFrom.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // Batch
             // 
             this.AcceptButton = this.btnSet;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -151,13 +151,13 @@
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "BatchAction";
+            this.Name = "Batch";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Batch Download";
             this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.udFrom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udTo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udFrom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

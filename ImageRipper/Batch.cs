@@ -3,24 +3,28 @@
     using System;
     using System.Windows.Forms;
 
-    partial class BatchAction : Form
+    using ImgRipper.Properties;
+
+    partial class Batch : Form
     {
-        public BatchAction(int seed)
+        int _seed;
+
+        public Batch(int seed)
         {
             InitializeComponent();
+            _seed = seed;
             udFrom.Value = udTo.Value = seed;
         }
 
         private void btnSet_Click(object sender, EventArgs e)
         {
-            //Do batch download actions.
-            Ripper ripper = this.Owner as Ripper;
+            var ripper = this.Owner as Ripper;
             if (udFrom.Value > 0 && udFrom.Value < udTo.Value)
             {
-                ripper.From = Convert.ToInt32(udFrom.Value); ripper.To = Convert.ToInt32(udTo.Value);
-                ripper.Range = ripper.To - ripper.From + 1;
-                ripper.Address = new Uri(ripper.Address.AbsoluteUri.Replace(ripper.Address.Query, "?thread=" + ripper.From));
+                ripper.From = decimal.ToInt32(udFrom.Value); ripper.To = decimal.ToInt32(udTo.Value);
+                ripper.Address = new Uri(ripper.Address.AbsoluteUri.Replace(_seed.ToString(), ripper.From.ToString()));
                 ripper.Batch = true;
+                ripper.Range = ripper.To - ripper.From + 1;
                 Close();
             }
             else

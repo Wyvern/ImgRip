@@ -26,12 +26,12 @@ namespace ImgRipper.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string txtParse {
+        public string txtUrl {
             get {
-                return ((string)(this["txtParse"]));
+                return ((string)(this["txtUrl"]));
             }
             set {
-                this["txtParse"] = value;
+                this["txtUrl"] = value;
             }
         }
         

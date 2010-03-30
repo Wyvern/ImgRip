@@ -28,9 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WebCloud));
             this.lvCloud = new System.Windows.Forms.ListView();
-            this.lvImageList = new System.Windows.Forms.ImageList();
+            this.lvImageList = new System.Windows.Forms.ImageList(this.components);
             this.lblCloudID = new System.Windows.Forms.Label();
             this.lblPass = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -46,7 +47,8 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.CommandPanel = new System.Windows.Forms.Panel();
             this.cbPublic = new System.Windows.Forms.CheckBox();
-            this.ttCloud = new System.Windows.Forms.ToolTip();
+            this.ttCloud = new System.Windows.Forms.ToolTip(this.components);
+            this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip1.SuspendLayout();
             this.gpLogin.SuspendLayout();
             this.CommandPanel.SuspendLayout();
@@ -268,6 +270,13 @@
             // 
             this.ttCloud.AutomaticDelay = 300;
             // 
+            // ofd
+            // 
+            this.ofd.DefaultExt = "jpg";
+            this.ofd.Filter = "JPG files|*.jpg|PNG files|*.png|BMP files|*.bmp|All files|*.*";
+            this.ofd.InitialDirectory = global::ImgRipper.Properties.Settings.Default.txtDir;
+            this.ofd.Multiselect = true;
+            // 
             // WebCloud
             // 
             this.AcceptButton = this.btnSign;
@@ -323,5 +332,6 @@
         private System.Windows.Forms.Panel CommandPanel;
         private System.Windows.Forms.CheckBox cbPublic;
         private System.Windows.Forms.ToolTip ttCloud;
+        private System.Windows.Forms.OpenFileDialog ofd;
     }
 }

@@ -11,16 +11,12 @@
 
     partial class SetCookie : Form
     {
-        public SetCookie(string cookie)
+        public SetCookie()
         {
             InitializeComponent();
-            if (!string.IsNullOrEmpty(cookie))
-                tbCookie.Text = cookie;
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            Ripper rip = Owner as Ripper;
-            rip.Cookie = tbCookie.Text.Trim();
             Close();
         }
     }
