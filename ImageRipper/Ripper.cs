@@ -14,7 +14,7 @@
     partial class Ripper : Form
     {
         public bool Batch { get; set; }
-        Fetcher rip;
+        Fetcher rip = new Fetcher();
         bool FullScreen { get; set; }
         public int Range { get; set; }
 
@@ -26,13 +26,13 @@
             btnDownloadCancel.DownArrowMouseUp += (s, e) => tmMinus.Enabled = false;
             btnDownloadCancel.UpArrowMouseDown += (s, e) =>
             {
-                if (((rip = rip ?? new Fetcher()).Style = Check()) == ParseStyle.NotSupport) return;
+                if ((rip.Style = CheckUrl(Address)) == ParseStyle.NotSupport) return;
                 if (tmMinus.Enabled) tmMinus.Enabled = false;
                 tmPlus.Enabled = true;
             };
             btnDownloadCancel.DownArrowMouseDown += (s, e) =>
             {
-                if (((rip = rip ?? new Fetcher()).Style = Check()) == ParseStyle.NotSupport) return;
+                if ((rip.Style = CheckUrl(Address)) == ParseStyle.NotSupport) return;
                 if (tmPlus.Enabled) tmPlus.Enabled = false;
                 tmMinus.Enabled = true;
             };
@@ -83,30 +83,21 @@
 
         internal string Dir
         {
-            get { return tbDir.Text.Trim(); }
+            get { return tbDir.Text; }
             set { tbDir.Text = value; }
         }
 
-       public Uri Address
+       public string Address
         {
             get
             {
-                try
-                {
-                    return new Uri(tbParse.Text.Trim());
-                }
-                catch (System.UriFormatException format)
-                {
-                    Prompt = format.Message;
-                    return null;
-                }
+                return tbParse.Text;
             }
-            set { tbParse.Text = value.ToString(); }
+            set { tbParse.Text = value; }
         }
 
         private void DownloadCancel_Click(object sender, EventArgs e)
         {
-            rip = rip ?? new Fetcher();
             switch (rip.PushState)
             {
                 case RipperAction.Download:
@@ -257,22 +248,32 @@
             }
         }
 
-        private ParseStyle Check()
+        private ParseStyle CheckUrl(string address)
         {
-            if (Address == null) return ParseStyle.NotSupport;
-            if (Address.Host.Contains("heels"))
+            Uri Url;
+            try
+            {
+                Url = new Uri(address);
+            }
+            catch (System.UriFormatException format)
+            {
+                tsLabel.Text = format.Message;
+                return ParseStyle.NotSupport;
+            }
+            string host = Url.Host;
+            if (host.Contains("heels"))
                 return ParseStyle.Heels;
-            else if (Address.Host.Contains("duide"))
+            else if (host.Contains("duide"))
                 return ParseStyle.Duide;
-            else if (Address.Host.Contains("keaibbs"))
+            else if (host.Contains("keaibbs"))
                 return ParseStyle.KeAiBbs;
-            else if (Address.Host.Contains("tu11"))
+            else if (host.Contains("tu11.cc"))
                 return ParseStyle.Tu11;
-            else if (Address.Host.Contains("meituiji"))
+            else if (host.Contains("meituiji"))
                 return ParseStyle.MeiTuiJi;
-            else if (Address.Host.Contains("pal.ath.cx"))
+            else if (host.Contains("pal.ath.cx"))
                 return ParseStyle.PalAthCx;
-            else if (Address.Host.Contains("deskcity"))
+            else if (host.Contains("deskcity"))
                 return ParseStyle.DeskCity;
             else return ParseStyle.NotSupport;
         }
@@ -281,12 +282,12 @@
         /// Parse URL address and generate dataset collection to store download information
         /// </summary>
         /// <param name="url">The address value from txtParse TextBox control</param>
-        private string Parse(Uri url)
+        private string Parse(string url)
         {
-            Prompt="Parsing " + Enum.GetName(typeof(ParseStyle), rip.Style);
+            Prompt = "Parsing " + Enum.GetName(typeof(ParseStyle), rip.Style);
             try
             {
-                var doc = new HAP.HtmlWeb() { AutoDetectEncoding=true}.Load(url.AbsoluteUri);
+                var doc = new HAP.HtmlWeb() { AutoDetectEncoding=true}.Load(url);
                 rip.Title = doc.DocumentNode.SelectSingleNode("//title").InnerText;
                 switch (rip.Style)
                 {
@@ -319,7 +320,7 @@
                                 string href = lnk.Attributes["src"].Value.Replace("thumbnails", "images");
                                 string[] name = href.Split('/','_');
                                 string key = name[1].ToUpper() + '-' + name[3] + ".jpg";
-                                rip.Imgs[key] = url.AbsoluteUri.Replace(url.LocalPath.Split('/')[2], href);
+                                rip.Imgs[key] = url.Replace(url.Substring(url.LastIndexOf('/')+1), href);
                             }
                         }
                         break;
@@ -332,7 +333,7 @@
                             int countofpage = doc.DocumentNode.SelectNodes("//option").Count;
                             HAP.HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//td/a/img[@src]");
                             if (links == null || links.Count == 0) return "No picture found in this page";
-                            string path = "http://tuku.keaibbs.com" + url.AbsolutePath.Replace("/index.html", "");
+                            string path = "http://tuku.keaibbs.com" + url.Replace("/index.html", "");
                             foreach (HAP.HtmlNode lnk in links)
                             {
                                 string[] tokens = lnk.Attributes["src"].Value.Split('/');
@@ -379,10 +380,10 @@
                     case ParseStyle.MeiTuiJi:
                         {
                             rip.Title = doc.DocumentNode.SelectSingleNode("//div[@id='newsName']").InnerText;
-                            string pageName = url.LocalPath.Substring(url.LocalPath.LastIndexOf('/') + 1);
+                            string pageName = url.Substring(url.LastIndexOf('/') + 1);
                             HAP.HtmlNode nextpageNode = doc.DocumentNode.SelectSingleNode("//ul[@class='pagelist']/li[last()]/a");
                             rip.NextPage = nextpageNode.Attributes["href"].Value;
-                            rip.NextPage = rip.NextPage != "#" ? url.AbsoluteUri.Replace(pageName, rip.NextPage) : null;
+                            rip.NextPage = rip.NextPage != "#" ? url.Replace(pageName, rip.NextPage) : null;
                             HAP.HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//div[@id='newsContent']/a[@href]");
                             if (links == null || links.Count == 0) return "No picture found in this page";
                             foreach (HAP.HtmlNode lnk in links)
@@ -448,7 +449,7 @@
                             {
                                 string img = lnk.Attributes["src"].Value;
                                 string key = img.Split("/-".ToCharArray())[4];
-                                rip.Imgs[key + ".jpg"] = "http://" + url.Host + img.Replace(img.Substring(img.LastIndexOf(key)), key + ".jpg");
+                                rip.Imgs[key + ".jpg"] = "http://www.deskcity.com" + img.Replace(img.Substring(img.LastIndexOf(key)), key + ".jpg");
                             }
                             string nextpage = null;
                             HAP.HtmlNode next = doc.DocumentNode.SelectSingleNode("//div[@class='pagination']");
@@ -464,7 +465,7 @@
                                 {
                                     string img = lnk.Attributes["src"].Value;
                                     string key = img.Split("/-".ToCharArray())[4];
-                                    rip.Imgs[key + ".jpg"] = "http://" + url.Host + img.Replace(img.Substring(img.LastIndexOf(key)), key + ".jpg");
+                                    rip.Imgs[key + ".jpg"] = "http://www.deskcity.com"  + img.Replace(img.Substring(img.LastIndexOf(key)), key + ".jpg");
                                 }
                                 next = doc.DocumentNode.SelectSingleNode("//div[@class='pagination']").LastChild;
                                 if (next.Attributes["href"] != null)
@@ -513,7 +514,7 @@
                         case RipperAction.Download:
                             btnDownloadCancel.Image = Resources.Cancel;
                             rip.PushState = RipperAction.Cancel;
-                            Address = new Uri(rip.NextPage);
+                            Address = rip.NextPage;
                             bwDownload.RunWorkerAsync();
                             break;
                         case RipperAction.Cancel:
@@ -591,22 +592,22 @@
             switch (rip.Style)
             {
                 case ParseStyle.Heels:
-                    if (!Address.AbsoluteUri.StartsWith("http://www.heels.cn/web/viewthread?thread=")) return;
-                    number = Address.Query.Split('=')[1];
+                    if (!Address.StartsWith("http://www.heels.cn/web/viewthread?thread=")) return;
+                    number = Address.Split('=')[1];
                     if (int.TryParse(number, out value))
                     {
                         value += step;
-                        Address = new Uri(Address.AbsoluteUri.Replace(number, value.ToString()));
+                        Address = Address.Replace(number, value.ToString());
                     }
                     break;
 
-                case ParseStyle.Duide:
-                    if (!Address.AbsoluteUri.StartsWith("http://www.duide.com/ggfdrdsuy")) return;
-                    number = Address.LocalPath.Split("/.abc".ToCharArray())[3];
+                case ParseStyle.Duide://http://www.duide.com/ggfdrdsuy/a103.htm
+                    if (!Address.StartsWith("http://www.duide.com/ggfdrdsuy")) return;
+                    number = Address.Substring(Address.LastIndexOfAny("abc".ToCharArray())+1).Split('.')[0];
                     if (int.TryParse(number, out value))
                     {
                         value += step;
-                        Address = new Uri(Address.AbsoluteUri.Replace(number, value.ToString()));
+                        Address = Address.Replace(number, value.ToString());
                     }
                     break;
 
@@ -638,14 +639,14 @@
 
         private void btnBatch_Click(object sender, EventArgs e)
         {
-            if (((rip = rip ?? new Fetcher()).Style = Check()) == ParseStyle.NotSupport) return;
+            if ((rip.Style = CheckUrl(Address)) == ParseStyle.NotSupport) return;
             if (rip.Style == ParseStyle.Heels)
             {
-                if (!Address.AbsoluteUri.StartsWith("http://www.heels.cn/web/viewthread?thread=")) return;
-                string text = Address.Query.Split('=')[1];
+                if (!Address.StartsWith("http://www.heels.cn/web/viewthread?thread=")) return;
+                string text = Address.Split('=')[1];
                 int pageid;
                 if (int.TryParse(text, out pageid))
-                    new Batch(pageid) .ShowDialog(this);
+                    new Batch(pageid).ShowDialog(this);
             }
             else
                 MessageBox.Show("Please imput URL address which support batch operation.", "Can not take batch operation on this site!",MessageBoxButtons.OK,MessageBoxIcon.Information);
@@ -836,7 +837,7 @@
         {
             get
             {
-                if ((rip.Style = Check()) == ParseStyle.NotSupport) return false;
+                if ((rip.Style = CheckUrl(Address)) == ParseStyle.NotSupport) return false;
                 if (!Directory.Exists(Dir))
                 {
                     if (DialogResult.Yes == MessageBox.Show("Do you want to create new folder to store files?", "Invalid Directory!", MessageBoxButtons.YesNo, MessageBoxIcon.Question))

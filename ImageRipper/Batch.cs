@@ -22,7 +22,7 @@
             if (udFrom.Value > 0 && udFrom.Value < udTo.Value)
             {
                 ripper.From = decimal.ToInt32(udFrom.Value); ripper.To = decimal.ToInt32(udTo.Value);
-                ripper.Address = new Uri(ripper.Address.AbsoluteUri.Replace(_seed.ToString(), ripper.From.ToString()));
+                ripper.Address = ripper.Address.Replace(_seed.ToString(), ripper.From.ToString());
                 ripper.Batch = true;
                 ripper.Range = ripper.To - ripper.From + 1;
                 Close();
