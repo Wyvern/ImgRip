@@ -89,10 +89,7 @@
 
        public string Address
         {
-            get
-            {
-                return tbParse.Text;
-            }
+            get { return tbParse.Text; }
             set { tbParse.Text = value; }
         }
 
@@ -203,11 +200,14 @@
                                 {
                                     e.Cancel = true;
                                     rip.NextPage = null;
-                                    SetListViewItem = new string[] {  fi.Name,No, null, "Cancelled" };
+                                    SetListViewItem = new string[] { fi.Name, No, null, "Cancelled" };
                                     return;
                                 }
                                 else
-                                    SetListViewItem = new string[] {  fi.Name, No,null, "Downloading..." };
+                                {
+                                    if (Batch) RipStatus.Invoke(new Action(() => lbBatch.Text = " #" + (Range - (To - From)) + "/" + Range + " Pages"));
+                                    SetListViewItem = new string[] { fi.Name, No, null, "Downloading..." };
+                                }
                             }
                         }
                         #region Check whether the file is too small, dimension less than 768x768 pixels
@@ -238,7 +238,7 @@
                             SetListViewItem = new string[] { fi.Name, No, null, "Skipped" };
                             return;
                         }
-                        if (Batch) RipStatus.Invoke(new Action(()=>lbBatch.Text=" #" + (Range - (To - From)) + "/" + Range));
+                        if (Batch) RipStatus.Invoke(new Action(()=>lbBatch.Text=" #" + (Range - (To - From)) + "/" + Range+" Pages"));
                         SetListViewItem = new string[] { fi.Name,No,  null, "Downloading" };
                         rip.GetFile(rip.Address, fi.ToString());
                         fi.Refresh();
@@ -647,15 +647,15 @@
             if ((rip.Style = CheckUrl(Address)) == ParseStyle.NotSupport) return;
             if (rip.Style == ParseStyle.Heels)
             {
-                if (!Address.StartsWith("http://www.heels.cn/web/viewthread?thread=")) return;
+                if (!Address.TrimStart().StartsWith("http://www.heels.cn/web/viewthread?thread=")) return;
                 string text = Address.Split('=')[1];
                 int pageid;
                 if (int.TryParse(text, out pageid))
                     new Batch(pageid).ShowDialog(this);
-            }//http://www.duide.com/ggfdrdsuy/a103.htm
+            }
             else if (rip.Style == ParseStyle.Duide)
             {
-                if (!Address.StartsWith("http://www.duide.com/ggfdrdsuy/")) return;
+                if (!Address.TrimStart().StartsWith("http://www.duide.com/ggfdrdsuy/")) return;
                 string text = Address.Substring(Address.LastIndexOfAny("abc".ToCharArray()) + 1).Split('.')[0];
                 int pageid;
                 if (int.TryParse(text, out pageid))

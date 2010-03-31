@@ -115,8 +115,6 @@
                 #endregion
             }
             btnSign.Enabled = false;
-            Properties.Settings.Default.CloudID = LoginName;
-            Properties.Settings.Default.Password = tbPass.Text;
             Properties.Settings.Default.Save();
         }
 
