@@ -303,7 +303,7 @@
                             txtFolderName.cbEnable(true);
                             btnCreate.cbEnable(true);
                             btnUp.cbEnable(@base != null);
-                            Prompt = (@base == null ? "GDrive" : string.Join(" > ", Folder.Select(f =>f.Title).Reverse().ToArray())) + ": " + cldCache.Count + " item(s)";
+                            Prompt = (@base == null ? "GDrive" : string.Join(" > ", Folder.Select(f => f.Title).Reverse().ToArray())) + ": " + lvCloud.Items.Count + " item(s)";
                         }, null);
                     break;
                 #endregion
@@ -332,7 +332,7 @@
                             if (cldCache != null) cldCache.Add(new ListViewItem(foldername, 0) { Tag = @new.AtomEntry, ToolTipText = @new.AtomEntry.AlternateUri.Content });
                             btnCreate.cbEnable(true);
                             txtFolderName.cbEnable(true);
-                            Prompt = cldCache.Count + " item(s)";
+                            Prompt = lvCloud.Items.Count + " item(s)";
                         }, null);
                     break;
                 #endregion
@@ -487,7 +487,7 @@
                         }
                         catch (Exception exp)
                         {
-                            MessageBox.Show(exp.Message, "Upload " + filename + " ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(exp.Message, "Upload \"" + filename + "\" ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
                     }
@@ -520,20 +520,25 @@
                         string filename = Path.GetFileName(file), ext = Path.GetExtension(file);
                         if (!Picasa.ContainsKey(ext)) continue;
                         Prompt = "Adding \"" + filename + "\"";
-                        try
+                        using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
                         {
-                            using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
+                            try
                             {
                                 var ae = PR.Service.Insert(new Uri(PicasaQuery.CreatePicasaUri(LoginName, AlbumID)), fs, Picasa[ext], filename);
-                                fs.Close();
                                 lvCloud.cbAdd(ae, 1);
                                 if (cldCache != null) cldCache.Add(new ListViewItem(filename, 1) { Tag = ae, ToolTipText = ae.AlternateUri.Content });
+                                fs.Close();
                             }
-                        }
-                        catch (Exception exp)
-                        {
-                            MessageBox.Show(exp.Message, "Upload " + filename + " ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                            catch (Exception exp)
+                            {
+                                fs.Close();
+                                MessageBox.Show(exp.Message, "Upload \"" + filename + "\" ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                            }
+                            finally
+                            {
+                                fs.Dispose();
+                            }
                         }
                     }
                     Prompt = lvCloud.Items.Count + " Photos(s)";
@@ -741,7 +746,7 @@
                 {
                     #region GDrive
                     case CloudType.GDrive:
-                        Prompt = (cldCache != null ? cldCache.Count : lvCloud.Items.Count) + " item(s)";
+                        Prompt = lvCloud.Items.Count + " item(s)";
                         break;
                     #endregion
 
@@ -758,7 +763,7 @@
                     #region Picasa
                     case CloudType.Picasa:
                         cbPublic.CheckState = CheckState.Unchecked;
-                        Prompt = (cldCache != null ? cldCache.Count : lvCloud.Items.Count) + (AlbumID == null ? " Albums(s)" : " Photos(s)");
+                        Prompt = lvCloud.Items.Count + (AlbumID == null ? " Albums(s)" : " Photos(s)");
                         break;
                     #endregion
                 }
@@ -778,12 +783,10 @@
             string text = txtFolderName.Text.Trim().ToLower();
             lvCloud.Items.Clear();
             if (string.IsNullOrEmpty(text))
-            {
                 lvCloud.Items.AddRange(cldCache.ToArray());
-                CloudStatus.Text = lvCloud.Items.Count + " items";
-                return;
-            }
-            lvCloud.Items.AddRange(cldCache.Where(_ => _.Text.ToLower().Contains(text)).ToArray());
+            else
+                lvCloud.Items.AddRange(cldCache.Where(_ => _.Text.ToLower().Contains(text)).ToArray());
+            CloudStatus.Text = lvCloud.Items.Count + " items";
         }
 
         private void txtFolderName_KeyPress(object sender, KeyPressEventArgs e)
