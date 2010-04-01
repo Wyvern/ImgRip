@@ -24,7 +24,7 @@
 
         string LoginName { get { return tbName.Text.Trim(); } }
         bool Aborted = false;
-        string Prompt { set { statusStrip1.Invoke(new Action(() => CloudStatus.Text = value)); } }
+        string Prompt { set { cldStatus.Invoke(new Action(() => CloudStatus.Text = value)); } }
         
         //Local ListViewItems memory cache
         Collection<ListViewItem> cldCache;
@@ -607,10 +607,44 @@
             if (lvCloud.Focused)
             {
             ListViewItem lvi = lvCloud.FocusedItem;
-            if (lvi != null && e.KeyCode == Keys.F2)
-                lvi.BeginEdit();
-            if (lvi != null && e.KeyCode == Keys.C && e.Control)
-                Clipboard.SetText(lvi.ToolTipText);
+            if (lvi != null)
+                if (e.KeyCode == Keys.F2)
+                    lvi.BeginEdit();
+                else if (e.KeyCode == Keys.C && e.Control)
+                    Clipboard.SetText(lvi.ToolTipText);
+                else if (Service == CloudType.Picasa && AlbumID == null && e.KeyCode == Keys.F4)
+                {
+                    var a = new Album() { AtomEntry = lvi.Tag as AtomEntry };
+                    if (e.Shift)
+                    {
+                        if (a.Access == "private") return;
+                        if (DialogResult.Yes == MessageBox.Show(string.Format("Are you sure to set \"{0}\" Album private?", lvi.Text), "Protect Album in Picasa", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+                        {
+                            a.Access = "private"; CloudStatus.Text = "Setting \"" + lvi.Text + "\" Album private";
+                        }
+                        else return;
+                    }
+                    else
+                    {
+                        if (a.Access == "public") return;
+                        if (DialogResult.Yes == MessageBox.Show(string.Format("Are you sure to set \"{0}\" Album public?", lvi.Text), "Share Album in Picasa", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
+                        {
+                            a.Access = "public"; CloudStatus.Text = "Setting \"" + lvi.Text + "\" Album public";
+                        }
+                        else return;
+                    }
+                    Func<AtomEntry> AU = () => a.PicasaEntry.Update();
+                    AU.BeginInvoke(r =>
+                    {
+                        var @new = AU.EndInvoke(r); lvi.Tag = @new; lvi.ToolTipText = @new.AlternateUri.Content;
+                        if (cldCache != null)
+                        {
+                            var item = cldCache.Single(_ => _.ToolTipText == a.AtomEntry.AlternateUri.Content);
+                            item.Tag = @new; item.ToolTipText = @new.AlternateUri.Content;
+                        }
+                        Prompt = "Done";
+                    }, null);
+                }
             }
             if (e.KeyCode == Keys.Escape)
             {

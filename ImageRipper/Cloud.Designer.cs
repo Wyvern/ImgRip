@@ -34,7 +34,7 @@
             this.lvImageList = new System.Windows.Forms.ImageList(this.components);
             this.lblCloudID = new System.Windows.Forms.Label();
             this.lblPass = new System.Windows.Forms.Label();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.cldStatus = new System.Windows.Forms.StatusStrip();
             this.CloudStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.txtFolderName = new System.Windows.Forms.TextBox();
             this.gpLogin = new System.Windows.Forms.GroupBox();
@@ -49,7 +49,7 @@
             this.cbPublic = new System.Windows.Forms.CheckBox();
             this.ttCloud = new System.Windows.Forms.ToolTip(this.components);
             this.ofd = new System.Windows.Forms.OpenFileDialog();
-            this.statusStrip1.SuspendLayout();
+            this.cldStatus.SuspendLayout();
             this.gpLogin.SuspendLayout();
             this.CommandPanel.SuspendLayout();
             this.SuspendLayout();
@@ -109,16 +109,17 @@
             this.lblPass.TabIndex = 4;
             this.lblPass.Text = "Password";
             // 
-            // statusStrip1
+            // cldStatus
             // 
-            this.statusStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cldStatus.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.cldStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloudStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 408);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(577, 24);
-            this.statusStrip1.TabIndex = 8;
-            this.statusStrip1.Text = "statusStrip1";
+            this.cldStatus.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
+            this.cldStatus.Location = new System.Drawing.Point(0, 408);
+            this.cldStatus.Name = "cldStatus";
+            this.cldStatus.Size = new System.Drawing.Size(577, 24);
+            this.cldStatus.TabIndex = 8;
+            this.cldStatus.Text = "statusStrip1";
             // 
             // CloudStatus
             // 
@@ -290,7 +291,7 @@
             this.Controls.Add(this.CommandPanel);
             this.Controls.Add(this.gpLogin);
             this.Controls.Add(this.txtFolderName);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.cldStatus);
             this.Controls.Add(this.lvCloud);
             this.Font = new System.Drawing.Font("Microsoft YaHei", 10F);
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
@@ -302,8 +303,8 @@
             this.Text = "Cloud";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.WebCloud_FormClosed);
             this.Load += new System.EventHandler(this.WebCloud_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.cldStatus.ResumeLayout(false);
+            this.cldStatus.PerformLayout();
             this.gpLogin.ResumeLayout(false);
             this.gpLogin.PerformLayout();
             this.CommandPanel.ResumeLayout(false);
@@ -321,7 +322,7 @@
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.TextBox tbPass;
         private System.Windows.Forms.Button btnUp;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip cldStatus;
         private System.Windows.Forms.ToolStripStatusLabel CloudStatus;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnCreate;
