@@ -612,6 +612,7 @@
                     lvi.BeginEdit();
                 else if (e.KeyCode == Keys.C && e.Control)
                     Clipboard.SetText(lvi.ToolTipText);
+                    //Press (Shift+)F4 to set Album public or private.
                 else if (Service == CloudType.Picasa && AlbumID == null && e.KeyCode == Keys.F4)
                 {
                     var a = new Album() { AtomEntry = lvi.Tag as AtomEntry };
@@ -633,17 +634,16 @@
                         }
                         else return;
                     }
-                    Func<AtomEntry> AU = () => a.PicasaEntry.Update();
-                    AU.BeginInvoke(r =>
+                    new Thread(new ThreadStart(() =>
                     {
-                        var @new = AU.EndInvoke(r); lvi.Tag = @new; lvi.ToolTipText = @new.AlternateUri.Content;
+                        var @new = a.PicasaEntry.Update(); lvi.Tag = @new; lvCloud.Invoke(new Action(() => lvi.ToolTipText = @new.AlternateUri.Content));
                         if (cldCache != null)
                         {
-                            var item = cldCache.Single(_ => _.ToolTipText == a.AtomEntry.AlternateUri.Content);
-                            item.Tag = @new; item.ToolTipText = @new.AlternateUri.Content;
+                            var cache = cldCache.Single(_ => _.ToolTipText == a.AtomEntry.AlternateUri.Content);
+                            cache.Tag = @new; cache.ToolTipText = @new.AlternateUri.Content;
                         }
                         Prompt = "Done";
-                    }, null);
+                    })).Start();
                 }
             }
             if (e.KeyCode == Keys.Escape)
@@ -814,6 +814,7 @@
 
         private void txtFolderName_TextChanged(object sender, EventArgs e)
         {
+            if (cldCache == null) return;
             string text = txtFolderName.Text.Trim().ToLower();
             lvCloud.Items.Clear();
             if (string.IsNullOrEmpty(text))
