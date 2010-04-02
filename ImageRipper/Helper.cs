@@ -23,7 +23,7 @@
                 case WebCloud.CloudType.GDrive:
                 case WebCloud.CloudType.Picasa:
                     var ae = data as AtomEntry;
-                    lv.Invoke(new Action(() => lv.Items.Add(new ListViewItem(ae.Title.Text, imgindex) { Tag = data, ToolTipText = ae.AlternateUri.Content })));
+                    lv.Invoke(new Action(() => lv.Items.Add(new ListViewItem(ae.Title.Text, imgindex) { Tag = ae, ToolTipText = ae.AlternateUri.Content })));
                     break;
             }
         }

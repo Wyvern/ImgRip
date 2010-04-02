@@ -348,9 +348,11 @@
                 #region GDrive & Picasa
                 case CloudType.GDrive:
                 case CloudType.Picasa:
-                    List<ListViewItem> items = new List<ListViewItem>();
-                    foreach (ListViewItem item in lvCloud.SelectedItems)
-                        items.Add(item);
+                    ListViewItem[] items = new ListViewItem[total];
+                    for (int i = 0; i < total; i++)
+                    {
+                        items[i] = lvCloud.SelectedItems[i];
+                    }
                     if (MessageBox.Show("Are you sure to delete items below:\n" + string.Join(", ", items.Select(i => i.Text).ToArray()), "Delete Cloud Items", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                         btnDelete.Enabled = btnUp.Enabled = false;
@@ -373,7 +375,7 @@
 
         void DeleteCloudItem(object arg)
         {
-            IEnumerable<ListViewItem> items = arg as IEnumerable<ListViewItem>;
+            ListViewItem[] items = arg as ListViewItem[];
             Action<ListViewItem> RemoveItem = lvi => lvCloud.Items.Remove(lvi);
             switch (Service)
             {
@@ -395,7 +397,7 @@
                         }
                         catch (Exception exp)
                         {
-                            MessageBox.Show(exp.Message, "Delete " + lvi.Text + " ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(exp.Message, "Delete \"" + lvi.Text + "\" ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
                         if (cldCache != null) cldCache.Remove(cldCache.Single(_ => _.ToolTipText == lvi.ToolTipText));
@@ -434,7 +436,7 @@
                         }
                         catch (Exception exp)
                         {
-                            MessageBox.Show(exp.InnerException.Message, "Delete " + lvi.Text + " ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(exp.InnerException.Message, "Delete \"" + lvi.Text + "\" ERROR!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             break;
                         }
                         if (cldCache != null) cldCache.Remove(cldCache.Single(_ => _.ToolTipText == lvi.ToolTipText));
@@ -454,7 +456,7 @@
             {
                 #region GDrive
                 case CloudType.GDrive:
-                    Document @base = null, @new;
+                    Document @base = null;
                     if (Folder != null && Folder.Count > 0)
                         @base = Folder.Peek();
                     Dictionary<string, string> GDrive = new Dictionary<string, string>
@@ -462,7 +464,7 @@
                     { ".jpg", "image/jpeg" },{".rtf",""},{".ppt",""},{".pps",""},{ ".htm", "" }, { ".html", "" },{".xls",""},{".xlsx",""},{".ods",""},
                     { ".png", "image/png" }, { ".gif", "image/gif" }, { ".tiff", "image/tiff" },{ ".bmp", "image/bmp" }, { ".mov", "video/quicktime" },
                      { ".psd", "application/photoshop" },{ ".avi", "video/x-msvideo"}, { ".mpg", "video/mpeg"}, { ".wmv", "video/x-ms-wmv" },
-                     {".asf","video/x-ms-asf"},{".tif","video/x-ms-asf"},{".csv",""},{".tsb",""},{".doc",""},{".docx",""},{".txt",""},
+                     {".asf","video/x-ms-asf"},{".tif","video/x-ms-asf"},{".csv",""},{".tsb",""},{".doc",""},{".docx",""},{".txt","text/plain"},
                     };
                     foreach (var file in files)
                     {
@@ -473,17 +475,17 @@
                         try
                         {
                             var de = string.IsNullOrEmpty(GDrive[ext]) ? 
-                                DR.Service.UploadDocument(file, filename) : 
-                                DR.Service.UploadFile(file, filename, GDrive[ext], true);
-                            @new = new Document() { AtomEntry = de };
+                                DR.Service.UploadDocument(file, filename) :
+                                DR.Service.UploadFile(file, filename, GDrive[ext], true); 
+                            var @new = new Document() { AtomEntry = de};
                             if (@base != null)
                             {
                                 Prompt = "Moving \"" + @new.Title + "\" to " + @base.Title;
                                 @new = DR.MoveDocumentTo(@base, @new);
                             }
                             string ttt = @new.AtomEntry.AlternateUri.Content;
-                            lvCloud.cbAdd(de, 2);
-                            if (cldCache != null) cldCache.Add(new ListViewItem(de.Title.Text, 2) { Tag = de, ToolTipText = ttt });
+                            lvCloud.cbAdd(@new.AtomEntry, 2);
+                            if (cldCache != null) cldCache.Add(new ListViewItem(@new.Title, 2) { Tag = @new.AtomEntry, ToolTipText = ttt });
                         }
                         catch (Exception exp)
                         {
@@ -512,7 +514,7 @@
                     { 
                     { ".jpg", "image/jpeg"}, { ".gif", "image/gif" }, { ".bmp", "image/bmp" }, { ".mov", "video/quicktime" }, { ".psd", "application/photoshop" },
                      { ".avi", "video/x-msvideo"}, { ".mpg", "video/mpeg"}, { ".wmv", "video/x-ms-wmv" },{".asf","video/x-ms-asf"},
-                     {".tif","video/x-ms-asf"},{".png","image/png"},{"","image/x-image-raw"}
+                     {".tif","video/x-ms-asf"},{".png","image/png"},{".cr2","image/x-image-raw"},{".nef","image/x-image-raw"},{".orf","image/x-image-raw"}
                     };
                     foreach (var file in files)
                     {
