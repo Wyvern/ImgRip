@@ -467,7 +467,7 @@
                     foreach (var file in files)
                     {
                         if (Aborted) { Prompt = "Operation Cancelled!"; Aborted = false; return; }
-                        string filename = Path.GetFileName(file), ext = Path.GetExtension(file);
+                        string filename = Path.GetFileName(file), ext = Path.GetExtension(file).ToLower();
                         if (!GDrive.ContainsKey(ext)) continue;
                         Prompt = "Adding \"" + filename + "\"";
                         try
@@ -517,7 +517,7 @@
                     foreach (var file in files)
                     {
                         if (Aborted) { Prompt = "Operation Cancelled!"; Aborted = false; return; }
-                        string filename = Path.GetFileName(file), ext = Path.GetExtension(file);
+                        string filename = Path.GetFileName(file), ext = Path.GetExtension(file).ToLower();
                         if (!Picasa.ContainsKey(ext)) continue;
                         Prompt = "Adding \"" + filename + "\"";
                         using (FileStream fs = new FileStream(file, FileMode.Open, FileAccess.Read))
