@@ -264,7 +264,7 @@
             this.cbPublic.Size = new System.Drawing.Size(48, 42);
             this.cbPublic.TabIndex = 13;
             this.cbPublic.ThreeState = true;
-            this.ttCloud.SetToolTip(this.cbPublic, "Shared");
+            this.ttCloud.SetToolTip(this.cbPublic, "(Shift+) F4 to share ON/OFF");
             this.cbPublic.UseVisualStyleBackColor = true;
             // 
             // ttCloud
