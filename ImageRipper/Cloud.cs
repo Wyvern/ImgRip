@@ -338,7 +338,7 @@
                     if (MessageBox.Show("Are you sure to delete items below:\n" + string.Join(", ", items.Select(i => i.Text).ToArray()), "Delete Cloud Items", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                         btnDelete.Enabled = btnUp.Enabled = false;
-                        ThreadPool.QueueUserWorkItem(DeleteCloudItem, items);
+                        new Thread(DeleteCloudItem).Start(items);
                     }
                     break;
                 #endregion
@@ -542,7 +542,7 @@
                 Aborted = false;
                 btnUp.Enabled = false;
                 btnSign.Enabled = false;
-                ThreadPool.QueueUserWorkItem(AddCloudFile, ofd.FileNames);
+                new Thread(AddCloudFile).Start(ofd.FileNames);
             }
         }
 
@@ -669,7 +669,7 @@
             Aborted = false;
             btnUp.Enabled = false;
             btnSign.Enabled = false;
-            ThreadPool.QueueUserWorkItem(AddCloudFile, files);
+            new Thread(AddCloudFile).Start(files);
         }
 
         private void lvCloud_DragEnter(object sender, DragEventArgs e)
