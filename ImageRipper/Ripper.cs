@@ -267,7 +267,7 @@
                 tsLabel.Text = format.Message;
                 return ParseStyle.NotSupport;
             }
-            string host = Url.Host;
+            string host = Url.Host.ToLower();
             if (host.Contains("heels"))
                 return ParseStyle.Heels;
             else if (host.Contains("duide"))
@@ -282,6 +282,8 @@
                 return ParseStyle.PalAthCx;
             else if (host.Contains("deskcity"))
                 return ParseStyle.DeskCity;
+            if (host.Contains("pics100"))
+                return ParseStyle.Pics100;
             else return ParseStyle.NotSupport;
         }
 
@@ -485,6 +487,40 @@
 
                     #endregion
 
+                    #region Parse Pics100.net site
+                    
+                    case ParseStyle.Pics100:
+                        {
+                            var part = rip.Title.Split("[]".ToCharArray());
+                            rip.Title = part[2]; int countofpage = int.Parse(part[part.Length-2].TrimEnd("pP".ToCharArray()));
+                            HAP.HtmlNodeCollection links = doc.DocumentNode.SelectNodes("//p[@align]/img[@src]");
+                            if (links == null || links.Count == 0) return "No picture found in this page";
+                            foreach (HAP.HtmlNode lnk in links)
+                            {
+                                string img = lnk.Attributes["src"].Value;
+                                string key = img.Substring(img.LastIndexOf('/') + 1);
+                                rip.Imgs[key] = "http://www.pics100.net" + img;
+                            }
+                            for (int i = 2; i <= countofpage; i++)
+                            {
+                                if (rip.Canceled) return "User Cancelled!";
+                                Prompt = string.Format("Parsing page {0} of {1}", i, countofpage);
+                                url = string.Format("{0}_{1}.html", url.LastIndexOf('_') > 0 ? url.Split('_')[0] : url.Replace(".html", ""), i);
+                                doc = new HAP.HtmlWeb().Load(url);
+                                links = doc.DocumentNode.SelectNodes("//p[@align]/img[@src]");
+                                if (links == null || links.Count == 0) break;
+                                foreach (HAP.HtmlNode lnk in links)
+                                {
+                                    string img = lnk.Attributes["src"].Value;
+                                    string key = img.Substring(img.LastIndexOf('/') + 1);
+                                    rip.Imgs[key] = "http://www.pics100.net" + img;
+                                }
+                            }
+                        }
+                        break;
+
+                    #endregion
+
                     case ParseStyle.NotSupport:
                         return "Invalid Site Url!";
                 }
@@ -616,15 +652,6 @@
                         Address = Address.Replace(number, value.ToString());
                     }
                     break;
-
-                //case ParseStyle.Pics100:
-                //    number = Url.LocalPath.Split("/.".ToCharArray())[2];
-                //    if(int.TryParse(number,out value))
-                //    {
-                //        value += step;
-                //        Url = new Uri(Url.AbsoluteUri.Replace(number, value.ToString()));
-                //    }
-                //    break;
             }
         }
 
