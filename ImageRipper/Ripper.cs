@@ -498,7 +498,7 @@
                             foreach (HAP.HtmlNode lnk in links)
                             {
                                 string img = lnk.Attributes["src"].Value;
-                                string key = img.Substring(img.LastIndexOf('/') + 1);
+                                string key = string.Format("{0} {1:000}.jpg", rip.Title, 0);
                                 rip.Imgs[key] = "http://www.pics100.net" + img;
                             }
                             for (int i = 2; i <= countofpage; i++)
@@ -512,7 +512,7 @@
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
                                     string img = lnk.Attributes["src"].Value;
-                                    string key = img.Substring(img.LastIndexOf('/') + 1);
+                                    string key = string.Format("{0} {1:000}.jpg", rip.Title, i-1);
                                     rip.Imgs[key] = "http://www.pics100.net" + img;
                                 }
                             }
