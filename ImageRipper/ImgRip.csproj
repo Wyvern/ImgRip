@@ -257,6 +257,21 @@
     <Compile Include="f:\code\gdata\core\xmlextension.cs">
       <Link>GData\Core\xmlextension.cs</Link>
     </Compile>
+    <Compile Include="F:\Code\GData\docs\docrequest.cs">
+      <Link>GData\Docs\docrequest.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\docs\documententry.cs">
+      <Link>GData\Docs\documententry.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\docs\documentfeed.cs">
+      <Link>GData\Docs\documentfeed.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\docs\documentquery.cs">
+      <Link>GData\Docs\documentquery.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\docs\documentservice.cs">
+      <Link>GData\Docs\documentservice.cs</Link>
+    </Compile>
     <Compile Include="F:\Code\GData\extensions\enumconstruct.cs">
       <Link>GData\Extensions\enumconstruct.cs</Link>
     </Compile>
@@ -292,21 +307,6 @@
     </Compile>
     <Compile Include="F:\Code\GData\gacl\aclscope.cs">
       <Link>GData\Acl\aclscope.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\GData\GDoc\docrequest.cs">
-      <Link>GData\Docs\docrequest.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\GData\GDoc\documententry.cs">
-      <Link>GData\Docs\documententry.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\GData\GDoc\documentfeed.cs">
-      <Link>GData\Docs\documentfeed.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\GData\GDoc\documentquery.cs">
-      <Link>GData\Docs\documentquery.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\GData\GDoc\documentservice.cs">
-      <Link>GData\Docs\documentservice.cs</Link>
     </Compile>
     <Compile Include="f:\code\gdata\gphotos\albumentry.cs">
       <Link>GData\Photo\albumentry.cs</Link>

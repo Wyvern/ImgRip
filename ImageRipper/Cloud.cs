@@ -441,12 +441,12 @@
                     Document @base = null;
                     if (Folder != null && Folder.Count > 0)
                         @base = Folder.Peek();
-                    Dictionary<string, string> GDrive = new Dictionary<string, string>
+                    var GDrive = new Dictionary<string, string>
                     { 
                     { ".jpg", "image/jpeg" },{".rtf",""},{".ppt",""},{".pps",""},{ ".htm", "" }, { ".html", "" },{".xls",""},{".xlsx",""},{".ods",""},
                     { ".png", "image/png" }, { ".gif", "image/gif" }, { ".tiff", "image/tiff" },{ ".bmp", "image/bmp" }, { ".mov", "video/quicktime" },
                      { ".psd", "application/photoshop" },{ ".avi", "video/x-msvideo"}, { ".mpg", "video/mpeg"}, { ".wmv", "video/x-ms-wmv" },
-                     {".asf","video/x-ms-asf"},{".tif","video/x-ms-asf"},{".csv",""},{".tsb",""},{".doc",""},{".docx",""},{".txt","text/plain"},
+                     {".asf","video/x-ms-asf"},{".tif","video/x-ms-asf"},{".csv",""},{".tsb",""},{".doc",""},{".docx",""},{".txt","text/plain"},{".pptx",""}
                     };
                     foreach (var file in files)
                     {
@@ -460,7 +460,6 @@
                                 DR.Service.UploadDocument(file, filename) :
                                 DR.Service.UploadFile(file, filename, GDrive[ext], true);
                             var @new = new Document() { AtomEntry = de };
-                            //de.Delete();
                             if (@base != null)
                             {
                                 Prompt = "Moving \"" + @new.Title + "\" to " + @base.Title;
@@ -493,7 +492,7 @@
                 #region Picasa
                 case CloudType.Picasa:
                     //raw formats (.cr2, .nef, .orf, etc.) - "image/x-image-raw"
-                    Dictionary<string, string> Picasa = new Dictionary<string, string>
+                    var Picasa = new Dictionary<string, string>
                     { 
                     { ".jpg", "image/jpeg"}, { ".gif", "image/gif" }, { ".bmp", "image/bmp" }, { ".mov", "video/quicktime" }, { ".psd", "application/photoshop" },
                      { ".avi", "video/x-msvideo"}, { ".mpg", "video/mpeg"}, { ".wmv", "video/x-ms-wmv" },{".asf","video/x-ms-asf"},
