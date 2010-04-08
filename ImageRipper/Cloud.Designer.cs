@@ -65,7 +65,7 @@
             this.lvCloud.Location = new System.Drawing.Point(0, 118);
             this.lvCloud.Name = "lvCloud";
             this.lvCloud.ShowItemToolTips = true;
-            this.lvCloud.Size = new System.Drawing.Size(577, 290);
+            this.lvCloud.Size = new System.Drawing.Size(627, 290);
             this.lvCloud.SmallImageList = this.lvImageList;
             this.lvCloud.TabIndex = 1;
             this.lvCloud.UseCompatibleStateImageBehavior = false;
@@ -117,7 +117,7 @@
             this.cldStatus.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
             this.cldStatus.Location = new System.Drawing.Point(0, 408);
             this.cldStatus.Name = "cldStatus";
-            this.cldStatus.Size = new System.Drawing.Size(577, 24);
+            this.cldStatus.Size = new System.Drawing.Size(627, 24);
             this.cldStatus.TabIndex = 8;
             this.cldStatus.Text = "statusStrip1";
             // 
@@ -135,9 +135,9 @@
             this.txtFolderName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFolderName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFolderName.Enabled = false;
-            this.txtFolderName.Location = new System.Drawing.Point(394, 80);
+            this.txtFolderName.Location = new System.Drawing.Point(427, 80);
             this.txtFolderName.Name = "txtFolderName";
-            this.txtFolderName.Size = new System.Drawing.Size(171, 25);
+            this.txtFolderName.Size = new System.Drawing.Size(178, 25);
             this.txtFolderName.TabIndex = 12;
             this.ttCloud.SetToolTip(this.txtFolderName, "Type to search or add new album");
             this.txtFolderName.TextChanged += new System.EventHandler(this.txtFolderName_TextChanged);
@@ -155,7 +155,7 @@
             this.gpLogin.ForeColor = System.Drawing.Color.BlueViolet;
             this.gpLogin.Location = new System.Drawing.Point(12, 5);
             this.gpLogin.Name = "gpLogin";
-            this.gpLogin.Size = new System.Drawing.Size(319, 100);
+            this.gpLogin.Size = new System.Drawing.Size(347, 100);
             this.gpLogin.TabIndex = 13;
             this.gpLogin.TabStop = false;
             this.gpLogin.Text = "Login";
@@ -165,7 +165,7 @@
             this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "CloudID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbName.Location = new System.Drawing.Point(78, 21);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(174, 25);
+            this.tbName.Size = new System.Drawing.Size(194, 25);
             this.tbName.TabIndex = 0;
             this.tbName.Text = global::ImgRipper.Properties.Settings.Default.CloudID;
             // 
@@ -174,7 +174,7 @@
             this.btnSign.AutoSize = true;
             this.btnSign.Font = new System.Drawing.Font("Microsoft YaHei", 10F);
             this.btnSign.Image = global::ImgRipper.Properties.Resources.Login;
-            this.btnSign.Location = new System.Drawing.Point(258, 28);
+            this.btnSign.Location = new System.Drawing.Point(278, 28);
             this.btnSign.Name = "btnSign";
             this.btnSign.Size = new System.Drawing.Size(56, 51);
             this.btnSign.TabIndex = 2;
@@ -186,7 +186,7 @@
             this.tbPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "Password", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbPass.Location = new System.Drawing.Point(78, 60);
             this.tbPass.Name = "tbPass";
-            this.tbPass.Size = new System.Drawing.Size(174, 25);
+            this.tbPass.Size = new System.Drawing.Size(194, 25);
             this.tbPass.TabIndex = 1;
             this.tbPass.Text = global::ImgRipper.Properties.Settings.Default.Password;
             this.tbPass.UseSystemPasswordChar = true;
@@ -248,7 +248,7 @@
             this.CommandPanel.Controls.Add(this.btnDelete);
             this.CommandPanel.Controls.Add(this.btnCreate);
             this.CommandPanel.Controls.Add(this.btnAdd);
-            this.CommandPanel.Location = new System.Drawing.Point(332, 5);
+            this.CommandPanel.Location = new System.Drawing.Point(372, 5);
             this.CommandPanel.Name = "CommandPanel";
             this.CommandPanel.Size = new System.Drawing.Size(233, 62);
             this.CommandPanel.TabIndex = 14;
@@ -259,7 +259,7 @@
             this.cbPublic.Enabled = false;
             this.cbPublic.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.cbPublic.Image = ((System.Drawing.Image)(resources.GetObject("cbPublic.Image")));
-            this.cbPublic.Location = new System.Drawing.Point(340, 71);
+            this.cbPublic.Location = new System.Drawing.Point(372, 71);
             this.cbPublic.Name = "cbPublic";
             this.cbPublic.Size = new System.Drawing.Size(48, 42);
             this.cbPublic.TabIndex = 13;
@@ -286,7 +286,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(577, 432);
+            this.ClientSize = new System.Drawing.Size(627, 432);
             this.Controls.Add(this.cbPublic);
             this.Controls.Add(this.CommandPanel);
             this.Controls.Add(this.gpLogin);
