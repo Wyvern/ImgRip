@@ -45,13 +45,13 @@
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
-            this.CommandPanel = new System.Windows.Forms.Panel();
+            this.CmdPanel = new System.Windows.Forms.Panel();
             this.cbPublic = new System.Windows.Forms.CheckBox();
             this.ttCloud = new System.Windows.Forms.ToolTip(this.components);
             this.ofd = new System.Windows.Forms.OpenFileDialog();
             this.cldStatus.SuspendLayout();
             this.gpLogin.SuspendLayout();
-            this.CommandPanel.SuspendLayout();
+            this.CmdPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvCloud
@@ -65,7 +65,7 @@
             this.lvCloud.Location = new System.Drawing.Point(0, 118);
             this.lvCloud.Name = "lvCloud";
             this.lvCloud.ShowItemToolTips = true;
-            this.lvCloud.Size = new System.Drawing.Size(627, 290);
+            this.lvCloud.Size = new System.Drawing.Size(627, 320);
             this.lvCloud.SmallImageList = this.lvImageList;
             this.lvCloud.TabIndex = 1;
             this.lvCloud.UseCompatibleStateImageBehavior = false;
@@ -115,7 +115,7 @@
             this.cldStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CloudStatus});
             this.cldStatus.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Flow;
-            this.cldStatus.Location = new System.Drawing.Point(0, 408);
+            this.cldStatus.Location = new System.Drawing.Point(0, 438);
             this.cldStatus.Name = "cldStatus";
             this.cldStatus.Size = new System.Drawing.Size(627, 24);
             this.cldStatus.TabIndex = 8;
@@ -240,18 +240,18 @@
             this.btnUp.UseVisualStyleBackColor = true;
             this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
-            // CommandPanel
+            // CmdPanel
             // 
-            this.CommandPanel.AutoSize = true;
-            this.CommandPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.CommandPanel.Controls.Add(this.btnUp);
-            this.CommandPanel.Controls.Add(this.btnDelete);
-            this.CommandPanel.Controls.Add(this.btnCreate);
-            this.CommandPanel.Controls.Add(this.btnAdd);
-            this.CommandPanel.Location = new System.Drawing.Point(372, 5);
-            this.CommandPanel.Name = "CommandPanel";
-            this.CommandPanel.Size = new System.Drawing.Size(233, 62);
-            this.CommandPanel.TabIndex = 14;
+            this.CmdPanel.AutoSize = true;
+            this.CmdPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.CmdPanel.Controls.Add(this.btnUp);
+            this.CmdPanel.Controls.Add(this.btnDelete);
+            this.CmdPanel.Controls.Add(this.btnCreate);
+            this.CmdPanel.Controls.Add(this.btnAdd);
+            this.CmdPanel.Location = new System.Drawing.Point(372, 5);
+            this.CmdPanel.Name = "CmdPanel";
+            this.CmdPanel.Size = new System.Drawing.Size(233, 62);
+            this.CmdPanel.TabIndex = 14;
             // 
             // cbPublic
             // 
@@ -286,9 +286,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(627, 432);
+            this.ClientSize = new System.Drawing.Size(627, 462);
             this.Controls.Add(this.cbPublic);
-            this.Controls.Add(this.CommandPanel);
+            this.Controls.Add(this.CmdPanel);
             this.Controls.Add(this.gpLogin);
             this.Controls.Add(this.txtFolderName);
             this.Controls.Add(this.cldStatus);
@@ -307,7 +307,7 @@
             this.cldStatus.PerformLayout();
             this.gpLogin.ResumeLayout(false);
             this.gpLogin.PerformLayout();
-            this.CommandPanel.ResumeLayout(false);
+            this.CmdPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,7 +330,7 @@
         private System.Windows.Forms.TextBox txtFolderName;
         private System.Windows.Forms.GroupBox gpLogin;
         private System.Windows.Forms.ImageList lvImageList;
-        private System.Windows.Forms.Panel CommandPanel;
+        private System.Windows.Forms.Panel CmdPanel;
         private System.Windows.Forms.CheckBox cbPublic;
         private System.Windows.Forms.ToolTip ttCloud;
         private System.Windows.Forms.OpenFileDialog ofd;
