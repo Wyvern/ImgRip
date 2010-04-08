@@ -51,12 +51,15 @@
                     DR = new DocumentsRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) {AutoPaging=true});
                     new Thread(new ThreadStart(() =>
                     {
-                        try { DR.Service.QueryClientLoginToken(); }
+                        try { 
+                            DR.Service.QueryClientLoginToken();
+                            var items = DR.GetFolders().Entries;
+                            foreach (var item in items)
+                                if (item.ParentFolders.Count == 0)
+                                    lvCloud.cbAdd(item.AtomEntry, 0);
+                            Prompt = items.Count() + " item(s)";
+                        }
                         catch (Exception exp) { Prompt = exp.Message; btnSign.cbEnable(true); return; }
-                        var items = DR.GetFolders().Entries;
-                        foreach (var item in items)
-                            if (item.ParentFolders.Count == 0)
-                                lvCloud.cbAdd(item.AtomEntry, 0);
                         if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                         btnSign.cbEnable(true);
                         txtFolderName.cbEnable(true);
@@ -64,7 +67,6 @@
                         btnDelete.cbEnable(false);
                         btnUp.cbEnable(false);
                         btnAdd.cbEnable(false);
-                        Prompt = items.Count() + " item(s)";
                     })).Start();
                     break;
                 #endregion
@@ -85,11 +87,15 @@
                     PR = new PicasaRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) { AutoPaging=true});
                     new Thread(new ThreadStart(() =>
                     {
-                        try { PR.Service.QueryClientLoginToken(); }
+                        try
+                        {
+                            PR.Service.QueryClientLoginToken(); 
+                            var items = PR.GetAlbums().Entries;
+                            foreach (var item in items)
+                                lvCloud.cbAdd(item.AtomEntry, 0);
+                            Prompt = items.Count() + " Album(s)";
+                        }
                         catch (Exception exp) { Prompt = exp.Message; btnSign.cbEnable(true); return; }
-                        var items = PR.GetAlbums().Entries;
-                        foreach (var item in items)
-                            lvCloud.cbAdd(item.AtomEntry, 0);
                         if (cldCache != null) { cldCache.Clear(); cldCache = null; }
                         txtFolderName.cbEnable(true);
                         btnCreate.cbEnable(true);
@@ -98,7 +104,6 @@
                         btnAdd.cbEnable(false);
                         btnDelete.cbEnable(false);
                         btnSign.cbEnable(true);
-                        Prompt = items.Count() + " Album(s)";
                     })).Start();
                     break;
                 #endregion
