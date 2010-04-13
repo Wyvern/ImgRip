@@ -163,7 +163,7 @@
             // tbName
             // 
             this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "CloudID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbName.Location = new System.Drawing.Point(78, 21);
+            this.tbName.Location = new System.Drawing.Point(82, 21);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(194, 25);
             this.tbName.TabIndex = 0;
@@ -174,7 +174,7 @@
             this.btnSign.AutoSize = true;
             this.btnSign.Font = new System.Drawing.Font("Microsoft YaHei", 10F);
             this.btnSign.Image = global::ImgRipper.Properties.Resources.Login;
-            this.btnSign.Location = new System.Drawing.Point(278, 28);
+            this.btnSign.Location = new System.Drawing.Point(282, 28);
             this.btnSign.Name = "btnSign";
             this.btnSign.Size = new System.Drawing.Size(56, 51);
             this.btnSign.TabIndex = 2;
@@ -184,7 +184,7 @@
             // tbPass
             // 
             this.tbPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "Password", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbPass.Location = new System.Drawing.Point(78, 60);
+            this.tbPass.Location = new System.Drawing.Point(82, 60);
             this.tbPass.Name = "tbPass";
             this.tbPass.Size = new System.Drawing.Size(194, 25);
             this.tbPass.TabIndex = 1;

@@ -882,12 +882,9 @@
                 {
                     if (DialogResult.Yes == MessageBox.Show("Do you want to create new folder to store files?", "Invalid Directory!", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                     {
-                        try { Directory.CreateDirectory(Dir); }
-                        catch (Exception exp)
-                        {
-                            tsLabel.Text = exp.Message;
-                            return false;
-                        }
+                        if ((fbDir.ShowDialog()) == DialogResult.OK)
+                            Dir = fbDir.SelectedPath;
+                        else return false;
                     }
                     else
                         return false;
