@@ -416,7 +416,10 @@
                             foreach (HAP.HtmlNode lnk in links)
                             {
                                 string imgsrc = lnk.Attributes["src"].Value;
-                                string id = imgsrc.Split("/-".ToCharArray())[1];
+                                string[] segs = imgsrc.Split("/-".ToCharArray());
+                                string id = segs[1], file = segs[segs.Length-1];
+                                string alt = lnk.Attributes["alt"].Value;
+                                if (file != alt) continue;
                                 imgsrc = imgsrc.Replace(id, (uint.Parse(id) - 1).ToString());
                                 string address = "http://pal.ath.cx" + imgsrc;
                                 int mark = rip.Title.IndexOf('[');
@@ -434,7 +437,10 @@
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
                                     string imgsrc = lnk.Attributes["src"].Value;
-                                    string id = imgsrc.Split("/-".ToCharArray())[1];
+                                    string[] segs = imgsrc.Split("/-".ToCharArray());
+                                    string id = segs[1], file = segs[segs.Length - 1];
+                                    string alt = lnk.Attributes["alt"].Value;
+                                    if (file != alt) continue;
                                     imgsrc = imgsrc.Replace(id, (uint.Parse(id) - 1).ToString());
                                     string address = "http://pal.ath.cx" + imgsrc;
                                     int mark = rip.Title.IndexOf('[');
