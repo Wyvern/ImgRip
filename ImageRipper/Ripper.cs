@@ -416,8 +416,7 @@
                             foreach (HAP.HtmlNode lnk in links)
                             {
                                 string imgsrc = lnk.Attributes["src"].Value;
-                                string[] segs = imgsrc.Split("/-".ToCharArray());
-                                string id = segs[1], file = segs[segs.Length-1];
+                                string id = imgsrc.Split("/-".ToCharArray())[1], file = imgsrc.Substring(imgsrc.LastIndexOf('/') + 1);
                                 string alt = lnk.Attributes["alt"].Value;
                                 if (!file.Contains(alt)) continue;
                                 imgsrc = imgsrc.Replace(id, (uint.Parse(id) - 1).ToString());
@@ -437,8 +436,7 @@
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
                                     string imgsrc = lnk.Attributes["src"].Value;
-                                    string[] segs = imgsrc.Split("/-".ToCharArray());
-                                    string id = segs[1], file = segs[segs.Length - 1];
+                                    string id = imgsrc.Split("/-".ToCharArray())[1], file = imgsrc.Substring(imgsrc.LastIndexOf('/') + 1);
                                     string alt = lnk.Attributes["alt"].Value;
                                     if (!file.Contains(alt)) continue;
                                     imgsrc = imgsrc.Replace(id, (uint.Parse(id) - 1).ToString());
