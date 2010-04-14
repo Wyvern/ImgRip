@@ -419,12 +419,12 @@
                                 string[] segs = imgsrc.Split("/-".ToCharArray());
                                 string id = segs[1], file = segs[segs.Length-1];
                                 string alt = lnk.Attributes["alt"].Value;
-                                if (file != alt) continue;
+                                if (!file.Contains(alt)) continue;
                                 imgsrc = imgsrc.Replace(id, (uint.Parse(id) - 1).ToString());
                                 string address = "http://pal.ath.cx" + imgsrc;
                                 int mark = rip.Title.IndexOf('[');
                                 if (mark > 0) rip.Title = rip.Title.Substring(0, mark);
-                                string name = rip.Title + string.Format("{0:000}", rip.Imgs.Count) + ".jpg";
+                                string name = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
                                 rip.Imgs[name] = address;
                             }
                             while (rip.NextPage != null)
@@ -440,12 +440,12 @@
                                     string[] segs = imgsrc.Split("/-".ToCharArray());
                                     string id = segs[1], file = segs[segs.Length - 1];
                                     string alt = lnk.Attributes["alt"].Value;
-                                    if (file != alt) continue;
+                                    if (!file.Contains(alt)) continue;
                                     imgsrc = imgsrc.Replace(id, (uint.Parse(id) - 1).ToString());
                                     string address = "http://pal.ath.cx" + imgsrc;
                                     int mark = rip.Title.IndexOf('[');
                                     if (mark > 0) rip.Title = rip.Title.Substring(0, mark);
-                                    string name = rip.Title + string.Format("{0:000}", rip.Imgs.Count) + ".jpg";
+                                    string name = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
                                     rip.Imgs[name] = address;
                                 }
                             }
@@ -504,7 +504,7 @@
                             foreach (HAP.HtmlNode lnk in links)
                             {
                                 string img = lnk.Attributes["src"].Value;
-                                string key = string.Format("{0} {1:000}.jpg", rip.Title, 0);
+                                string key = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
                                 rip.Imgs[key] = "http://www.pics100.net" + img;
                             }
                             for (int i = 2; i <= countofpage; i++)
@@ -518,7 +518,7 @@
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
                                     string img = lnk.Attributes["src"].Value;
-                                    string key = string.Format("{0} {1:000}.jpg", rip.Title, i-1);
+                                    string key = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
                                     rip.Imgs[key] = "http://www.pics100.net" + img;
                                 }
                             }
