@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ripper));
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.btnDownloadCancel = new Wyvern.SplitButton();
-            this.cmsBatch = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsBatch = new System.Windows.Forms.ContextMenuStrip();
             this.btnBatch = new System.Windows.Forms.ToolStripMenuItem();
             this.tbParse = new System.Windows.Forms.TextBox();
             this.llCookie = new System.Windows.Forms.LinkLabel();
@@ -42,7 +41,7 @@
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cmsLV = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsLV = new System.Windows.Forms.ContextMenuStrip();
             this.cmmiNextPage = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiDropGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiCopyName = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,10 +62,10 @@
             this.tbDir = new System.Windows.Forms.TextBox();
             this.pbPreview = new System.Windows.Forms.PictureBox();
             this.fbDir = new System.Windows.Forms.FolderBrowserDialog();
-            this.bwDownload = new System.ComponentModel.BackgroundWorker();
-            this.ttRipper = new System.Windows.Forms.ToolTip(this.components);
-            this.tmMinus = new System.Windows.Forms.Timer(this.components);
-            this.tmPlus = new System.Windows.Forms.Timer(this.components);
+            this.bwFetch = new System.ComponentModel.BackgroundWorker();
+            this.ttRipper = new System.Windows.Forms.ToolTip();
+            this.tmMinus = new System.Windows.Forms.Timer();
+            this.tmPlus = new System.Windows.Forms.Timer();
             this.mainSplit.Panel1.SuspendLayout();
             this.mainSplit.Panel2.SuspendLayout();
             this.mainSplit.SuspendLayout();
@@ -183,6 +182,7 @@
             this.llCookie.TabIndex = 32;
             this.llCookie.TabStop = true;
             this.llCookie.Text = "Cookie";
+            this.ttRipper.SetToolTip(this.llCookie, "Set Cookie value");
             this.llCookie.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llCookie_LinkClicked);
             // 
             // llFolder
@@ -276,7 +276,6 @@
             this.cmmiDropGroup.Name = "cmmiDropGroup";
             this.cmmiDropGroup.Size = new System.Drawing.Size(152, 22);
             this.cmmiDropGroup.Text = "Drop";
-            this.cmmiDropGroup.Visible = false;
             this.cmmiDropGroup.Click += new System.EventHandler(this.cmmiDrop_Click);
             // 
             // cmmiCopyName
@@ -465,13 +464,13 @@
             this.fbDir.Description = "Select folder to store files";
             this.fbDir.SelectedPath = global::ImgRipper.Properties.Settings.Default.txtDir;
             // 
-            // bwDownload
+            // bwFetch
             // 
-            this.bwDownload.WorkerReportsProgress = true;
-            this.bwDownload.WorkerSupportsCancellation = true;
-            this.bwDownload.DoWork += new System.ComponentModel.DoWorkEventHandler(this.DownloadFiles_DoWork);
-            this.bwDownload.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.DownloadFiles_ProgressChanged);
-            this.bwDownload.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DownloadFiles_RunWorkerCompleted);
+            this.bwFetch.WorkerReportsProgress = true;
+            this.bwFetch.WorkerSupportsCancellation = true;
+            this.bwFetch.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Fetch_DoWork);
+            this.bwFetch.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.DownloadFiles_ProgressChanged);
+            this.bwFetch.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.DownloadFiles_RunWorkerCompleted);
             // 
             // ttRipper
             // 
@@ -520,7 +519,6 @@
         private Wyvern.SplitButton btnDownloadCancel;
         private System.Windows.Forms.TextBox tbDir;
         private System.Windows.Forms.FolderBrowserDialog fbDir;
-        internal System.ComponentModel.BackgroundWorker bwDownload;
         private System.Windows.Forms.Label lblUrl;
         private System.Windows.Forms.TextBox tbParse;
         private System.Windows.Forms.PictureBox pbPreview;
@@ -554,6 +552,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsiPicasa;
         private System.Windows.Forms.ColumnHeader chNumber;
         private System.Windows.Forms.ToolStripStatusLabel tsHome;
+        private System.ComponentModel.BackgroundWorker bwFetch;
     }
 }
 
