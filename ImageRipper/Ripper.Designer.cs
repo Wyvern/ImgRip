@@ -46,7 +46,6 @@
             this.cmmiNextPage = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiDropGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiCopyName = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmmiSaveAll = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiSave = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiClear = new System.Windows.Forms.ToolStripMenuItem();
@@ -254,7 +253,6 @@
             this.cmmiNextPage,
             this.cmmiDropGroup,
             this.cmmiCopyName,
-            this.cmmiSaveAll,
             this.cmmiSave,
             this.cmmiRemove,
             this.cmmiClear});
@@ -262,7 +260,7 @@
             this.cmsLV.ShowCheckMargin = true;
             this.cmsLV.ShowImageMargin = false;
             this.cmsLV.ShowItemToolTips = false;
-            this.cmsLV.Size = new System.Drawing.Size(153, 180);
+            this.cmsLV.Size = new System.Drawing.Size(153, 158);
             this.cmsLV.Opening += new System.ComponentModel.CancelEventHandler(this.cmsLV_Opening);
             // 
             // cmmiNextPage
@@ -279,7 +277,7 @@
             this.cmmiDropGroup.Size = new System.Drawing.Size(152, 22);
             this.cmmiDropGroup.Text = "Drop";
             this.cmmiDropGroup.Visible = false;
-            this.cmmiDropGroup.Click += new System.EventHandler(this.cmmiDeleteAll_Click);
+            this.cmmiDropGroup.Click += new System.EventHandler(this.cmmiDrop_Click);
             // 
             // cmmiCopyName
             // 
@@ -288,14 +286,6 @@
             this.cmmiCopyName.Text = "Copy";
             this.cmmiCopyName.Visible = false;
             this.cmmiCopyName.Click += new System.EventHandler(this.cmmiCopyName_Click);
-            // 
-            // cmmiSaveAll
-            // 
-            this.cmmiSaveAll.CheckOnClick = true;
-            this.cmmiSaveAll.Name = "cmmiSaveAll";
-            this.cmmiSaveAll.Size = new System.Drawing.Size(152, 22);
-            this.cmmiSaveAll.Text = "Small";
-            this.cmmiSaveAll.Visible = false;
             // 
             // cmmiSave
             // 
@@ -542,7 +532,6 @@
         private System.Windows.Forms.Timer tmPlus;
         private System.Windows.Forms.ContextMenuStrip cmsLV;
         private System.Windows.Forms.ToolStripMenuItem cmmiNextPage;
-        private System.Windows.Forms.ToolStripMenuItem cmmiSaveAll;
         private System.Windows.Forms.ToolStripMenuItem cmmiDropGroup;
         private System.Windows.Forms.ToolStripStatusLabel lbBatch;
         private System.Windows.Forms.ContextMenuStrip cmsBatch;

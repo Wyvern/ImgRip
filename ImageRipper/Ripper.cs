@@ -110,6 +110,7 @@
                 case RipperAction.Cancel:
                     Batch = false;
                     rip.Canceled = true;
+                    rip.Cancel();
                     rip.NextPage = null;
                     tbParse.ReadOnly = false;
                     tbDir.ReadOnly = false;
@@ -139,7 +140,6 @@
             ResetStatus();
             for (int idx = 0; idx < rip.Imgs.Count; idx++)
             {
-                if (rip.Canceled) { e.Cancel = true; return; }
                 rip.Address = rip.Imgs[idx];
                 FileInfo fi = new FileInfo(Path.Combine(Dir, rip.Imgs.Keys[idx]));
                 rip.Current = fi;
@@ -156,8 +156,6 @@
                     if (rip.Style == ParseStyle.Heels)
                     #region For Heels.cn
                     {
-                        Bitmap bmp = null;
-                        string filesize;
                         bool succeed = false;
                         if (string.IsNullOrEmpty(Settings.Default.Cookie))
                         {
@@ -174,15 +172,17 @@
                         }
                         while (!succeed)
                         {
-                            if (rip.SkipPage)
-                            {
-                                rip.SkipPage = false;
-                                SetListViewItem = new string[] {  fi.Name, No,null, "Skipped" };
-                                return;
-                            }
+                            SetListViewItem = new string[] { fi.Name, No, null, "Downloading..." };
                             try
                             {
-                                bmp = rip.GetBitmap(rip.Address, Settings.Default.Cookie);
+                                rip.GetFile(rip.Address, fi.ToString(), Settings.Default.Cookie);
+                                if (rip.SkipPage)
+                                {
+                                    rip.SkipPage = false;
+                                    SetListViewItem = new string[] { fi.Name, No, null, "Skipped" };
+                                    return;
+                                }
+                                if (rip.Canceled) { e.Cancel = true; SetListViewItem = new string[] { fi.Name, No, null, "Cancelled" }; return; }
                                 succeed = true;
                             }
                             catch (Exception)
@@ -210,45 +210,38 @@
                                 }
                             }
                         }
-                        #region Check whether the file is too small, dimension less than 768x768 pixels
-                        rip.Tiny = false;
-                        if (bmp.Width >= 768 && bmp.Height >= 768 || cmmiSaveAll.Checked)
+                        fi.Refresh();
+                        if (fi.Exists)
                         {
-                            bmp.Save(rip.ImageLocation = fi.ToString());
-                            fi.Refresh();
+                            SetListViewItem = new string[] { fi.Name, No, fi.Length / 1024 + " KB", "Finished" };
+                            pbPreview.ImageLocation = rip.ImageLocation = fi.ToString();
                         }
-                        else
-                        {
-                            rip.Tiny = true;
-                            rip.ImageLocation = null;
-                        }
-                        #endregion
-                        pbPreview.Image = bmp.Clone() as Image;
-                        filesize = fi.Exists ? fi.Length / 1024 + " KB" : "";
-                        SetListViewItem = new string[] { fi.Name, No, filesize, rip.Tiny ? "Dropped" : "Finished" };
-                        bmp.Dispose();
                     }
                     #endregion
                     else
                     #region For Others
                     {
+                        if (Batch) RipStatus.Invoke(new Action(()=>lbBatch.Text=" #" + (Range - (To - From)) + "/" + Range+" Pages"));
+                        SetListViewItem = new string[] { fi.Name, No, null, "Downloading" };
+                        rip.GetFile(rip.Address, fi.ToString());
                         if (rip.SkipPage)
                         {
                             rip.SkipPage = false;
                             SetListViewItem = new string[] { fi.Name, No, null, "Skipped" };
                             return;
                         }
-                        if (Batch) RipStatus.Invoke(new Action(()=>lbBatch.Text=" #" + (Range - (To - From)) + "/" + Range+" Pages"));
-                        SetListViewItem = new string[] { fi.Name,No,  null, "Downloading" };
-                        rip.GetFile(rip.Address, fi.ToString());
+                        if (rip.Canceled) { e.Cancel = true; SetListViewItem = new string[] { fi.Name, No, null, "Cancelled" }; return; }
                         fi.Refresh();
-                        SetListViewItem = new string[] { fi.Name,No,  fi.Length / 1024 + " KB", "Finished" };
-                        pbPreview.ImageLocation = rip.ImageLocation = fi.ToString();
+                        if (fi.Exists)
+                        {
+                            SetListViewItem = new string[] { fi.Name, No, fi.Length / 1024 + " KB", "Finished" };
+                            pbPreview.ImageLocation = rip.ImageLocation = fi.ToString();
+                        }
                     }
                     #endregion
                     bwDownload.ReportProgress((idx + 1) * 100 / rip.Imgs.Count);
                 }
-                catch (WebException exp)
+                catch (Exception exp)
                 {
                     SetListViewItem = new string[] {  fi.Name,No, null, exp.Message};
                 }
@@ -328,7 +321,7 @@
                             {
                                 string href = lnk.Attributes["src"].Value.Replace("thumbnails", "images");
                                 string[] name = href.Split('/','_');
-                                string key = name[1].ToUpper() + '-' + name[3] + ".jpg";
+                                string key = string.Format("{0}-{1}.jpg", name[1].ToUpper(), name[3]);
                                 rip.Imgs[key] = url.Replace(url.Substring(url.LastIndexOf('/')+1), href);
                             }
                         }
@@ -567,7 +560,7 @@
                         case RipperAction.Cancel:
                             rip.NextPage = null;
                             if (bwDownload.CancellationPending) return;
-                            rip.Canceled = true;
+                            rip.Canceled = true;rip.Cancel();
                             if (bwDownload.IsBusy)
                                 bwDownload.CancelAsync();
                             btnDownloadCancel.Enabled = false;
@@ -589,7 +582,7 @@
                         case RipperAction.Cancel:
                             Batch = false;
                             if (bwDownload.CancellationPending) return;
-                            rip.Canceled = true;
+                            rip.Canceled = true;rip.Cancel();
                             if (bwDownload.IsBusy)
                                 bwDownload.CancelAsync();
                             btnDownloadCancel.Enabled = false;
@@ -707,9 +700,8 @@
             if (File.Exists(rip.ImageLocation))
             {
                 File.Delete(rip.ImageLocation);
-                FileInfo fi = new FileInfo(rip.ImageLocation);
+                var lvi = lvRip.FindItemWithText(Path.GetFileName(rip.ImageLocation));
                 rip.ImageLocation = null;
-                var lvi = lvRip.FindItemWithText(fi.Name);
                 if (lvi != null)
                 {
                     lvi.SubItems[3].Text = "Deleted";
@@ -718,23 +710,22 @@
             }
         }
 
-        private void cmmiDeleteAll_Click(object sender, EventArgs e)
+        private void cmmiDrop_Click(object sender, EventArgs e)
         {
             if (rip.Imgs != null && rip.Imgs.Count > 0 && rip.Style == ParseStyle.Heels)
             {
                 foreach (string name in rip.Imgs.AllKeys)
                 {
-                    string file = Path.Combine(Dir, name);
-                    if (File.Exists(file))
+                    string path = Path.Combine(Dir, name);
+                    var lvi = lvRip.FindItemWithText(name);
+                    if (lvi != null)
                     {
-                        File.Delete(file);
-                        ListViewItem lvi = lvRip.FindItemWithText(name);
-                        if (lvi != null)
-                        {
-                            lvi.SubItems[3].Text = "Deleted";
-                            lvi.Font = new Font(lvi.Font, FontStyle.Strikeout);
-                        }
+                        lvi.SubItems[3].Text = "Deleted";
+                        lvi.Font = new Font(lvi.Font, FontStyle.Strikeout);
                     }
+                    if (rip.Current != null && rip.Current.Name == name) { rip.Cancel(); continue; }
+                    if (File.Exists(path))
+                        File.Delete(path);
                 }
                 rip.SkipPage = true;
             }
@@ -762,12 +753,11 @@
                 foreach (ListViewItem lvi in lvRip.SelectedItems)
                 {
                     string path = Path.Combine(Dir, lvi.Text);
+                    lvi.SubItems[3].Text = "Deleted";
+                    lvi.Font = new Font(lvi.Font, FontStyle.Strikeout);
+                    if (rip.Current != null && rip.Current.Name == lvi.Text) { rip.Cancel(); continue; }
                     if (File.Exists(path))
-                    {
                         File.Delete(path);
-                        lvi.SubItems[3].Text = "Deleted";
-                        lvi.Font = new Font(lvi.Font, FontStyle.Strikeout);
-                    }
                 }
             }
         }
@@ -795,14 +785,7 @@
             {
                 try
                 {
-                    if (rip.Style == ParseStyle.Heels)
-                    {
-                        Bitmap bmp = rip.GetBitmap(item.Url, Settings.Default.Cookie);
-                        bmp.Save(Path.Combine(Dir, item.Name));
-                        bmp.Dispose();
-                    }
-                    else
-                        rip.GetFile(item.Url, Path.Combine(Dir, item.Name));
+                    rip.GetFile(item.Url, Path.Combine(Dir, item.Name), Settings.Default.Cookie);
                     SetListViewItem = new string[] { item.Name, null, null, "Finished" };
                 }
                 catch (Exception exp)
@@ -824,7 +807,7 @@
             {
                 case Keys.Delete:
                     if (e.Shift)
-                        cmmiDeleteAll_Click(sender, e);
+                        cmmiDrop_Click(sender, e);
                     else
                         cmmiDeleteFile(sender, e);
                     break;
@@ -931,7 +914,7 @@
         private void cmsLV_Opening(object sender, CancelEventArgs e)
         {
             cmmiNextPage.Visible = Batch;
-            cmmiDropGroup.Visible = cmmiSaveAll.Visible = (rip != null && rip.Style == ParseStyle.Heels) ? true : false;
+            cmmiDropGroup.Visible  = (rip != null && rip.Style == ParseStyle.Heels) ? true : false;
             cmmiSave.Visible = cmmiRemove.Visible = cmmiCopyName.Visible = lvRip.SelectedItems.Count > 0 ? true : false;
             cmmiClear.Enabled = lvRip.Items.Count == 0 ? false : true;
         }

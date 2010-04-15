@@ -1,8 +1,10 @@
 ﻿namespace ImgRipper
 {
+    using System;
     using System.Collections.Specialized;
     using System.Drawing;
     using System.IO;
+    using System.Threading;
     using System.Net;
     
     class Fetcher
@@ -11,6 +13,7 @@
         {
             Imgs = new NameValueCollection();
         }
+        WebClient wc;
         #region Properties definitions
         public NameValueCollection Imgs { get; set; }
         public bool Canceled { get; set; }
@@ -20,33 +23,26 @@
         public string ImageLocation { get; set; }
         public bool SkipPage { get; set; }
         public string Title { get; set; }
-        public bool Tiny { get; set; }
         public string Address { get; set; }
         public string NextPage { get; set; }
         #endregion
 
-        public Bitmap GetBitmap(string url, string cookie)
+        public void GetFile(string url, string file, string cookie=null)
         {
-            Bitmap result;
-            using (var wc = new WebClient())
-            {
-                wc.Headers["Cookie"] = "JSESSIONID=" + cookie;
-                using (Stream s = wc.OpenRead(url))
-                {
-                    result = new Bitmap(s);
-                    s.Close();
-                }
-            }
-            return result;
-        }
-        
-        public void GetFile(string url, string file)
-        {
-            using (var wc = new WebClient())
+            using (wc = new WebClient())
             {
                 wc.Headers["Referer"] = url;
-                wc.DownloadFile(url, file);
+                if (Style == ParseStyle.Heels) wc.Headers["Cookie"] = string.Format("JSESSIONID={0}", cookie);
+                var mre = new ManualResetEvent(false);
+                wc.DownloadFileCompleted += (s, e) => { if ((e.Cancelled || e.Error != null) && File.Exists(file)) File.Delete(file); mre.Set(); };
+                wc.DownloadFileAsync(new Uri(url), file);
+                mre.WaitOne(); mre.Close();
             }
+        }
+        public void Cancel()
+        {
+            if (wc != null)
+                wc.CancelAsync();
         }
 
         public void Reset()
@@ -54,9 +50,8 @@
             PushState = RipperAction.Download;
             Imgs.Clear();
             Canceled = false;
-            Title = default(string);
-            Address = default(string);
-            Title = default(string);
+            Current = null;
+            Title = Address = string.Empty;
         }
     }
     /// <summary>
