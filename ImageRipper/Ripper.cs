@@ -200,7 +200,7 @@
                                     return;
                                 }
                                 if (Batch) RipStatus.Invoke(new Action(() => lbBatch.Text = string.Format(" #{0}/{1} Pages", (Range - (To - From)), Range)));
-                                SetListViewItem = new string[] { fi.Name, Order, null, "Retry after 5 secs..." };
+                                SetListViewItem = new string[] { fi.Name, Order, null, "Check cookie / Wait 5 secs" };
                                 Thread.Sleep(5000);
                             }
                         }

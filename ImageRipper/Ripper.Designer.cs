@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ripper));
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.btnDownloadCancel = new Wyvern.SplitButton();
-            this.cmsBatch = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsBatch = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnBatch = new System.Windows.Forms.ToolStripMenuItem();
             this.tbParse = new System.Windows.Forms.TextBox();
             this.llCookie = new System.Windows.Forms.LinkLabel();
@@ -41,7 +42,7 @@
             this.chNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chState = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cmsLV = new System.Windows.Forms.ContextMenuStrip();
+            this.cmsLV = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cmmiNextPage = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiDropGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiCopyName = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,9 +64,9 @@
             this.pbPreview = new System.Windows.Forms.PictureBox();
             this.fbDir = new System.Windows.Forms.FolderBrowserDialog();
             this.bwFetch = new System.ComponentModel.BackgroundWorker();
-            this.ttRipper = new System.Windows.Forms.ToolTip();
-            this.tmMinus = new System.Windows.Forms.Timer();
-            this.tmPlus = new System.Windows.Forms.Timer();
+            this.ttRipper = new System.Windows.Forms.ToolTip(this.components);
+            this.tmMinus = new System.Windows.Forms.Timer(this.components);
+            this.tmPlus = new System.Windows.Forms.Timer(this.components);
             this.mainSplit.Panel1.SuspendLayout();
             this.mainSplit.Panel2.SuspendLayout();
             this.mainSplit.SuspendLayout();
@@ -245,7 +246,7 @@
             // 
             this.chState.Text = "State";
             this.chState.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.chState.Width = 100;
+            this.chState.Width = 147;
             // 
             // cmsLV
             // 
