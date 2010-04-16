@@ -204,9 +204,6 @@
                                 Thread.Sleep(5000);
                             }
                         }
-                        fi.Refresh();
-                        SetListViewItem = new string[] { fi.Name, Order, fi.Length / 1024 + " KB", "Finished" };
-                        pbPreview.ImageLocation = rip.ImageLocation = fi.ToString();
                     }
                     #endregion
                     else
@@ -223,11 +220,11 @@
                         }
                         if (rip.Canceled) { e.Cancel = true; SetListViewItem = new string[] { fi.Name, Order, null, "Cancelled" }; return; }
                         if (rip.Dropped) { rip.Dropped = false; SetListViewItem = new string[] { fi.Name, Order, null, "Dropped" }; return; }
-                        fi.Refresh();
-                        SetListViewItem = new string[] { fi.Name, Order, fi.Length / 1024 + " KB", "Finished" };
-                        pbPreview.ImageLocation = rip.ImageLocation = fi.ToString();
                     }
                     #endregion
+                    fi.Refresh();
+                    SetListViewItem = new string[] { fi.Name, Order, fi.Length / 1024 + " KB", "Finished" };
+                    pbPreview.ImageLocation = rip.ImageLocation = fi.ToString();
                     bwFetch.ReportProgress((idx + 1) * 100 / rip.Imgs.Count);
                 }
                 catch (Exception exp)
