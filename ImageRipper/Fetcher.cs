@@ -17,6 +17,7 @@
         #region Properties definitions
         public NameValueCollection Imgs { get; set; }
         public bool Canceled { get; set; }
+        public bool Dropped { get; set; }
         public RipperAction PushState { get; set; }
         public ParseStyle Style { get; set; }
         public FileInfo Current { get; set; }
@@ -27,12 +28,25 @@
         public string NextPage { get; set; }
         #endregion
 
-        public void GetFile(string url, string file, string cookie=null)
+        public Stream GetStream(string url, string cookie)
+        {
+            Stream r = null;
+            using (wc = new WebClient())
+            {
+                wc.Headers["Cookie"] = string.Format("JSESSIONID={0}", cookie);
+                var mre = new ManualResetEvent(false);
+                wc.OpenReadCompleted += (s, e) => { if (e.Cancelled) return; r = e.Result; mre.Set(); };
+                wc.OpenReadAsync(new Uri(url));
+                mre.WaitOne(); mre.Close();
+                return r;
+            }
+        }
+
+        public void GetFile(string url, string file)
         {
             using (wc = new WebClient())
             {
                 wc.Headers["Referer"] = url;
-                if (Style == ParseStyle.Heels) wc.Headers["Cookie"] = string.Format("JSESSIONID={0}", cookie);
                 var mre = new ManualResetEvent(false);
                 wc.DownloadFileCompleted += (s, e) => { if ((e.Cancelled || e.Error != null) && File.Exists(file)) File.Delete(file); mre.Set(); };
                 wc.DownloadFileAsync(new Uri(url), file);
@@ -49,7 +63,7 @@
         {
             PushState = RipperAction.Download;
             Imgs.Clear();
-            Canceled = false;
+            Canceled = Dropped = false;
             Current = null;
             Title = Address = string.Empty;
         }
