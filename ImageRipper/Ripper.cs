@@ -68,7 +68,7 @@
                         {
                             lvi = new ListViewItem(value);
                             lvi.ToolTipText = rip.Address;
-                            if (lvRip.Groups[rip.Title] == null) lvRip.Groups.Add(rip.Title, rip.Title + string.Format(" [{0}P]", rip.Imgs.Count));
+                            if (lvRip.Groups[rip.Title] == null) lvRip.Groups.Add(rip.Title, string.Format("{0} of [{1}P]", rip.Title, rip.Imgs.Count));
                             lvi.Group = lvRip.Groups[rip.Title];
                             lvRip.Items.Add(lvi).EnsureVisible();
                             lvi.ForeColor = lvi.Index % 2 == 0 ? Color.DarkGreen : Color.DarkBlue;
@@ -171,6 +171,7 @@
                         while (!succeed)
                         {
                             SetListViewItem = new string[] { fi.Name, Order, null, "Downloading" };
+                            if (Batch) RipStatus.Invoke(new Action(() => lbBatch.Text = string.Format(" #{0}/{1} Pages", (Range - (To - From)), Range)));
                             try
                             {
                                 using (Stream s = rip.GetStream(rip.Address, Settings.Default.Cookie))
@@ -199,7 +200,6 @@
                                     SetListViewItem = new string[] { fi.Name, Order, null, "Skipped" };
                                     return;
                                 }
-                                if (Batch) RipStatus.Invoke(new Action(() => lbBatch.Text = string.Format(" #{0}/{1} Pages", (Range - (To - From)), Range)));
                                 SetListViewItem = new string[] { fi.Name, Order, null, "Check cookie / Wait 5 secs" };
                                 Thread.Sleep(5000);
                             }
@@ -943,6 +943,11 @@
         private void tsHome_Click(object sender, EventArgs e)
         {
             Process.Start("http://imgrip.codeplex.com");
+        }
+
+        private void llSites_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new Sites().ShowDialog(this);
         }
     }
 }

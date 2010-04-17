@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ripper));
             this.mainSplit = new System.Windows.Forms.SplitContainer();
+            this.llSites = new System.Windows.Forms.LinkLabel();
             this.btnDownloadCancel = new Wyvern.SplitButton();
             this.cmsBatch = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnBatch = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,6 +86,7 @@
             // 
             // mainSplit.Panel1
             // 
+            this.mainSplit.Panel1.Controls.Add(this.llSites);
             this.mainSplit.Panel1.Controls.Add(this.btnDownloadCancel);
             this.mainSplit.Panel1.Controls.Add(this.tbParse);
             this.mainSplit.Panel1.Controls.Add(this.llCookie);
@@ -105,6 +107,21 @@
             this.mainSplit.SplitterDistance = 407;
             this.mainSplit.SplitterWidth = 5;
             this.mainSplit.TabIndex = 23;
+            // 
+            // llSites
+            // 
+            this.llSites.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.llSites.AutoSize = true;
+            this.llSites.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
+            this.llSites.LinkColor = System.Drawing.SystemColors.Highlight;
+            this.llSites.Location = new System.Drawing.Point(646, 14);
+            this.llSites.Name = "llSites";
+            this.llSites.Size = new System.Drawing.Size(42, 19);
+            this.llSites.TabIndex = 33;
+            this.llSites.TabStop = true;
+            this.llSites.Text = "Sites";
+            this.ttRipper.SetToolTip(this.llSites, "Support sites list");
+            this.llSites.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llSites_LinkClicked);
             // 
             // btnDownloadCancel
             // 
@@ -148,12 +165,13 @@
             this.tbParse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tbParse.AutoCompleteCustomSource.AddRange(new string[] {
+            "http://pics100.net/<category>/<pageid>",
             "http://www.deskcity.com/details/picture/<id>.html",
-            "http://wallcoo.com/<Category>/<album>/index.html",
+            "http://wallcoo.com/<category>/<album>/index.html",
             "http://www.heels.cn/web/viewthread?thread=<id>",
             "http://www.duide.com/ggfdrdsuy/[a|b|c]<id>.htm",
-            "http://meituiji.com/<Category>/<Year>/<Month><Date>/<Id>.html",
-            "http://tu11.cc/new/<Category>/<DateTime>.htm",
+            "http://meituiji.com/<category>/<Year>/<Month><Date>/<Id>.html",
+            "http://tu11.cc/new/<category>/<DateTime>.htm",
             "http://pal.ath.cx/<id>/<category>/<start-end>/<albumid>/"});
             this.tbParse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tbParse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
@@ -163,7 +181,7 @@
             this.tbParse.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbParse.Name = "tbParse";
             this.tbParse.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.tbParse.Size = new System.Drawing.Size(659, 23);
+            this.tbParse.Size = new System.Drawing.Size(595, 23);
             this.tbParse.TabIndex = 20;
             this.tbParse.TabStop = false;
             this.tbParse.Text = global::ImgRipper.Properties.Settings.Default.txtUrl;
@@ -441,7 +459,7 @@
             this.tbDir.Location = new System.Drawing.Point(43, 55);
             this.tbDir.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbDir.Name = "tbDir";
-            this.tbDir.Size = new System.Drawing.Size(594, 23);
+            this.tbDir.Size = new System.Drawing.Size(595, 23);
             this.tbDir.TabIndex = 4;
             this.tbDir.TabStop = false;
             this.tbDir.Text = global::ImgRipper.Properties.Settings.Default.txtDir;
@@ -554,6 +572,7 @@
         private System.Windows.Forms.ColumnHeader chNumber;
         private System.Windows.Forms.ToolStripStatusLabel tsHome;
         private System.ComponentModel.BackgroundWorker bwFetch;
+        private System.Windows.Forms.LinkLabel llSites;
     }
 }
 
