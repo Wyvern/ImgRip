@@ -149,6 +149,8 @@
                     continue;
                 }
                 if (mainSplit.Panel2Collapsed) mainSplit.Invoke(new Action(() => mainSplit.Panel2Collapsed = false));
+                SetListViewItem = new string[] { fi.Name, Order, null, "Downloading" };
+                if (Batch) RipStatus.Invoke(new Action(() => lbBatch.Text = string.Format(" #{0}/{1} Pages", (Range - (To - From)), Range)));
                 try
                 {
                     if (rip.Style == ParseStyle.Heels)
@@ -162,16 +164,8 @@
                                 new SetCookie().ShowDialog(this);
                             }));
                         }
-                        if (string.IsNullOrEmpty(Settings.Default.Cookie))
-                        {
-                            e.Result = "NULL Cookie!";
-                            SetListViewItem = new string[] { fi.Name, Order, null, "Cancelled" };
-                            return;
-                        }
                         while (!succeed)
                         {
-                            SetListViewItem = new string[] { fi.Name, Order, null, "Downloading" };
-                            if (Batch) RipStatus.Invoke(new Action(() => lbBatch.Text = string.Format(" #{0}/{1} Pages", (Range - (To - From)), Range)));
                             try
                             {
                                 using (Stream s = rip.GetStream(rip.Address, Settings.Default.Cookie))
@@ -186,20 +180,7 @@
                             }
                             catch (Exception)
                             {
-                                if (rip.Dropped) { rip.Dropped = false; SetListViewItem = new string[] { fi.Name, Order, null, "Dropped" }; return; }
-                                if (rip.Canceled)
-                                {
-                                    e.Cancel = true;
-                                    rip.NextPage = null;
-                                    SetListViewItem = new string[] { fi.Name, Order, null, "Cancelled" };
-                                    return;
-                                }
-                                if (rip.SkipPage)
-                                {
-                                    rip.SkipPage = false;
-                                    SetListViewItem = new string[] { fi.Name, Order, null, "Skipped" };
-                                    return;
-                                }
+                                if (RipCheck(Order, e)) return;
                                 SetListViewItem = new string[] { fi.Name, Order, null, "Check cookie / Wait 5 secs" };
                                 Thread.Sleep(5000);
                             }
@@ -209,17 +190,8 @@
                     else
                     #region For Others
                     {
-                        if (Batch) RipStatus.Invoke(new Action(() => lbBatch.Text = string.Format(" #{0}/{1} Pages", (Range - (To - From)), Range)));
-                        SetListViewItem = new string[] { fi.Name, Order, null, "Downloading" };
                         rip.GetFile(rip.Address, fi.ToString());//Block here
-                        if (rip.SkipPage)
-                        {
-                            rip.SkipPage = false;
-                            SetListViewItem = new string[] { fi.Name, Order, null, "Skipped" };
-                            return;
-                        }
-                        if (rip.Canceled) { e.Cancel = true; SetListViewItem = new string[] { fi.Name, Order, null, "Cancelled" }; return; }
-                        if (rip.Dropped) { rip.Dropped = false; SetListViewItem = new string[] { fi.Name, Order, null, "Dropped" }; return; }
+                        if (RipCheck(Order, e)) return;
                     }
                     #endregion
                     fi.Refresh();
@@ -232,6 +204,19 @@
                     SetListViewItem = new string[] {  fi.Name,Order, null, exp.Message};
                 }
             }
+        }
+
+        bool RipCheck(string order, DoWorkEventArgs e)
+        {
+            if (rip.Dropped) { rip.Dropped = false; SetListViewItem = new string[] { rip.Current.Name, order, null, "Dropped" }; return true; }
+            if (rip.Canceled) { e.Cancel = true; rip.NextPage = null; SetListViewItem = new string[] { rip.Current.Name, order, null, "Cancelled" }; return true; }
+            if (rip.SkipPage)
+            {
+                rip.SkipPage = false;
+                SetListViewItem = new string[] { rip.Current.Name, order, null, "Skipped" };
+                return true;
+            }
+            return false;
         }
 
         private ParseStyle CheckUrl(string address)
