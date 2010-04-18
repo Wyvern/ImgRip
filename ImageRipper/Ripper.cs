@@ -6,6 +6,7 @@
     using System.Drawing;
     using System.IO;
     using System.Net;
+    using System.Web;
     using System.Threading;
     using System.Windows.Forms;
 
@@ -248,7 +249,7 @@
                 return ParseStyle.DeskCity;
             if (host.Contains("pics100"))
                 return ParseStyle.Pics100;
-             else if (host.Contains("wallcoo.net"))
+            else if (host.Contains("wallcoo.net") || host.Contains("wallcoo.com"))
                 return ParseStyle.WallCoo;
             else return ParseStyle.NotSupport;
         }
@@ -374,31 +375,10 @@
                     #region Parse Pal.Ath.Cx site
                     case ParseStyle.PalAthCx:
                         {
-                            HAP.HtmlNode nextpageNode = doc.DocumentNode.SelectSingleNode("//div/a[@class='next']");
-                            rip.NextPage = nextpageNode != null ? nextpageNode.Attributes["href"].Value : null;
-                            rip.NextPage = rip.NextPage != null ? "http://pal.ath.cx" + rip.NextPage : null;
-                            var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
-                            if (links == null || links.Count == 0) return "No picture found in this page";
-                            foreach (HAP.HtmlNode lnk in links)
+                            do
                             {
-                                string imgsrc = lnk.Attributes["src"].Value;
-                                string id = imgsrc.Split("/-".ToCharArray())[1], file = imgsrc.Substring(imgsrc.LastIndexOf('/') + 1);
-                                string alt = lnk.Attributes["alt"].Value;
-                                if (!file.Contains(alt)) continue;
-                                imgsrc = imgsrc.Replace(id, (uint.Parse(id) - 1).ToString());
-                                string address = "http://pal.ath.cx" + imgsrc;
-                                int mark = rip.Title.IndexOf('[');
-                                if (mark > 0) rip.Title = rip.Title.Substring(0, mark);
-                                string name = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
-                                rip.Imgs[name] = address;
-                            }
-                            while (rip.NextPage != null)
-                            {
-                                doc = new HAP.HtmlWeb().Load(rip.NextPage);
-                                nextpageNode = doc.DocumentNode.SelectSingleNode("//div/a[@class='next']");
-                                rip.NextPage = nextpageNode != null ? nextpageNode.Attributes["href"].Value : null;
-                                rip.NextPage = rip.NextPage != null ? "http://pal.ath.cx" + rip.NextPage : null;
-                                links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
+                                var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
+                                if (links == null || links.Count == 0) return "No picture found in this page";
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
                                     string imgsrc = lnk.Attributes["src"].Value;
@@ -412,7 +392,12 @@
                                     string name = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
                                     rip.Imgs[name] = address;
                                 }
-                            }
+                                if (rip.Canceled) return "User Cancelled";
+                                HAP.HtmlNode nextpageNode = doc.DocumentNode.SelectSingleNode("//div/a[@class='next']");
+                                rip.NextPage = nextpageNode != null ? nextpageNode.Attributes["href"].Value : null;
+                                rip.NextPage = rip.NextPage != null ? "http://pal.ath.cx" + rip.NextPage : null;
+                                if (rip.NextPage != null) doc = new HAP.HtmlWeb().Load(rip.NextPage);
+                            } while (rip.NextPage != null);
                         }
                         break;
                     #endregion
@@ -422,36 +407,22 @@
                     case ParseStyle.DeskCity:
                         {
                             rip.Title = rip.Title.Split('|')[0];
-                            var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
-                            if (links == null || links.Count == 0) return "No picture found in this page";
-                            foreach (HAP.HtmlNode lnk in links)
+                            do
                             {
-                                string img = lnk.Attributes["src"].Value;
-                                string key = img.Split("/-".ToCharArray())[4];
-                                rip.Imgs[key + ".jpg"] = "http://www.deskcity.com" + img.Replace(img.Substring(img.LastIndexOf(key)), key + ".jpg");
-                            }
-                            string nextpage = null;
-                            HAP.HtmlNode next = doc.DocumentNode.SelectSingleNode("//div[@class='pagination']");
-                            if (next != null && next.HasChildNodes) next = next.LastChild; else return null;
-                            if (next.Attributes["href"] != null)
-                                nextpage = next.Attributes["href"].Value;
-                            while (nextpage != null)
-                            {
-                                doc = new HAP.HtmlWeb().Load("http://www.deskcity.com" + nextpage);
-                                links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
+                                var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
                                 if (links == null || links.Count == 0) return "No picture found in this page";
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
                                     string img = lnk.Attributes["src"].Value;
                                     string key = img.Split("/-".ToCharArray())[4];
-                                    rip.Imgs[key + ".jpg"] = "http://www.deskcity.com"  + img.Replace(img.Substring(img.LastIndexOf(key)), key + ".jpg");
+                                    rip.Imgs[key+".jpg"] = "http://www.deskcity.com" + img.Replace(img.Substring(img.LastIndexOf(key)), key + ".jpg");
                                 }
-                                next = doc.DocumentNode.SelectSingleNode("//div[@class='pagination']").LastChild;
-                                if (next.Attributes["href"] != null)
-                                    nextpage = next.Attributes["href"].Value;
-                                else
-                                    nextpage = null;
-                            }
+                                if (rip.Canceled) return "User Cancelled";
+                                HAP.HtmlNode next = doc.DocumentNode.SelectSingleNode("//div[@class='pagination']");
+                                if (next != null && next.HasChildNodes) next = next.LastChild; else return null;
+                                rip.NextPage = next.Attributes["href"] != null ? next.Attributes["href"].Value : null;
+                                if (rip.NextPage != null) doc = new HAP.HtmlWeb().Load("http://www.deskcity.com" + rip.NextPage);
+                            } while (rip.NextPage != null);
                         }
                         break;
 
@@ -497,43 +468,26 @@
                         {
                             rip.Title = rip.Title.Substring(0, rip.Title.LastIndexOf('-'));
                             var folder = url.Substring(0, url.LastIndexOf('/'));
-                            var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src][@alt][@title]");
-                            var wxh = doc.DocumentNode.SelectSingleNode("//h2/strong").InnerText.Split('|');
-                            var wh = wxh[wxh.Length-2].Replace('*', 'x').Trim();
-                            if (links == null || links.Count == 0) return "No picture found in this page";
-                            foreach (HAP.HtmlNode lnk in links)
+                            do
                             {
-                                string img = lnk.Attributes["src"].Value;
-                                string alt = lnk.Attributes["alt"].Value;
-                                if (alt.IndexOf(':') > 0) alt = alt.Substring(alt.IndexOf(':') + 1);
-                                string key = alt.Split('-')[0].Trim() + ".jpg";
-                                string mock = folder + string.Format("/wallpapers/{0}/{1}", wh, img.Split('/')[1]);
-                                rip.Imgs[key] = mock.Substring(0, mock.LastIndexOf('s')) + ".jpg";
-                            }
-                            var nextpage = doc.DocumentNode.SelectNodes("//a[@href][@class='navigationtext']");
-                            var next = nextpage[nextpage.Count - 1];
-                            if (next != null) rip.NextPage = next.InnerText.Contains("Next") ? folder + "/" + next.Attributes["href"].Value : null;
-                            while (rip.NextPage != null)
-                            {
-                                if (rip.Canceled) return "User Cancelled!";
-                                doc = new HAP.HtmlWeb().Load(rip.NextPage);
-                                links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src][@alt][@title]");
-                                wxh = doc.DocumentNode.SelectSingleNode("//h2/strong").InnerText.Split('|');
-                                wh = wxh[wxh.Length - 2].Replace('*', 'x').Trim();
+                                var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src][@alt][@title]");
                                 if (links == null || links.Count == 0) return "No picture found in this page";
+                                var wxh = doc.DocumentNode.SelectSingleNode("//h2/strong").InnerText.Split('|');
+                                var wh = wxh[wxh.Length - 2].Replace('*', 'x').Trim();
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
                                     string img = lnk.Attributes["src"].Value;
-                                    string alt = lnk.Attributes["alt"].Value;
-                                    if (alt.IndexOf(':') > 0) alt = alt.Substring(alt.IndexOf(':') + 1);
-                                    string key = alt.Split('-')[0].Trim() + ".jpg";
+                                    if (rip.Title.IndexOf(':') > 0) rip.Title = rip.Title.Substring(rip.Title.IndexOf(':') + 1);
+                                    string key = string.Format("{0}{1:00}.jpg", rip.Title, rip.Imgs.Count+1);
                                     string mock = folder + string.Format("/wallpapers/{0}/{1}", wh, img.Split('/')[1]);
                                     rip.Imgs[key] = mock.Substring(0, mock.LastIndexOf('s')) + ".jpg";
                                 }
-                                nextpage = doc.DocumentNode.SelectNodes("//a[@href][@class='navigationtext']");
-                                next = nextpage[nextpage.Count - 1];
-                                if (next != null) rip.NextPage = next.InnerText.Contains("Next") ? folder + "/" + next.Attributes["href"].Value : null;
-                            }
+                                if (rip.Canceled) return "User Cancelled!";
+                                var nextpage = doc.DocumentNode.SelectNodes("//a[@href][@class='navigationtext']");
+                                var next = nextpage[nextpage.Count - 1];
+                                if (next != null) rip.NextPage = next.InnerText.Contains("&gt") ? folder + "/" + next.Attributes["href"].Value : null;
+                                if (rip.NextPage != null) doc = new HAP.HtmlWeb().Load(rip.NextPage);
+                            } while (rip.NextPage != null);
                         }
                         break;
 

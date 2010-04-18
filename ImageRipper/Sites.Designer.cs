@@ -32,18 +32,19 @@
             // 
             // flSites
             // 
+            this.flSites.AutoScroll = true;
             this.flSites.BackColor = System.Drawing.Color.Gainsboro;
             this.flSites.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flSites.Location = new System.Drawing.Point(9, 9);
             this.flSites.Name = "flSites";
-            this.flSites.Size = new System.Drawing.Size(330, 114);
+            this.flSites.Size = new System.Drawing.Size(342, 108);
             this.flSites.TabIndex = 10;
             // 
             // Sites
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 132);
+            this.ClientSize = new System.Drawing.Size(360, 126);
             this.Controls.Add(this.flSites);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
