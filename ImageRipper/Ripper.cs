@@ -306,29 +306,22 @@
 
                     case ParseStyle.KeAiBbs:
                         {
-                            int countofpage = doc.DocumentNode.SelectNodes("//option").Count;
-                            var links = doc.DocumentNode.SelectNodes("//td/a/img[@src]");
-                            if (links == null || links.Count == 0) return "No picture found in this page";
-                            string path = "http://tuku.keaibbs.com" + url.Replace("/index.html", "");
-                            foreach (HAP.HtmlNode lnk in links)
-                            {
-                                string[] tokens = lnk.Attributes["src"].Value.Split('/');
-                                string key = tokens[tokens.Length - 1].Substring(2);
-                                rip.Imgs[key.Substring(0, key.LastIndexOf('_')) + ".jpg"] = path + "/originalimages/" + key;
-                            }
-                            for (int i = 2; i <= countofpage; i++)
+                            var countofpage = doc.DocumentNode.SelectNodes("//option").Count;
+                            var pageid = 1; var path = url.Substring(0, url.LastIndexOf('/'));
+                            do
                             {
                                 if (rip.Canceled) return "User Cancelled";
-                                Prompt = "Parsing... Page " + i + "/" + countofpage;
-                                doc = new HAP.HtmlWeb().Load(path + "/index" + i + ".html");
-                                links = doc.DocumentNode.SelectNodes("//td/a/img[@src]");
+                                var links = doc.DocumentNode.SelectNodes("//td/a/img[@src]");
+                                if (links == null || links.Count == 0) return "No picture found in this page";
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
                                     string[] tokens = lnk.Attributes["src"].Value.Split('/');
                                     string key = tokens[tokens.Length - 1].Substring(2);
                                     rip.Imgs[key.Substring(0, key.LastIndexOf('_')) + ".jpg"] = path + "/originalimages/" + key;
                                 }
-                            }
+                                pageid++; Prompt = string.Format("Parsing page {0} of {1}", pageid, countofpage);
+                                doc = new HAP.HtmlWeb().Load(string.Format("{0}/index{1}.html", path, pageid));
+                            } while (pageid <= countofpage);
                         }
                         break;
 
@@ -377,6 +370,7 @@
                         {
                             do
                             {
+                                if (rip.Canceled) return "User Cancelled";
                                 var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
                                 if (links == null || links.Count == 0) return "No picture found in this page";
                                 foreach (HAP.HtmlNode lnk in links)
@@ -392,7 +386,6 @@
                                     string name = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
                                     rip.Imgs[name] = address;
                                 }
-                                if (rip.Canceled) return "User Cancelled";
                                 HAP.HtmlNode nextpageNode = doc.DocumentNode.SelectSingleNode("//div/a[@class='next']");
                                 rip.NextPage = nextpageNode != null ? nextpageNode.Attributes["href"].Value : null;
                                 rip.NextPage = rip.NextPage != null ? "http://pal.ath.cx" + rip.NextPage : null;
@@ -409,6 +402,7 @@
                             rip.Title = rip.Title.Split('|')[0];
                             do
                             {
+                                if (rip.Canceled) return "User Cancelled";
                                 var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
                                 if (links == null || links.Count == 0) return "No picture found in this page";
                                 foreach (HAP.HtmlNode lnk in links)
@@ -417,7 +411,6 @@
                                     string key = img.Split("/-".ToCharArray())[4];
                                     rip.Imgs[key+".jpg"] = "http://www.deskcity.com" + img.Replace(img.Substring(img.LastIndexOf(key)), key + ".jpg");
                                 }
-                                if (rip.Canceled) return "User Cancelled";
                                 HAP.HtmlNode next = doc.DocumentNode.SelectSingleNode("//div[@class='pagination']");
                                 if (next != null && next.HasChildNodes) next = next.LastChild; else return null;
                                 rip.NextPage = next.Attributes["href"] != null ? next.Attributes["href"].Value : null;
@@ -434,29 +427,22 @@
                         {
                             var part = rip.Title.Split("[]".ToCharArray());
                             rip.Title = part[2]; int countofpage = int.Parse(part[part.Length-2].TrimEnd("pP".ToCharArray()));
-                            var links = doc.DocumentNode.SelectNodes("//p[@align]/img[@src]");
-                            if (links == null || links.Count == 0) return "No picture found in this page";
-                            foreach (HAP.HtmlNode lnk in links)
-                            {
-                                string img = lnk.Attributes["src"].Value;
-                                string key = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
-                                rip.Imgs[key] = "http://www.pics100.net" + img;
-                            }
-                            for (int i = 2; i <= countofpage; i++)
+                            int pageid = 1;
+                            do
                             {
                                 if (rip.Canceled) return "User Cancelled!";
-                                Prompt = string.Format("Parsing page {0} of {1}", i, countofpage);
-                                url = string.Format("{0}_{1}.html", url.LastIndexOf('_') > 0 ? url.Split('_')[0] : url.Replace(".html", ""), i);
-                                doc = new HAP.HtmlWeb().Load(url);
-                                links = doc.DocumentNode.SelectNodes("//p[@align]/img[@src]");
-                                if (links == null || links.Count == 0) break;
+                                var links = doc.DocumentNode.SelectNodes("//p[@align]/img[@src]");
+                                if (links == null || links.Count == 0) return "No picture found in this page";
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
                                     string img = lnk.Attributes["src"].Value;
                                     string key = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
                                     rip.Imgs[key] = "http://www.pics100.net" + img;
                                 }
-                            }
+                                pageid++; Prompt = string.Format("Parsing page {0} of {1}", pageid, countofpage);
+                                url = string.Format("{0}_{1}.html", url.LastIndexOf('_') > 0 ? url.Split('_')[0] : url.Replace(".html", ""), pageid);
+                                doc = new HAP.HtmlWeb().Load(url);
+                            } while (pageid <= countofpage);
                         }
                         break;
 
@@ -470,19 +456,19 @@
                             var folder = url.Substring(0, url.LastIndexOf('/'));
                             do
                             {
+                                if (rip.Canceled) return "User Cancelled!";
                                 var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src][@alt][@title]");
                                 if (links == null || links.Count == 0) return "No picture found in this page";
                                 var wxh = doc.DocumentNode.SelectSingleNode("//h2/strong").InnerText.Split('|');
                                 var wh = wxh[wxh.Length - 2].Replace('*', 'x').Trim();
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
-                                    string img = lnk.Attributes["src"].Value;
+                                    var img = lnk.Attributes["src"].Value;
                                     if (rip.Title.IndexOf(':') > 0) rip.Title = rip.Title.Substring(rip.Title.IndexOf(':') + 1);
-                                    string key = string.Format("{0}{1:00}.jpg", rip.Title, rip.Imgs.Count+1);
-                                    string mock = folder + string.Format("/wallpapers/{0}/{1}", wh, img.Split('/')[1]);
+                                    var key = string.Format("{0}{1:00}.jpg", rip.Title, rip.Imgs.Count+1);
+                                    var mock = folder + string.Format("/wallpapers/{0}/{1}", wh, img.Split('/')[1]);
                                     rip.Imgs[key] = mock.Substring(0, mock.LastIndexOf('s')) + ".jpg";
                                 }
-                                if (rip.Canceled) return "User Cancelled!";
                                 var nextpage = doc.DocumentNode.SelectNodes("//a[@href][@class='navigationtext']");
                                 var next = nextpage[nextpage.Count - 1];
                                 if (next != null) rip.NextPage = next.InnerText.Contains("&gt") ? folder + "/" + next.Attributes["href"].Value : null;
@@ -862,9 +848,8 @@
                 {
                     if (DialogResult.Yes == MessageBox.Show("Do you want to create new folder to store files?", "Invalid Directory!", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                     {
-                        if ((fbDir.ShowDialog()) == DialogResult.OK)
-                            Dir = fbDir.SelectedPath;
-                        else return false;
+                        try { Directory.CreateDirectory(Dir); return true; }
+                        catch (Exception exp) { MessageBox.Show(exp.Message, "Create Directory failed!", MessageBoxButtons.OK, MessageBoxIcon.Error); return false; }
                     }
                     else
                         return false;
