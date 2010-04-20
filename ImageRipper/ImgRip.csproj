@@ -84,6 +84,12 @@
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\crc32.cs">
       <Link>HtmlAgilityPack\crc32.cs</Link>
     </Compile>
+    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\EncodingFoundException.cs">
+      <Link>HtmlAgilityPack\EncodingFoundException.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\IOLibrary.cs">
+      <Link>HtmlAgilityPack\IOLibrary.cs</Link>
+    </Compile>
     <Compile Include="Sites.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -356,23 +362,14 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Fetcher.cs" />
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\EncodingFoundException.cs">
-      <Link>HtmlAgilityPack\EncodingFoundException.cs</Link>
-    </Compile>
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlAttribute.cs">
       <Link>HtmlAgilityPack\HtmlAttribute.cs</Link>
     </Compile>
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlAttributeCollection.cs">
       <Link>HtmlAgilityPack\HtmlAttributeCollection.cs</Link>
     </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlCmdLine.cs">
-      <Link>HtmlAgilityPack\HtmlCmdLine.cs</Link>
-    </Compile>
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlCommentNode.cs">
       <Link>HtmlAgilityPack\HtmlCommentNode.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlConsoleListener.cs">
-      <Link>HtmlAgilityPack\HtmlConsoleListener.cs</Link>
     </Compile>
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlDocument.cs">
       <Link>HtmlAgilityPack\HtmlDocument.cs</Link>
@@ -412,27 +409,6 @@
     </Compile>
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlWebException.cs">
       <Link>HtmlAgilityPack\HtmlWebException.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\IOLibrary.cs">
-      <Link>HtmlAgilityPack\IOLibrary.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\MixedCodeDocument.cs">
-      <Link>HtmlAgilityPack\MixedCodeDocument.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\MixedCodeDocumentCodeFragment.cs">
-      <Link>HtmlAgilityPack\MixedCodeDocumentCodeFragment.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\MixedCodeDocumentFragment.cs">
-      <Link>HtmlAgilityPack\MixedCodeDocumentFragment.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\MixedCodeDocumentFragmentList.cs">
-      <Link>HtmlAgilityPack\MixedCodeDocumentFragmentList.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\MixedCodeDocumentFragmentType.cs">
-      <Link>HtmlAgilityPack\MixedCodeDocumentFragmentType.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\MixedCodeDocumentTextFragment.cs">
-      <Link>HtmlAgilityPack\MixedCodeDocumentTextFragment.cs</Link>
     </Compile>
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\NameValuePair.cs">
       <Link>HtmlAgilityPack\NameValuePair.cs</Link>
