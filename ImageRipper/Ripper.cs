@@ -237,8 +237,6 @@
                 return ParseStyle.Heels;
             else if (host.Contains("duide"))
                 return ParseStyle.Duide;
-            else if (host.Contains("keaibbs"))
-                return ParseStyle.KeAiBbs;
             else if (host.Contains("tu11.cc"))
                 return ParseStyle.Tu11;
             else if (host.Contains("meituiji"))
@@ -300,31 +298,6 @@
                             }
                         }
                         break;
-                    #endregion
-
-                    #region Parse tuku.keaibbs.com site
-
-                    case ParseStyle.KeAiBbs:
-                        {
-                            var countofpage = doc.DocumentNode.SelectNodes("//option").Count;
-                            var pageid = 1; var path = url.Substring(0, url.LastIndexOf('/'));
-                            do
-                            {
-                                if (rip.Canceled) return "User Cancelled";
-                                var links = doc.DocumentNode.SelectNodes("//td/a/img[@src]");
-                                if (links == null || links.Count == 0) return "No picture found in this page";
-                                foreach (HAP.HtmlNode lnk in links)
-                                {
-                                    string[] tokens = lnk.Attributes["src"].Value.Split('/');
-                                    string key = tokens[tokens.Length - 1].Substring(2);
-                                    rip.Imgs[key.Substring(0, key.LastIndexOf('_')) + ".jpg"] = path + "/originalimages/" + key;
-                                }
-                                pageid++; Prompt = string.Format("Parsing page {0} of {1}", pageid, countofpage);
-                                doc = new HAP.HtmlWeb().Load(string.Format("{0}/index{1}.html", path, pageid));
-                            } while (pageid <= countofpage);
-                        }
-                        break;
-
                     #endregion
 
                     #region Parse Tu11.cc site
@@ -427,8 +400,7 @@
                         {
                             var part = rip.Title.Split("[]".ToCharArray());
                             rip.Title = part[2]; int countofpage = int.Parse(part[part.Length-2].TrimEnd("pP".ToCharArray()));
-                            int pageid = 1;
-                            do
+                           while(rip.Imgs.Count!=countofpage)
                             {
                                 if (rip.Canceled) return "User Cancelled!";
                                 var links = doc.DocumentNode.SelectNodes("//p[@align]/img[@src]");
@@ -439,10 +411,14 @@
                                     string key = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
                                     rip.Imgs[key] = "http://www.pics100.net" + img;
                                 }
-                                pageid++; Prompt = string.Format("Parsing page {0} of {1}", pageid, countofpage);
-                                url = string.Format("{0}_{1}.html", url.LastIndexOf('_') > 0 ? url.Split('_')[0] : url.Replace(".html", ""), pageid);
-                                doc = new HAP.HtmlWeb().Load(url);
-                            } while (pageid <= countofpage);
+                                if (rip.Imgs.Count == countofpage) break;
+                                Prompt = string.Format("Parsing page {0} of {1}", rip.Imgs.Count, countofpage);
+                               var mark=url.LastIndexOf('_');
+                               var nextpage=string.Format("{0}_{1}.html", mark>0?url.Substring(0,mark):url.Replace(".html",""), rip.Imgs.Count);
+                                if (nextpage.EndsWith("_1.html")) nextpage = nextpage.Replace("_1.html", ".html");
+                                if (nextpage.Equals(url, StringComparison.OrdinalIgnoreCase)) nextpage = string.Format("{0}_{1}.html", mark > 0 ? url.Substring(0, mark) : url.Replace(".html", ""), rip.Imgs.Count+1);
+                                doc = new HAP.HtmlWeb().Load(nextpage);
+                            }
                         }
                         break;
 
