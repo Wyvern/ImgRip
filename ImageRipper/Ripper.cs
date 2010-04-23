@@ -414,7 +414,7 @@
                                 if (rip.Imgs.Count == countofpage) break;
                                 Prompt = string.Format("Parsing page {0} of {1}", rip.Imgs.Count+1, countofpage);
                                var mark=url.LastIndexOf('_');
-                               var nextpage=string.Format("{0}_{1}.html", mark>0?url.Substring(0,mark):url.Replace(".html",""), rip.Imgs.Count);
+                               var nextpage = string.Format("{0}_{1}.html", mark > 0 ? url.Substring(0, mark) : url.Replace(".html", ""), rip.Imgs.Count);
                                 if (nextpage.EndsWith("_1.html")) nextpage = nextpage.Replace("_1.html", ".html");
                                 if (nextpage.Equals(url, StringComparison.OrdinalIgnoreCase)) nextpage = string.Format("{0}_{1}.html", mark > 0 ? url.Substring(0, mark) : url.Replace(".html", ""), rip.Imgs.Count+1);
                                 doc = new HAP.HtmlWeb().Load(nextpage);
