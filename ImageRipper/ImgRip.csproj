@@ -87,6 +87,9 @@
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\EncodingFoundException.cs">
       <Link>HtmlAgilityPack\EncodingFoundException.cs</Link>
     </Compile>
+    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlElementFlag.cs">
+      <Link>HtmlAgilityPack\HtmlElementFlag.cs</Link>
+    </Compile>
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\IOLibrary.cs">
       <Link>HtmlAgilityPack\IOLibrary.cs</Link>
     </Compile>
@@ -373,9 +376,6 @@
     </Compile>
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlDocument.cs">
       <Link>HtmlAgilityPack\HtmlDocument.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlElementFlag.cs">
-      <Link>HtmlAgilityPack\HtmlElementFlag.cs</Link>
     </Compile>
     <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlEntity.cs">
       <Link>HtmlAgilityPack\HtmlEntity.cs</Link>

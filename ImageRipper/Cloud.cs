@@ -5,13 +5,10 @@
     using System.Collections.ObjectModel;
     using System.IO;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Threading;
     using System.Windows.Forms;
-
-    using Google.GData.Client;
-    using Google.GData.Documents;
     using Google.Documents;
+    using Google.GData.Client;
     using Google.GData.Photos;
     using Google.Picasa;
 

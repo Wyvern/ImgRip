@@ -170,12 +170,10 @@
                             try
                             {
                                 using (Stream s = rip.GetStream(rip.Address, Settings.Default.Cookie))
+                                using (Image bmp = Image.FromStream(s))
                                 {
-                                    using (Image bmp = Image.FromStream(s))
-                                    {
-                                        s.Close(); bmp.Save(fi.ToString());
-                                        bmp.Dispose();
-                                    }
+                                    s.Close(); bmp.Save(fi.ToString());
+                                    bmp.Dispose();
                                 }
                                 succeed = true;
                             }
