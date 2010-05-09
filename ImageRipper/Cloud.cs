@@ -435,7 +435,7 @@
 
         void AddCloudFile(object arg)
         {
-            string[] files = arg as string[];
+            var files = arg as string[];
             switch (Service)
             {
                 #region GDrive

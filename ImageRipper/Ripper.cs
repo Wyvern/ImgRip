@@ -146,11 +146,11 @@
                 string Order = (idx + 1).ToString();
                 if (fi.Exists)
                 {
-                    SetListViewItem = new string[] { fi.Name, Order, fi.Length / 1024 + " KB", "Existed" };
+                    SetListViewItem = new [] { fi.Name, Order, fi.Length / 1024 + " KB", "Existed" };
                     continue;
                 }
                 if (mainSplit.Panel2Collapsed) mainSplit.Invoke(new Action(() => mainSplit.Panel2Collapsed = false));
-                SetListViewItem = new string[] { fi.Name, Order, null, "Downloading" };
+                SetListViewItem = new [] { fi.Name, Order, null, "Downloading" };
                 if (Batch) RipStatus.Invoke(new Action(() => lbBatch.Text = string.Format(" #{0}/{1} Pages", (Range - (To - From)), Range)));
                 try
                 {
@@ -169,8 +169,8 @@
                         {
                             try
                             {
-                                using (Stream s = rip.GetStream(rip.Address, Settings.Default.Cookie))
-                                using (Image bmp = Image.FromStream(s))
+                                using (var s = rip.GetStream(rip.Address, Settings.Default.Cookie))
+                                using (var bmp = Image.FromStream(s))
                                 {
                                     s.Close(); bmp.Save(fi.ToString());
                                     bmp.Dispose();
@@ -180,7 +180,7 @@
                             catch (Exception)
                             {
                                 if (RipCheck(Order, e)) return;
-                                SetListViewItem = new string[] { fi.Name, Order, null, "Check cookie / Wait 5 secs" };
+                                SetListViewItem = new [] { fi.Name, Order, null, "Check cookie / Wait 5 secs" };
                                 Thread.Sleep(5000);
                             }
                         }
@@ -194,25 +194,25 @@
                     }
                     #endregion
                     fi.Refresh();
-                    SetListViewItem = new string[] { fi.Name, Order, fi.Length / 1024 + " KB", "Finished" };
+                    SetListViewItem = new [] { fi.Name, Order, fi.Length / 1024 + " KB", "Finished" };
                     pbPreview.ImageLocation = rip.ImageLocation = fi.ToString();
                     bwFetch.ReportProgress((idx + 1) * 100 / rip.Imgs.Count);
                 }
                 catch (Exception exp)
                 {
-                    SetListViewItem = new string[] {  fi.Name,Order, null, exp.Message};
+                    SetListViewItem = new [] {  fi.Name,Order, null, exp.Message};
                 }
             }
         }
 
         bool RipCheck(string order, DoWorkEventArgs e)
         {
-            if (rip.Dropped) { rip.Dropped = false; SetListViewItem = new string[] { rip.Current.Name, order, null, "Dropped" }; return true; }
-            if (rip.Canceled) { e.Cancel = true; rip.NextPage = null; SetListViewItem = new string[] { rip.Current.Name, order, null, "Cancelled" }; return true; }
+            if (rip.Dropped) { rip.Dropped = false; SetListViewItem = new [] { rip.Current.Name, order, null, "Dropped" }; return true; }
+            if (rip.Canceled) { e.Cancel = true; rip.NextPage = null; SetListViewItem = new [] { rip.Current.Name, order, null, "Cancelled" }; return true; }
             if (rip.SkipPage)
             {
                 rip.SkipPage = false;
-                SetListViewItem = new string[] { rip.Current.Name, order, null, "Skipped" };
+                SetListViewItem = new [] { rip.Current.Name, order, null, "Skipped" };
                 return true;
             }
             return false;
