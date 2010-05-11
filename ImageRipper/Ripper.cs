@@ -9,9 +9,10 @@
     using System.Web;
     using System.Threading;
     using System.Windows.Forms;
-
+    
     using ImgRipper.Properties;
     using HAP = HtmlAgilityPack;
+    using System.Reflection;
     partial class Ripper : Form
     {
         Fetcher rip = new Fetcher();
@@ -259,7 +260,7 @@
             Prompt = "Parsing " + Enum.GetName(typeof(ParseStyle), rip.Style);
             try
             {
-                var doc = new HAP.HtmlWeb() { AutoDetectEncoding=true}.Load(url);
+                var doc = new HAP.HtmlWeb() { AutoDetectEncoding = true }.Load(url);
                 rip.Title = doc.DocumentNode.SelectSingleNode("//title").InnerText;
                 switch (rip.Style)
                 {

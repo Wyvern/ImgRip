@@ -29,7 +29,7 @@
             }
             else
             {
-                ToolTip tt = new ToolTip();
+                var tt = new ToolTip();
                 tt.IsBalloon = true;
                 tt.ToolTipIcon = ToolTipIcon.Warning;
                 tt.ToolTipTitle = "Invalid Range";

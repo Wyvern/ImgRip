@@ -7,10 +7,12 @@
     using System.Linq;
     using System.Threading;
     using System.Windows.Forms;
+
     using Google.Documents;
     using Google.GData.Client;
     using Google.GData.Photos;
     using Google.Picasa;
+    using System.Reflection;
 
     partial class WebCloud : Form
     {
@@ -29,7 +31,7 @@
         DocumentsRequest DR;
         PicasaRequest PR;
         public string AlbumID { get; set; }
-
+        
         internal static CloudType Service { get; set; }
 
         // Supported Cloud storage service
