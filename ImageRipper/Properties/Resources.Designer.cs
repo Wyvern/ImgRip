@@ -88,6 +88,20 @@ namespace ImgRipper.Properties {
             }
         }
         
+        internal static byte[] GData {
+            get {
+                object obj = ResourceManager.GetObject("GData", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        internal static byte[] HAP {
+            get {
+                object obj = ResourceManager.GetObject("HAP", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
         internal static System.Drawing.Bitmap Login {
             get {
                 object obj = ResourceManager.GetObject("Login", resourceCulture);

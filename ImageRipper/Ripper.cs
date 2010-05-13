@@ -7,6 +7,7 @@
     using System.IO;
     using System.Net;
     using System.Web;
+    using System.Linq;
     using System.Threading;
     using System.Windows.Forms;
     
@@ -104,7 +105,6 @@
                     tbParse.ReadOnly = true;
                     tbDir.ReadOnly = true;
                     Settings.Default.Save();
-                    //Begin download action
                     bwFetch.RunWorkerAsync();
                     ((Button) sender).Image = Resources.Cancel;
                     rip.PushState = RipperAction.Cancel;
@@ -130,6 +130,11 @@
 
         private void Fetch_DoWork(object sender, DoWorkEventArgs e)
         {
+            if (!AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.Split(',')[0] == "HAP"))
+            {
+                var asm = AppDomain.CurrentDomain.Load(Resources.HAP);
+                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((o, a) => a.Name.Split(',')[0] == "HAP" ? asm : null);
+            }
             if ((e.Result = Parse(Address)) != null) return;
             if (rip.Canceled) { e.Result = "User Cancelled!"; rip.NextPage = null; return; }
             FetchFile(e);
@@ -397,8 +402,8 @@
                     
                     case ParseStyle.Pics100:
                         {
-                            var part = rip.Title.Split("[]".ToCharArray());
-                            rip.Title = part[2]; int countofpage = int.Parse(part[part.Length-2].TrimEnd("pP".ToCharArray()));
+                            var part = rip.Title.Split('[',']');
+                            rip.Title = part[2]; int countofpage = int.Parse(part[part.Length-2].TrimEnd('p','P'));
                            while(rip.Imgs.Count!=countofpage)
                             {
                                 if (rip.Canceled) return "User Cancelled!";

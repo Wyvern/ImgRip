@@ -61,6 +61,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>
+    </DocumentationFile>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -201,6 +204,8 @@
     <EmbeddedResource Include="Icons\icon.ico" />
     <None Include="Resources\files.bmp" />
     <None Include="Resources\Login.bmp" />
+    <None Include="HAP\bin\Release\HAP.dll" />
+    <None Include="GData\bin\Release\GData.dll" />
     <Content Include="Resources\New.bmp" />
     <Content Include="Resources\Delete.bmp" />
     <None Include="Resources\Up.bmp" />
@@ -209,14 +214,14 @@
     <ProjectReference Include="GData\GData.csproj">
       <Project>{510070A4-28D1-4362-BAB5-54984A9F75BF}</Project>
       <Name>GData</Name>
-      <Private>True</Private>
+      <Private>False</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
     <ProjectReference Include="HAP\HAP.csproj">
       <Project>{F39EA302-4440-4BFC-9071-5321E36C2C4C}</Project>
       <Name>HAP</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

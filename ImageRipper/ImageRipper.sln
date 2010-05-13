@@ -17,14 +17,14 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs02.codeplex.com/
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ImgRip.csproj
-		SccLocalPath1 = .
-		SccProjectUniqueName2 = HAP\\HAP.csproj
-		SccProjectName2 = HAP
-		SccLocalPath2 = HAP
-		SccProjectUniqueName3 = GData\\GData.csproj
-		SccProjectName3 = GData
-		SccLocalPath3 = GData
+		SccProjectUniqueName1 = HAP\\HAP.csproj
+		SccProjectName1 = HAP
+		SccLocalPath1 = HAP
+		SccProjectUniqueName2 = GData\\GData.csproj
+		SccProjectName2 = GData
+		SccLocalPath2 = GData
+		SccProjectUniqueName3 = ImageRipper.csproj
+		SccLocalPath3 = .
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

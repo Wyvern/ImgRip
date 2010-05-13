@@ -19,6 +19,11 @@
         public WebCloud()
         {
             InitializeComponent();
+            if (!AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.Split(',')[0] == "GData"))
+            {
+                var asm = AppDomain.CurrentDomain.Load(Properties.Resources.GData);
+                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((o, a) => a.Name.Split(',')[0] == "GData" ? asm : null);
+            }
         }
 
         string LoginName { get { return tbName.Text.Trim(); } }
