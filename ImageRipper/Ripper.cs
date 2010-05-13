@@ -18,8 +18,8 @@
     {
         Fetcher rip = new Fetcher();
         bool FullScreen { get; set; }
-        public int Range { get; set; }
-        public bool Batch { get; set; }
+        internal int Range { get; set; }
+        internal bool Batch { get; set; }
 
         public Ripper()
         {
@@ -81,8 +81,8 @@
             }
         }
 
-        public int From { get; set; }
-        public int To { get; set; }
+        internal int From { get; set; }
+        internal int To { get; set; }
 
         internal string Dir
         {
@@ -130,10 +130,10 @@
 
         private void Fetch_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (!AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.Split(',')[0] == "HAP"))
+            if (!AppDomain.CurrentDomain.GetAssemblies().Any(a => a.GetName().Name == "HAP"))
             {
                 var asm = AppDomain.CurrentDomain.Load(Resources.HAP);
-                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((o, a) => a.Name.Split(',')[0] == "HAP" ? asm : null);
+                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((o, a) => a.Name == asm.FullName ? asm : null);
             }
             if ((e.Result = Parse(Address)) != null) return;
             if (rip.Canceled) { e.Result = "User Cancelled!"; rip.NextPage = null; return; }

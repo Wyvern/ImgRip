@@ -19,10 +19,10 @@
         public WebCloud()
         {
             InitializeComponent();
-            if (!AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName.Split(',')[0] == "GData"))
+            if (!AppDomain.CurrentDomain.GetAssemblies().Any(a => a.GetName().Name == "GData"))
             {
                 var asm = AppDomain.CurrentDomain.Load(Properties.Resources.GData);
-                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((o, a) => a.Name.Split(',')[0] == "GData" ? asm : null);
+                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((o, a) => a.Name == asm.FullName ? asm : null);
             }
         }
 
