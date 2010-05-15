@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ripper));
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.llSites = new System.Windows.Forms.LinkLabel();
-            this.btnDownloadCancel = new Wyvern.SplitButton();
+            this.btnDownloadCancel = new SplitButton();
             this.cmsBatch = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnBatch = new System.Windows.Forms.ToolStripMenuItem();
             this.tbParse = new System.Windows.Forms.TextBox();
@@ -535,7 +535,7 @@
 
         #endregion
 
-        private Wyvern.SplitButton btnDownloadCancel;
+        private SplitButton btnDownloadCancel;
         private System.Windows.Forms.TextBox tbDir;
         private System.Windows.Forms.FolderBrowserDialog fbDir;
         private System.Windows.Forms.Label lblUrl;

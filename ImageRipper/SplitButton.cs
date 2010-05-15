@@ -1,12 +1,12 @@
-﻿using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
-
-namespace Wyvern
+﻿namespace ImgRipper
 {
+    using System;
+    using System.ComponentModel;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.Windows.Forms;
+    using System.Windows.Forms.VisualStyles;
+
     [DefaultProperty("ShowSplit")]
     public class SplitButton : Button
     {
