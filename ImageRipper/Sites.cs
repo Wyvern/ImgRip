@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Windows.Forms;
-
-namespace ImgRipper
+﻿namespace ImgRipper
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Windows.Forms;
+
     partial class Sites : Form
     {
         public Sites()
