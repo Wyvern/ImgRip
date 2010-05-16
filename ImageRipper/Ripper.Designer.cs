@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ripper));
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.llSites = new System.Windows.Forms.LinkLabel();
-            this.btnDownloadCancel = new SplitButton();
+            this.btnDownloadCancel = new ImgRipper.SplitButton();
             this.cmsBatch = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnBatch = new System.Windows.Forms.ToolStripMenuItem();
             this.tbParse = new System.Windows.Forms.TextBox();
@@ -518,7 +518,7 @@
             this.MinimumSize = new System.Drawing.Size(450, 300);
             this.Name = "Ripper";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Image Ripper - F11: FullScreen, (Shift+) Space: Switch Preview Panel";
+            this.Text = "Image Ripper - F11: FullScreen mode, [Shift+] Space: Switch Preview";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Ripper_KeyDown);
             this.mainSplit.Panel1.ResumeLayout(false);
             this.mainSplit.Panel1.PerformLayout();

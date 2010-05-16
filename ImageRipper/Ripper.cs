@@ -11,6 +11,7 @@
     using ImgRipper.Properties;
     using HAP = HtmlAgilityPack;
     using System.Collections.Generic;
+
     partial class Ripper : Form
     {
         Fetcher rip = new Fetcher();
