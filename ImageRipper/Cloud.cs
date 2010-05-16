@@ -12,7 +12,6 @@
     using Google.GData.Client;
     using Google.GData.Photos;
     using Google.Picasa;
-    using System.Reflection;
 
     partial class WebCloud : Form
     {
@@ -22,7 +21,7 @@
             if (!AppDomain.CurrentDomain.GetAssemblies().Any(a => a.GetName().Name == "GData"))
             {
                 var asm = AppDomain.CurrentDomain.Load(Properties.Resources.GData);
-                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((o, a) => a.Name == asm.FullName ? asm : null);
+                AppDomain.CurrentDomain.AssemblyResolve += (o, a) => a.Name == asm.FullName ? asm : null;
             }
         }
 

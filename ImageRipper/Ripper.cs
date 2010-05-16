@@ -5,15 +5,12 @@
     using System.Diagnostics;
     using System.Drawing;
     using System.IO;
-    using System.Net;
-    using System.Web;
     using System.Linq;
     using System.Threading;
     using System.Windows.Forms;
-    
     using ImgRipper.Properties;
     using HAP = HtmlAgilityPack;
-    using System.Reflection;
+    using System.Collections.Generic;
     partial class Ripper : Form
     {
         Fetcher rip = new Fetcher();
@@ -90,7 +87,7 @@
             set { tbDir.Text = value; }
         }
 
-       public string Address
+        public string Address
         {
             get { return tbParse.Text; }
             set { tbParse.Text = value; }
@@ -133,7 +130,7 @@
             if (!AppDomain.CurrentDomain.GetAssemblies().Any(a => a.GetName().Name == "HAP"))
             {
                 var asm = AppDomain.CurrentDomain.Load(Resources.HAP);
-                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler((o, a) => a.Name == asm.FullName ? asm : null);
+                AppDomain.CurrentDomain.AssemblyResolve += (o, a) => a.Name == asm.FullName ? asm : null;
             }
             if ((e.Result = Parse(Address)) != null) return;
             if (rip.Canceled) { e.Result = "User Cancelled!"; rip.NextPage = null; return; }
@@ -710,7 +707,7 @@
 
         private void cmmiDownloadFile(object sender, EventArgs e)
         {
-            var args = new System.Collections.Generic.List<DownloadFileArgs>();
+            var args = new List<DownloadFileArgs>();
             foreach (ListViewItem lvi in lvRip.SelectedItems)
             {
                 if (!File.Exists(Path.Combine(Dir, lvi.Text)))

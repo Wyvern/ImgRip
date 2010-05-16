@@ -2,10 +2,9 @@
 {
     using System;
     using System.Collections.Specialized;
-    using System.Drawing;
     using System.IO;
-    using System.Threading;
     using System.Net;
+    using System.Threading;
     
     class Fetcher
     {
@@ -14,7 +13,7 @@
             Imgs = new NameValueCollection();
         }
         WebClient wc;
-        #region Properties definitions
+        #region Properties Definitions
         public NameValueCollection Imgs { get; set; }
         public bool Canceled { get; set; }
         public bool Dropped { get; set; }
@@ -35,11 +34,11 @@
             {
                 wc.Headers["Cookie"] = string.Format("JSESSIONID={0}", cookie);
                 var mre = new ManualResetEvent(false);
-                wc.OpenReadCompleted += (s, e) => { if (e.Cancelled) return; r = e.Result; mre.Set(); };
+                wc.OpenReadCompleted += (s, e) => { if (!e.Cancelled) r = e.Result; mre.Set(); };
                 wc.OpenReadAsync(new Uri(url));
                 mre.WaitOne(); mre.Close();
-                return r;
             }
+            return r;
         }
 
         public void GetFile(string url, string file)
@@ -55,8 +54,7 @@
         }
         public void Cancel()
         {
-            if (wc != null)
-                wc.CancelAsync();
+            if (wc != null) wc.CancelAsync();
         }
 
         public void Reset()

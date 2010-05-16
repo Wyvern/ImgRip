@@ -3,8 +3,6 @@
     using System;
     using System.Windows.Forms;
 
-    using ImgRipper.Properties;
-
     partial class Batch : Form
     {
         int _seed;
