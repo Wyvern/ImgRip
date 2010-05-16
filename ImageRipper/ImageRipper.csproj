@@ -204,8 +204,6 @@
     <EmbeddedResource Include="Icons\icon.ico" />
     <None Include="Resources\files.bmp" />
     <None Include="Resources\Login.bmp" />
-    <None Include="HAP\bin\Release\HAP.dll" />
-    <None Include="GData\bin\Release\GData.dll" />
     <Content Include="Resources\New.bmp" />
     <Content Include="Resources\Delete.bmp" />
     <None Include="Resources\Up.bmp" />
