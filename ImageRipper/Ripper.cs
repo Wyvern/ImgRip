@@ -153,7 +153,7 @@
                     SetListViewItem = new [] { fi.Name, Order, fi.Length / 1024 + " KB", "Existed" };
                     continue;
                 }
-                if (mainSplit.Panel2Collapsed) mainSplit.Invoke(new Action(() => mainSplit.Panel2Collapsed = false));
+               
                 SetListViewItem = new [] { fi.Name, Order, null, "Downloading" };
                 if (Batch) RipStatus.Invoke(new Action(() => lbBatch.Text = string.Format(" #{0}/{1} Pages", (Range - (To - From)), Range)));
                 try
@@ -184,7 +184,7 @@
                             catch (Exception)
                             {
                                 if (RipCheck(Order, e)) return;
-                                SetListViewItem = new [] { fi.Name, Order, null, "Check cookie / Wait 5 secs" };
+                                SetListViewItem = new [] { fi.Name, Order, null, "Check Cookie / Wait 5 secs" };
                                 Thread.Sleep(5000);
                             }
                         }
@@ -197,6 +197,7 @@
                         if (RipCheck(Order, e)) return;
                     }
                     #endregion
+                    if (mainSplit.Panel2Collapsed) mainSplit.Invoke(new Action(() => mainSplit.Panel2Collapsed = false));
                     fi.Refresh();
                     SetListViewItem = new [] { fi.Name, Order, fi.Length / 1024 + " KB", "Finished" };
                     pbPreview.ImageLocation = rip.ImageLocation = fi.ToString();

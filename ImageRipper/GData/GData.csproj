@@ -175,9 +175,6 @@
     <Compile Include="F:\Code\GData\core\HttpUtility.cs">
       <Link>Core\HttpUtility.cs</Link>
     </Compile>
-    <Compile Include="F:\Code\GData\core\logrequest.cs">
-      <Link>Core\logrequest.cs</Link>
-    </Compile>
     <Compile Include="F:\Code\GData\core\mediaservice.cs">
       <Link>Core\mediaservice.cs</Link>
     </Compile>
@@ -195,9 +192,6 @@
     </Compile>
     <Compile Include="F:\Code\GData\core\request.cs">
       <Link>Core\request.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\GData\core\resumableupload.cs">
-      <Link>Core\resumableupload.cs</Link>
     </Compile>
     <Compile Include="F:\Code\GData\core\rssfeedparser.cs">
       <Link>Core\rssfeedparser.cs</Link>

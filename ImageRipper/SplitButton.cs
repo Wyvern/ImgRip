@@ -7,8 +7,6 @@
     using System.Windows.Forms;
     using System.Windows.Forms.VisualStyles;
 
-    [Description("Three arrow Split Button control")]
-    [DefaultProperty("ShowSplit")]
     internal class SplitButton : Button
     {
         private PushButtonState _state;
@@ -27,6 +25,10 @@
         [Description("Check to set whether to show context menu")]
         public bool ShowSplit
         {
+            get
+            {
+                return showSplit;
+            }
             set
             {
                 if (value != showSplit)
