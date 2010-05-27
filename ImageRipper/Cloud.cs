@@ -27,7 +27,7 @@
 
         string LoginName { get { return tbName.Text.Trim(); } }
         bool Aborted = false;
-        string Prompt { set { cldStatus.Invoke(new Action(() => CloudStatus.Text = value)); } }
+        string Prompt { set { if (cldStatus.IsHandleCreated) cldStatus.Invoke(new Action(() => CloudStatus.Text = value)); } }
         
         //Local ListViewItems memory cache
         Collection<ListViewItem> cldCache;
@@ -54,7 +54,8 @@
                     DR = new DocumentsRequest(new RequestSettings("Ripper", LoginName, tbPass.Text) {AutoPaging=true});
                     new Thread(new ThreadStart(() =>
                     {
-                        try { 
+                        try
+                        {
                             DR.Service.QueryClientLoginToken();
                             var items = DR.GetFolders().Entries;
                             foreach (var item in items)
