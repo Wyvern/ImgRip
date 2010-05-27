@@ -347,7 +347,7 @@
                             do
                             {
                                 if (rip.Canceled) return "User Cancelled";
-                                var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src]");
+                                var links = doc.DocumentNode.SelectNodes("//a[@href]/img[@src][@class]");
                                 if (links == null || links.Count == 0) return "No picture found in this page";
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
