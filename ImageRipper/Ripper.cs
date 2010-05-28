@@ -248,10 +248,12 @@
                 return ParseStyle.PalAthCx;
             else if (host.Contains("deskcity"))
                 return ParseStyle.DeskCity;
-            if (host.Contains("pics100"))
+            else if (host.Contains("pics100"))
                 return ParseStyle.Pics100;
             else if (host.Contains("wallcoo.net") || host.Contains("wallcoo.com"))
                 return ParseStyle.WallCoo;
+            else if (host.Contains("mtswa"))
+                return ParseStyle.Mtswa;
             else return ParseStyle.NotSupport;
         }
 
@@ -411,8 +413,8 @@
                                 foreach (HAP.HtmlNode lnk in links)
                                 {
                                     string img = lnk.Attributes["src"].Value;
-                                    string key = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
-                                    rip.Imgs[key] = "http://www.pics100.net" + img;
+                                    string name = string.Format("{0} {1:000}.jpg", rip.Title, rip.Imgs.Count);
+                                    rip.Imgs[name] = "http://www.pics100.net" + img;
                                 }
                                 if (rip.Imgs.Count == countofpage) break;
                                 Prompt = string.Format("Parsing page {0} of {1}", rip.Imgs.Count+1, countofpage);
@@ -456,6 +458,27 @@
                         }
                         break;
 
+                    #endregion
+
+                    #region Parse Mtswa.com site
+                    case ParseStyle.Mtswa:
+                        {
+                            rip.Title = rip.Title.Split('-')[0];
+                            var links = doc.DocumentNode.SelectNodes("//img[@onload][@onclick]");
+                            if (links == null || links.Count == 0) return "No picture found in this page";
+                            var nextpageNode = doc.DocumentNode.SelectSingleNode("//div[@class='cPageBox']").LastChild.FirstChild;
+                            var pageid = doc.DocumentNode.SelectSingleNode("//li[@class='thisclass']/a[@href='#']").InnerText;
+                            var id = int.Parse(pageid) - 1;
+                            rip.NextPage = nextpageNode.Attributes["href"].Value;
+                            rip.NextPage = rip.NextPage == "#" ? null : url.Substring(0, url.LastIndexOf('/') + 1) + rip.NextPage;
+                            foreach (HAP.HtmlNode lnk in links)
+                            {
+                                string address = lnk.Attributes["src"].Value; 
+                                string name = string.Format("{0} {1:000}.jpg", rip.Title, 4*id+ rip.Imgs.Count);
+                                rip.Imgs[name] = address;
+                            }
+                        }
+                        break;
                     #endregion
 
                     case ParseStyle.NotSupport:

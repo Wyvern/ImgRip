@@ -10,7 +10,7 @@
         public Sites()
         {
             InitializeComponent();
-            var Sites = new Dictionary<string, string>() { { "Pics100", "http://pics100.net" }, { "Duide", "http://duide.com" }, { "Tu11", "http://tu11.cc" }, { "MeiTuiJi", "http://meituiji.com" }, { "PalAthCx", "http://pal.ath.cx" }, { "DeskCity", "http://deskcity.com" }, { "Heels", "http://www.heels.cn/web/index" }, { "WallCoo", "http://www.wallcoo.net" }};
+            var Sites = new Dictionary<string, string>() { { "Pics100", "http://pics100.net" }, { "Duide", "http://duide.com" }, { "Tu11", "http://tu11.cc" }, { "MeiTuiJi", "http://meituiji.com" }, { "PalAthCx", "http://pal.ath.cx" }, { "DeskCity", "http://deskcity.com" }, { "Heels", "http://www.heels.cn/web/index" }, { "WallCoo", "http://www.wallcoo.net" }, { "Mtswa", "http://www.mtswa.com" } };
             foreach (var site in Sites)
             {
                 var item = new LinkLabel() { Text = site.Key, Font = new Font("Georgia", 15f), Tag = site.Value, Margin = new Padding(5) };
