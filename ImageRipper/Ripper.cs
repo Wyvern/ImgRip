@@ -254,6 +254,12 @@
                 return ParseStyle.WallCoo;
             else if (host.Contains("mtswa"))
                 return ParseStyle.Mtswa;
+            else if (host.Contains("ttmnw"))
+                return ParseStyle.Ttmnw;
+            else if (host.Contains("xyuba"))
+                return ParseStyle.Xyuba;
+            else if (host.Contains("yzmnw"))
+                return ParseStyle.Yzmnw;
             else return ParseStyle.NotSupport;
         }
 
@@ -326,16 +332,16 @@
                     #region Parse MeiTuiJi.com site
                     case ParseStyle.MeiTuiJi:
                         {
-                            rip.Title = doc.DocumentNode.SelectSingleNode("//div[@id='newsName']").InnerText;
+                            rip.Title = rip.Title = rip.Title.Split('-')[0];
                             string pageName = url.Substring(url.LastIndexOf('/') + 1);
                             var nextpageNode = doc.DocumentNode.SelectSingleNode("//ul[@class='pagelist']/li[last()]/a");
                             rip.NextPage = nextpageNode.Attributes["href"].Value;
                             rip.NextPage = rip.NextPage != "#" ? url.Replace(pageName, rip.NextPage) : null;
-                            var links = doc.DocumentNode.SelectNodes("//div[@id='newsContent']/a[@href]");
+                            var links = doc.DocumentNode.SelectNodes("//img[@src][@onload]");
                             if (links == null || links.Count == 0) return "No picture found in this page";
                             foreach (HAP.HtmlNode lnk in links)
                             {
-                                string address = "http://www.meituiji.com" + lnk.Attributes["href"].Value;
+                                string address = "http://www.meituiji.com" + lnk.Attributes["src"].Value;
                                 string name = address.Substring(address.LastIndexOf('/') + 1);
                                 rip.Imgs[name] = address;
                             }
@@ -460,21 +466,28 @@
 
                     #endregion
 
-                    #region Parse Mtswa.com site
+                    #region Parse [Mtswa|Ttmnw|Yzmnw|Xyuba].com sites
                     case ParseStyle.Mtswa:
+                    case ParseStyle.Ttmnw:
+                    case ParseStyle.Yzmnw:
+                    case ParseStyle.Xyuba:
                         {
                             rip.Title = rip.Title.Split('-')[0];
-                            var links = doc.DocumentNode.SelectNodes("//img[@onload][@onclick]");
+                            var links = doc.DocumentNode.SelectNodes("//img[@src]" + (rip.Style != ParseStyle.Xyuba ? "[@onload]" : "[@id='bigimg']"));
                             if (links == null || links.Count == 0) return "No picture found in this page";
-                            var nextpageNode = doc.DocumentNode.SelectSingleNode("//div[@class='cPageBox']").LastChild.FirstChild;
+                            HAP.HtmlNode nextpageNode;
+                            if (rip.Style == ParseStyle.Mtswa || rip.Style == ParseStyle.Ttmnw)
+                                nextpageNode = doc.DocumentNode.SelectSingleNode("//div[@class='cPageBox']/li[last()]/a");
+                            else
+                                nextpageNode = doc.DocumentNode.SelectSingleNode("//ul[@class='pagelist']/li[last()]/a");
                             var pageid = doc.DocumentNode.SelectSingleNode("//li[@class='thisclass']/a[@href='#']").InnerText;
                             var id = int.Parse(pageid) - 1;
                             rip.NextPage = nextpageNode.Attributes["href"].Value;
                             rip.NextPage = rip.NextPage == "#" ? null : url.Substring(0, url.LastIndexOf('/') + 1) + rip.NextPage;
                             foreach (HAP.HtmlNode lnk in links)
                             {
-                                string address = lnk.Attributes["src"].Value; 
-                                string name = string.Format("{0} {1:000}.jpg", rip.Title, 4*id+ rip.Imgs.Count);
+                                string address = (rip.Style == ParseStyle.Xyuba ? "http://www.xyuba.com" : string.Empty) + lnk.Attributes["src"].Value;
+                                string name = string.Format("{0} {1:000}.jpg", rip.Title, (rip.Style == ParseStyle.Xyuba ? 3 : 4)*id+ rip.Imgs.Count);
                                 rip.Imgs[name] = address;
                             }
                         }

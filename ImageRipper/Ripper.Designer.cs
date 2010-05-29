@@ -164,17 +164,8 @@
             this.tbParse.AllowDrop = true;
             this.tbParse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbParse.AutoCompleteCustomSource.AddRange(new string[] {
-            "http://pics100.net/<category>/<pageid>",
-            "http://www.deskcity.com/details/picture/<id>.html",
-            "http://wallcoo.com/<category>/<album>/index.html",
-            "http://www.heels.cn/web/viewthread?thread=<id>",
-            "http://www.duide.com/ggfdrdsuy/[a|b|c]<id>.htm",
-            "http://meituiji.com/<category>/<Year>/<Month><Date>/<Id>.html",
-            "http://tu11.cc/new/<category>/<DateTime>.htm",
-            "http://pal.ath.cx/<id>/<category>/<start-end>/<albumid>/"});
             this.tbParse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.tbParse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.tbParse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
             this.tbParse.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "txtUrl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbParse.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
             this.tbParse.Location = new System.Drawing.Point(43, 13);
