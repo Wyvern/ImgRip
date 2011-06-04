@@ -1,4 +1,4 @@
-﻿namespace ImgRipper
+﻿namespace ImgRip
 {
     partial class WebCloud
     {
@@ -65,7 +65,7 @@
             this.lvCloud.Location = new System.Drawing.Point(0, 118);
             this.lvCloud.Name = "lvCloud";
             this.lvCloud.ShowItemToolTips = true;
-            this.lvCloud.Size = new System.Drawing.Size(627, 317);
+            this.lvCloud.Size = new System.Drawing.Size(627, 320);
             this.lvCloud.SmallImageList = this.lvImageList;
             this.lvCloud.TabIndex = 1;
             this.lvCloud.UseCompatibleStateImageBehavior = false;
@@ -92,7 +92,7 @@
             this.lblCloudID.AutoSize = true;
             this.lblCloudID.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.lblCloudID.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblCloudID.Location = new System.Drawing.Point(4, 24);
+            this.lblCloudID.Location = new System.Drawing.Point(29, 24);
             this.lblCloudID.Name = "lblCloudID";
             this.lblCloudID.Size = new System.Drawing.Size(51, 19);
             this.lblCloudID.TabIndex = 3;
@@ -103,7 +103,7 @@
             this.lblPass.AutoSize = true;
             this.lblPass.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.lblPass.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblPass.Location = new System.Drawing.Point(4, 63);
+            this.lblPass.Location = new System.Drawing.Point(4, 74);
             this.lblPass.Name = "lblPass";
             this.lblPass.Size = new System.Drawing.Size(76, 19);
             this.lblPass.TabIndex = 4;
@@ -135,17 +135,21 @@
             this.txtFolderName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFolderName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFolderName.Enabled = false;
-            this.txtFolderName.Location = new System.Drawing.Point(434, 79);
+            this.txtFolderName.Location = new System.Drawing.Point(434, 80);
             this.txtFolderName.Name = "txtFolderName";
             this.txtFolderName.Size = new System.Drawing.Size(171, 25);
             this.txtFolderName.TabIndex = 12;
             this.ttCloud.SetToolTip(this.txtFolderName, "Type to search or add new album");
+            this.txtFolderName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtFolderName_MouseClick);
             this.txtFolderName.TextChanged += new System.EventHandler(this.txtFolderName_TextChanged);
             this.txtFolderName.Enter += new System.EventHandler(this.txtFolderName_Enter);
             this.txtFolderName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFolderName_KeyPress);
+            this.txtFolderName.Leave += new System.EventHandler(this.txtFolderName_Leave);
             // 
             // gpLogin
             // 
+            this.gpLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.gpLogin.Controls.Add(this.tbName);
             this.gpLogin.Controls.Add(this.btnSign);
             this.gpLogin.Controls.Add(this.lblCloudID);
@@ -155,47 +159,53 @@
             this.gpLogin.ForeColor = System.Drawing.Color.BlueViolet;
             this.gpLogin.Location = new System.Drawing.Point(12, 5);
             this.gpLogin.Name = "gpLogin";
-            this.gpLogin.Size = new System.Drawing.Size(347, 100);
+            this.gpLogin.Size = new System.Drawing.Size(347, 106);
             this.gpLogin.TabIndex = 13;
             this.gpLogin.TabStop = false;
             this.gpLogin.Text = "Login";
             // 
             // tbName
             // 
-            this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "CloudID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbName.Location = new System.Drawing.Point(82, 21);
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRip.Properties.Settings.Default, "CloudID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbName.Location = new System.Drawing.Point(82, 24);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(194, 25);
             this.tbName.TabIndex = 0;
-            this.tbName.Text = global::ImgRipper.Properties.Settings.Default.CloudID;
+            this.tbName.Text = global::ImgRip.Properties.Settings.Default.CloudID;
             // 
             // btnSign
             // 
+            this.btnSign.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSign.AutoSize = true;
             this.btnSign.Font = new System.Drawing.Font("Microsoft YaHei", 10F);
-            this.btnSign.Image = global::ImgRipper.Properties.Resources.Login;
-            this.btnSign.Location = new System.Drawing.Point(282, 28);
+            this.btnSign.Image = ((System.Drawing.Image)(resources.GetObject("btnSign.Image")));
+            this.btnSign.Location = new System.Drawing.Point(282, 31);
             this.btnSign.Name = "btnSign";
-            this.btnSign.Size = new System.Drawing.Size(56, 51);
+            this.btnSign.Size = new System.Drawing.Size(56, 54);
             this.btnSign.TabIndex = 2;
             this.btnSign.UseVisualStyleBackColor = true;
             this.btnSign.Click += new System.EventHandler(this.ConnectCloud_Click);
             // 
             // tbPass
             // 
-            this.tbPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "Password", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbPass.Location = new System.Drawing.Point(82, 60);
+            this.tbPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRip.Properties.Settings.Default, "Password", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbPass.Location = new System.Drawing.Point(82, 71);
             this.tbPass.Name = "tbPass";
             this.tbPass.Size = new System.Drawing.Size(194, 25);
             this.tbPass.TabIndex = 1;
-            this.tbPass.Text = global::ImgRipper.Properties.Settings.Default.Password;
+            this.tbPass.Text = global::ImgRip.Properties.Settings.Default.Password;
             this.tbPass.UseSystemPasswordChar = true;
             // 
             // btnAdd
             // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAdd.Enabled = false;
-            this.btnAdd.Image = global::ImgRipper.Properties.Resources.Files;
-            this.btnAdd.Location = new System.Drawing.Point(121, 9);
+            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.Location = new System.Drawing.Point(121, 6);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(50, 50);
             this.btnAdd.TabIndex = 11;
@@ -205,9 +215,10 @@
             // 
             // btnCreate
             // 
+            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCreate.Enabled = false;
-            this.btnCreate.Image = global::ImgRipper.Properties.Resources.New;
-            this.btnCreate.Location = new System.Drawing.Point(180, 9);
+            this.btnCreate.Image = ((System.Drawing.Image)(resources.GetObject("btnCreate.Image")));
+            this.btnCreate.Location = new System.Drawing.Point(180, 6);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(50, 50);
             this.btnCreate.TabIndex = 10;
@@ -217,9 +228,10 @@
             // 
             // btnDelete
             // 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDelete.Enabled = false;
-            this.btnDelete.Image = global::ImgRipper.Properties.Resources.Delete;
-            this.btnDelete.Location = new System.Drawing.Point(62, 9);
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.Location = new System.Drawing.Point(62, 6);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(50, 50);
             this.btnDelete.TabIndex = 9;
@@ -229,10 +241,11 @@
             // 
             // btnUp
             // 
+            this.btnUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnUp.Enabled = false;
             this.btnUp.Font = new System.Drawing.Font("Microsoft YaHei", 10F);
-            this.btnUp.Image = global::ImgRipper.Properties.Resources.Up;
-            this.btnUp.Location = new System.Drawing.Point(3, 9);
+            this.btnUp.Image = ((System.Drawing.Image)(resources.GetObject("btnUp.Image")));
+            this.btnUp.Location = new System.Drawing.Point(3, 6);
             this.btnUp.Name = "btnUp";
             this.btnUp.Size = new System.Drawing.Size(50, 50);
             this.btnUp.TabIndex = 7;
@@ -242,6 +255,7 @@
             // 
             // CmdPanel
             // 
+            this.CmdPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CmdPanel.AutoSize = true;
             this.CmdPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CmdPanel.Controls.Add(this.btnUp);
@@ -250,18 +264,19 @@
             this.CmdPanel.Controls.Add(this.btnAdd);
             this.CmdPanel.Location = new System.Drawing.Point(372, 5);
             this.CmdPanel.Name = "CmdPanel";
-            this.CmdPanel.Size = new System.Drawing.Size(233, 62);
+            this.CmdPanel.Size = new System.Drawing.Size(233, 59);
             this.CmdPanel.TabIndex = 14;
             // 
             // cbPublic
             // 
             this.cbPublic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbPublic.AutoSize = true;
             this.cbPublic.Enabled = false;
             this.cbPublic.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.cbPublic.Image = ((System.Drawing.Image)(resources.GetObject("cbPublic.Image")));
-            this.cbPublic.Location = new System.Drawing.Point(372, 70);
+            this.cbPublic.Location = new System.Drawing.Point(373, 73);
             this.cbPublic.Name = "cbPublic";
-            this.cbPublic.Size = new System.Drawing.Size(48, 42);
+            this.cbPublic.Size = new System.Drawing.Size(47, 32);
             this.cbPublic.TabIndex = 13;
             this.cbPublic.ThreeState = true;
             this.ttCloud.SetToolTip(this.cbPublic, "(Shift+) F4 to share ON/OFF");
@@ -275,7 +290,7 @@
             // 
             this.ofd.DefaultExt = "jpg";
             this.ofd.Filter = "JPG files|*.jpg|PNG files|*.png|BMP files|*.bmp|All files|*.*";
-            this.ofd.InitialDirectory = global::ImgRipper.Properties.Settings.Default.txtDir;
+            this.ofd.InitialDirectory = global::ImgRip.Properties.Settings.Default.Dir;
             this.ofd.Multiselect = true;
             // 
             // WebCloud

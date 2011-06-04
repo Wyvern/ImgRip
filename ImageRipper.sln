@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageRipper", "ImageRipper.csproj", "{2172F5C5-FAE4-47E4-8662-D3F6443DE0F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImgRip", "ImgRip.csproj", "{2172F5C5-FAE4-47E4-8662-D3F6443DE0F5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F39EA302-4440-4BFC-9071-5321E36C2C4C} = {F39EA302-4440-4BFC-9071-5321E36C2C4C}
 		{510070A4-28D1-4362-BAB5-54984A9F75BF} = {510070A4-28D1-4362-BAB5-54984A9F75BF}
@@ -11,25 +11,20 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HAP", "HAP\HAP.csproj", "{F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GData", "GData\GData.csproj", "{510070A4-28D1-4362-BAB5-54984A9F75BF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{71B3A77F-8BD7-4534-B099-96C30B2DF1F0}"
-	ProjectSection(SolutionItems) = preProject
-		IRPerf.psess = IRPerf.psess
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs02
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ImageRipper.csproj
-		SccLocalPath1 = .
+		SccProjectUniqueName1 = GData\\GData.csproj
+		SccProjectName1 = GData
+		SccLocalPath1 = GData
 		SccProjectUniqueName2 = HAP\\HAP.csproj
 		SccProjectName2 = HAP
 		SccLocalPath2 = HAP
-		SccProjectUniqueName3 = GData\\GData.csproj
-		SccProjectName3 = GData
-		SccLocalPath3 = GData
+		SccProjectUniqueName3 = ImgRip.csproj
+		SccLocalPath3 = .
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,8 +53,8 @@ Global
 		{F39EA302-4440-4BFC-9071-5321E36C2C4C}.Debug|x86.Build.0 = Debug|x86
 		{F39EA302-4440-4BFC-9071-5321E36C2C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F39EA302-4440-4BFC-9071-5321E36C2C4C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F39EA302-4440-4BFC-9071-5321E36C2C4C}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{F39EA302-4440-4BFC-9071-5321E36C2C4C}.Release|Mixed Platforms.Build.0 = Release|x86
+		{F39EA302-4440-4BFC-9071-5321E36C2C4C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{F39EA302-4440-4BFC-9071-5321E36C2C4C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F39EA302-4440-4BFC-9071-5321E36C2C4C}.Release|x86.ActiveCfg = Release|x86
 		{F39EA302-4440-4BFC-9071-5321E36C2C4C}.Release|x86.Build.0 = Release|x86
 		{510070A4-28D1-4362-BAB5-54984A9F75BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

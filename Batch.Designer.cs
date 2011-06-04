@@ -1,4 +1,4 @@
-﻿namespace ImgRipper
+﻿namespace ImgRip
 {
     partial class Batch
     {
@@ -41,12 +41,12 @@
             // lblFrom
             // 
             this.lblFrom.AutoSize = true;
-            this.lblFrom.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblFrom.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblFrom.ForeColor = System.Drawing.Color.Teal;
-            this.lblFrom.Location = new System.Drawing.Point(9, 51);
+            this.lblFrom.Location = new System.Drawing.Point(9, 55);
             this.lblFrom.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblFrom.Name = "lblFrom";
-            this.lblFrom.Size = new System.Drawing.Size(67, 26);
+            this.lblFrom.Size = new System.Drawing.Size(48, 19);
             this.lblFrom.TabIndex = 1;
             this.lblFrom.Text = "From:";
             // 
@@ -67,12 +67,12 @@
             // lblTo
             // 
             this.lblTo.AutoSize = true;
-            this.lblTo.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTo.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTo.ForeColor = System.Drawing.Color.Teal;
-            this.lblTo.Location = new System.Drawing.Point(176, 51);
+            this.lblTo.Location = new System.Drawing.Point(177, 55);
             this.lblTo.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.lblTo.Name = "lblTo";
-            this.lblTo.Size = new System.Drawing.Size(41, 26);
+            this.lblTo.Size = new System.Drawing.Size(30, 19);
             this.lblTo.TabIndex = 4;
             this.lblTo.Text = "To:";
             // 
@@ -92,7 +92,6 @@
             // 
             // udTo
             // 
-            this.udTo.AutoSize = true;
             this.udTo.Increment = new decimal(new int[] {
             5,
             0,
@@ -101,37 +100,26 @@
             this.udTo.Location = new System.Drawing.Point(217, 50);
             this.udTo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.udTo.Maximum = new decimal(new int[] {
-            10000,
+            0,
             0,
             0,
             0});
             this.udTo.Name = "udTo";
             this.udTo.Size = new System.Drawing.Size(100, 29);
             this.udTo.TabIndex = 8;
-            this.udTo.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
             // 
             // udFrom
             // 
-            this.udFrom.AutoSize = true;
-            this.udFrom.Location = new System.Drawing.Point(76, 50);
+            this.udFrom.Location = new System.Drawing.Point(67, 50);
             this.udFrom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.udFrom.Maximum = new decimal(new int[] {
-            10000,
+            0,
             0,
             0,
             0});
             this.udFrom.Name = "udFrom";
             this.udFrom.Size = new System.Drawing.Size(100, 29);
             this.udFrom.TabIndex = 7;
-            this.udFrom.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
             // 
             // Batch
             // 

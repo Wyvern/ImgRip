@@ -1,4 +1,4 @@
-﻿namespace ImgRipper
+﻿namespace ImgRip
 {
     using System;
     using System.ComponentModel;
@@ -138,7 +138,7 @@
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            if (!showSplit)
+            if (!showSplit || e.Button == MouseButtons.Right)
             {
                 base.OnMouseDown(e);
                 return;
@@ -356,7 +356,7 @@
                new Rectangle(0, 0, original.Width, original.Height),
                0, 0, original.Width, original.Height,
                GraphicsUnit.Pixel, attributes);
-
+            
             //dispose the Graphics object
             g.Dispose();
             return newBitmap;
@@ -410,7 +410,7 @@
             if (e.CloseReason == ToolStripDropDownCloseReason.AppClicked)
             {
                 Point pt = this.PointToClient(Cursor.Position);
-                skipNextOpen = (dropDownRectangle.Contains(pt)||UpRectangle.Contains(pt)||DownRectangle.Contains(pt));
+                skipNextOpen = (dropDownRectangle.Contains(pt) || UpRectangle.Contains(pt) || DownRectangle.Contains(pt));
             }
         }
 

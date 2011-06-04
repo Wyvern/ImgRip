@@ -1,16 +1,17 @@
-﻿namespace ImgRipper
+﻿namespace ImgRip
 {
     using System;
     using System.Windows.Forms;
 
     partial class Batch : Form
     {
-        int _seed;
+        long _seed;
 
-        public Batch(int seed)
+        public Batch(long seed)
         {
             InitializeComponent();
             _seed = seed;
+            udFrom.Maximum = udTo.Maximum = long.MaxValue;
             udFrom.Value = udTo.Value = seed;
         }
 
@@ -20,7 +21,9 @@
             if (udFrom.Value > 0 && udFrom.Value < udTo.Value)
             {
                 ripper.From = decimal.ToInt32(udFrom.Value); ripper.To = decimal.ToInt32(udTo.Value);
-                ripper.Address =ripper.Address.Replace(_seed.ToString(), ripper.From.ToString());
+                var n = _seed.ToString();
+                var m = ripper.Address.LastIndexOf(n);
+                ripper.Address = ripper.Address.Substring(0, m) + ripper.From.ToString() + ripper.Address.Substring(m + n.Length);
                 ripper.Batch = true;
                 ripper.Range = ripper.To - ripper.From + 1;
                 Close();

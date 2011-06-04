@@ -1,10 +1,10 @@
-﻿namespace ImgRipper
+﻿namespace ImgRip
 {
     using System;
     using System.Windows.Forms;
     using Google.GData.Client;
     /// <summary>
-    /// UI Callback Helper class for extension method
+    /// UI Callback Helper
     /// </summary>
     static class UICallBack
     {
@@ -18,6 +18,7 @@
         {
             foreach (var ctl in ctls)
             {
+                if (!ctl.IsHandleCreated) break;
                 ctl.Invoke(new Action(() => ctl.Enabled = enable));
             }
         }

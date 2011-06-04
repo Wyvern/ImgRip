@@ -1,4 +1,4 @@
-﻿namespace ImgRipper
+﻿namespace ImgRip
 {
     partial class Sites
     {
@@ -27,49 +27,82 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.flSites = new System.Windows.Forms.FlowLayoutPanel();
-            this.ttSite = new System.Windows.Forms.ToolTip(this.components);
+            this.ssPrompt = new System.Windows.Forms.StatusStrip();
+            this.Prompt = new System.Windows.Forms.ToolStripStatusLabel();
+            this.flPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.ssPrompt.SuspendLayout();
             this.SuspendLayout();
             // 
-            // flSites
+            // ssPrompt
             // 
-            this.flSites.AutoScroll = true;
-            this.flSites.AutoSize = true;
-            this.flSites.BackColor = System.Drawing.Color.Lavender;
-            this.flSites.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flSites.Font = new System.Drawing.Font("Georgia", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.flSites.Location = new System.Drawing.Point(9, 9);
-            this.flSites.Margin = new System.Windows.Forms.Padding(0);
-            this.flSites.Name = "flSites";
-            this.flSites.Size = new System.Drawing.Size(466, 247);
-            this.flSites.TabIndex = 10;
+            this.ssPrompt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ssPrompt.AutoSize = false;
+            this.ssPrompt.BackColor = System.Drawing.SystemColors.Control;
+            this.ssPrompt.Dock = System.Windows.Forms.DockStyle.None;
+            this.ssPrompt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Prompt});
+            this.ssPrompt.Location = new System.Drawing.Point(1, 401);
+            this.ssPrompt.Name = "ssPrompt";
+            this.ssPrompt.Size = new System.Drawing.Size(623, 23);
+            this.ssPrompt.TabIndex = 11;
             // 
-            // ttSite
+            // Prompt
             // 
-            this.ttSite.AutomaticDelay = 300;
-            this.ttSite.AutoPopDelay = 5000;
-            this.ttSite.InitialDelay = 300;
-            this.ttSite.ReshowDelay = 0;
+            this.Prompt.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.Prompt.ForeColor = System.Drawing.Color.MediumSeaGreen;
+            this.Prompt.Name = "Prompt";
+            this.Prompt.Size = new System.Drawing.Size(0, 18);
+            // 
+            // flPanel
+            // 
+            this.flPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flPanel.AutoScroll = true;
+            this.flPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.flPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flPanel.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.flPanel.Location = new System.Drawing.Point(0, 26);
+            this.flPanel.Name = "flPanel";
+            this.flPanel.Size = new System.Drawing.Size(624, 375);
+            this.flPanel.TabIndex = 12;
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSearch.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbSearch.Location = new System.Drawing.Point(1, 0);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(623, 25);
+            this.tbSearch.TabIndex = 0;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             // 
             // Sites
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(484, 265);
-            this.Controls.Add(this.flSites);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(625, 424);
+            this.Controls.Add(this.tbSearch);
+            this.Controls.Add(this.flPanel);
+            this.Controls.Add(this.ssPrompt);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Sites";
             this.Padding = new System.Windows.Forms.Padding(9);
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Support Sites";
             this.Load += new System.EventHandler(this.Sites_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Sites_KeyPress);
+            this.ssPrompt.ResumeLayout(false);
+            this.ssPrompt.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -77,8 +110,10 @@
 
         #endregion
 
-        private System.Windows.Forms.FlowLayoutPanel flSites;
-        private System.Windows.Forms.ToolTip ttSite;
+        private System.Windows.Forms.StatusStrip ssPrompt;
+        private System.Windows.Forms.ToolStripStatusLabel Prompt;
+        private System.Windows.Forms.FlowLayoutPanel flPanel;
+        private System.Windows.Forms.TextBox tbSearch;
 
     }
 }

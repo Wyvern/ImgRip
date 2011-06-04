@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ImgRipper
+namespace ImgRip
 {
     static class Program
     {

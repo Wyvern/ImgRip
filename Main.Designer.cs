@@ -1,4 +1,4 @@
-﻿namespace ImgRipper
+﻿namespace ImgRip
 {
     partial class Main
     {
@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.mainSplit = new System.Windows.Forms.SplitContainer();
             this.llSites = new System.Windows.Forms.LinkLabel();
-            this.btnDownloadCancel = new ImgRipper.SplitButton();
+            this.btnGo = new ImgRip.SplitButton();
             this.cmsBatch = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnBatch = new System.Windows.Forms.ToolStripMenuItem();
             this.tbParse = new System.Windows.Forms.TextBox();
@@ -50,24 +50,25 @@
             this.cmmiSave = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiRemove = new System.Windows.Forms.ToolStripMenuItem();
             this.cmmiClear = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmmiBatch = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmmiPreview = new System.Windows.Forms.ToolStripMenuItem();
             this.RipStatus = new System.Windows.Forms.StatusStrip();
             this.tsLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.lbBatch = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsPB = new System.Windows.Forms.ToolStripProgressBar();
             this.tsCloud = new System.Windows.Forms.ToolStripSplitButton();
             this.tsiGData = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsiFlickr = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsiFacebook = new System.Windows.Forms.ToolStripMenuItem();
             this.tsiPicasa = new System.Windows.Forms.ToolStripMenuItem();
             this.tsHome = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblUrl = new System.Windows.Forms.Label();
             this.tbDir = new System.Windows.Forms.TextBox();
             this.pbPreview = new System.Windows.Forms.PictureBox();
-            this.fbDir = new System.Windows.Forms.FolderBrowserDialog();
             this.bwFetch = new System.ComponentModel.BackgroundWorker();
             this.ttRipper = new System.Windows.Forms.ToolTip(this.components);
             this.tmMinus = new System.Windows.Forms.Timer(this.components);
             this.tmPlus = new System.Windows.Forms.Timer(this.components);
+            this.fbDir = new System.Windows.Forms.FolderBrowserDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).BeginInit();
             this.mainSplit.Panel1.SuspendLayout();
             this.mainSplit.Panel2.SuspendLayout();
             this.mainSplit.SuspendLayout();
@@ -87,7 +88,7 @@
             // mainSplit.Panel1
             // 
             this.mainSplit.Panel1.Controls.Add(this.llSites);
-            this.mainSplit.Panel1.Controls.Add(this.btnDownloadCancel);
+            this.mainSplit.Panel1.Controls.Add(this.btnGo);
             this.mainSplit.Panel1.Controls.Add(this.tbParse);
             this.mainSplit.Panel1.Controls.Add(this.llCookie);
             this.mainSplit.Panel1.Controls.Add(this.llFolder);
@@ -123,23 +124,24 @@
             this.ttRipper.SetToolTip(this.llSites, "Support sites list");
             this.llSites.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llSites_LinkClicked);
             // 
-            // btnDownloadCancel
+            // btnGo
             // 
-            this.btnDownloadCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDownloadCancel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnDownloadCancel.ContextMenuStrip = this.cmsBatch;
-            this.btnDownloadCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnDownloadCancel.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold);
-            this.btnDownloadCancel.Image = global::ImgRipper.Properties.Resources.Download;
-            this.btnDownloadCancel.Location = new System.Drawing.Point(708, 5);
-            this.btnDownloadCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDownloadCancel.Name = "btnDownloadCancel";
-            this.btnDownloadCancel.Size = new System.Drawing.Size(71, 73);
-            this.btnDownloadCancel.TabIndex = 3;
-            this.btnDownloadCancel.TabStop = false;
-            this.ttRipper.SetToolTip(this.btnDownloadCancel, "Begin/Stop, Set page Up/Down");
-            this.btnDownloadCancel.UseVisualStyleBackColor = true;
-            this.btnDownloadCancel.Click += new System.EventHandler(this.DownloadCancel_Click);
+            this.btnGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGo.ContextMenuStrip = this.cmsBatch;
+            this.btnGo.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnGo.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold);
+            this.btnGo.Image = global::ImgRip.Properties.Resources.Download;
+            this.btnGo.Location = new System.Drawing.Point(708, 5);
+            this.btnGo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnGo.Name = "btnGo";
+            this.btnGo.Size = new System.Drawing.Size(71, 73);
+            this.btnGo.TabIndex = 3;
+            this.btnGo.TabStop = false;
+            this.btnGo.Tag = "";
+            this.ttRipper.SetToolTip(this.btnGo, "Start/Stop, Page Up/Down");
+            this.btnGo.UseVisualStyleBackColor = true;
+            this.btnGo.Click += new System.EventHandler(this.Go_Click);
             // 
             // cmsBatch
             // 
@@ -147,14 +149,14 @@
             this.btnBatch});
             this.cmsBatch.Name = "cmsButton";
             this.cmsBatch.ShowItemToolTips = false;
-            this.cmsBatch.Size = new System.Drawing.Size(153, 48);
+            this.cmsBatch.Size = new System.Drawing.Size(110, 26);
             // 
             // btnBatch
             // 
             this.btnBatch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.btnBatch.Image = global::ImgRipper.Properties.Resources.batch;
+            this.btnBatch.Image = global::ImgRip.Properties.Resources.Batch;
             this.btnBatch.Name = "btnBatch";
-            this.btnBatch.Size = new System.Drawing.Size(152, 22);
+            this.btnBatch.Size = new System.Drawing.Size(109, 22);
             this.btnBatch.Text = "Batch";
             this.btnBatch.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.btnBatch.Click += new System.EventHandler(this.btnBatch_Click);
@@ -166,19 +168,20 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tbParse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tbParse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
-            this.tbParse.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "txtUrl", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbParse.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRip.Properties.Settings.Default, "Url", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbParse.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
             this.tbParse.Location = new System.Drawing.Point(43, 13);
             this.tbParse.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tbParse.Name = "tbParse";
-            this.tbParse.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.tbParse.Size = new System.Drawing.Size(595, 23);
             this.tbParse.TabIndex = 20;
             this.tbParse.TabStop = false;
-            this.tbParse.Text = global::ImgRipper.Properties.Settings.Default.txtUrl;
+            this.tbParse.Text = global::ImgRip.Properties.Settings.Default.Url;
             this.tbParse.WordWrap = false;
+            this.tbParse.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_MouseClick);
             this.tbParse.DragDrop += new System.Windows.Forms.DragEventHandler(this.tbParse_DragDrop);
             this.tbParse.DragEnter += new System.Windows.Forms.DragEventHandler(this.tbParse_DragEnter);
+            this.tbParse.Leave += new System.EventHandler(this.tb_Leave);
             // 
             // llCookie
             // 
@@ -265,12 +268,14 @@
             this.cmmiCopyName,
             this.cmmiSave,
             this.cmmiRemove,
-            this.cmmiClear});
+            this.cmmiClear,
+            this.cmmiBatch,
+            this.cmmiPreview});
             this.cmsLV.Name = "contextMenuStrip1";
             this.cmsLV.ShowCheckMargin = true;
             this.cmsLV.ShowImageMargin = false;
             this.cmsLV.ShowItemToolTips = false;
-            this.cmsLV.Size = new System.Drawing.Size(153, 158);
+            this.cmsLV.Size = new System.Drawing.Size(153, 202);
             this.cmsLV.Opening += new System.ComponentModel.CancelEventHandler(this.cmsLV_Opening);
             // 
             // cmmiNextPage
@@ -318,7 +323,26 @@
             this.cmmiClear.Name = "cmmiClear";
             this.cmmiClear.Size = new System.Drawing.Size(152, 22);
             this.cmmiClear.Text = "Clear";
+            this.cmmiClear.Visible = false;
             this.cmmiClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // cmmiBatch
+            // 
+            this.cmmiBatch.CheckOnClick = true;
+            this.cmmiBatch.Name = "cmmiBatch";
+            this.cmmiBatch.Size = new System.Drawing.Size(152, 22);
+            this.cmmiBatch.Text = "Batch";
+            this.cmmiBatch.Visible = false;
+            this.cmmiBatch.CheckedChanged += new System.EventHandler(this.cmmiBatch_CheckedChanged);
+            // 
+            // cmmiPreview
+            // 
+            this.cmmiPreview.Checked = true;
+            this.cmmiPreview.CheckOnClick = true;
+            this.cmmiPreview.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cmmiPreview.Name = "cmmiPreview";
+            this.cmmiPreview.Size = new System.Drawing.Size(152, 22);
+            this.cmmiPreview.Text = "Preview";
             // 
             // RipStatus
             // 
@@ -340,7 +364,6 @@
             this.RipStatus.ShowItemToolTips = true;
             this.RipStatus.Size = new System.Drawing.Size(785, 22);
             this.RipStatus.TabIndex = 22;
-            this.RipStatus.Text = "statusStrip1";
             // 
             // tsLabel
             // 
@@ -370,10 +393,8 @@
             this.tsCloud.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsCloud.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsiGData,
-            this.tsiFlickr,
-            this.tsiFacebook,
             this.tsiPicasa});
-            this.tsCloud.Image = global::ImgRipper.Properties.Resources.Cloud;
+            this.tsCloud.Image = ((System.Drawing.Image)(resources.GetObject("tsCloud.Image")));
             this.tsCloud.Name = "tsCloud";
             this.tsCloud.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tsCloud.Size = new System.Drawing.Size(32, 20);
@@ -385,33 +406,15 @@
             // 
             this.tsiGData.Image = ((System.Drawing.Image)(resources.GetObject("tsiGData.Image")));
             this.tsiGData.Name = "tsiGData";
-            this.tsiGData.Size = new System.Drawing.Size(127, 22);
+            this.tsiGData.Size = new System.Drawing.Size(114, 22);
             this.tsiGData.Text = "GDrive";
             this.tsiGData.Click += new System.EventHandler(this.CloudItem_Click);
-            // 
-            // tsiFlickr
-            // 
-            this.tsiFlickr.Image = ((System.Drawing.Image)(resources.GetObject("tsiFlickr.Image")));
-            this.tsiFlickr.Name = "tsiFlickr";
-            this.tsiFlickr.Size = new System.Drawing.Size(127, 22);
-            this.tsiFlickr.Text = "Flickr";
-            this.tsiFlickr.Visible = false;
-            this.tsiFlickr.Click += new System.EventHandler(this.CloudItem_Click);
-            // 
-            // tsiFacebook
-            // 
-            this.tsiFacebook.Image = ((System.Drawing.Image)(resources.GetObject("tsiFacebook.Image")));
-            this.tsiFacebook.Name = "tsiFacebook";
-            this.tsiFacebook.Size = new System.Drawing.Size(127, 22);
-            this.tsiFacebook.Text = "Facebook";
-            this.tsiFacebook.Visible = false;
-            this.tsiFacebook.Click += new System.EventHandler(this.CloudItem_Click);
             // 
             // tsiPicasa
             // 
             this.tsiPicasa.Image = ((System.Drawing.Image)(resources.GetObject("tsiPicasa.Image")));
             this.tsiPicasa.Name = "tsiPicasa";
-            this.tsiPicasa.Size = new System.Drawing.Size(127, 22);
+            this.tsiPicasa.Size = new System.Drawing.Size(114, 22);
             this.tsiPicasa.Text = "Picasa";
             this.tsiPicasa.Click += new System.EventHandler(this.CloudItem_Click);
             // 
@@ -420,7 +423,7 @@
             this.tsHome.AutoToolTip = true;
             this.tsHome.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsHome.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.tsHome.Image = global::ImgRipper.Properties.Resources.Home;
+            this.tsHome.Image = ((System.Drawing.Image)(resources.GetObject("tsHome.Image")));
             this.tsHome.IsLink = true;
             this.tsHome.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.tsHome.Margin = new System.Windows.Forms.Padding(0, 3, 5, 2);
@@ -446,7 +449,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDir.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tbDir.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
-            this.tbDir.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "txtDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbDir.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRip.Properties.Settings.Default, "Dir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbDir.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
             this.tbDir.Location = new System.Drawing.Point(43, 55);
             this.tbDir.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -454,7 +457,9 @@
             this.tbDir.Size = new System.Drawing.Size(595, 23);
             this.tbDir.TabIndex = 4;
             this.tbDir.TabStop = false;
-            this.tbDir.Text = global::ImgRipper.Properties.Settings.Default.txtDir;
+            this.tbDir.Text = global::ImgRip.Properties.Settings.Default.Dir;
+            this.tbDir.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tb_MouseClick);
+            this.tbDir.Leave += new System.EventHandler(this.tb_Leave);
             // 
             // pbPreview
             // 
@@ -469,11 +474,6 @@
             this.pbPreview.TabIndex = 22;
             this.pbPreview.TabStop = false;
             this.pbPreview.DoubleClick += new System.EventHandler(this.pbDoubleClick);
-            // 
-            // fbDir
-            // 
-            this.fbDir.Description = "Select folder to store files";
-            this.fbDir.SelectedPath = global::ImgRipper.Properties.Settings.Default.txtDir;
             // 
             // bwFetch
             // 
@@ -495,11 +495,17 @@
             // 
             this.tmPlus.Tick += new System.EventHandler(this.btnPlus_Click);
             // 
-            // Ripper
+            // fbDir
             // 
-            this.AcceptButton = this.btnDownloadCancel;
+            this.fbDir.Description = "Select folder to store files";
+            this.fbDir.SelectedPath = global::ImgRip.Properties.Settings.Default.Dir;
+            // 
+            // Main
+            // 
+            this.AcceptButton = this.btnGo;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnGo;
             this.ClientSize = new System.Drawing.Size(787, 488);
             this.Controls.Add(this.mainSplit);
             this.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
@@ -508,13 +514,14 @@
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(450, 300);
-            this.Name = "Ripper";
+            this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Image Ripper - F11: FullScreen,  [Shift+] Space: Preview ON|OFF";
+            this.Text = "F11: FullScreen,  [Shift+] Space: Preview ON|OFF";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Ripper_KeyDown);
             this.mainSplit.Panel1.ResumeLayout(false);
             this.mainSplit.Panel1.PerformLayout();
             this.mainSplit.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).EndInit();
             this.mainSplit.ResumeLayout(false);
             this.cmsBatch.ResumeLayout(false);
             this.cmsLV.ResumeLayout(false);
@@ -527,7 +534,7 @@
 
         #endregion
 
-        private SplitButton btnDownloadCancel;
+        private SplitButton btnGo;
         private System.Windows.Forms.TextBox tbDir;
         private System.Windows.Forms.FolderBrowserDialog fbDir;
         private System.Windows.Forms.Label lblUrl;
@@ -558,13 +565,13 @@
         private System.Windows.Forms.ToolStripSplitButton tsCloud;
         private System.Windows.Forms.ToolStripProgressBar tsPB;
         private System.Windows.Forms.ToolStripMenuItem tsiGData;
-        private System.Windows.Forms.ToolStripMenuItem tsiFlickr;
-        private System.Windows.Forms.ToolStripMenuItem tsiFacebook;
         private System.Windows.Forms.ToolStripMenuItem tsiPicasa;
         private System.Windows.Forms.ColumnHeader chNumber;
         private System.Windows.Forms.ToolStripStatusLabel tsHome;
         private System.ComponentModel.BackgroundWorker bwFetch;
         private System.Windows.Forms.LinkLabel llSites;
+        private System.Windows.Forms.ToolStripMenuItem cmmiBatch;
+        private System.Windows.Forms.ToolStripMenuItem cmmiPreview;
     }
 }
 

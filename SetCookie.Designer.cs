@@ -1,11 +1,11 @@
-﻿namespace ImgRipper
+﻿namespace ImgRip
 {
     partial class SetCookie
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components;
+        private System.ComponentModel.IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -45,13 +45,13 @@
             // 
             // tbCookie
             // 
-            this.tbCookie.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRipper.Properties.Settings.Default, "Cookie", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tbCookie.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRip.Properties.Settings.Default, "Cookie", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbCookie.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tbCookie.Location = new System.Drawing.Point(12, 65);
             this.tbCookie.Name = "tbCookie";
             this.tbCookie.Size = new System.Drawing.Size(360, 29);
             this.tbCookie.TabIndex = 1;
-            this.tbCookie.Text = global::ImgRipper.Properties.Settings.Default.Cookie;
+            this.tbCookie.Text = global::ImgRip.Properties.Settings.Default.Cookie;
             // 
             // btnSummit
             // 
@@ -76,6 +76,7 @@
             this.Controls.Add(this.lblCookie);
             this.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.ForeColor = System.Drawing.Color.Green;
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -84,6 +85,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Set Cookie";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SetCookie_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 

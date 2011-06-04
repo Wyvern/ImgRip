@@ -1,7 +1,8 @@
-﻿namespace ImgRipper
+﻿namespace ImgRip
 {
-    using System.Collections.Generic;
+    using System;
     using System.Diagnostics;
+    using System.Linq;
     using System.Windows.Forms;
 
     partial class Sites : Form
@@ -11,10 +12,15 @@
             InitializeComponent();
         }
 
-        void item_MouseHover(object sender, System.EventArgs e)
+        void item_MouseEnter(object sender, System.EventArgs e)
         {
             var ll = sender as LinkLabel;
-            ttSite.Show(ll.Tag as string, ll);
+            Prompt.Text = string.Format("{0}", ll.Tag as string);
+        }
+
+        void item_MouseLeave(object sender, System.EventArgs e)
+        {
+            Prompt.Text = string.Format("Total {0} sites.", flPanel.Controls.Count);
         }
 
         void item_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -22,24 +28,45 @@
             Process.Start(((LinkLabel)sender).Tag as string);
         }
 
-        private void Sites_Load(object sender, System.EventArgs e)
+        private void Sites_KeyPress(object sender, KeyPressEventArgs e)
         {
-            var Sites = new Dictionary<string, string>() {
-            { "Pics100", "http://pics100.net" }, { "Duide", "http://duide.com" }, { "Tu11", "http://tu11.cc" }, {"Tu25","http://www.tu25.com"},
-            { "MeiTuiJi", "http://meituiji.com" }, { "PalAthCx", "http://pal.ath.cx" }, { "DeskCityCom", "http://deskcity.com" }, 
-            { "Heels", "http://www.heels.cn/web/index" }, { "WallCoo", "http://www.wallcoo.net" },  { "MeiTu", "http://www.meitushow.com" },
-            { "Mtswa", "http://www.mtswa.com" },  { "Ttmnw", "http://www.ttmnw.com" }, {"6S8","http://www.6s8.net/meinv"},
-            { "Xyuba", "http://www.xyuba.com" }, { "Yzmnw", "http://www.yzmnw.com" }, { "GirlCity", "http://www.girlcity.cn" }, 
-            { "DeskCityCn", "http://www.deskcity.cn" }, { "China016", "http://www.china016.com" }, {"6188","http://www.6188.net"},
-            { "169PP", "http://www.169pp.com" },{"1000RT","http://www.1000rt.com"},{"77MeiTu","http://www.77meitu.com"}
-            ,{"158KK","http://www.158kk.com"},{"920MM","http://www.920mm.com"},{"Voc","http://mm.voc.com.cn"}};
-            foreach (var site in Sites)
+            if (e.KeyChar == 27) this.Close();
+        }
+
+        LinkLabel[] lla;
+
+        private void Sites_Load(object sender, EventArgs e)
+        {
+            var owner = this.Owner as Main;
+            flPanel.SuspendLayout();
+            foreach (var site in owner.sites)
             {
-                var item = new LinkLabel() { Text = site.Key, Tag = site.Value, Margin = new Padding(5) };
+                var item = new LinkLabel { Text = site.Name, Tag = "http://" + site.ToString(), AutoSize = true };
                 item.LinkClicked += item_LinkClicked;
-                item.MouseHover += item_MouseHover;
-                flSites.Controls.Add(item);
+                item.MouseEnter += item_MouseEnter;
+                item.MouseLeave += item_MouseLeave;
+                flPanel.Controls.Add(item);
             }
+            flPanel.ResumeLayout();
+            lla = new LinkLabel[flPanel.Controls.Count];
+            flPanel.Controls.CopyTo(lla, 0);
+            Prompt.Text = string.Format("Total {0} sites.", flPanel.Controls.Count);
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            var term = tbSearch.Text.Trim();
+            if (string.IsNullOrEmpty(term))
+                if (tbSearch.Text.Length > 0) return;
+                else { if (lla.Length != flPanel.Controls.Count) { flPanel.SuspendLayout(); flPanel.Controls.Clear(); flPanel.Controls.AddRange(lla); } }
+            else
+            {
+                var match = lla.Where(_ => ((string)_.Tag).ContainsEx(term)).ToArray();
+                if (match.Length == lla.Length && lla.Length == flPanel.Controls.Count) return;
+                flPanel.SuspendLayout(); flPanel.Controls.Clear(); flPanel.Controls.AddRange(match);
+            }
+            flPanel.ResumeLayout();
+            Prompt.Text = string.Format("Total {0} sites.", flPanel.Controls.Count);
         }
     }
 }
