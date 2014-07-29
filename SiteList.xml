@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ImageRipper>
   <List>
@@ -229,4 +230,317 @@
     <Site Name="第一丝所" Domain="001si.com" Image="//div[@class='bbox']//img" Next="//div[@id='fenye']//a" />
     <Site Name="BeautyLeg" Domain="beautyleg.com" Image="//td[@align='center']/a" Type="BLeg" />
   </List>
+=======
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImageRipper>
+  <List>
+    <Site Name="016美图" Domain="china016.com" Image="//img[@src]" Next="//div[@class='turnPage']/a[last()-1]" />
+    <Site Name="1000人体 " Domain="1000rt.com" Image="//p[@align='center']/img[@src]" />
+    <Site Name="115美女" Domain="115mm.com" Image="//img[@id='bodyimg']" Next="//ul[@class='pagelist']//a" />
+    <Site Name="126人体艺术" Domain="126rt.com" Image="//div[@class='myc']//img" Next="//div[@class='page page_l']//a" />
+    <Site Name="15335" Domain="15335.com" Image="//div[@id='content']/img" Next="//div[@id='pages']/*" />
+    <Site Name="169CC" Domain="169mm.cc" Image="//p[@align='center']/img[@src]" />
+    <Site Name="169PP" Domain="169pp.com" Image="//p[@align='center']/img[@src]" />
+    <Site Name="169US" Domain="169mm.us" Image="//p[@align='center']/img[@src]" />
+    <Site Name="25靓女" Domain="25meinv.com" Image="//div[@class='shows']/img" Next="//div[@class='page']/a" Type="Meinv25" />
+    <Site Name="27270" Domain="mm270.com" Image="//div[@id='b-show']//p/img" Next="//div[@class='pageList']//a" />
+    <Site Name="27270" Domain="27270.net" Image="//div[@id='b-show']//p/img" Next="//div[@class='pageList']//a" />
+    <Site Name="27美女写真 " Domain="mn27.com" Image="//div[@class='picbox']/img" Next="//div[@class='newsfy']/a" />
+    <Site Name="33美女" Domain="33mm.cc" Image="//div[@class='content']//img" Next="//div[@class='pageLink']/a[last()-1]" />
+    <Site Name="34340" Domain="34340.com" Image="//div[@class='content']//img" Next="//div[@class='page page_c']//a" />
+    <Site Name="345MM" Domain="345mm.com" Image="//div[@class='str']//img" Next="//div[@class='cpagebox']//a" />
+    <Site Name="365美女" Domain="365meinv.net" Image="//div[@class='mypic']/img" Next="//div[@class='page page_c']/*" />
+    <Site Name="3721MM" Domain="3721mm.com" Image="//div[@id='imgs']/img" Next="//div[@class='p']//*" />
+    <Site Name="39123" Domain="39123.net" Image="//ul[@id='listimg']//img" Next="//div[@class='dede_pages']//a" />
+    <Site Name="460图库 " Domain="pic.460.com.cn" Image="//img[@style='cursor: pointer']" Next="//div[@class='lookev_pagesm']//a" />
+    <Site Name="51美女网" Domain="51yyyy.com" Image="//div[@class='Npic']/img" Next="//div[@class='turnPage']/*" />
+    <Site Name="521MX" Domain="521mx.com" Image="//div[@class='str']//img" Next="//p/b//*" />
+    <Site Name="533美女" Domain="533m.com" Image="//img[@id='bigimg']" Next="//div[@class='forumallpages']//a" />
+    <Site Name="56美图网" Domain="56ls.com" Image="//div[@class='photoimg']//img" Next="//*[@class='page-ch']" />
+    <Site Name="57616" Domain="pic.57616.com" Image="//div[@class='bimg']//img" Next="//div[@id='simg']/a" />
+    <Site Name="6188美图 " Domain="6188.net" Image="//img[@id='showPhoto']" Next="//div[@class='page']/a[@class='next']"/>
+    <Site Name="62美女图" Domain="62mn.com" Image="//div[@id='pics']//img" Next="//div[@class='page forumallpages']/a" />
+    <Site Name="6396" Domain="6396.info" Image="//div[@class='imgview']//img" Next="//div[@class='newsfy']/a" />
+    <Site Name="6623" Domain="6623.info" Image="//div[@id='bimg']//img" Next="//div[@class='page']/a" />
+    <Site Name="68娱乐" Domain="6s8.net" Image="//span[@class='STYLE1']//img" Next="//div[@class='turnPage']/a[last()-1]" />
+    <Site Name="69美女" Domain="mn69.com" Image="//div[@class='content-pic']/img" Next="//*[@class='page-ch']" />
+    <Site Name="77美图" Domain="77meitu.com" Image="//img[@src]" Next="//div[@class='turnPage']/a[last()-1]"/>
+    <Site Name="77美图" Domain="77meitu.net" Image="//img[@src]" Next="//div[@class='turnPage']/a[last()-1]" />
+    <Site Name="789美女写真" Domain="789pp.com" Image="//div[@class='content']/img" Next="//div[@class='pageinfo']/a[last()-1]"/>
+    <Site Name="798美女" Domain="mm798.net" Image="//div[@class='Npic']/img" Next="//div[@class='forumallpages']//a" />
+    <Site Name="855MM" Domain="855m.com" Image="//div[@class='Nontn']//img" Next="//div[@class='pages']//a" />
+    <Site Name="909美眉" Domain="909mm.com" Image="//div[@id='pics']//img" Next="//div[@class='page']/a"  Type="MM909"/>
+    <Site Name="909美女" Domain="909meinv.com" Image="//div[@id='pics']//img" Next="//div[@class='page']/a"  Type="MM909"/>
+    <Site Name="94写真馆" Domain="94xiezhen.com" Image="//div[@id='content_nei']/img" Next="//div[@id='fenye']/a" />
+    <Site Name="991图片" Domain="mm991.com" Image="//div[@class='73128 box_inner']//img" Next="//ul[@class='pic_pagelist listc']//a" />
+    <Site Name="99美女图片" Domain="99tuu.com" Image="//div[@class='Npic']//img" Next="//div[@class='turnPage']/a" />
+    <Site Name="BLEG腿模 " Domain="beautyleg.cc" Image="//li[@class='g-item g-photo']//a/img" Next="//li[@class='g-text-right']/a[1]" Type="BeautyLeg" />
+    <Site Name="ChinaGirl" Domain="china-girl.info" Image="//img[@id]" Next="//a[@id='lnkNext']" Type="ChinaGirl" />
+    <Site Name="H2004" Domain="h2004.com" Image="//p[@align='center']/img" Next="//div[@class='turnPage']/*" Type="H2004" />
+    <Site Name="HYPAGE" Domain="hypage.com" Image="//div[@id='endtext']/img" Next="//div[@id='pages']/a" />
+    <Site Name="MM2" Domain="mm2mm2.com" Image="//div[@class='content-pic']/img" Next="//div[@class='page page_n']//a" />
+    <Site Name="MM校区" Domain="mmxq.com" Image="//img[@id='bigimg']" Next="//div[@class='pnum']/a" />
+    <Site Name="PalAthCx" Domain="pal.ath.cx" Image="//img[@class='giThumbnail']" Next="//div/a[@class='next']" Type="PalAthCx"/>
+    <Site Name="Q566" Domain="q566.com" Image="//div[@class='bimg']//img" Next="//div[@id='simg']//a" />
+    <Site Name="Top100美图" Domain="top100.cm" Image="//img[@id='bigimg']" />
+    <Site Name="Tu11" Domain="tu11.cc" Image="//div[@class='img_read']//img" Next="//div[@class='page']//a" />
+    <Site Name="WallCoo" Domain="wallcoo.net" Image="//li//img[@title]" Next="//a[@class='navigationtext']" Screen="//h2/strong" Type="WallCoo" />
+    <Site Name="YY美女图片" Domain="yysuu.com" Image="//p[@align='center']//img" Next="//div[@class='turnPage']/a[last()-1]"/>
+    <Site Name="爱看MM" Domain="2kmm.com" Image="//img[@onload]" Next="//div[@class='shejw_page']//a" />
+    <Site Name="爱丝人" Domain="aisiren.com" Image="//img[@onload]" Next="//p/b/a" />
+    <Site Name="爱图吧" Domain="atu8.com" Image="//table[@align='center']//td[@align='center']//img[@alt][@border]" Next="//a[@class='au']" />
+    <Site Name="爱图图" Domain="21tutu.com" Image="//div[@class='Npic']//img" Next="//div[@class='forumallpages']//a" />
+    <Site Name="草美女" Domain="caomeinv.com" Image="//div[@class='NewsContent']//img" Next="//div[@class='textpage']//a" />
+    <Site Name="多多美女" Domain="meinvdd.com" Image="//div[@class='mypic']/img" Next="//div[@class='page page_c']/*" />
+    <Site Name="飞卢网" Domain="pp.faloo.com" Image="//img[@class='imgbor']" Next="//table[@id='PageListBTop']//a" Type="Faloo" />
+    <Site Name="高跟" Domain="gaogen.net" Image="//img[@onclick]" Next="//p[@align='center']/b/*" />
+    <Site Name="高跟爱好者" Domain="duide.com" Image="//a/img[@border=1]" Next="" Type="Duide" />
+    <Site Name="华声论坛" Domain="bbs.voc.com.cn" Image="//a[@href]/img[@src][@onload]" Next="" Type="Voc" />
+    <Site Name="精美图片" Domain="vvmmm.com" Image="//div[@class='photoimg']//img" Next="//div[@id='contentsx']/a" />
+    <Site Name="精品图片" Domain="meirenxiu.com" Image="//div[@class='contn']//img" Next="//div[@class='forumallpages']/a" />
+    <Site Name="精选美女" Domain="mm.net" Image="//div[@class='content_3 mb8']//img" Next="//a[@class='next']" />
+    <Site Name="九妹图库" Domain="999m.com" Image="//img[@id='bigimg']" Next="//span[@class='pagebox_next']/a[1]" />
+    <Site Name="就爱图" Domain="92tu.com" Image="//div[@class='pic_content']/img" Next="//div[@class='pnum']/*" />
+    <Site Name="看美女写真" Domain="kmeinv.com" Image="//div[@class='Npic']//img" Next="//div[@class='forumallpages']//a" />
+    <Site Name="酷6美女" Domain="k6meinv.com" Image="//td[@class='picsize']//img" Next="//a[@class='pic1']" />
+    <Site Name="酷爱女性 " Domain="ku22.net" Image="//img[@id='bigimg']" Next="//div[@class='content_pages']/a" />
+    <Site Name="酷酷桌面" Domain="kkdesk.com" Image="//div[@class='content-pic']//a" Next="" Type="KKDesk" />
+    <Site Name="酷图吧" Domain="ktbar.com" Image="//div[@class='content_pic']//img" Next="//div[@class='shejw_page']//a" />
+    <Site Name="酷桌面壁纸" Domain="kudesk.com" Image="//img[@id='bigimg']" Next="" Type="KuDesk" />
+    <Site Name="宽屏壁纸" Domain="kpbz.net" Image="//ul[@id='imglist']//img" Next="//div[@id='pagelist']/a" Type="Kpbz" />
+    <Site Name="浪丝袜" Domain="langsiwa.info" Image="//div[@class='bigimg']//img" Next="//div[@class='forumallpages']//a" />
+    <Site Name="乐美图片" Domain="6hy.cc" Image="//td[@class='picsize']//img" Next="//span[@class='fy1']/*" />
+    <Site Name="靓丽美图秀" Domain="meinvtp.net" Image="//div[@class='tu']//img" Next="//div[@class='pagelist']//a" />
+    <Site Name="猫猫壁纸酷 " Domain="wallcoo.com" Image="//li//img[@title]" Next="//a[@class='navigationtext']" Screen="//h2/strong" Type="WallCoo" />
+    <Site Name="猫扑美女" Domain="mopmeinv.com" Image="//div[@class='pic_show']//img" Next="//div[@class='page']/a" />
+    <Site Name="美丽图片" Domain="67597.com" Image="//div[@class='picbox']//img" Next="//div[@class='newsfy']/a" />
+    <Site Name="美眉131" Domain="mm131.com" Image="//div[@class='content-pic']/img" Next="//*[@class='page-ch']" />
+    <Site Name="美眉167" Domain="mm167.com" Image="//div/p/img" />
+    <Site Name="美女写真" Domain="mm2ku.com" Image="//div[@class='picbox']//img" Next="//div[@class='newsfy']/a" />
+    <Site Name="美女85" Domain="meinv85.com" Image="//img[@id='bigimg']" Next="//*[@class='page-ch']" />
+    <Site Name="美女KTV" Domain="meinvktv.com" Image="//div[@id='content']//img" Next="//div[@class='page']/a" />
+    <Site Name="美女啦" Domain="meinv.la" Image="//img[@onload]" Next="//div[@class='pagelist']/a" />
+    <Site Name="美女明星" Domain="www.7kpp.com" Image="//div[@class='img']/img" Next="//div[@class='shejw_page']/a" />
+    <Site Name="美女图片" Domain="meinvtupian.cc" Image="//div[@class='Npic']//img" Next="//div[@class='forumallpages']//a" />
+    <Site Name="美女图片" Domain="mntup.com" Image="//div[@class='bimg']//img" Next="//div[@id='simg']/a" />
+    <Site Name="美女图片" Domain="mnpic.com" Image="//div[@id='endtext']/img" Next="//div[@id='pages']/a" />
+    <Site Name="美女图片" Domain="mnkoo.com" Image="//div[@id='endtext']/img" Next="//div[@id='pages']/a" />
+    <Site Name="美女专题站" Domain="dota123.com" Image="//div[@class='content']//img" Next="//a[@class='prenext']" />
+    <Site Name="美图Show" Domain="meitushow.com" Image="//div[@class='pics']//img" Next="//div[@class='page']/a" Type="MeiTuShow" />
+    <Site Name="美图摄影" Domain="imgs8.com" Image="//div[@class='content w2']/img" Next="//ul[@class='pagelist']//a" />
+    <Site Name="美图网" Domain="kumm.cc" Image="//div[@id='MyContent']//img" Next="//div[@class='cPageBox']/a" />
+    <Site Name="美图秀秀" Domain="43992.com" Image="//img[@onload]" Next="//p[@class='textpage']//a" />
+    <Site Name="美腿集" Domain="meituiji.com" Image="//img[@src][@onload]" Next="//ul[@class='pagelist']//a" />
+    <Site Name="美腿美女" Domain="meituitu.com" Image="//tr/td/img" Next="//p/b/a" />
+    <Site Name="美腿丝袜" Domain="mtswa.com" Image="//img[@src][@onload]" Next="//div[@class='cPageBox']//a" />
+    <Site Name="迷丝友" Domain="misiyou.com" Image="//div[@class='tpc_content']//img" />
+    <Site Name="女人图" Domain="nvrentu.com" Image="//div[@id='articlebody']/img" Next="//div[@class='dede_pages']//a" />
+    <Site Name="漂亮美女" Domain="mb97.com" Image="//img[@onload]" Next="//ul[@class='pic_pagelist listc']//a" />
+    <Site Name="漂亮图片" Domain="82652.com" Image="//div[@class='picbox']//img" Next="//div[@class='newsfy']/a" />
+    <Site Name="漂漂美术馆" Domain="5542.com" Image="//ul[@class='file']/img" Next="//ul[@class='image']/a" />
+    <Site Name="齐齐看美女" Domain="51mm.idc21.net" Image="//div[@align='center']/img" Next="//div[@class='turnPage']/a[last()-1]"/>
+    <Site Name="瞧瞧美女" Domain="qq4s.com" Image="//div[@class='imgview']//img" Next="//div[@class='newsfy']/a" />
+    <Site Name="清风桌面" Domain="winddesktop.com" Image="//a/img[@width][@align='absmiddle']" Type="QFZM" />
+    <Site Name="清风桌面" Domain="qfdesk.cn" Image="//a/img[@width][@align='absmiddle']" Type="QFZM" />
+    <Site Name="人体色美" Domain="rentise.com" Image="//img[@onclick]" Next="//ul[@class='pagelist']//a" />
+    <Site Name="人体艺术" Domain="meite.in" Image="//div[@class='str']//img" Next="//div[@class='cPageBox']//a" />
+    <Site Name="三色美女" Domain="34mn.com" Image="//img[@id='content']" Next="//ul[@class='pagelist']//a" />
+    <Site Name="色丝袜" Domain="sesiwa.info" Image="//img[@id='bigimg']" Next="//ul[@class='pagelist']//a" />
+    <Site Name="色小妹" Domain="sexiaomei.com" Image="//p[@align='center']/img" />
+    <Site Name="莎莎美女" Domain="paihang.info" Image="//img[@border='0']" Next="//div[@class='fy txtcen']//a" />
+    <Site Name="莎莎美女" Domain="39881.cn" Image="//div[@class='imgview']//img" Next="//div[@class='fy txtcen']/a" />
+    <Site Name="丝袜村" Domain="siwacun.com" Image="//p[@align='center']//img" Next="//div[@class='page page3']//a" />
+    <Site Name="丝袜美女" Domain="mm94.com" Image="//div[@class='content top4']//img" />
+    <Site Name="丝袜女" Domain="siwanv.net" Image="//div[@class='content']//img" Next="//div[@class='cupage']/a" />
+    <Site Name="丝袜诱惑" Domain="13cps.com" Image="//p[@align='center']/img" Next="//div[@class='content-page']//a" />
+    <Site Name="天堂图片" Domain="ivsky.com" Image="//div[@class='piclist']//img" Next="//a[@class='page-next']" Type="Ivsky" />
+    <Site Name="天天美女" Domain="ttmnw.com" Image="//img[@src][@onload]" Next="//div[@class='cPageBox']//a" />
+    <Site Name="图爱屋" Domain="www.tu25.com" Image="//p/img[@src]" Next="//p[@align='center']/a" />
+    <Site Name="图坊" Domain="pic86.cn" Image="//div[@class='p']//img" Type="LeafWeb" />
+    <Site Name="图坊" Domain="leafweb.cn" Image="//div[@class='p']//img"  Type="LeafWeb" />
+    <Site Name="图库网 " Domain="tuku.cn" Image="//img[@id][@alt]" Next="//a[@id='lnkNext']" Type="Tuku" />
+    <Site Name="图片100" Domain="pics100.net" Image="//p[@align]/img[@src]" Next="//b[@id='miracleflower']/a" Type="Pics100" />
+    <Site Name="图片吧" Domain="tpbar.com" Image="//img[@id='bigimg']" Next="//ul[@class='pagelist']//a" />
+    <Site Name="图片大全" Domain="tpdq.net" Image="//img[@id='bigimg']" Next="//div[@class='fy_bt']/a" />
+    <Site Name="图片网" Domain="tupian.com" Image="//div[@class='intro']/img" Next="//div[@class='pages']//a" />
+    <Site Name="图片秀" Domain="pic22.com" Image="//div[@class='pic_look']/img" Next="//div[@class='p']//a" />
+    <Site Name="我爱美人" Domain="52meiren.com" Image="//div[@class='con_3']//img" Next="//div[@class='page']/a[last()-1]"/>
+    <Site Name="我爱美人" Domain="22tf.com" Image="//div[@class='con_3']//img" Next="//div[@class='page']/a[last()-1]"/>
+    <Site Name="我爱丝袜" Domain="5isw.com" Image="//div[@class='bimg']//img" Next="//div[@id='simg']/a" />
+    <Site Name="我爱桌面" Domain="52desktop.cn" Image="//div[@class='bizhi']//img" Next="//a[@class='next']" Type="Desktop" />
+    <Site Name="吾要壁纸" Domain="51bizhi.com" Image="//img[@class='Image']" Next="//td[@align='right']/a" Type="Bizhi" />
+    <Site Name="纤纤美女" Domain="2qian.com" Image="//div[@class='bimg']//img" Next="//div[@id='simg']/a" />
+    <Site Name="筱雨吧" Domain="xyuba.com" Image="////img[@src][@id='bigimg']" Next="//ul[@class='pagelist']//a" />
+    <Site Name="写真站 " Domain="xiezhenzhan.com" Image="//div[@class='content_pic']//img" Next="//div[@class='page']/a" />
+    <Site Name="新视觉图库" Domain="cooltuku.com" Image="//img[@onload]" Next="//p[@align='center']//a" />
+    <Site Name="性感美女吧" Domain="gao28.com" Image="//div[@class='mmimg']//img" Next="//div[@class='dede_pages']//a" />
+    <Site Name="性感美女屋" Domain="920mm.com" Image="//ul[@class='file']/img" Next="//ul[@class='image']/a[@href]" />
+    <Site Name="性感美女屋" Domain="4582.com" Image="//ul[@class='file']/img" Next="//ul[@class='image']/a[@href]" />
+    <Site Name="秀图网" Domain="xiutu.cc" Image="//center/a/img" Next="//ul[@class='pagelist']//a" />
+    <Site Name="雅克女性" Domain="yklady.com" Image="//div[@class='left_content_5_1']//img" Next="//div[@class='content_pages']//a" />
+    <Site Name="亚洲美女" Domain="yzmnw.com" Image="//img[@src][@onload]" Next="//ul[@class='pagelist']//a" />
+    <Site Name="养眼美眉" Domain="yangyanmm.com" Image="//div[@class='myc']/img" Next="//div[@class='page page_l']/*" />
+    <Site Name="一流美女屋" Domain="meinv01.com" Image="//div[@class='Npic']/img" Next="//div[@class='forumallpages']//a" />
+    <Site Name="一起看美女" Domain="17kmeinv.com" Image="//div[@class='NewsContent']//img" Next="" />
+    <Site Name="伊看美眉" Domain="1kmm.com" Image="//div[@class='Npic']//img" Next="//div[@class='forumallpages']//a" />
+    <Site Name="艺术人生" Domain="04cc.com" Image="//div[@class='lt4']//img" Next="//div[@class='lt4']/a" />
+    <Site Name="易图库" Domain="tukuba.cn" Image="//img[@id='bigimg']" Next="//div[@class='dede_pages']//a" />
+    <Site Name="易桌面" Domain="ytuku.com" Image="//img[@id='bigimg']" Next="//div[@class='dede_pages']//a" />
+    <Site Name="优色网" Domain="7bbuu.com" Image="//div[@class='content']/img" Next="" />
+    <Site Name="优色网" Domain="uusese.com" Image="//div[@class='content']/img" Next="" />
+    <Site Name="中高艺" Domain="heels.cn" Image="//img[@onmouseover]" Type="Heels" />
+    <Site Name="桌酷壁纸" Domain="zhuoku.com" Image="//div[@class='bizhiin']//img" Next="//select/option" Type="ZhuoKu" />
+    <Site Name="桌面壁纸" Domain="seedesk.cn" Image="//a[@onclick]/img" Next="" Type="SeeDesk" />
+    <Site Name="桌面城市" Domain="deskcity.com" Image="//a[@href]/img[@src]" Next="//div[@class='pagination']" Type="DeskCity" />
+    <Site Name="桌面城市" Domain="deskcity.cn" Image="//a[@href]/img[@src][@border='1']" Next="//select/option" Type="GirlCity" />
+    <Site Name="桌面城市 " Domain="girlcity.cn" Image="//a[@href]/img[@src][@border='1']" Next="//select/option" Type="GirlCity" />
+    <Site Name="桌面互联" Domain="ydesk.com" Image="//a/img[@width='160']" Next="//p/a" Screen="//font[@style='font-size:12px;color:#999999;font-weight:normal;line-height:25px;']" Type="YDesk" />
+    <Site Name="丝袜网" Domain="42w.info" Image="//p[@align='center']/a/img" Next="//div[@align='center']/a[last()-1]"/>
+    <Site Name="美女图片" Domain="mm210.com" Image="//div[@class='content-pic']/img" Next="//div[@class='content-page']/a"/>
+    <Site Name="日本人体屋" Domain="krenti.com" Image="//img[@onclick]" Next="//div[@id='MyContent']//li/a"/>
+    <Site Name="美女门" Domain="men2012.com" Image="//img[@onload]" Next="//div[@class='page']//a"/>
+    <Site Name="第四色" Domain="uu4q.com" Image="//div[@class='content']//img" />
+    <Site Name="美图秀" Domain="tu.18.lc" Image="//img[@onload]" />
+    <Site Name="美图网" Domain="98renti.org" Image="//div[@id='xwxc']//img" Next="//div[@class='pageLink']/a[last()-1]"/>
+    <Site Name="丝袜论坛" Domain="6611.us" Image="//img[@onclick]" Next="" Type="6611"/>
+    <Site Name="啾丫丫" Domain="chouy.com" Image="//div[@class='picDimg']//img" Next="//ul[@class='pagelist']//a" />
+    <Site Name="正妹日报" Domain="slf001.com" Image="//div[@class='tusm']//img" Next="//div[@class='page']//a" />
+    <Site Name="热鸟论坛" Domain="reniao.net" Image="//img[@onload]" />
+    <Site Name="性感美女" Domain="kanayi.com" Image="//img[@onclick]" Next="//div[@class='pnum']/a" />
+    <Site Name="伊人美女" Domain="mmback.com" Image="//div[@id='content_nei']/img" Next="//div[@id='fenye']/a" />
+    <Site Name="色非美女" Domain="sefeimeinv.com" Image="//img[@onclick]" Next="//ul[@class='pagelist']//a" />
+    <Site Name="美女本色" Domain="meinvbense.com" Image="//img[@onclick]" Next="//p[@class='cpages']/a" />
+    <Site Name="90后美女" Domain="meimei90.com" Image="//div[@class='pMin']/img" Next="//div[@class='cPageBox']/a" />
+    <Site Name="齐齐看美女" Domain="7kmn.com" Image="//div[@class='pp']/img" Next="//div[@class='page']//a" />
+    <Site Name="好色之图" Domain="592020.com" Image="//img[@id='bigimg']" Next="//ul[@class='pagelist']//a" />
+    <Site Name="美图门户" Domain="shoushoutu.com" Image="//img[@id='bigimg']" Next="//div[@class='dede_pages']//a" />
+    <Site Name="美女迷" Domain="meinvmi.com" Image="//img[@id='big_img']" Next="//div[@class='viewbox']/a" />
+    <Site Name="Yaoe美女" Domain="yaoe.net" Image="//img[@onload]" Next="//div[@class='pagelist']//a" />
+    <Site Name="55美图" Domain="55meitu.com" Image="//img[@onload]" Next="//div[@class='pagelist']/a" />
+    <Site Name="魅力美女" Domain="charmpic.com" Image="//img[@onload]" Next="//div[@class='pagelist']/a" />
+    <Site Name="看美女写真" Domain="gushiqu.com" Image="//img[@id='bigimg']" Next="//div[@class='forumallpages']//a" />
+    <Site Name="丝袜高跟" Domain="heel.cc" Image="//p[@class='mbn']/a" Type="Heel" />
+    <Site Name="秀尚起义" Domain="mmp.cc" Image="//div[@class='bimg']//img" Next="//div[@id='simg']/a" />
+    <Site Name="就爱图" Domain="by2.tv" Image="//div[@class='pic_content']//img" Next="//div[@class='pnum']/a" />
+    <Site Name="妹妹吧" Domain="mm8mm8.com" Image="//p[@align='center']/img" Next="//div[@class='page page_l']//a" />
+    <Site Name="美女之家" Domain="mmonly.com" Image="//p[@align='center']/img" Next="//div[@class='page page_c']//a" />
+    <Site Name="天羽美女" Domain="555ty.com" Image="//p[@align='center']/img" Next="//div[@class='page page_w1']//a" />
+    <Site Name="女生网" Domain="nvsheng.com" Image="//div[@class='zh_show']//img" />
+    <Site Name="明星网" Domain="mingxing.com" Image="//span[@class='img_box']//img" Next="//span[@class='img_box']/a" />
+    <Site Name="扫图地带" Domain="youzi4.com" Image="//ul[@class='show_box_two']//img[@onmouseover]" Next="//div[@class='page']//a" Type="Youzi" />
+    <!--<Site Name="美女私房照" Domain="mnsfz.com" Image="//div[@id='imgString']/img" Next="//div[@class='pageList']/a"/>-->
+    <Site Name="很美写真网" Domain="henmei.net" Image="//div[@class='infopic']/img" Next="//div[@class='viewpage']/a"/>
+    <Site Name="我要你的" Domain="520de.com" Image="//div[@id='content_nei']/img" Next="//div[@id='fenye']/a"/>
+    <Site Name="千帆壁纸" Domain="piclove.com" Image="//ul[@class='update_show']//img" Next="" Type="PicLove"/>
+    <Site Name="性感丝袜" Domain="xinggansiwa.info" Image="//img[@id='bigimg']" Next="//div[@class='page page_w1']/a"/>
+    <Site Name="丝袜足" Domain="siwazu.info" Image="//img[@id='bigimg']" Next="//ul[@class='pagelist']//a"/>
+    <Site Name="薄丝美女" Domain="mm522.com" Image="//div[@class='content']/img" Next="//ul[@class='pagelist']//a"/>
+    <Site Name="78美图" Domain="meitu78.com" Image="//div[@class='imgview']//img" Next="//div[@class='fy txtcen']/a"/>
+    <Site Name="K奇网" Domain="kissqi.com" Image="//img[@onload]" Next="//table[@class='pageNavBox list']//a" Type="KissQi"/>
+    <Site Name="美腿网" Domain="meitui5.com" Image="//div[@class='pMin 6521']/img" Next="//div[@class='sPage'][2]/a" />
+    <Site Name="美女图片" Domain="36mn.com" Image="//img[@onload]" />
+    <Site Name="丝袜艺术馆" Domain="si-wa.com" Image="//img[@id='bigimg']" Next="//ul[@class='pagelist']//a" />
+    <Site Name="XIUMN " Domain="xiumn.com" Image="//div[@class='content_3 mb8']//img" Next="//div[@class='page']/a" />
+    <Site Name="美女大秀" Domain="daxiu.info" Image="//div[@class='73128 box_inner']/img" Next="//ul[@class='pic_pagelist listc']//a" />
+    <Site Name="织梦玫瑰" Domain="707486.com" Image="//img[@id='big_img']" Next="//ul[@class='pagelist']//a" />
+    <Site Name="POSE美女" Domain="rtpose.com" Image="//img[@onclick]" Next="//ul[@class='pagelist']//a" />
+    <Site Name="美眉魅惑" Domain="mmmh.cc" Image="//img[@onclick]" Next="//dt/a" />
+    <Site Name="知足者" Domain="1meng.com" Image="//img[@onload]" Next="" Type="Meng" />
+    <Site Name="秀尚起义" Domain="meinvzp.com" Image="//div[@class='bimg']//img" Next="//div[@id='simg']//a" />
+    <Site Name="美腿丝袜" Domain="siwa-siwa.com" Image="//img[@id='bigimg']" Next="//ul[@class='pagelist']//a" />
+    <Site Name="39美女写真" Domain="mn39.com" Image="//div[@class='picbox']/img" Next="" />
+    <Site Name="永恒美女" Domain="yhwang.cn" Image="//div[@class='bimg']//img" Next="//div[@id='simg']//a" />
+    <Site Name="美图下载" Domain="mtxz.net" Image="//img[@onload]" />
+    <Site Name="爱死美女" Domain="24meinv.com" Image="//div[@class='gtps fl']//img" Next="//div[@class='page ps']/a[last()-1]" Type="Meinv"/>
+    <Site Name="爱思美女" Domain="91241.com" Image="//img[@onload]" Next="//div[@class='pagelist']/a"/>
+    <Site Name="丝袜美腿" Domain="swmtw.com" Image="//div[@class='photoimg']/img" Next="//div[@id='contentsx']/a"/>
+    <Site Name="我要看美女" Domain="65177.com" Image="//div[@class='content_pic']//img" Next="//div[@id='contentsx']/a"/>
+    <Site Name="琪琪美女" Domain="im77.com" Image="//img[@onclick]" Next="//div[@class='pclady_page']/a"/>
+    <Site Name="悠悠美女" Domain="uumm.us" Image="//div[@class='content-pic']//img" Next="//div[@class='content-page']/a"/>
+    <Site Name="美女九百" Domain="mn900.com" Image="//div[@class='picbox']//img" Next="//div[@class='content-page']/a"/>
+    <Site Name="78美女" Domain="78meinv.com" Image="//img[@onload]" />
+    <Site Name="丝袜会" Domain="siwahui.com" Image="//img[@id='bigimg']" Next="//a[@class='page-ch']"/>
+    <Site Name="女妞网" Domain="nvniu.com" Image="//div[@id='contents']//img" Next="//ul[@class='pagelist']//a"/>
+    <Site Name="我爱美女" Domain="520955.com" Image="//img[@style='cursor: pointer;']" Next="//ul[@class='pagelist']//a"/>
+    <Site Name="丝袜诱惑" Domain="www.isiwa.info" Image="//div[@class='con']//img" Next="//ul[@class='pagelist']//a"/>
+    <Site Name="丝图阁" Domain="situge.com" Image="//img[@onload]" />
+    <Site Name="黑丝袜" Domain="heisiwa.info" Image="//div[@class='con_con']//img" Next="//div[@class='page']/a"/>
+    <Site Name="黑丝袜" Domain="shuocuo.com" Image="//img[@id='bigimg']" Next="//a[@class='page-ch']"/>
+    <Site Name="找美女" Domain="zhaomeinv.net" Image="//div[@class='content']//img" Next="//div[@class='page']/a"/>
+    <Site Name="51时尚" Domain="51ass.com" Image="//div[@class='viewbody']//img" Next="//div[@class='turnPage']/a[last()-1]"/>
+    <Site Name="魅力图库" Domain="mltuku.com" Image="//div[@class='contents']//img" Next="//div[@class='contentsx']/a"/>
+    <Site Name="AV人体艺术" Domain="avrentiyishu.com" Image="//div[@class='contents']//img" Next="//div[@class='page']/a"/>
+    <Site Name="爱黑丝" Domain="aiheisi.com" Image="//img[@id='big_img']" Next="//div[@class='viewbox']/a"/>
+    <Site Name="丝袜淫" Domain="siwain.com" Image="//img[@onload]" />
+    <Site Name="养眼吧" Domain="yangyan8.com" Image="//div[@class='pop3_left_5']//img" Next="//div[@class='pop3_left_6_2']/a"/>
+    <Site Name="优美写真" Domain="yymm.com" Image="//img[@id='showPhoto']" Next="//div[@class='page']/a[last()-1]"/>
+    <Site Name="优美艺术" Domain="ymtuku.com" Image="//img[@id='bigimg']" Next="//div[@class='forumallpages']/a"/>
+    <Site Name="搜美眉" Domain="soomm.com" Image="//p[@align='center']//img" Next="//div[@class='b3']/a[last()-1]"/>
+    <Site Name="零度美女" Domain="06363.com" Image="//div[@class='str']/img" Next="//div[@class='cPageBox']/a"/>
+    <Site Name="爱妹妹" Domain="mm2.cc" Image="//img[@id='bigimg']" Next="//div[@class='pnum']/a"/>
+    <Site Name="第四色" Domain="70chun.com" Image="//div[@class='content']/img" />
+    <Site Name="第四色" Domain="di4se.com" Image="//div[@class='content']/img" />
+    <Site Name="第四色" Domain="d4uu.com" Image="//div[@class='content']/img" />
+    <Site Name="第四色" Domain="f4nn.com" Image="//div[@class='content']/img" />
+    <Site Name="图秀吧" Domain="tushow8.com" Image="//div[@class='bimg']//img" Next="//div[@id='simg']/a"/>
+    <Site Name="正妹論壇" Domain="twavtv.com" Image="//td/img[@onload]" Next=""/>
+    <Site Name="356688" Domain="356688.com" Image="//img[@id='bigimg']" Next="//a[@class='page-ch']"/>
+    <Site Name="丝袜美腿" Domain="zumap.info" Image="//div[@class='content-pic']/img" Next="//div[@class='content-page']//a"/>
+    <Site Name="qq美女" Domain="qqhow.com" Image="//div[@class='content_pic']/img" Next="//div[@class='page page_w1']//a"/>
+    <Site Name="QQ头像" Domain="uvcnc.com" Image="//div[@class='content']/img"/>
+    <Site Name="美腿丝袜" Domain="meitui-bbs.com" Image="//p[@class='imgtitle']/a"/>
+    <Site Name="无国界YY" Domain="wgjyy.com" Image="//img[@id='bigimg']" Next="//a[@class='page-ch']"/>
+    <Site Name="海量下载" Domain="h899.com" Image="//img[@onload]" Next="//p[@class='textpage']//a"/>
+    <Site Name="美腿佳人" Domain="meitui.org" Image="//ul[@class='file']/img" Next="//ul[@class='image']/a"/>
+    <Site Name="美图秀秀" Domain="95t.info" Image="//div[@class='picbox']//img" Next="//div[@class='newsfy']/a"/>
+    <Site Name="美图秀秀" Domain="86188.info" Image="//div[@class='picbox']//img" Next="//div[@class='newsfy']/a"/>
+    <Site Name="漂亮图片" Domain="86677.info" Image="//img[@onclick]" Next="//div[@class='newsfy']/a"/>
+    <Site Name="寻图交友" Domain="xtjy.net" Image="//div[@class='imgview']//img" Next="//div[@class='fy txtcen']//a"/>
+    <Site Name="美眉写真" Domain="mmxzg.com" Image="//p/a/img" Next="//div[@class='page']/a"/>
+    <Site Name="369美眉" Domain="369m.com" Image="//img[@id='bigimg']" Next="//div[@class='forumallpages']/a"/>
+    <Site Name="性感美女" Domain="kuyici.com" Image="//img[@onclick]" Next="//div[@class='pnum']/a"/>
+    <Site Name="唯美欣赏" Domain="leg99.cn" Image="//a/img[@border='1']" Next="//select/option" Type="Leg99"/>
+    <Site Name="一起赏靓女" Domain="17xmm.org" Image="//img[@id='bigimg']" Next="//div[@class='viewpage']//a"/>
+    <Site Name="成人惹火" Domain="thehuo.com" Image="//img[@id='bigimg']" Next="//div[@class='page']//a"/>
+    <Site Name="腿模Fans" Domain="beautyleg.fans365.com" Image="//img[@onload]" Next="//div[@class='dede_pages']//a"/>
+    <Site Name="清风美女" Domain="haodp123.com" Image="//img[@id='bigimg']" Next="//div[@class='pageList']//a"/>
+    <Site Name="开心美女" Domain="kx52.com" Image="//img[@id='bigimg']" Next="//div[@class='pagelist']/a"/>
+    <Site Name="好色之图" Domain="596060.com" Image="//img[@id='bigimg']" Next="//ul[@class='pagelist']//a"/>
+    <Site Name="美女在线" Domain="zxtuku.com" Image="//img[@id='bigimg']" Next="//div[@class='page page_c']//a"/>
+    <Site Name="18妹" Domain="18mei.com" Image="//div[@class='inle-cont']//img" Next="//ul[@class='pagelist']//a"/>
+    <Site Name="犀利美女" Domain="xl911.com" Image="//p/img[@alt]" Next="//div[@class='pagelist']/a"/>
+    <Site Name="大胆美女" Domain="ddmeimei.com" Image="//td[@class='picsize']/img" Next="//a[@class='pic1']"/>
+    <Site Name="诱惑吧" Domain="youhuo8.com" Image="//div[@class='photoimg']/img" Next="//div[@id='contentsx']//a"/>
+    <Site Name="性感MM" Domain="skddz.net" Image="//img[@onclick]" Next="//div[@class='page page_l']//a"/>
+    <Site Name="MM231" Domain="mm231.com" Image="//div[@class='box_inner']/img" Next="//div[@class='pageList']//a"/>
+    <Site Name="美腿屋" Domain="meituiwu.com" Image="//img[@id='bigimg']" Next="//div[@class='pagelist']/a"/>
+    <Site Name="艺术美女" Domain="ysmeinv.com" Image="//div[@id='contents']//img" Next="//div[@class='contentsx']/a"/>
+    <Site Name="美妞儿" Domain="meiniu.cc" Image="//img[@onclick]" Next="//div[@class='page page_c']//a"/>
+    <Site Name="艳图吧" Domain="yantuba.com" Image="//div[@class='box_inner']/img" Next="//div[@class='pageList']//a"/>
+    <Site Name="日本美女" Domain="rbmeinv.com" Image="//div[@class='newspic']//img" Next="//div[@class='forumallpages']//a"/>
+    <Site Name="快乐美女" Domain="k6mn.com" Image="//div[@class='pic_show']//img[@alt]" Next="//div[@class='forumallpages']//a"/>
+    <Site Name="爱妹妹" Domain="7089.net" Image="//div[@class='content']//img" Next="//ul[@class='pagelist']//a"/>
+    <Site Name="哇哇美女" Domain="wmmw.net" Image="//img[@id='bigimg']" Next="//div[@class='pagelist']/a"/>
+    <Site Name="易车网" Domain="photo.bitauto.com" Image="//img[@id='v_img']" Next="//a[@id='lnk_btmnext']" Type="BitAuto"/>
+    <Site Name="美女伊甸园" Domain="meinv.cn" Image="//div[@class='article']//img" Next="//div[@class='page']//a"/>
+    <Site Name="美女图片" Domain="mmpp.cc" Image="//img[@id='bigimg']" Next="//a[@class='page-ch']"/>
+    <Site Name="妞妞美女" Domain="66meitu.com" Image="//img[@file]" Next="" Type="66MeiTu"/>
+    <Site Name="美图频道" Domain="6to23.com" Image="//img[@id='Img']" Next="//div[@class='page_list']/a[last()-1]"/>
+    <Site Name="MM2You" Domain="mm2you.com" Image="//div[@class='content']//img" Next="//div[@class='page page_c']//a"/>
+    <Site Name="人体艺术" Domain="uummp.com" Image="//img[@onload]" Next="//a[@class='next']"/>
+    <Site Name="丝袜美女" Domain="swcn8.com" Image="//img[@file]"/>
+    <Site Name="日韩美女" Domain="55siwa.com" Image="//img[@file]"/>
+    <Site Name="丝袜美女" Domain="siwaimg.com" Image="//img[@file]"/>
+    <Site Name="YY美女" Domain="yymmmm.info" Image="//div[@class='Nrsx']/img" Next="//div[@class='turnPage']/a"/>
+    <Site Name="HoopChina" Domain="hoopchina.com" Image="//img[@id='bigpicpic']" Next="//span[@class='nomp']/a"/>
+    <Site Name="美女论坛" Domain="meinvlt.net" Image="//img[@onload]"/>
+    <Site Name="美腿站" Domain="meituiz.com" Image="//img[@id='bigimg']" Next="//div[@class='pagebar']/a"/>
+    <Site Name="美眉吧" Domain="meimeibar.com" Image="//img[@onload]" Next="//p[@class='pageLink']/a[last()-1]"/>
+    <Site Name="89美女" Domain="89mn.com" Image="//p[@align='center']/img[@alt]" Next="//div[@class='pagelist']/a"/>
+    <Site Name="丝袜美腿" Domain="jule8.com" Image="//img[@id='bigimg']" Next="//div[@class='page page_c']//a"/>
+    <Site Name="九九美女" Domain="99mnw.com" Image="//img[@file]"/>
+    <Site Name="妹妹我爱图" Domain="mm52pic.com" Image="//img[@onclick]"/>
+    <Site Name="HI301" Domain="pic.hi301.com" Image="//img[@style='cursor: pointer;']" Next="//div[@class='tp_pages']//a[last()-1]"/>
+  </List>
+>>>>>>> parent of fb9b497... Sync from codeplex
 </ImageRipper>

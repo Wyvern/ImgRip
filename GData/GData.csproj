@@ -374,4 +374,332 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.30319</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{510070A4-28D1-4362-BAB5-54984A9F75BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GData</RootNamespace>
+    <AssemblyName>GData</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>none</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>none</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GData.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="F:\Code\GData\core\abstractentry.cs">
+      <Link>Core\abstractentry.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\abstractfeed.cs">
+      <Link>Core\abstractfeed.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\appcontrol.cs">
+      <Link>Core\appcontrol.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\asyncDataHandler.cs">
+      <Link>Core\asyncDataHandler.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\asyncservice.cs">
+      <Link>Core\asyncservice.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atombase.cs">
+      <Link>Core\atombase.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atombaselink.cs">
+      <Link>Core\atombaselink.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomcategory.cs">
+      <Link>Core\atomcategory.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomcontent.cs">
+      <Link>Core\atomcontent.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomfeed.cs">
+      <Link>Core\atomfeed.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomfeedentry.cs">
+      <Link>Core\atomfeedentry.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomFeedgenerator.cs">
+      <Link>Core\atomFeedgenerator.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomfeedparser.cs">
+      <Link>Core\atomfeedparser.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomicon.cs">
+      <Link>Core\atomicon.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomId.cs">
+      <Link>Core\atomId.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomlink.cs">
+      <Link>Core\atomlink.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomlogo.cs">
+      <Link>Core\atomlogo.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomnametable.cs">
+      <Link>Core\atomnametable.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomperson.cs">
+      <Link>Core\atomperson.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomsource.cs">
+      <Link>Core\atomsource.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomtextconstruct.cs">
+      <Link>Core\atomtextconstruct.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\atomuri.cs">
+      <Link>Core\atomuri.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\authentication.cs">
+      <Link>Core\authentication.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\authexceptions.cs">
+      <Link>Core\authexceptions.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\authsubutil.cs">
+      <Link>Core\authsubutil.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\basefeedparser.cs">
+      <Link>Core\basefeedparser.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\basenametable.cs">
+      <Link>Core\basenametable.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\collections.cs">
+      <Link>Core\collections.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\documentquery.cs">
+      <Link>Core\documentquery.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\exceptions.cs">
+      <Link>Core\exceptions.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\extcollections.cs">
+      <Link>Core\extcollections.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\extensionbase.cs">
+      <Link>Core\extensionbase.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\feedconstants.cs">
+      <Link>Core\feedconstants.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\feedmodel.cs">
+      <Link>Core\feedmodel.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\feedquery.cs">
+      <Link>Core\feedquery.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\gauthrequest.cs">
+      <Link>Core\gauthrequest.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\gauthsubrequest.cs">
+      <Link>Core\gauthsubrequest.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\gdatabatch.cs">
+      <Link>Core\gdatabatch.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\goauthrequest.cs">
+      <Link>Core\goauthrequest.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\HttpUtility.cs">
+      <Link>Core\HttpUtility.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\mediaservice.cs">
+      <Link>Core\mediaservice.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\mediasource.cs">
+      <Link>Core\mediasource.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\oauthbase.cs">
+      <Link>Core\oauthbase.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\oauthuri.cs">
+      <Link>Core\oauthuri.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\oauthutil.cs">
+      <Link>Core\oauthutil.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\request.cs">
+      <Link>Core\request.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\rssfeedparser.cs">
+      <Link>Core\rssfeedparser.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\service.cs">
+      <Link>Core\service.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\serviceinterface.cs">
+      <Link>Core\serviceinterface.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\simplecontainer.cs">
+      <Link>Core\simplecontainer.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\simpleelement.cs">
+      <Link>Core\simpleelement.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\tracing.cs">
+      <Link>Core\tracing.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\utilities.cs">
+      <Link>Core\utilities.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\versioninterface.cs">
+      <Link>Core\versioninterface.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\core\xmlextension.cs">
+      <Link>Core\xmlextension.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\docs\docrequest.cs">
+      <Link>Docs\docrequest.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\docs\documententry.cs">
+      <Link>Docs\documententry.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\docs\documentfeed.cs">
+      <Link>Docs\documentfeed.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\docs\documentquery.cs">
+      <Link>Docs\documentquery.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\docs\documentservice.cs">
+      <Link>Docs\documentservice.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\extensions\enumconstruct.cs">
+      <Link>Extensions\enumconstruct.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\extensions\exif.cs">
+      <Link>Extensions\exif.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\extensions\feedlink.cs">
+      <Link>Extensions\feedlink.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\extensions\gdatanametable.cs">
+      <Link>Extensions\gdatanametable.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\extensions\georsswhere.cs">
+      <Link>Extensions\georsswhere.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\extensions\mediarss.cs">
+      <Link>Extensions\mediarss.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\extensions\misc.cs">
+      <Link>Extensions\misc.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gacl\aclentry.cs">
+      <Link>Acl\aclentry.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gacl\aclfeed.cs">
+      <Link>Acl\aclfeed.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gacl\aclnamespace.cs">
+      <Link>Acl\aclnamespace.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gacl\aclrole.cs">
+      <Link>Acl\aclrole.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gacl\aclscope.cs">
+      <Link>Acl\aclscope.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\albumentry.cs">
+      <Link>Photo\albumentry.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\commententry.cs">
+      <Link>Photo\commententry.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\gextphotos.cs">
+      <Link>Photo\gextphotos.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\kindsquery.cs">
+      <Link>Photo\kindsquery.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\photoentry.cs">
+      <Link>Photo\photoentry.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\photosrequest.cs">
+      <Link>Photo\photosrequest.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\picasaentry.cs">
+      <Link>Photo\picasaentry.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\picasafeed.cs">
+      <Link>Photo\picasafeed.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\picasaquery.cs">
+      <Link>Photo\picasaquery.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\picasaservice.cs">
+      <Link>Photo\picasaservice.cs</Link>
+    </Compile>
+    <Compile Include="F:\Code\GData\gphotos\tagentry.cs">
+      <Link>Photo\tagentry.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GData.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
 </Project>
