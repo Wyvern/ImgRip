@@ -19,12 +19,13 @@
     <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -45,14 +46,14 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>bin\Debug\</OutputPath>
     <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <OutputPath>bin\Release\</OutputPath>
     <Optimize>true</Optimize>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
@@ -61,88 +62,97 @@
     <AssemblyOriginatorKeyFile>HAP.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\crc32.cs">
-      <Link>crc32.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\EncodingFoundException.cs">
-      <Link>EncodingFoundException.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlAttribute.cs">
-      <Link>HtmlAttribute.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlAttributeCollection.cs">
-      <Link>HtmlAttributeCollection.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlCommentNode.cs">
-      <Link>HtmlCommentNode.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlDocument.cs">
-      <Link>HtmlDocument.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlDocument.Xpath.cs">
-      <Link>HtmlDocument.Xpath.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlElementFlag.cs">
-      <Link>HtmlElementFlag.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlEntity.cs">
-      <Link>HtmlEntity.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlNameTable.cs">
-      <Link>HtmlNameTable.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlNode.cs">
-      <Link>HtmlNode.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlNode.Xpath.cs">
-      <Link>HtmlNode.Xpath.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlNodeCollection.cs">
-      <Link>HtmlNodeCollection.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlNodeNavigator.cs">
-      <Link>HtmlNodeNavigator.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlNodeType.cs">
-      <Link>HtmlNodeType.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlParseError.cs">
-      <Link>HtmlParseError.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlParseErrorCode.cs">
-      <Link>HtmlParseErrorCode.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlTextNode.cs">
-      <Link>HtmlTextNode.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlWeb.cs">
-      <Link>HtmlWeb.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\HtmlWeb.Xpath.cs">
-      <Link>HtmlWeb.Xpath.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\HtmlWebException.cs">
-      <Link>HtmlWebException.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\IOLibrary.cs">
-      <Link>IOLibrary.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\NameValuePair.cs">
-      <Link>NameValuePair.cs</Link>
-    </Compile>
-    <Compile Include="f:\code\htmlagilitypack\htmlagilitypack\NameValuePairList.cs">
-      <Link>NameValuePairList.cs</Link>
-    </Compile>
-    <Compile Include="F:\Code\htmlagilitypack\HtmlAgilityPack\Utilities.cs">
-      <Link>Utilities.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <None Include="HAP.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Code\HtmlAgilityPack\crc32.cs">
+      <Link>crc32.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\EncodingFoundException.cs">
+      <Link>EncodingFoundException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlAttribute.cs">
+      <Link>HtmlAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlAttributeCollection.cs">
+      <Link>HtmlAttributeCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlCommentNode.cs">
+      <Link>HtmlCommentNode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlDocument.cs">
+      <Link>HtmlDocument.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlDocument.PathMethods.cs">
+      <Link>HtmlDocument.PathMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlDocument.Xpath.cs">
+      <Link>HtmlDocument.Xpath.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlElementFlag.cs">
+      <Link>HtmlElementFlag.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlEntity.cs">
+      <Link>HtmlEntity.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlNameTable.cs">
+      <Link>HtmlNameTable.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlNode.cs">
+      <Link>HtmlNode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlNode.Dynamic.cs">
+      <Link>HtmlNode.Dynamic.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlNode.Xpath.cs">
+      <Link>HtmlNode.Xpath.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlNodeCollection.cs">
+      <Link>HtmlNodeCollection.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlNodeNavigator.cs">
+      <Link>HtmlNodeNavigator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlNodeType.cs">
+      <Link>HtmlNodeType.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlParseError.cs">
+      <Link>HtmlParseError.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlParseErrorCode.cs">
+      <Link>HtmlParseErrorCode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlTextNode.cs">
+      <Link>HtmlTextNode.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlWeb.cs">
+      <Link>HtmlWeb.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlWeb.Xpath.cs">
+      <Link>HtmlWeb.Xpath.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\HtmlWebException.cs">
+      <Link>HtmlWebException.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\IOLibrary.cs">
+      <Link>IOLibrary.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\NameValuePair.cs">
+      <Link>NameValuePair.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\NameValuePairList.cs">
+      <Link>NameValuePairList.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\Trace.cs">
+      <Link>Trace.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Code\HtmlAgilityPack\Utilities.cs">
+      <Link>Utilities.cs</Link>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

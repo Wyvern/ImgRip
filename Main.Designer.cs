@@ -164,8 +164,8 @@
             // tbParse
             // 
             this.tbParse.AllowDrop = true;
-            this.tbParse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbParse.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbParse.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tbParse.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.AllUrl;
             this.tbParse.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRip.Properties.Settings.Default, "Url", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -215,9 +215,9 @@
             // lvRip
             // 
             this.lvRip.AllowColumnReorder = true;
-            this.lvRip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvRip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvRip.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.chName,
             this.chNumber,
@@ -275,13 +275,13 @@
             this.cmsLV.ShowCheckMargin = true;
             this.cmsLV.ShowImageMargin = false;
             this.cmsLV.ShowItemToolTips = false;
-            this.cmsLV.Size = new System.Drawing.Size(153, 202);
+            this.cmsLV.Size = new System.Drawing.Size(118, 180);
             this.cmsLV.Opening += new System.ComponentModel.CancelEventHandler(this.cmsLV_Opening);
             // 
             // cmmiNextPage
             // 
             this.cmmiNextPage.Name = "cmmiNextPage";
-            this.cmmiNextPage.Size = new System.Drawing.Size(152, 22);
+            this.cmmiNextPage.Size = new System.Drawing.Size(117, 22);
             this.cmmiNextPage.Text = "Next";
             this.cmmiNextPage.Visible = false;
             this.cmmiNextPage.Click += new System.EventHandler(this.cmmiNextPage_Click);
@@ -289,7 +289,7 @@
             // cmmiDropGroup
             // 
             this.cmmiDropGroup.Name = "cmmiDropGroup";
-            this.cmmiDropGroup.Size = new System.Drawing.Size(152, 22);
+            this.cmmiDropGroup.Size = new System.Drawing.Size(117, 22);
             this.cmmiDropGroup.Text = "Drop";
             this.cmmiDropGroup.Visible = false;
             this.cmmiDropGroup.Click += new System.EventHandler(this.cmmiDrop_Click);
@@ -297,7 +297,7 @@
             // cmmiCopyName
             // 
             this.cmmiCopyName.Name = "cmmiCopyName";
-            this.cmmiCopyName.Size = new System.Drawing.Size(152, 22);
+            this.cmmiCopyName.Size = new System.Drawing.Size(117, 22);
             this.cmmiCopyName.Text = "Copy";
             this.cmmiCopyName.Visible = false;
             this.cmmiCopyName.Click += new System.EventHandler(this.cmmiCopyName_Click);
@@ -305,7 +305,7 @@
             // cmmiSave
             // 
             this.cmmiSave.Name = "cmmiSave";
-            this.cmmiSave.Size = new System.Drawing.Size(152, 22);
+            this.cmmiSave.Size = new System.Drawing.Size(117, 22);
             this.cmmiSave.Text = "Save";
             this.cmmiSave.Visible = false;
             this.cmmiSave.Click += new System.EventHandler(this.cmmiDownloadFile);
@@ -313,7 +313,7 @@
             // cmmiRemove
             // 
             this.cmmiRemove.Name = "cmmiRemove";
-            this.cmmiRemove.Size = new System.Drawing.Size(152, 22);
+            this.cmmiRemove.Size = new System.Drawing.Size(117, 22);
             this.cmmiRemove.Text = "Remove";
             this.cmmiRemove.Visible = false;
             this.cmmiRemove.Click += new System.EventHandler(this.cmmiDeleteFile);
@@ -321,7 +321,7 @@
             // cmmiClear
             // 
             this.cmmiClear.Name = "cmmiClear";
-            this.cmmiClear.Size = new System.Drawing.Size(152, 22);
+            this.cmmiClear.Size = new System.Drawing.Size(117, 22);
             this.cmmiClear.Text = "Clear";
             this.cmmiClear.Visible = false;
             this.cmmiClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -330,7 +330,7 @@
             // 
             this.cmmiBatch.CheckOnClick = true;
             this.cmmiBatch.Name = "cmmiBatch";
-            this.cmmiBatch.Size = new System.Drawing.Size(152, 22);
+            this.cmmiBatch.Size = new System.Drawing.Size(117, 22);
             this.cmmiBatch.Text = "Batch";
             this.cmmiBatch.Visible = false;
             this.cmmiBatch.CheckedChanged += new System.EventHandler(this.cmmiBatch_CheckedChanged);
@@ -341,13 +341,13 @@
             this.cmmiPreview.CheckOnClick = true;
             this.cmmiPreview.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cmmiPreview.Name = "cmmiPreview";
-            this.cmmiPreview.Size = new System.Drawing.Size(152, 22);
+            this.cmmiPreview.Size = new System.Drawing.Size(117, 22);
             this.cmmiPreview.Text = "Preview";
             // 
             // RipStatus
             // 
-            this.RipStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.RipStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.RipStatus.AutoSize = false;
             this.RipStatus.Dock = System.Windows.Forms.DockStyle.None;
             this.RipStatus.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
@@ -445,8 +445,8 @@
             // 
             // tbDir
             // 
-            this.tbDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDir.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tbDir.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.tbDir.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRip.Properties.Settings.Default, "Dir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
@@ -505,7 +505,6 @@
             this.AcceptButton = this.btnGo;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnGo;
             this.ClientSize = new System.Drawing.Size(787, 488);
             this.Controls.Add(this.mainSplit);
             this.Font = new System.Drawing.Font("Microsoft YaHei", 9F);
@@ -516,7 +515,7 @@
             this.MinimumSize = new System.Drawing.Size(450, 300);
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "F11: FullScreen,  [Shift+] Space: Preview ON|OFF";
+            this.Text = "Image Ripper - F11: FullScreen,  [Shift+] Space: Preview ON|OFF";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Ripper_KeyDown);
             this.mainSplit.Panel1.ResumeLayout(false);
             this.mainSplit.Panel1.PerformLayout();

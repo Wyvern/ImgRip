@@ -1,5 +1,7 @@
-﻿namespace ImgRip
+﻿//#define CheckSites
+namespace ImgRip
 {
+    using ImgRip.Properties;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -7,15 +9,15 @@
     using System.Drawing;
     using System.IO;
     using System.Linq;
+    using System.Net;
     using System.Threading;
     using System.Windows.Forms;
     using System.Xml.Linq;
-    using ImgRip.Properties;
 
     partial class Main : Form
     {
         bool FullScreen { get; set; }
-        internal readonly Site[] sites;
+        internal Site[] sites;
         internal long Range { get; set; }
         internal bool Batch { get { return To - From > 0; } set { cmmiBatch.Checked = cmmiBatch.Enabled = cmmiNextPage.Enabled = value; } }
 
@@ -39,39 +41,61 @@
                 tmMinus.Enabled = true;
             };
             sites = ReadXML();
-            //GenXML();
-
-            var hap = AppDomain.CurrentDomain.Load(Resources.HAP);
-            var gd = AppDomain.CurrentDomain.Load(Resources.GData);
-            AppDomain.CurrentDomain.AssemblyResolve += (o, a) => a.Name == hap.FullName ? hap : a.Name == gd.FullName ? gd : null;
+            //CheckSites(); WriteXML();
         }
 
         Site[] ReadXML()
         {
             var xe = XElement.Parse(Resources.SiteList);
-            var ss = from s in xe.Descendants("Site")
-                     select new Site(s.Attribute("Name").Value, s.Attribute("Domain").Value, s.Attribute("Image").Value) { Type = s.Attribute("Type") == null ? "Default" : s.Attribute("Type").Value, Next = s.Attribute("Next") == null ? "" : s.Attribute("Next").Value, Screen = s.Attribute("Screen") == null ? "" : s.Attribute("Screen").Value };
-            return ss.OrderBy(s => s.Name).ToArray();
+            var sites = from s in xe.Descendants("Site")
+                        select new Site(s.Attribute("Name").Value, s.Attribute("Domain").Value, s.Attribute("Image").Value)
+                        {
+                            Type = s.Attribute("Type") == null ? "Default" : s.Attribute("Type").Value,
+                            Next = s.Attribute("Next") == null ? "" : s.Attribute("Next").Value,
+                            Screen = s.Attribute("Screen") == null ? "" : s.Attribute("Screen").Value
+                        };
+            return sites.OrderBy(_ => _.Name).ToArray();
+        }
+
+        Site[] CheckSites()
+        {
+            var website = sites.ToList();
+            foreach (var site in sites)
+            {
+                HttpWebRequest request = WebRequest.Create(string.Format("http://{0}", site.Domain)) as HttpWebRequest;
+                request.Method = "HEAD";
+                HttpWebResponse response = null;
+                try
+                {
+                    response = request.GetResponse() as HttpWebResponse;
+                    response.Close();
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Trace.WriteLine(ex.Message);
+                    website.Remove(site);
+                }
+            }
+            return website.ToArray();
         }
 
         void WriteXML()
         {
             var doc = new XDocument();
-            var ir = new XElement("ImageRipper", new XElement("List"));
+            doc.Add(new XElement("ImageRipper", new XElement("List")));
             foreach (var item in sites)
             {
                 var el = new XElement("Site",
                     new XAttribute("Name", item.Name),
                     new XAttribute("Domain", item.ToString()),
                     new XAttribute("Image", item.Image),
-                    new XAttribute("Next", item.Next),
+                    string.IsNullOrEmpty(item.Next) ? null : new XAttribute("Next", item.Next),
                     string.IsNullOrEmpty(item.Screen) ? null : new XAttribute("Screen", item.Screen));
                 if (item.Type != "Default")
                     el.Add(new XAttribute("Type", item.Type));
-                ir.Add(el);
+                doc.Descendants("List").First().Add(el);
             }
-            doc.Add(ir);
-            doc.Save(@".\..\..\SitesList.xml");
+            doc.Save(@".\..\..\Sites.xml");
         }
 
         /// <summary>
@@ -162,7 +186,7 @@
             if ((e.Result = Parse(Address.Trim())) != null) { Fetch.Next = null; return; }
             if (Fetch.Canceled) { e.Cancel = true; Fetch.Next = null; return; }
 #if ! TRACE
-             FetchFile(e);
+            FetchFile(e);
 #endif
         }
 
@@ -251,7 +275,7 @@
                         break;
                 }
                 #endregion
-                
+
                 if (Check(Order, e)) return;
                 fi.Refresh();
                 if (!fi.Exists) { LviUpdate = new[] { fi.Name, Order, null, "Download Failed!" }; continue; }
@@ -290,7 +314,7 @@
             }
             try
             {
-                return sites.SingleOrDefault(_ => host.ContainsEx(_.ToString()));
+                return sites.SingleOrDefault(_ => host.Replace("www.", "").Equals(_.ToString(), StringComparison.OrdinalIgnoreCase));
             }
             catch (Exception e)
             { MessageBox.Show(e.Message, "Duplicate site definition"); return null; }
@@ -378,7 +402,7 @@
                         return Fetch.Parse(url,
                             hnc =>
                             {
-                                var index = hnc.GetNodeIndex(hnc.Last(o => o.Attributes["selected"] != null));
+                                var index = hnc.IndexOf(hnc.Last(o => o.Attributes["selected"] != null));
                                 return (index + 1 == hnc.Count) ? null : folder + hnc[index + 1].Attributes["value"].Value;
                             },
                             fnAddress: a =>
@@ -413,7 +437,7 @@
                     case "ZhuoKu":
                         return Fetch.Parse(url, hnc =>
                         {
-                            var index = hnc.GetNodeIndex(hnc.Last(o => o.Attributes["selected"] != null));
+                            var index = hnc.IndexOf(hnc.Last(o => o.Attributes["selected"] != null));
                             return (index + 1 == hnc.Count) ? null : folder + hnc[index + 1].Attributes["value"].Value;
                         }, fnAddress: a => a.Replace("//img", "//bizhi").Replace("/thumbs/tn_", "/"));
                     #endregion
@@ -522,11 +546,6 @@
                         return Fetch.Parse(url, fnAddress: _ => _.Replace("/thumb/", "/"));
                     #endregion
 
-                    #region Youzi4.com site
-                    case "Youzi":
-                        return Fetch.Parse(url, fnAddress: a => a.Replace("-lp.jpg", ".jpg"), fnNextPage: hnc => { var page = hnc.SingleOrDefault(_ => _.InnerText == "下一页"); return page == null ? null : "http://www.youzi4.com" + page.Attributes["href"].Value; });
-                    #endregion
-
                     #region piclove.com site
                     case "PicLove":
                         return Fetch.Parse(url, fnAddress: a => "http://www.piclove.com" + a.Replace("-lp.jpg", ".jpg"));
@@ -553,7 +572,8 @@
                         return Fetch.Parse(url, fnAddress: _ =>
                         {
                             var mark = _.LastIndexOf('/'); var path = _.Substring(0, mark + 1);
-                            var name = _.Substring(mark + 1); name = name.Remove(0, 1); return path + name;
+                            var name = _.Substring(mark + 1); name = name.Remove(0, 1); path = path.Replace("//pic.", "//img.");
+                            return path + name;
                         });
                     #endregion
 
@@ -566,6 +586,34 @@
                             return curidx == hnc.Count - 1 ? null : folder + hnc[curidx + 1].Attributes["value"].Value;
                         });
                     #endregion
+
+                    #region 8264.com site
+                    case "8264":
+                        return Fetch.Parse(url, fnAddress: _ => _.Replace(".thumb.jpg", ""));
+                    #endregion
+
+                    #region Luscious site
+                    case "Luscious":
+                        return Fetch.Parse(url, fnAddress: _ => _.Replace("thumb_100_", "").Replace("static3.", "static.").Replace("static2.", "static."));
+                    #endregion
+
+                    #region LegPic.net site
+                    case "LegPic":
+                        return Fetch.Parse(url, fnAddress: _ => "http://www.legpic.net/" + _.TrimStart("../".ToCharArray()).Replace("/thumbnail/TN-", "/"),
+                        fnNextPage: _ =>
+                        {
+                            var next = _.LastOrDefault();
+                            if (next == null) return null;
+                            return "http://www.legpic.net/" + next.Attributes["href"].Value.TrimStart("../".ToCharArray());
+                        });
+                    #endregion
+
+                    #region BeautyLeg.com site
+                    case "BLeg":
+                        return Fetch.Parse(url, fnAddress: _ => _.StartsWith("http://photo.beautyleg.com/album")?_ :null
+                        );
+                    #endregion
+
                     #region Parse other sites
                     default:
                         return Fetch.Parse(url);
@@ -656,26 +704,32 @@
         /// <param name="pm">The PlusMinus enum value indicate the action type.</param>
         private void AdjustURL(int step)
         {
-            string number;
+            string number, url = Address;
             try
             {
                 switch (Fetch.Site.Type)
                 {
                     default:
-                        var q = Address.Split('='); var t = Address.LastIndexOf('_');
-                        if (q.Length < 2 && t < 0) return;
-                        number = t > 0 ? Address.Substring(t + 1, Address.LastIndexOf('.') - t - 1) : q[1];
+                        var mark = url.LastIndexOf('=');
+                        if (mark > 0)
+                            number = url.Substring(mark + 1);
+                        else
+                        {
+                            mark = url.LastIndexOf('.');
+                            var start = url.LastIndexOf('/') + 1;
+                            number = mark > 0 ? url.Substring(start, mark - start) : url.Substring(start);
+                        }
                     ChangeUrl:
                         var value = int.Parse(number);
                         value += step; if (value < 0) return;
-                        var m = Address.LastIndexOf(number);
-                        Address = Address.Substring(0, m) + value.ToString(new string('0',number.Length)) + Address.Substring(m + number.Length);
+                        var m = url.LastIndexOf(number);
+                        Address = url.Substring(0, m) + value.ToString(new string('0', number.Length)) + url.Substring(m + number.Length);
                         break;
                     case "Duide":
-                        number = Address.Substring(Address.LastIndexOf('/') + 2).Replace(".htm", "");
+                        number = url.Substring(url.LastIndexOf('/') + 2).Replace(".htm", "");
                         goto ChangeUrl;
                     case "PalAthCx":
-                        var seg = Address.Split("/".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                        var seg = url.Split("/".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                         number = seg[seg.Length - 1];
                         goto ChangeUrl;
                 }
@@ -718,7 +772,7 @@
                         text = Address.Substring(Address.LastIndexOfAny("abc".ToCharArray()) + 1).Split('.')[0];
                         goto OpenBatchDialog;
                     case "PalAthCx":
-                        var seg = Address.Split("/".ToCharArray(),StringSplitOptions.RemoveEmptyEntries);
+                        var seg = Address.Split("/".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                         text = seg[seg.Length - 1];
                         goto OpenBatchDialog;
                 }
@@ -842,11 +896,11 @@
                     }
                     else
                         Fetch.GetFile(item.Item1, path);
-                    LviUpdate = new string[] { item.Item2, null, new FileInfo(path).Length / 1024 + " KB", "Finished" };
+                    LviUpdate = new[] { item.Item2, null, new FileInfo(path).Length / 1024 + " KB", "Finished" };
                 }
                 catch (Exception)
                 {
-                    LviUpdate = new string[] { item.Item2, null, null, "Failed" };
+                    LviUpdate = new[] { item.Item2, null, null, "Failed" };
                 }
             }
         }
@@ -873,10 +927,10 @@
             switch (e.KeyCode)
             {
                 case Keys.Space:
-                    if (e.Shift) { mainSplit.Panel2Collapsed = true; cmmiPreview.Checked = false; break; }
                     if (tbParse.Focused || tbDir.Focused) break;
+                    if (e.Shift) { mainSplit.Panel2Collapsed = !mainSplit.Panel2Collapsed; cmmiPreview.Checked = !mainSplit.Panel2Collapsed; break; }
                     mainSplit.Panel1Collapsed = !mainSplit.Panel1Collapsed;
-                    cmmiPreview.Checked = true;
+                    cmmiPreview.Checked = !mainSplit.Panel1Collapsed;
                     break;
                 case Keys.Escape:
                     if (FormBorderStyle == FormBorderStyle.None)
@@ -916,6 +970,7 @@
             get
             {
                 if ((Fetch.Site = CheckUrl(Address)) == null) { tsLabel.Text = "Not support!"; return false; }
+#if  !TRACE
                 if (!Directory.Exists(Dir))
                 {
                     if (DialogResult.Yes == MessageBox.Show("Do you want to create new folder to store files?", "Directory doesn't exist!", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
@@ -926,6 +981,7 @@
                     else
                         return false;
                 }
+#endif
                 return true;
             }
         }
@@ -983,7 +1039,7 @@
                 case "Facebook": WebCloud.Service = WebCloud.CloudType.Facebook; break;
                 case "Picasa": WebCloud.Service = WebCloud.CloudType.Picasa; break;
             }
-            new WebCloud().Show();
+            new WebCloud() { Text = tsmi.Text }.Show();
         }
 
         private void tsHome_Click(object sender, EventArgs e)

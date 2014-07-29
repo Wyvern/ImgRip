@@ -36,10 +36,12 @@
             // lblCookie
             // 
             this.lblCookie.AutoSize = true;
+            this.lblCookie.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.lblCookie.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblCookie.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.lblCookie.Location = new System.Drawing.Point(41, 21);
+            this.lblCookie.Location = new System.Drawing.Point(63, 21);
             this.lblCookie.Name = "lblCookie";
-            this.lblCookie.Size = new System.Drawing.Size(302, 26);
+            this.lblCookie.Size = new System.Drawing.Size(259, 22);
             this.lblCookie.TabIndex = 0;
             this.lblCookie.Text = "Get Cookie from your browser";
             // 
@@ -55,12 +57,17 @@
             // 
             // btnSummit
             // 
+            this.btnSummit.AutoSize = true;
+            this.btnSummit.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSummit.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnSummit.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSummit.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.btnSummit.Location = new System.Drawing.Point(141, 107);
+            this.btnSummit.Location = new System.Drawing.Point(151, 107);
             this.btnSummit.Name = "btnSummit";
-            this.btnSummit.Size = new System.Drawing.Size(103, 40);
+            this.btnSummit.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnSummit.Size = new System.Drawing.Size(83, 31);
             this.btnSummit.TabIndex = 2;
-            this.btnSummit.Text = "Summit";
+            this.btnSummit.Text = "Submit";
             this.btnSummit.UseVisualStyleBackColor = true;
             this.btnSummit.Click += new System.EventHandler(this.button1_Click);
             // 

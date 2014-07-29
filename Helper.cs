@@ -18,8 +18,8 @@
         {
             foreach (var ctl in ctls)
             {
-                if (!ctl.IsHandleCreated) break;
-                ctl.Invoke(new Action(() => ctl.Enabled = enable));
+                if (ctl.IsHandleCreated)
+                    ctl.Invoke(new Action(() => ctl.Enabled = enable));
             }
         }
 

@@ -43,7 +43,7 @@
             this.ssPrompt.Dock = System.Windows.Forms.DockStyle.None;
             this.ssPrompt.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Prompt});
-            this.ssPrompt.Location = new System.Drawing.Point(1, 401);
+            this.ssPrompt.Location = new System.Drawing.Point(1, 419);
             this.ssPrompt.Name = "ssPrompt";
             this.ssPrompt.Size = new System.Drawing.Size(623, 23);
             this.ssPrompt.TabIndex = 11;
@@ -63,20 +63,21 @@
             this.flPanel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.flPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flPanel.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.flPanel.Location = new System.Drawing.Point(0, 26);
+            this.flPanel.Location = new System.Drawing.Point(0, 29);
             this.flPanel.Name = "flPanel";
-            this.flPanel.Size = new System.Drawing.Size(624, 375);
+            this.flPanel.Size = new System.Drawing.Size(624, 390);
             this.flPanel.TabIndex = 12;
             // 
             // tbSearch
             // 
             this.tbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbSearch.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tbSearch.Location = new System.Drawing.Point(1, 0);
+            this.tbSearch.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tbSearch.Location = new System.Drawing.Point(0, 1);
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(623, 25);
+            this.tbSearch.Size = new System.Drawing.Size(623, 27);
             this.tbSearch.TabIndex = 0;
+            this.tbSearch.WordWrap = false;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             // 
             // Sites
@@ -84,7 +85,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(625, 424);
+            this.ClientSize = new System.Drawing.Size(625, 442);
             this.Controls.Add(this.tbSearch);
             this.Controls.Add(this.flPanel);
             this.Controls.Add(this.ssPrompt);

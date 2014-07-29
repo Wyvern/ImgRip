@@ -45,7 +45,7 @@
         public static string Next { get; set; }
         public static string Screen { get; private set; }
         #endregion
-
+        
         public static Stream GetStream(string url, string cookie = null)
         {
             Stream r = null;
@@ -85,8 +85,8 @@
             var doc = hw.Load(url);
             if (Canceled) return "User Cancelled.";
             Title = doc.DocumentNode.SelectSingleNode("//title").InnerText;
-            Title = Title.Trim().Split('-', '_', '(', '[', '|', '.', ':', '、')[0];
-            var uri = new Uri(url); var host = uri.Host; var port = uri.Port;
+            Title = Title.Trim().Split('-', '_', '(', '[', '|', ':', '、')[0];
+            var uri = new Uri(url); var host = uri.Host; var port = uri.Port; 
             var folder = url.Substring(0, url.LastIndexOf('/') + 1);
             fnName = fnName ?? (n => n.Substring(n.LastIndexOf('/') + 1));
             fnAddress = fnAddress ?? (a => a.StartsWith("http://") ? a :
@@ -120,10 +120,14 @@
                 var src = atag ? item.Attributes["href"].Value.Trim() : item.Attributes["file"] != null ? item.Attributes["file"].Value.Trim() : item.Attributes["src"].Value.Trim();
                 var address = fnAddress(HttpUtility.HtmlDecode(src));
                 var name = item.InnerText == string.Empty ? fnName(address) : item.InnerText;
-                Images[name] = address;
-                System.Diagnostics.Trace.WriteLine(string.Format("Name:\"{0}\"\n\tUrl:\t\"{1}\"", name, address));
+                if (name != null && address != null)
+                {
+                    Images[name] = address;
+                    System.Diagnostics.Trace.WriteLine(string.Format("Name:\"{0}\"\n\tUrl:\t\"{1}\"", name, address));
+                }
             }
-            System.Diagnostics.Trace.WriteLine(string.Format("Total <{0}> photos in page \"{1}\".", Images.Count, Title));
+            System.Diagnostics.Trace.WriteLine(string.Format("Total [{0}] photos in page: \"{1}\".", Images.Count, Title));
+            if (Images.Count==0) return "No gallery found in this page.";
             #endregion
             if (string.IsNullOrEmpty(Site.Next)) return null;
             #region Get Next page url
@@ -135,10 +139,10 @@
                 var href = page.Attributes["href"].Value; if (href == "#" || href.StartsWith("javascript")) return null;
                 var next = href.StartsWith("http://") ?
                 href : href.StartsWith("./") ?
-                href.Replace("./", folder) : href.StartsWith("/") ?
+                href.Replace("./", folder) : href.StartsWith("../") ? href.Replace("../", UpFolder(folder)) : href.StartsWith("/") ?
                 string.Format("http://{0}{1}", host, port == 80 ? "" : ":" + port.ToString()) + href : (href.StartsWith("?") ?
                 url.Split('?')[0] + href : href.IndexOf('/') > 0 ? string.Format("http://{0}/", host) : folder) + href;
-                if (Site.Type == "BitAuto") return next;
+                if (Site.Type == "BitAuto"||Site.Type=="LianTu") return next;
                 var pq = new Uri(next).PathAndQuery.TrimEnd('/');
                 var cur = uri.PathAndQuery.TrimEnd('/');
                 return pq.CompareWithLength(cur) ? next : null;
@@ -146,8 +150,15 @@
             #endregion
             var pages = doc.DocumentNode.SelectNodes(Site.Next);
             Next = pages == null ? null : fnNextPage(pages);
-            System.Diagnostics.Trace.WriteLine(string.Format("Next page is: {0}", Next));
+            System.Diagnostics.Trace.WriteLine(string.Format("Next page is: {0}", Next ?? "Empty"));
             return null;
+        }
+
+        static string UpFolder(string url)
+        {
+            var parts = url.Split("/".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length == 0) return string.Empty;
+            return url.Replace(parts[parts.Length - 1] + "/", "");
         }
 
         public static void Reset()
@@ -169,7 +180,7 @@
             Next = xpNext;
         }
 
-        string Domain { get; set; }
+        public string Domain { get; set; }
 
         public string Image { get; private set; }
         public string Next { get; set; }

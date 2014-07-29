@@ -199,7 +199,7 @@
 
         protected override void OnMouseUp(MouseEventArgs mevent)
         {
-            if (!showSplit)
+            if (!showSplit || mevent.Button.Equals( MouseButtons.Right))
             {
                 base.OnMouseUp(mevent);
                 return;

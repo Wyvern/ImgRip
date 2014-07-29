@@ -57,9 +57,9 @@
             // lvCloud
             // 
             this.lvCloud.AllowDrop = true;
-            this.lvCloud.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvCloud.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvCloud.ForeColor = System.Drawing.Color.Blue;
             this.lvCloud.LabelEdit = true;
             this.lvCloud.Location = new System.Drawing.Point(0, 118);
@@ -74,8 +74,8 @@
             this.lvCloud.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvCloud_ItemSelectionChanged);
             this.lvCloud.DragDrop += new System.Windows.Forms.DragEventHandler(this.lvCloud_DragDrop);
             this.lvCloud.DragEnter += new System.Windows.Forms.DragEventHandler(this.lvCloud_DragEnter);
-            this.lvCloud.Enter += new System.EventHandler(this.lvCloud_Enter);
             this.lvCloud.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvCloud_KeyDown);
+            this.lvCloud.Leave += new System.EventHandler(this.lvCloud_Leave);
             this.lvCloud.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvCloud_MouseClick);
             this.lvCloud.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvCloud_MouseDoubleClick);
             // 
@@ -92,22 +92,22 @@
             this.lblCloudID.AutoSize = true;
             this.lblCloudID.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.lblCloudID.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblCloudID.Location = new System.Drawing.Point(29, 24);
+            this.lblCloudID.Location = new System.Drawing.Point(4, 29);
             this.lblCloudID.Name = "lblCloudID";
-            this.lblCloudID.Size = new System.Drawing.Size(51, 19);
+            this.lblCloudID.Size = new System.Drawing.Size(55, 19);
             this.lblCloudID.TabIndex = 3;
-            this.lblCloudID.Text = "Name";
+            this.lblCloudID.Text = "Name:";
             // 
             // lblPass
             // 
             this.lblPass.AutoSize = true;
             this.lblPass.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.lblPass.ForeColor = System.Drawing.Color.DodgerBlue;
-            this.lblPass.Location = new System.Drawing.Point(4, 74);
+            this.lblPass.Location = new System.Drawing.Point(4, 73);
             this.lblPass.Name = "lblPass";
-            this.lblPass.Size = new System.Drawing.Size(76, 19);
+            this.lblPass.Size = new System.Drawing.Size(80, 19);
             this.lblPass.TabIndex = 4;
-            this.lblPass.Text = "Password";
+            this.lblPass.Text = "Password:";
             // 
             // cldStatus
             // 
@@ -135,21 +135,20 @@
             this.txtFolderName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFolderName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtFolderName.Enabled = false;
-            this.txtFolderName.Location = new System.Drawing.Point(434, 80);
+            this.txtFolderName.Location = new System.Drawing.Point(434, 81);
             this.txtFolderName.Name = "txtFolderName";
             this.txtFolderName.Size = new System.Drawing.Size(171, 25);
             this.txtFolderName.TabIndex = 12;
             this.ttCloud.SetToolTip(this.txtFolderName, "Type to search or add new album");
             this.txtFolderName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtFolderName_MouseClick);
             this.txtFolderName.TextChanged += new System.EventHandler(this.txtFolderName_TextChanged);
-            this.txtFolderName.Enter += new System.EventHandler(this.txtFolderName_Enter);
             this.txtFolderName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFolderName_KeyPress);
             this.txtFolderName.Leave += new System.EventHandler(this.txtFolderName_Leave);
             // 
             // gpLogin
             // 
-            this.gpLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpLogin.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gpLogin.Controls.Add(this.tbName);
             this.gpLogin.Controls.Add(this.btnSign);
             this.gpLogin.Controls.Add(this.lblCloudID);
@@ -166,10 +165,10 @@
             // 
             // tbName
             // 
-            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbName.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRip.Properties.Settings.Default, "CloudID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbName.Location = new System.Drawing.Point(82, 24);
+            this.tbName.Location = new System.Drawing.Point(82, 26);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(194, 25);
             this.tbName.TabIndex = 0;
@@ -181,7 +180,7 @@
             this.btnSign.AutoSize = true;
             this.btnSign.Font = new System.Drawing.Font("Microsoft YaHei", 10F);
             this.btnSign.Image = ((System.Drawing.Image)(resources.GetObject("btnSign.Image")));
-            this.btnSign.Location = new System.Drawing.Point(282, 31);
+            this.btnSign.Location = new System.Drawing.Point(283, 32);
             this.btnSign.Name = "btnSign";
             this.btnSign.Size = new System.Drawing.Size(56, 54);
             this.btnSign.TabIndex = 2;
@@ -190,10 +189,10 @@
             // 
             // tbPass
             // 
-            this.tbPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbPass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::ImgRip.Properties.Settings.Default, "Password", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tbPass.Location = new System.Drawing.Point(82, 71);
+            this.tbPass.Location = new System.Drawing.Point(82, 70);
             this.tbPass.Name = "tbPass";
             this.tbPass.Size = new System.Drawing.Size(194, 25);
             this.tbPass.TabIndex = 1;
@@ -270,17 +269,19 @@
             // cbPublic
             // 
             this.cbPublic.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbPublic.AutoCheck = false;
             this.cbPublic.AutoSize = true;
             this.cbPublic.Enabled = false;
             this.cbPublic.Font = new System.Drawing.Font("Microsoft YaHei", 10F, System.Drawing.FontStyle.Bold);
             this.cbPublic.Image = ((System.Drawing.Image)(resources.GetObject("cbPublic.Image")));
-            this.cbPublic.Location = new System.Drawing.Point(373, 73);
+            this.cbPublic.Location = new System.Drawing.Point(373, 77);
             this.cbPublic.Name = "cbPublic";
             this.cbPublic.Size = new System.Drawing.Size(47, 32);
             this.cbPublic.TabIndex = 13;
             this.cbPublic.ThreeState = true;
-            this.ttCloud.SetToolTip(this.cbPublic, "(Shift+) F4 to share ON/OFF");
             this.cbPublic.UseVisualStyleBackColor = true;
+            this.cbPublic.CheckedChanged += new System.EventHandler(this.cbPublic_CheckedChanged);
+            this.cbPublic.Leave += new System.EventHandler(this.cbPublic_Leave);
             // 
             // ttCloud
             // 
