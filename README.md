@@ -1,6 +1,8 @@
 ImageRipper
 ===========
 
+[![Join the chat at https://gitter.im/Wyvern/ImageRipper](https://badges.gitter.im/Wyvern/ImageRipper.svg)](https://gitter.im/Wyvern/ImageRipper?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A gadget to parse &amp; fetch HD photos through lots of (300+) popular web galleries
 
 
